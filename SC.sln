@@ -57,6 +57,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "com.wer.sc.data.cnfutures.g
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "com.wer.sc.data.cnfutures.generator.test", "com.wer.sc.data.cnfutures.transfer.test\com.wer.sc.data.cnfutures.generator.test.csproj", "{9012BAC2-D754-4B94-86C8-FBC752D6ADDC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "com.wer.sc.data.generator", "com.wer.sc.data.generator\com.wer.sc.data.generator.csproj", "{2E08820B-F1E9-4062-A6A3-8815DBB86576}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -295,6 +297,18 @@ Global
 		{9012BAC2-D754-4B94-86C8-FBC752D6ADDC}.Release|x64.Build.0 = Release|Any CPU
 		{9012BAC2-D754-4B94-86C8-FBC752D6ADDC}.Release|x86.ActiveCfg = Release|Any CPU
 		{9012BAC2-D754-4B94-86C8-FBC752D6ADDC}.Release|x86.Build.0 = Release|Any CPU
+		{2E08820B-F1E9-4062-A6A3-8815DBB86576}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E08820B-F1E9-4062-A6A3-8815DBB86576}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E08820B-F1E9-4062-A6A3-8815DBB86576}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{2E08820B-F1E9-4062-A6A3-8815DBB86576}.Debug|x64.Build.0 = Debug|Any CPU
+		{2E08820B-F1E9-4062-A6A3-8815DBB86576}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{2E08820B-F1E9-4062-A6A3-8815DBB86576}.Debug|x86.Build.0 = Debug|Any CPU
+		{2E08820B-F1E9-4062-A6A3-8815DBB86576}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E08820B-F1E9-4062-A6A3-8815DBB86576}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E08820B-F1E9-4062-A6A3-8815DBB86576}.Release|x64.ActiveCfg = Release|Any CPU
+		{2E08820B-F1E9-4062-A6A3-8815DBB86576}.Release|x64.Build.0 = Release|Any CPU
+		{2E08820B-F1E9-4062-A6A3-8815DBB86576}.Release|x86.ActiveCfg = Release|Any CPU
+		{2E08820B-F1E9-4062-A6A3-8815DBB86576}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -321,5 +335,6 @@ Global
 		{22A41E52-F75A-4477-BD4D-D763DF67CD80} = {A2794EA0-6309-4CEF-9D32-6FC0BC5A8D45}
 		{B165E5A1-6ACA-4C8B-BD89-FE064209A893} = {A35141A9-B1B8-48BA-9395-112FEF88158D}
 		{9012BAC2-D754-4B94-86C8-FBC752D6ADDC} = {A35141A9-B1B8-48BA-9395-112FEF88158D}
+		{2E08820B-F1E9-4062-A6A3-8815DBB86576} = {B679F7C1-1A79-483F-881B-9766486D6913}
 	EndGlobalSection
 EndGlobal

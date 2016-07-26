@@ -5,25 +5,31 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace com.wer.sc.data.cnfutures
+namespace com.wer.sc.data.provider
 {
-    public class DataProviderImpl_OpenDate
+    public class DataProvider_OpenDate
     {
         private List<int> openDates;
 
-        private DataProviderConfig config;
+        private String configPath;
 
-        public DataProviderImpl_OpenDate(DataProviderConfig config)
+        public DataProvider_OpenDate(String configPath)
         {
-            this.config = config;
+            this.configPath = configPath;
         }
 
         public List<int> GetOpenDates()
         {
             if (this.openDates != null)
                 return this.openDates;
-            String path = config.GetMarketPath("DL");
-            this.openDates = GetOpenDates(path);
+
+            String[] lines = File.ReadAllLines(configPath + "opendates.csv");
+            this.openDates = new List<int>();
+            for (int i = 0; i < lines.Length; i++)
+            {
+                int opendate = int.Parse(lines[i]);
+                openDates.Add(opendate);
+            }
             return this.openDates;
         }
 

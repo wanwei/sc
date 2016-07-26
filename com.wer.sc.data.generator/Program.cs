@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace com.wer.sc.data.cnfutures.transfer
+namespace com.wer.sc.data.generator
 {
     static class Program
     {
@@ -16,7 +16,7 @@ namespace com.wer.sc.data.cnfutures.transfer
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormDataGenerator());
+            Application.Run(new FormGenerator());
         }
     }
 }

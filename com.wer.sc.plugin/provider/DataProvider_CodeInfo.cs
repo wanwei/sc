@@ -5,16 +5,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace com.wer.sc.data.cnfutures
+namespace com.wer.sc.data.provider
 {
-    public class DataProviderImpl_CodeInfo
+    public class DataProvider_CodeInfo
     {
         private Dictionary<String, CodeInfo> dicCodes = new Dictionary<string, CodeInfo>();
         private List<CodeInfo> codes;
         private Dictionary<String, String> dicCatelogs = new Dictionary<string, string>();
         private List<String> catelogs = new List<string>();
 
-        public DataProviderImpl_CodeInfo(String configPath)
+        public DataProvider_CodeInfo(String configPath)
         {
             initCodes(configPath);
             initCatelogs(configPath);

@@ -11,11 +11,11 @@ using System.Windows.Forms;
 
 namespace com.wer.sc.data.cnfutures.transfer
 {
-    public partial class FormAdjust : Form
+    public partial class FormDataGenerator : Form
     {
         private bool isAdjusted = false;
         private DataGenerator_TickData generator;
-        public FormAdjust()
+        public FormDataGenerator()
         {
             InitializeComponent();
             this.tbSrcPath.Text = @"F:\FUTURES\CSV\TICK";
@@ -58,7 +58,7 @@ namespace com.wer.sc.data.cnfutures.transfer
                 progressBar1.Maximum = max;//设置最大长度值
                 progressBar1.Value = 0;//设置当前值
                 progressBar1.Step = 1;//设置没次增长多少
-                toolStripStatusLabel1.Text = "准备完成";
+                toolStripStatusLabel1.Text = "准备完成，开始更新";
             }
         }
 
@@ -74,7 +74,7 @@ namespace com.wer.sc.data.cnfutures.transfer
             else
             {
                 this.progressBar1.Value += progressBar1.Step;
-                this.toolStripStatusLabel1.Text = "更新" + generateInfo.variety + ":" + generateInfo.nextStartDate + "-" + generateInfo.nextEndDate;
+                this.toolStripStatusLabel1.Text = "正在更新" + generateInfo.variety + ":" + generateInfo.nextStartDate + "-" + generateInfo.nextEndDate;
             }
         }
 

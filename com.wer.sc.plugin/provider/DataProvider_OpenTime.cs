@@ -1,39 +1,30 @@
-﻿using com.wer.sc.data.cnfutures.Properties;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 
-namespace com.wer.sc.data.cnfutures
+namespace com.wer.sc.data.provider
 {
-    public class DataProviderImpl_OpenTime
+    public class DataProvider_OpenTime
     {
         public OpenTimePeriod defaultOpenTime;
 
         public List<OpenTimeMarket> Markets = new List<OpenTimeMarket>();
 
         public Dictionary<String, OpenTimePeriod> dicOpenPeriod = new Dictionary<string, OpenTimePeriod>();
-        private DataProviderConfig providerConfig;
-        private DataProviderImpl_CodeInfo provider_CodeInfo;
+        private DataProvider_CodeInfo provider_CodeInfo;   
 
-        /// <summary>
-        /// 仅用作测试:TestDataProviderImpl_OpenTime
-        /// </summary>
-        public DataProviderImpl_OpenTime()
+        public DataProvider_OpenTime(String configPath) : this(configPath, new DataProvider_CodeInfo(configPath))
         {
-            XmlDocument doc = new XmlDocument();
-            doc.LoadXml(Resources.opentime);
-            Load(doc);
         }
 
-        public DataProviderImpl_OpenTime(DataProvider_CnFutures provider)
+        public DataProvider_OpenTime(String configPath, DataProvider_CodeInfo provider_CodeInfo)
         {
-            this.providerConfig = provider.ProviderConfig;
-            this.provider_CodeInfo = provider.Provider_CodeInfo;
+            this.provider_CodeInfo = provider_CodeInfo;
             XmlDocument doc = new XmlDocument();
-            doc.Load(provider.Helper.ConfigPath + "opentime.config");
+            doc.Load(configPath + "opentime.config");
             Load(doc);
         }
 
@@ -150,7 +141,7 @@ namespace com.wer.sc.data.cnfutures
 
         public List<OpenTimeVariety> varieties = new List<OpenTimeVariety>();
 
-        public DataProviderImpl_OpenTime Config;
+        public DataProvider_OpenTime Config;
 
         public OpenTimePeriod GetPeriod()
         {

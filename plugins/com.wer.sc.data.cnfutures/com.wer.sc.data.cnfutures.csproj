@@ -40,21 +40,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataGenerator_Index.cs" />
-    <Compile Include="DataProviderConfig.cs" />
-    <Compile Include="DataProviderImpl_CodeInfo.cs" />
-    <Compile Include="DataProviderImpl_OpenDate.cs" />
     <Compile Include="DataProvider_CnFutures.cs" />
-    <Compile Include="DataGenerater_MainFutures.cs" />
-    <Compile Include="DataGenerater_OpenTime.cs" />
-    <Compile Include="DataProviderImpl_OpenTime.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="DataProviderImpl_TickData.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">

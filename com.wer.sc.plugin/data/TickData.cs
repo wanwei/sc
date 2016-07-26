@@ -42,6 +42,25 @@ namespace com.wer.sc.data
 
         private int barPos;
 
+        private int[] arr_hold;
+
+        public int[] Arr_Hold
+        {
+            get
+            {
+                if (arr_hold != null)
+                    return arr_hold;
+                this.arr_hold = new int[Length];
+                int currentHold = 0;
+                for (int i = 0; i < arr_add.Length; i++)
+                {
+                    currentHold += arr_add[i];
+                    arr_hold[i] = currentHold;
+                }
+                return arr_hold;
+            }
+        }
+
         public TickData(int length)
         {
             this.arr_time = new double[length];
@@ -53,7 +72,7 @@ namespace com.wer.sc.data
             this.arr_buyMount = new int[length];
             this.arr_sellPrice = new float[length];
             this.arr_sellMount = new int[length];
-            this.arr_isBuy = new bool[length];
+            this.arr_isBuy = new bool[length];            
         }
 
         public int BarPos
@@ -110,6 +129,11 @@ namespace com.wer.sc.data
         public int Add
         {
             get { return arr_add[BarPos]; }
+        }
+
+        public int Hold
+        {
+            get { return Arr_Hold[BarPos]; }
         }
 
         // 买价
@@ -171,7 +195,7 @@ namespace com.wer.sc.data
         public String ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append(FullTime).Append(",");            
+            sb.Append(FullTime).Append(",");
             sb.Append(Price).Append(",");
             sb.Append(Mount).Append(",");
             sb.Append(TotalMount).Append(",");

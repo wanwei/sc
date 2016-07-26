@@ -14,6 +14,15 @@ namespace com.wer.sc.data.update
     {
         private bool append = false;
 
+        public MockDataProvider() : this(null)
+        {
+
+        }
+
+        public MockDataProvider(PluginHelper helper) : base(helper)
+        {
+        }
+
         public bool Append
         {
             get
@@ -25,7 +34,7 @@ namespace com.wer.sc.data.update
             {
                 append = value;
             }
-        }    
+        }
 
         override
         public String GetName()
@@ -61,8 +70,8 @@ namespace com.wer.sc.data.update
             List<int> openDates = ResourceLoader.GetOpenDates();
             if (Append)
                 return openDates;
-            else            
-                return openDates.GetRange(0, 10);                        
+            else
+                return openDates.GetRange(0, 10);
         }
         override
         public List<double[]> GetOpenTime(String code, int date)

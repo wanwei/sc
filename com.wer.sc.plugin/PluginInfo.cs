@@ -27,8 +27,9 @@ namespace com.wer.sc.plugin
 
         public DataProvider CreateDataProvider(Type type)
         {
-            DataProvider dataProvider = (DataProvider)Activator.CreateInstance(type);
-            dataProvider.Helper.ConfigPath = FullPath.Substring(0, FullPath.Length - 4) + "\\";
+            PluginHelper helper = new PluginHelper();
+            helper.ConfigPath = FullPath.Substring(0, FullPath.Length - 4) + "\\";
+            DataProvider dataProvider = (DataProvider)Activator.CreateInstance(type, new Object[] { helper });
             return dataProvider;
         }
 
@@ -39,7 +40,7 @@ namespace com.wer.sc.plugin
             if (providers != null)
                 return providers;
             providers = new List<DataProvider>();
-            for(int i = 0; i < DataProviders.Count; i++)
+            for (int i = 0; i < DataProviders.Count; i++)
             {
                 providers.Add(CreateDataProvider(DataProviders[i]));
             }

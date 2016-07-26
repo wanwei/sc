@@ -15,7 +15,7 @@ namespace com.wer.sc.data.cnfutures.test
         {
             DataGenerator_Index generator = new DataGenerator_Index();
 
-            DataProvider_CnFutures provider_cn = TestDataProvider_CnFutures.GetProvider();
+            DataProvider_CnFutures2 provider_cn = TestDataProvider_CnFutures.GetProvider();
             DataProviderImpl_TickData provider = provider_cn.Provider_TickData;
 
             //provider.GetTickData("")

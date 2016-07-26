@@ -18,7 +18,7 @@ namespace com.wer.sc.plugin
     /// </summary>
     public abstract class DataProvider
     {
-        private PluginHelper pluginHelper = new PluginHelper();
+        private PluginHelper pluginHelper;
 
         public PluginHelper Helper
         {
@@ -28,6 +28,11 @@ namespace com.wer.sc.plugin
             }
         }
         
+        public DataProvider(PluginHelper helper)
+        {
+            this.pluginHelper = helper;
+        }
+
         public abstract String GetName();
 
         public abstract String GetDescription();

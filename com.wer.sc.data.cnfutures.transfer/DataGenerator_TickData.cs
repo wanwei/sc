@@ -1,4 +1,5 @@
-﻿using System;
+﻿using com.wer.sc.data.provider;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -13,6 +14,7 @@ namespace com.wer.sc.data.cnfutures.transfer
     /// </summary>
     public class DataGenerator_TickData
     {
+        public const int PROGRESS_PERIOD = 10;
         private bool isCancel = false;
         public bool IsCancel
         {
@@ -27,7 +29,6 @@ namespace com.wer.sc.data.cnfutures.transfer
             }
         }
 
-        private DataProviderImpl_CodeInfo dataReader_CodeInfo;
 
         private TargetPathConfig targetPathConfig;
 
@@ -37,24 +38,44 @@ namespace com.wer.sc.data.cnfutures.transfer
 
         private List<int> openDates;
 
-        private TickDataTransfer tickDataTransfer;
+        private DataProvider_CodeInfo provider_CodeInfo;
 
-        private DataProvider_CnFutures dataProvider;
+        private DataProvider_OpenDate provider_OpenDate;
+
+        private DataProvider_OpenTime provider_OpenTime;
+
+        private DataProvider_TickData provider_TickData;
+
+        private DataGenerator_Normal generator_Normal;
+
+        private DataGenerator_Index generator_Index;
+
+        private DataGenerator_Main generator_Main;
 
         public DataGenerator_TickData(String srcPath, String targetPath, String[] varieties)
         {
             String configPath = Environment.CurrentDirectory + "\\com.wer.sc.data.cnfutures\\";
-            dataReader_CodeInfo = new DataProviderImpl_CodeInfo(configPath);
+            //生成开盘日数据
+            DataGenerator_OpenDate generator_OpenDate = new DataGenerator_OpenDate(configPath, srcPath);
+            generator_OpenDate.Generate();
+
             this.varieties = varieties;
             if (this.varieties == null)
-                varieties = dataReader_CodeInfo.GetVarieties().ToArray();
-            String path = srcPath + "\\DL\\";
-            openDates = DataProviderImpl_OpenDate.GetOpenDates(path);
+                varieties = provider_CodeInfo.GetVarieties().ToArray();
+
+            provider_CodeInfo = new DataProvider_CodeInfo(configPath);
+            provider_OpenDate = new DataProvider_OpenDate(configPath);
+            provider_OpenTime = new DataProvider_OpenTime(configPath);
+            provider_TickData = new DataProvider_TickData(targetPath);
+
+            this.openDates = provider_OpenDate.GetOpenDates();
 
             this.targetPathConfig = new TargetPathConfig(targetPath);
-            this.srcPathConfig = new SrcPathConfig(srcPath, dataReader_CodeInfo);
-            this.tickDataTransfer = new TickDataTransfer(dataReader_CodeInfo, srcPath, targetPath);
-            this.dataProvider = new DataProvider_CnFutures(configPath, srcPath, "");
+            this.srcPathConfig = new SrcPathConfig(srcPath, provider_CodeInfo);
+
+            this.generator_Normal = new DataGenerator_Normal(srcPath, provider_CodeInfo, provider_OpenTime);
+            this.generator_Index = new DataGenerator_Index(targetPath, provider_CodeInfo, provider_OpenTime, provider_TickData);
+            this.generator_Main = new DataGenerator_Main(targetPath, provider_CodeInfo, provider_TickData);
         }
 
         public void Generate()
@@ -76,6 +97,7 @@ namespace com.wer.sc.data.cnfutures.transfer
         private GenerateInfo DataPrepare()
         {
             GenerateInfo generate = GetGeneraters();
+
             if (AfterPrepared != null)
                 AfterPrepared(generate);
             return generate;
@@ -137,13 +159,13 @@ namespace com.wer.sc.data.cnfutures.transfer
                 int nextIndex = i + 1;
                 if (nextIndex >= dates.Count)
                     continue;
-                if ((nextIndex) % 100 == 0)
+                if ((nextIndex) % PROGRESS_PERIOD == 0)
                 {
                     if (AfterGeneratedPeriod != null)
                     {
                         GeneratedPeriodArgs args = new GeneratedPeriodArgs();
                         args.nextStartDate = date;
-                        int endIndex = i + 100;
+                        int endIndex = i + PROGRESS_PERIOD;
                         endIndex = endIndex >= dates.Count ? dates.Count - 1 : endIndex;
                         args.nextEndDate = dates[endIndex];
                         args.variety = generate_variety.variety;
@@ -155,7 +177,7 @@ namespace com.wer.sc.data.cnfutures.transfer
 
         private void Generate(String variety, int date)
         {
-            List<CodeInfo> codes = dataReader_CodeInfo.GetCodes(variety);
+            List<CodeInfo> codes = provider_CodeInfo.GetCodes(variety);
             //mi结尾是主连，13结尾是指数
             for (int i = 0; i < codes.Count; i++)
             {
@@ -165,34 +187,46 @@ namespace com.wer.sc.data.cnfutures.transfer
                     continue;
                 GenerateNormal(code.code, date);
             }
-            GenerateMain(codes, variety + "MI", date);
-            GenerateIndex(codes, variety + "13", date);
+            GenerateMain(variety, date);
+            GenerateIndex(variety, date);
         }
 
         private void GenerateNormal(String code, int date)
         {
-            TickData data = tickDataTransfer.GetTickData(code, date);
+            TickData data = generator_Normal.Generate(code, date);
+            if (data == null)
+                return;
             String path = targetPathConfig.GetFilePath(code, date);
+            WriteTickData(data, path);
+        }
+
+        private static void WriteTickData(TickData data, string path)
+        {
             string[] contents = new string[data.Length];
             for (int i = 0; i < data.Length; i++)
             {
                 data.BarPos = i;
                 contents[i] = data.ToString();
             }
+
+            DirectoryInfo dir = new FileInfo(path).Directory;
+            if (!dir.Exists)
+                Directory.CreateDirectory(dir.FullName);
             File.WriteAllLines(path, contents);
         }
 
-        private void GenerateMain(List<CodeInfo> codes, String code, int date)
-        {            
-            for(int i = 0; i < codes.Count; i++)
-            {
-
-            }
+        private void GenerateMain(String variety, int date)
+        {
+            TickData data = generator_Main.Generate(variety, date);
+            String path = targetPathConfig.GetFilePath(variety + "MI", date);
+            WriteTickData(data, path);
         }
 
-        private void GenerateIndex(List<CodeInfo> codes, string code, int date)
+        private void GenerateIndex(string variety, int date)
         {
-            Thread.Sleep(2);
+            TickData data = generator_Index.Generate(variety, date);
+            String path = targetPathConfig.GetFilePath(variety + "13", date);
+            WriteTickData(data, path);
         }
 
         #endregion
@@ -203,6 +237,7 @@ namespace com.wer.sc.data.cnfutures.transfer
 
         public AfterGeneratedHandler AfterGenerated;
     }
+
     public delegate void AfterPreparedHandler(GenerateInfo generateInfo);
     public delegate void AfterGeneratedPeriodHandler(GeneratedPeriodArgs args);
     public delegate void AfterGeneratedHandler(GeneratedArgs args);
@@ -247,17 +282,18 @@ namespace com.wer.sc.data.cnfutures.transfer
 
         public int GetCalcPeriodCount()
         {
-            if (dates.Count % 100 == 0)
-                return (dates.Count / 100);
-            return (dates.Count / 100) + 1;
+            int progress = DataGenerator_TickData.PROGRESS_PERIOD;
+            if (dates.Count % progress == 0)
+                return (dates.Count / progress);
+            return (dates.Count / progress) + 1;
         }
     }
 
     public class SrcPathConfig
     {
         private String srcPath;
-        private DataProviderImpl_CodeInfo dataReader_CodeInfo;
-        public SrcPathConfig(String srcPath, DataProviderImpl_CodeInfo dataReader_CodeInfo)
+        private DataProvider_CodeInfo dataReader_CodeInfo;
+        public SrcPathConfig(String srcPath, DataProvider_CodeInfo dataReader_CodeInfo)
         {
             this.srcPath = srcPath;
             this.dataReader_CodeInfo = dataReader_CodeInfo;
@@ -281,7 +317,7 @@ namespace com.wer.sc.data.cnfutures.transfer
 
         public String GetPath(String code)
         {
-            return rootPath + code + "\\";
+            return rootPath + "\\" + code + "\\";
         }
 
         public String GetFilePath(String code, int date)
@@ -292,7 +328,24 @@ namespace com.wer.sc.data.cnfutures.transfer
         public List<int> GetUpdatedDates(String code)
         {
             String path = GetPath(code);
-            return DataProviderImpl_OpenDate.GetOpenDates(path);
+            return GetOpenDates(path);
+        }
+
+        public static List<int> GetOpenDates(string path)
+        {
+            if (!Directory.Exists(path))
+                return new List<int>();
+            String[] files = Directory.GetFiles(path);
+            List<int> openDates = new List<int>();
+            foreach (String file in files)
+            {
+                int openDate;
+                int index = file.LastIndexOf('_');
+                bool isInt = int.TryParse(file.Substring(index + 1, 8), out openDate);
+                if (isInt)
+                    openDates.Add(openDate);
+            }
+            return openDates;
         }
     }
 }

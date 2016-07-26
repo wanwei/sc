@@ -7,9 +7,9 @@ namespace com.wer.sc.data.cnfutures.test
     [TestClass]
     public class TestDataProvider_CnFutures
     {
-        public static DataProvider_CnFutures GetProvider()
+        public static DataProvider_CnFutures2 GetProvider()
         {
-            DataProvider_CnFutures provider = new DataProvider_CnFutures();
+            DataProvider_CnFutures2 provider = new DataProvider_CnFutures2();
             provider.Helper.ConfigPath = System.Environment.CurrentDirectory + "\\com.wer.sc.data.cnfutures\\";
             return provider;
         }
@@ -17,7 +17,7 @@ namespace com.wer.sc.data.cnfutures.test
         [TestMethod]
         public void TestGetCodes()
         {
-            DataProvider_CnFutures provider = GetProvider();
+            DataProvider_CnFutures2 provider = GetProvider();
             List<CodeInfo> codes = provider.GetCodes();
             Assert.AreEqual(635, codes.Count);
             Assert.AreEqual("AMI,豆一连续,A", codes[0].ToString());
@@ -27,7 +27,7 @@ namespace com.wer.sc.data.cnfutures.test
         [TestMethod]
         public void TestOpenDates()
         {
-            DataProvider_CnFutures provider = GetProvider();
+            DataProvider_CnFutures2 provider = GetProvider();
             List<int> openDates = provider.GetOpenDates();
             Assert.IsTrue(openDates.Count >= 2994);
             Assert.AreEqual(20040102, openDates[0]);
@@ -37,7 +37,7 @@ namespace com.wer.sc.data.cnfutures.test
         [TestMethod]
         public void TestGetOpenTime()
         {
-            DataProvider_CnFutures provider = GetProvider();
+            DataProvider_CnFutures2 provider = GetProvider();
             List<double[]> openTime = provider.GetOpenTime("m05", 20160429);
             Assert.AreEqual("0.09-0.1015;0.103-0.113;0.133-0.15;0.21-0.233;", TestDataProviderImpl_OpenTime.OpenTimeToString(openTime));
             //Console.WriteLine(TestOpenTimeConfig.OpenTimeToString(openTime));
@@ -61,7 +61,7 @@ namespace com.wer.sc.data.cnfutures.test
         [TestMethod]
         public void TestGetTick()
         {
-            DataProvider_CnFutures provider = GetProvider();
+            DataProvider_CnFutures2 provider = GetProvider();
             //TickData tickData = provider.GetTickData("m05", 20160429);
             TickData tickData = provider.GetTickData("cf01", 20160429);
             for (int i = 0; i < tickData.Length; i++)

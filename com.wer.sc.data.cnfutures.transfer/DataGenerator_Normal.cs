@@ -1,39 +1,55 @@
-﻿using System;
+﻿using com.wer.sc.data.provider;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace com.wer.sc.data.cnfutures
+namespace com.wer.sc.data.cnfutures.transfer
 {
-    public class DataProviderImpl_TickData
+
+    public class DataGenerator_Normal
     {
-        private DataProvider_CnFutures provider;
-        private TickDataAdjust adjuster;
-        public DataProviderImpl_TickData(DataProvider_CnFutures provider)
+        private String dataSrcPath;
+
+        private DataProvider_CodeInfo provider_CodeInfo;
+
+        private DataProvider_OpenTime provider_OpenTime;
+
+        private TickDataAdjust tickDataAdjust;
+
+        public DataGenerator_Normal(String dataSrcPath, DataProvider_CodeInfo provider_CodeInfo, DataProvider_OpenTime provider_OpenTime)
         {
-            this.provider = provider;
-            this.adjuster = new TickDataAdjust(provider);
+            this.dataSrcPath = dataSrcPath;
+            this.provider_CodeInfo = provider_CodeInfo;
+            this.provider_OpenTime = provider_OpenTime;
+            this.tickDataAdjust = new TickDataAdjust();
         }
 
-        public TickData GetTickData(String code, int date)
+        public TickData Generate(String code, int date)
         {
             TickData data = GetOrignalTickData(code, date);
             if (data == null)
                 return null;
-            List<double[]> openTime = provider.GetOpenTime(code, date);
-            adjuster.Adjust(data, openTime);
+
+            List<double[]> openTime = provider_OpenTime.GetOpenTime(code, date);
+            tickDataAdjust.Adjust(data, openTime);
             return data;
         }
 
         public TickData GetOrignalTickData(string code, int date)
         {
-            String path = provider.GetCodePath(code, date);
+            String path = GetCodePath(code, date);
             if (!File.Exists(path))
                 return null;
             String[] lines = File.ReadAllLines(path);
             return ReadLinesToTickData(lines);
+        }
+
+        public String GetCodePath(String code, int date)
+        {
+            return dataSrcPath + "\\" + provider_CodeInfo.GetBelongMarket(code) + "\\" + date + "\\" + code + "_" + date + ".csv";
         }
 
         public static TickData ReadLinesToTickData(string[] lines)
@@ -92,11 +108,8 @@ namespace com.wer.sc.data.cnfutures
 
     public class TickDataAdjust
     {
-        private DataProvider_CnFutures provider;
-
-        public TickDataAdjust(DataProvider_CnFutures provider)
+        public TickDataAdjust()
         {
-            this.provider = provider;
         }
 
         /// <summary>
@@ -138,7 +151,7 @@ namespace com.wer.sc.data.cnfutures
              * 1.搜索出大量repeat的数据
              * 2.把repeat前的数据移到
              */
-            
+
             return;
         }
 

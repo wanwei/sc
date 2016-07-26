@@ -14,7 +14,7 @@ namespace com.wer.sc.data.cnfutures.test
         //[TestMethod]
         public void TestScanMainFutures()
         {
-            DataProvider_CnFutures provider = TestDataProvider_CnFutures.GetProvider();
+            DataProvider_CnFutures2 provider = TestDataProvider_CnFutures.GetProvider();
             MainFuturesScan scan = new MainFuturesScan(provider);
 
             List<DataGenerater_MainFutures> mainFutures = new List<DataGenerater_MainFutures>();

@@ -9,6 +9,15 @@ namespace com.wer.sc.data.update.cnstock
 {
     public class DataProvider_CnStock : DataProvider
     {
+        public DataProvider_CnStock() : this(null)
+        {
+
+        }
+
+        public DataProvider_CnStock(PluginHelper helper) : base(helper)
+        {
+        }
+
         public override string GetName()
         {
             return "中国股市数据提供";
@@ -27,7 +36,7 @@ namespace com.wer.sc.data.update.cnstock
 
         public override string GetDataPath()
         {
-            return ""; 
+            return "";
         }
 
         public override List<int> GetOpenDates()

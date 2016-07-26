@@ -15,7 +15,7 @@ namespace com.wer.sc.data.cnfutures.test
         [TestMethod]
         public void TestPrintGetTickData()
         {
-            DataProvider_CnFutures provider_cn = TestDataProvider_CnFutures.GetProvider();
+            DataProvider_CnFutures2 provider_cn = TestDataProvider_CnFutures.GetProvider();
             DataProviderImpl_TickData provider = provider_cn.Provider_TickData;
             List<int> openDates = provider_cn.Provider_OpenDate.GetOpenDates();
             for (int i = 300; i < 900; i++)
@@ -52,7 +52,7 @@ namespace com.wer.sc.data.cnfutures.test
         [TestMethod]
         public void TestGetTickData()
         {
-            DataProvider_CnFutures provider_cn = TestDataProvider_CnFutures.GetProvider();
+            DataProvider_CnFutures2 provider_cn = TestDataProvider_CnFutures.GetProvider();
             DataProviderImpl_TickData provider = provider_cn.Provider_TickData;
             AssertTickData(provider.GetTickData("m05", 20061229), Resources.adjust_m05_20061229);
             AssertTickData(provider.GetTickData("m09", 20070531), Resources.adjust_m09_20070531);
@@ -85,7 +85,7 @@ namespace com.wer.sc.data.cnfutures.test
         [TestMethod]
         public void TestGetOriginalTick()
         {
-            DataProvider_CnFutures provider_cn = TestDataProvider_CnFutures.GetProvider();
+            DataProvider_CnFutures2 provider_cn = TestDataProvider_CnFutures.GetProvider();
             DataProviderImpl_TickData provider = provider_cn.Provider_TickData;
             TickData tickData = provider.GetOrignalTickData("cf01", 20160429);
 
@@ -100,7 +100,7 @@ namespace com.wer.sc.data.cnfutures.test
         [TestMethod]
         public void TestTickAnalysis()
         {
-            DataProvider_CnFutures provider = TestDataProvider_CnFutures.GetProvider();
+            DataProvider_CnFutures2 provider = TestDataProvider_CnFutures.GetProvider();
             DataProviderImpl_TickData loader = new DataProviderImpl_TickData(provider);
 
             TickData data = loader.GetOrignalTickData("m05", 20100104);
