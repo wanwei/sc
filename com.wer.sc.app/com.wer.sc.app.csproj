@@ -133,9 +133,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\com.wer.sc.ana\com.wer.sc.ana.csproj">
       <Project>{0acf6f33-a700-47fd-aa61-5e0b3b4b8f80}</Project>
       <Name>com.wer.sc.ana</Name>

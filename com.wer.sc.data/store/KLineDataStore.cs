@@ -1,10 +1,8 @@
-﻿using com.wer.sc.utils;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace com.wer.sc.data.store
 {
@@ -91,6 +89,12 @@ namespace com.wer.sc.data.store
             {
                 file.Close();
             }
+        }
+
+        public int Length()
+        {
+            FileInfo f = new FileInfo(path);
+            return (int)(f.Length / LEN_EVERYKLINE);
         }
 
         public KLineData FromBytes(byte[] bs)
@@ -216,20 +220,82 @@ namespace com.wer.sc.data.store
         public KLineData Load(int startDate, int endDate)
         {
             KLineDataIndexResult result = LoadIndex();
+            return Load(startDate, endDate, result);
+        }
+
+        internal KLineData Load(int startDate, int endDate, KLineDataIndexResult result)
+        {
+            int startIndex = GetStartIndex(startDate, result);
+            int endIndex = GetEndIndex(endDate, result);
+            if (startIndex < 0 || endIndex < 0 || startIndex > endIndex)
+                return null;
+            return LoadByIndex(startIndex, endIndex);
+        }
+
+        internal int GetStartIndex(int startDate, KLineDataIndexResult result)
+        {
             int startIndex;
             if (result.IndexDic.Keys.Contains(startDate))
                 startIndex = result.IndexDic[startDate];
             else
-                startIndex = FindIndex(result, startDate, true);
+            {
+                int realStartDate = FindDate(result, startDate, true);
+                startIndex = result.GetDateDataIndex(realStartDate);
+            }
 
+            return startIndex;
+        }
+
+        internal int GetEndIndex(int endDate, KLineDataIndexResult result)
+        {
+            //最后一个index是结束日的后一天对应的index-1
             int endIndex;
             if (result.IndexDic.Keys.Contains(endDate))
-                endIndex = result.IndexDic[endDate];
+            {
+                endIndex = result.NextDateIndex(endDate) - 1;
+                if (endIndex < 0)
+                    endIndex = Length() - 1;
+            }
             else
-                endIndex = FindIndex(result, endDate, false);
-            if (startIndex < 0 || endIndex < 0 || startIndex > endIndex)
-                return null;
-            return LoadByIndex(startIndex, endIndex);
+            {
+                int realEndDateNext = FindDate(result, endDate, true);
+                if (realEndDateNext < 0)
+                    endIndex = Length() - 1;
+                else
+                {
+                    endIndex = result.IndexDic[realEndDateNext] - 1;
+                }
+            }
+
+            return endIndex;
+        }
+
+        private int FindDate(KLineDataIndexResult result, int date, bool forward)
+        {
+            List<int> dateList = result.DateList;
+            if (forward)
+            {
+                int lastDate = dateList[0];
+                if (lastDate > date)
+                    return 0;
+                for (int i = 1; i < dateList.Count; i++)
+                {
+                    if (dateList[i] > date && dateList[i - 1] < date)
+                        return dateList[i];
+                }
+            }
+            else
+            {
+                int lastDate = dateList[dateList.Count - 1];
+                if (lastDate < date)
+                    return 0;
+                for (int i = dateList.Count - 2; i >= 0; i--)
+                {
+                    if (dateList[i] < date && dateList[i + 1] > date)
+                        return dateList[i];
+                }
+            }
+            return -1;
         }
 
         private int FindIndex(KLineDataIndexResult result, int date, bool forward)
@@ -243,7 +309,7 @@ namespace com.wer.sc.data.store
                 for (int i = 1; i < dateList.Count; i++)
                 {
                     if (dateList[i] > date && dateList[i - 1] < date)
-                        return i;
+                        return result.IndexDic[dateList[i]];
                 }
             }
             else
@@ -254,13 +320,13 @@ namespace com.wer.sc.data.store
                 for (int i = dateList.Count - 2; i >= 0; i--)
                 {
                     if (dateList[i] < date && dateList[i + 1] > date)
-                        return i;
+                        return result.IndexDic[dateList[i]];
                 }
             }
             return -1;
         }
 
-        private KLineDataIndexResult LoadIndex()
+        internal KLineDataIndexResult LoadIndex()
         {
             KLineDataIndexResult result = LoadIndex2();
             if (result == null)
@@ -299,11 +365,25 @@ namespace com.wer.sc.data.store
     {
         private Dictionary<int, int> indexDic = new Dictionary<int, int>();
         private List<int> dateList = new List<int>();
+        //private Dictionary<int, int> dateDic = new Dictionary<int, int>();
 
         public void AddIndex(int date, int index)
         {
+            //TODO 此处应该是不会有重复KEY的
+            //以前加上判断原因是m03数据生成有误，20151222生成的时间错位
+            //但是m03数据基本不可用，所以注释掉
+            //if (!IndexDic.Keys.Contains(date))
+            //{
             IndexDic.Add(date, index);
             dateList.Add(date);
+            //}
+        }
+
+        public int GetDateDataIndex(int date)
+        {
+            if (indexDic.Keys.Contains(date))
+                return indexDic[date];
+            return -1;
         }
 
         public Dictionary<int, int> IndexDic
@@ -320,6 +400,43 @@ namespace com.wer.sc.data.store
             {
                 return dateList;
             }
+        }
+
+        public int GetDateIndex(int date)
+        {
+            return dateList.IndexOf(date);
+        }
+
+        public int NextDate(int date)
+        {
+            int index = GetDateIndex(date) + 1;
+            if (index >= dateList.Count)
+                return -1;
+            return dateList[index];
+        }
+
+        public int NextDateIndex(int date)
+        {
+            int nextdate = NextDate(date);
+            if (nextdate > 0)
+                return indexDic[nextdate];
+            return -1;
+        }
+
+        public int PrevDate(int date)
+        {
+            int index = GetDateIndex(date) - 1;
+            if (index < 0)
+                return -1;
+            return dateList[index];
+        }
+
+        public int PrevDateIndex(int date)
+        {
+            int prevdate = PrevDate(date);
+            if (prevdate > 0)
+                return indexDic[prevdate];
+            return -1;
         }
 
         public int LastDate
@@ -367,32 +484,69 @@ namespace com.wer.sc.data.store
                 double lastTime = GetTimeByIndex(file, 0);
                 double time = GetTimeByIndex(file, 1);
                 KLinePeriod period = KLineData.GetPeriod(lastTime, time);
-                //if (period.PeriodType > KLinePeriod.TYPE_MINUTE)
-                //    return;
 
+                //算法                
                 List<String> indeies = new List<string>(500);
-                indeies.Add(((int)lastTime).ToString() + ",0");
                 int len = GetLength(file);
+                int currentIndex = 0;
+                bool hasNight = false;
                 for (int index = 1; index < len; index++)
                 {
                     time = GetTimeByIndex(file, index);
 
-                    int changeDateType = GetChangeDateType(time, lastTime);
-                    if (changeDateType >= 0)
+                    int date = (int)time;
+                    int lastDate = (int)lastTime;
+
+                    //夜盘开始，则一定是新的一天开始
+                    if (IsNightStart(time, lastTime))
                     {
-                        indeies.Add(((int)time + changeDateType).ToString() + "," + index.ToString());
+                        indeies.Add(((int)lastTime).ToString() + "," + currentIndex.ToString());
+                        currentIndex = index;
+                        hasNight = true;
+                    }
+                    else if (hasNight)
+                    {
+                        //对于夜盘来说，如果到了第二天，则说明夜盘结束了,此时不算新的一天开始
+                        if (date != lastDate)
+                            hasNight = false;
+                    }
+                    //只要过了夜都算第二天的
+                    else if (date != lastDate)
+                    {
+                        indeies.Add(((int)lastTime).ToString() + "," + currentIndex.ToString());
+                        currentIndex = index;
                     }
 
-                    //停牌超过四个小时
                     lastTime = time;
                 }
-
+                indeies.Add(((int)time).ToString() + "," + currentIndex);
                 File.WriteAllLines(indexPath, indeies.ToArray());
             }
             finally
             {
                 file.Close();
             }
+        }
+
+        public static bool IsNightStart(double time, double lastTime)
+        {
+            //time在晚上6点之后，lasttime在晚上6点之前
+            //且前后时间相隔超过100分钟，说明time是夜盘开始
+            double t1 = time - (int)time;
+            if (t1 < 0.18)
+                return false;
+
+            double lastt1 = lastTime - (int)lastTime;
+            if (lastt1 >= 0.18)
+                return false;
+
+            TimeSpan span = TimeUtils.Substract(time, lastTime);
+            if (span.Hours * 60 + span.Minutes > 100)
+            {
+                return true;
+            }
+
+            return false;
         }
 
         private int GetChangeDateType(double time, double lastTime)

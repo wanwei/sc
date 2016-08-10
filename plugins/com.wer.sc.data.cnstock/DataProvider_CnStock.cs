@@ -53,5 +53,10 @@ namespace com.wer.sc.data.update.cnstock
         {
             throw new NotImplementedException();
         }
+
+        public override List<int> GetOpenDates(string code)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

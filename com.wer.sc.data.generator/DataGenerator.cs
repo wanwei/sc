@@ -18,4 +18,34 @@ namespace com.wer.sc.data.generator
     {
 
     }
+
+    //public class GenerateInfo
+    //{
+    //    public List<GenerateInfo_Code> generates = new List<GenerateInfo_Code>();
+
+    //    public int GetPeriodCount()
+    //    {
+    //        int max = 0;
+    //        for (int i = 0; i < generates.Count; i++)
+    //        {
+    //            max += generates[i].GetCalcPeriodCount();
+    //        }
+    //        return max;
+    //    }
+    //}
+
+    //public class GenerateInfo_Code
+    //{
+    //    public String code;
+
+    //    public List<int> dates;
+
+    //    public int GetCalcPeriodCount()
+    //    {
+    //        int progress = 10;
+    //        if (dates.Count % progress == 0)
+    //            return (dates.Count / progress);
+    //        return (dates.Count / progress) + 1;
+    //    }
+    //}
 }

@@ -23,22 +23,26 @@ namespace com.wer.sc.ana.test.model
         /// <summary>
         /// 高点
         /// </summary>
+        [ModelPoints("#FF0000", 6)]
+        //[ModelLines("#FF0000", 2)]
         public List<PricePoint> HighPoints = new List<PricePoint>();
 
         /// <summary>
         /// 低点
         /// </summary>
+        [ModelPoints("#00FF00", 6)]
+        //[ModelLines("#00FF00", 2)]
         public List<PricePoint> LowPoints = new List<PricePoint>();
 
         public KLineModel_Simple3()
         {
-
+            //Color.Red.
         }
 
         public override void ModelEnd()
         {
-            this.AddPoint(new PointList(HighPoints, Color.Red, 8));
-            this.AddPoint(new PointList(LowPoints, Color.Green, 8));
+            //this.AddPoint(new PointList(HighPoints, Color.Red, 8));
+            //this.AddPoint(new PointList(LowPoints, Color.Green, 8));
         }
 
         public override void Loop()
@@ -90,9 +94,9 @@ namespace com.wer.sc.ana.test.model
             if (lastType == 0)
             {
                 if (con_gd)
-                    AddHighPoint(arr_HighPrice, pointPos);                
-                else                
-                    AddLowPoint(arr_LowPrice, pointPos);                
+                    AddHighPoint(arr_HighPrice, pointPos);
+                else
+                    AddLowPoint(arr_LowPrice, pointPos);
             }
             //上一个是高点
             else if (lastType == 1)
@@ -109,7 +113,7 @@ namespace com.wer.sc.ana.test.model
                     }
                 }
                 else if (con_dd)
-                    AddLowPoint(arr_LowPrice, pointPos);                
+                    AddLowPoint(arr_LowPrice, pointPos);
             }
             else
             {
@@ -123,8 +127,8 @@ namespace com.wer.sc.ana.test.model
                         AddLowPoint(arr_LowPrice, pointPos);
                     }
                 }
-                else if (con_gd)                
-                    AddHighPoint(arr_HighPrice, pointPos);                
+                else if (con_gd)
+                    AddHighPoint(arr_HighPrice, pointPos);
             }
 
             AddPosPoint(zzLen, con_dd, con_gd);

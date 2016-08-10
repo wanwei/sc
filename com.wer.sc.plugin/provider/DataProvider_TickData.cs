@@ -16,6 +16,27 @@ namespace com.wer.sc.data.provider
             this.dataPath = dataPath;
         }
 
+        public List<int> GetOpenDates(String code)
+        {
+            String codePath = GetCodePath(code);
+            if (!Directory.Exists(codePath))
+                return new List<int>();
+            String[] openDateFiles = Directory.GetFiles(codePath);
+            List<int> openDates = new List<int>();
+            for (int i = 0; i < openDateFiles.Length; i++)
+            {
+                String file = openDateFiles[i];
+                int startIndex = file.LastIndexOf('_') + 1;
+                if (startIndex < 0)
+                    continue;
+                int openDate;
+                bool isInt = int.TryParse(file.Substring(startIndex, 8), out openDate);
+                if (isInt)
+                    openDates.Add(openDate);
+            }
+            return openDates;
+        }
+
         public TickData GetTickData(String code, int date)
         {
             String path = GetCodePath(code, date);
@@ -23,6 +44,11 @@ namespace com.wer.sc.data.provider
                 return null;
             String[] lines = File.ReadAllLines(path);
             return ReadLinesToTickData(lines);
+        }
+
+        private String GetCodePath(String code)
+        {
+            return dataPath + "\\" + code + "\\";
         }
 
         private String GetCodePath(String code, int date)

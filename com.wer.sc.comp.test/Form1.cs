@@ -45,5 +45,23 @@ namespace com.wer.sc.comp.test
         {
             
         }
+
+        private void btModel_Click(object sender, EventArgs e)
+        {
+            FrmModel model = new FrmModel();
+            model.ShowDialog();
+        }
+
+        private void btAna2_Click(object sender, EventArgs e)
+        {
+            FrmGraphicDrawer_Ana2 frm = new FrmGraphicDrawer_Ana2();
+            frm.ShowDialog();
+        }
+
+        private void btAna3_Click(object sender, EventArgs e)
+        {
+            FrmGraphicDrawer_Ana3 frm = new FrmGraphicDrawer_Ana3();
+            frm.ShowDialog();
+        }
     }
 }

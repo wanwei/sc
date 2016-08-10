@@ -126,10 +126,15 @@ namespace com.wer.sc.comp.graphic.utils
                         return;
                     }
                     int index = (int)provider.PriceMapping.CalcPriceX(point.X);
-                    if (this.selectIndex != index)
+                    GraphicDataProvider dataProvider = provider.GetDataProvider();
+                    if (index >= dataProvider.StartIndex && index <= dataProvider.EndIndex)
                     {
-                        this.selectIndex = index;
-                        provider.DoSelectIndexChange(this.selectIndex);
+                        //if(index>provider.)
+                        if (this.selectIndex != index)
+                        {
+                            this.selectIndex = index;
+                            provider.DoSelectIndexChange(this.selectIndex);
+                        }
                     }
                     //如果selectIndex<0，说明鼠标移出了该控件，此时应该不需要显示十字线了
                     if (this.selectIndex < 0)
@@ -223,5 +228,7 @@ namespace com.wer.sc.comp.graphic.utils
         bool DoMoveNext();
 
         bool DoMovePrev();
+
+        GraphicDataProvider GetDataProvider();
     }
 }

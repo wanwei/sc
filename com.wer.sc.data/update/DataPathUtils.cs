@@ -10,14 +10,19 @@ namespace com.wer.sc.data
     public class DataPathUtils
     {
         private String dataPath;
-        public DataPathUtils(String path)
+        public DataPathUtils(String dataPath)
         {
-            this.dataPath = RealPath(path);
+            this.dataPath = RealPath(dataPath);
         }
 
         public String GetCodePath()
         {
             return dataPath + "codes";
+        }
+
+        public String GetOpenDatePath()
+        {
+            return dataPath + "opendate";
         }
 
         public string GetTickPath(string code)

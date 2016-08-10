@@ -2,13 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace com.wer.sc.utils
+namespace com.wer.sc.data
 {
-    class TimeUtils
+    public class DataNavigate_Tick
     {
-        public static void test()
-        {
-        }
     }
 }

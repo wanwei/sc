@@ -33,6 +33,24 @@ namespace com.wer.sc.data
             this.Period = period;
         }
 
+        public override String ToString()
+        {
+            switch (PeriodType)
+            {
+                case TYPE_SECOND:
+                    return Period + "秒钟";
+                case TYPE_MINUTE:
+                    return Period + "分钟";
+                case TYPE_HOUR:
+                    return Period + "小时";
+                case TYPE_DAY:
+                    return Period + "天";
+                case TYPE_WEEK:
+                    return Period + "周";
+            }
+            return "";
+        }
+
         public override bool Equals(object obj)
         {
             if (!(obj is KLinePeriod))
@@ -41,6 +59,11 @@ namespace com.wer.sc.data
             if (this.PeriodType == period.PeriodType && this.Period == period.Period)
                 return true;
             return base.Equals(obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return Period * 10 + PeriodType;
         }
     }
 }

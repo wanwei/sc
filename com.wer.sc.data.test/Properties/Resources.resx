@@ -130,4 +130,10 @@
   <data name="AG05_20141230" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\AG05_20141230.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
   </data>
+  <data name="M13_20150105" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\M13_20150105.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
+  </data>
+  <data name="M05_20150106" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\M05_20150106.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
+  </data>
 </root>

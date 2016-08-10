@@ -20,40 +20,28 @@ namespace com.wer.sc.comp.test
         {
             InitializeComponent();            
 
-            //MockGraphicDataProvider dataProvider = new MockGraphicDataProvider();
-            //dataProvider.Code = "m05";
-            //dataProvider.Period = new KLinePeriod(KLinePeriod.TYPE_DAY, 1);
-            //dataProvider.EndIndex = 710;
-            //drawer.DataProvider = dataProvider;
-
             KLineModelRunner runner = new KLineModelRunner(@"D:\SCDATA\CNFUTURES");
-            runner.Code = "m05";
-            //runner.Start = 20100725;
-            //runner.End = 20141125;
-            runner.Start = 20100725;
-            runner.End = 20111125;
+            runner.Code = "m13";
+            runner.StartDate = 20100725;
+            runner.EndDate = 20111125;
             runner.Period = new data.KLinePeriod(KLineTimeType.TYPE_DAY, 1);
 
-            //KLineModel_Simple2 model = new KLineModel_Simple2();            
-            KLineModel_Simple3 model = new KLineModel_Simple3();
-            model.HLLen = 7;
+            KLineModel_Simple2 model = new KLineModel_Simple2();            
             runner.Model = model;
             runner.run();
 
             KLineData data = runner.Data;
             MockGraphicDataProvider dataProvider = new MockGraphicDataProvider();
-            dataProvider.Init(data);
+            dataProvider.ChangeData(data);
             dataProvider.EndIndex = 200;
 
             GraphicDrawer_Candle drawer = new GraphicDrawer_Candle();
             drawer.DataProvider = dataProvider;
             drawer.drawer_chart.AddPolyLines(model.polyLines);
+            drawer.drawer_chart.AddPolyLines(model.polyLineList);
             drawer.drawer_chart.AddPoints(model.points);
             drawer.drawer_chart.AddPoints(model.pointLists);
             drawer.BindControl(this);
-
-            //drawer.drawer_chart.AddPolyLines(model.polyLines);
-            //drawer.DrawGraph();
         }
     }
 }

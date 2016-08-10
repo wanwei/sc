@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace com.wer.sc.comp.graphic
 {
-    public class PolyLine
+    public class PolyLineArray
     {
         public float[] Data;
 
@@ -15,18 +15,18 @@ namespace com.wer.sc.comp.graphic
 
         public float Width = 1f;
 
-        public PolyLine()
+        public PolyLineArray()
         {
 
         }
 
-        public PolyLine(float[] data, Color color)
+        public PolyLineArray(float[] data, Color color)
         {
             this.Data = data;
             this.color = color;
         }
 
-        public PolyLine(float[] data, Color color, float width)
+        public PolyLineArray(float[] data, Color color, float width)
         {
             this.Data = data;
             this.color = color;

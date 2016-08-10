@@ -24,33 +24,45 @@ namespace com.wer.sc.comp.test
 
         private int startIndex = 200;
 
-        private int endIndex = 300;        
+        private int endIndex = 300;
+
+        private int startDate = 20100101;
+        private int endDate = 20150101;
 
         public MockGraphicDataProvider()
         {
             fac = new DataReaderFactory(@"D:\SCDATA\CNFUTURES");
         }
 
-        public void Init(KLineData klineData)
+        public void ChangeData(KLineData klineData)
         {
             this.data = klineData;
             this.code = klineData.code;
-            this.period = klineData.Period;            
+            this.period = klineData.Period;
+        }
+
+
+        public void ChangeData(String code, int startDate, int endDate, KLinePeriod period)
+        {
+            this.data = fac.KLineDataReader.GetData(code, startDate, endDate, period);
+            this.startDate = startDate;
+            this.endDate = endDate;
+            ChangeData(data);
         }
 
         public KLineData GetKLineData()
         {
             return data;
         }
-        public KLineChart GetCurrentChart()
+        public IKLineChart GetCurrentChart()
         {
-            return new KLineChart(data, endIndex);
+            return new KLineChart_KLineData(data, endIndex);
         }
         private void InitCharts()
         {
             if (code == null || period == null)
                 return;
-            this.data = fac.KLineDataReader.GetData(code, 20100101, 20150101, period);
+            this.data = fac.KLineDataReader.GetData(code, startDate, endDate, period);
         }
 
         private void InitIndex()
@@ -137,11 +149,23 @@ namespace com.wer.sc.comp.test
             set
             {
                 currentTime = value;
-                InitIndex();
+                EndIndex = findEndIndex(currentTime);
             }
         }
 
-        public event DataChangeHandler DataChange;
+        private int findEndIndex(float currentTime)
+        {
+            bool isSmaller = data.arr_time[0] < currentTime;
+            if (!isSmaller)
+                return 0;
+            for (int i = 0; i < data.Length; i++)
+            {
+                if (data.arr_time[i] >= currentTime)
+                    return i;
+            }
+            return data.Length - 1;
+        }
 
+        public event DataChangeHandler DataChange;
     }
 }

@@ -41,24 +41,32 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ana\KLineAttribute.cs" />
     <Compile Include="ana\KLineHoldInfo.cs" />
     <Compile Include="ana\KLineModelImport.cs" />
     <Compile Include="ana\KLineTimeType.cs" />
     <Compile Include="ana\KLineTrade.cs" />
     <Compile Include="ana\KLineTradeDetailInfo.cs" />
     <Compile Include="ana\KLineTradeFee.cs" />
+    <Compile Include="ana\ModelLinesAttribute.cs" />
+    <Compile Include="ana\ModelPointsAttribute.cs" />
+    <Compile Include="ana\ModelRegisterAttribute.cs" />
+    <Compile Include="ana\ZbRegisterAttribute.cs" />
     <Compile Include="data\CodeInfo.cs" />
     <Compile Include="DataProvider.cs" />
+    <Compile Include="data\IKLineChart.cs" />
+    <Compile Include="data\KLineChart_KLineData.cs" />
     <Compile Include="data\KLineChart.cs" />
+    <Compile Include="data\KLineChart_Abstract.cs" />
     <Compile Include="data\KLineData.cs" />
     <Compile Include="data\KLinePeriod.cs" />
+    <Compile Include="data\RealData.cs" />
     <Compile Include="data\TickData.cs" />
     <Compile Include="data\TimeConvert.cs" />
     <Compile Include="data\TimeUtils.cs" />
     <Compile Include="draw\PointArray.cs" />
     <Compile Include="draw\PointList.cs" />
-    <Compile Include="draw\PolyLine.cs" />
+    <Compile Include="draw\PolyLineArray.cs" />
+    <Compile Include="draw\PolyLineList.cs" />
     <Compile Include="draw\PricePoint.cs" />
     <Compile Include="draw\PriceRectangle.cs" />
     <Compile Include="KLineModel.cs" />

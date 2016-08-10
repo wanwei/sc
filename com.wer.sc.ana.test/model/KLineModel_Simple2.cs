@@ -11,13 +11,16 @@ namespace com.wer.sc.ana.test.model
 {
     public class KLineModel_Simple2 : KLineModel
     {
-
+        [ModelLines("#111111", 1)]
         public float[] ma5;
 
+        [ModelLines("#0000FF", 1)]
         public float[] ma10;
 
+        [ModelLines("#FF0000", 1)]
         public float[] ma20;
 
+        [ModelLines("#00FF00", 1)]
         public float[] ma40;
 
         public override void init(String code, KLineData data)
@@ -32,10 +35,6 @@ namespace com.wer.sc.ana.test.model
         public override void ModelEnd()
         {
             base.ModelEnd();
-            AddPolyLine(new comp.graphic.PolyLine(ma5, Color.Red));
-            AddPolyLine(new comp.graphic.PolyLine(ma10, Color.Blue));
-            AddPolyLine(new comp.graphic.PolyLine(ma20, Color.Green));
-            AddPolyLine(new comp.graphic.PolyLine(ma40, Color.Gray));
         }
 
         public override void Loop()

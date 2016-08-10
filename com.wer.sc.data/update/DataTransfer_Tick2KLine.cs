@@ -48,24 +48,24 @@ namespace com.wer.sc.data.update
             this.yesterdayEndPrice = yesterdayEndPrice;
         }
 
-        public List<KLineChart> GetKLineCharts()
+        public List<KLineChart2> GetKLineCharts()
         {
             return KLineChartGen.GenerateCharts(ticks, timePeriods, yesterdayEndPrice);
         }
 
         public KLineData GetKLineData()
         {
-            List<KLineChart> charts = KLineChartGen.GenerateCharts(ticks, timePeriods, yesterdayEndPrice);
+            List<KLineChart2> charts = KLineChartGen.GenerateCharts(ticks, timePeriods, yesterdayEndPrice);
 
             return GetCharts(charts);
         }
 
-        public static KLineData GetCharts(List<KLineChart> charts)
+        public static KLineData GetCharts(List<KLineChart2> charts)
         {
             KLineData data = new KLineData(charts.Count);
             for (int i = 0; i < charts.Count; i++)
             {
-                KLineChart chart = charts[i];
+                KLineChart2 chart = charts[i];
                 data.arr_time[i] = chart.time;
                 data.arr_start[i] = chart.start;
                 data.arr_high[i] = chart.high;
@@ -106,6 +106,12 @@ namespace com.wer.sc.data.update
             int startDate = GetDate(0);
             int endDate = GetDate(data.Length - 1);
 
+            //M03出现的状况
+            //if (timePeriods[0] > 0.18 && startDate == endDate)
+            //{
+            //    startDate = (int)TimeUtils.AddDays(endDate, -1);
+            //}
+
             List<double> periods = new List<double>(timePeriods.Count);
             if (startDate == endDate)
             {
@@ -142,9 +148,9 @@ namespace com.wer.sc.data.update
             return (int)tickData.arr_time[index];
         }
 
-        public KLineChart NextChart()
+        public KLineChart2 NextChart()
         {
-            KLineChart chart;
+            KLineChart2 chart;
             //已经没有tick数据了，说明最后几个周期没有交易
             if (currentTickIndex >= tickData.Length)
             {
@@ -235,9 +241,9 @@ namespace com.wer.sc.data.update
             return true;
         }
 
-        private KLineChart GetEmptyChart()
+        private KLineChart2 GetEmptyChart()
         {
-            KLineChart chart = new KLineChart();
+            KLineChart2 chart = new KLineChart2();
             chart.time = periods[currentPeriodIndex];
             float lastPrice = currentTickIndex == 0 ? yesterdayEndPrice : tickData.arr_price[currentTickIndex - 1];
             if (lastPrice < 0)
@@ -251,11 +257,11 @@ namespace com.wer.sc.data.update
             return chart;
         }
 
-        private KLineChart GetChart(int startTickIndex, int endTickIndex)
+        private KLineChart2 GetChart(int startTickIndex, int endTickIndex)
         {
             //if (endTickIndex < startTickIndex)
             //    return GetEmptyChart();
-            KLineChart chart = new KLineChart();
+            KLineChart2 chart = new KLineChart2();
             float high = 0;
             float low = float.MaxValue;
             int mount = 0;
@@ -286,10 +292,10 @@ namespace com.wer.sc.data.update
             return currentPeriodIndex != periods.Count;
         }
 
-        public static List<KLineChart> GenerateCharts(TickData tickData, List<double> timePeriods, float yesterdayEndPrice)
+        public static List<KLineChart2> GenerateCharts(TickData tickData, List<double> timePeriods, float yesterdayEndPrice)
         {
             KLineChartGen gen = new KLineChartGen(tickData, timePeriods, yesterdayEndPrice);
-            List<KLineChart> charts = new List<KLineChart>();
+            List<KLineChart2> charts = new List<KLineChart2>();
             while (gen.HasNext())
             {
                 charts.Add(gen.NextChart());
@@ -298,7 +304,7 @@ namespace com.wer.sc.data.update
         }
     }
 
-    public class KLineChart
+    public class KLineChart2
     {
         public double time;
         public float start;

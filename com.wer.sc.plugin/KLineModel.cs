@@ -239,11 +239,11 @@ namespace com.wer.sc.plugin
         /// 得到当前对应的Chart
         /// </summary>
         /// <returns></returns>
-        public KLineChart Chart
+        public KLineChart_KLineData Chart
         {
             get
             {
-                return new KLineChart(this.data, BarPos);
+                return new KLineChart_KLineData(this.data, BarPos);
             }
         }
 
@@ -781,16 +781,24 @@ namespace com.wer.sc.plugin
 
         #region 画图
 
-        public List<PolyLine> polyLines = new List<PolyLine>();
+        public List<PolyLineArray> polyLines = new List<PolyLineArray>();
 
-        public void AddPolyLine(PolyLine polyLine)
+        public void AddPolyLine(PolyLineArray polyLine)
         {
             polyLines.Add(polyLine);
+        }
+
+        public List<PolyLineList> polyLineList = new List<PolyLineList>();
+
+        public void AddPolyLine(PolyLineList polyLine)
+        {
+            polyLineList.Add(polyLine);
         }
 
         public void ClearPolyLine()
         {
             polyLines.Clear();
+            polyLineList.Clear();
         }
 
         public List<PointArray> points = new List<PointArray>();

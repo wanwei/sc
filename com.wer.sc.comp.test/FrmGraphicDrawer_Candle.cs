@@ -57,7 +57,7 @@ namespace com.wer.sc.comp.test
             {
                 ma[i] = this.ma(data.arr_end, i, 5);
             }
-            drawer.AddPolyLine(new PolyLine(ma, Color.Green));
+            drawer.AddPolyLine(new PolyLineArray(ma, Color.Green));
 
             float[] points = new float[data.Length];
             for (int i = 0; i < ma.Length; i++)

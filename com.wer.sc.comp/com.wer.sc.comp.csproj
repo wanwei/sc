@@ -16,18 +16,19 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
+    <DebugType>none</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -42,10 +43,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ana\AnaComponent.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ana\AnaComponent.Designer.cs">
+      <DependentUpon>AnaComponent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ana\AnaDrawer_KLine.cs" />
+    <Compile Include="ana\CompKLineModels.cs" />
     <Compile Include="graphic\ColorConfig.cs" />
     <Compile Include="graphic\candle\GraphicDrawer_Candle.cs" />
     <Compile Include="graphic\candle\GraphicDrawer_Candle_Abstract.cs" />
     <Compile Include="graphic\candle\GraphicDrawer_CandleMount.cs" />
+    <Compile Include="graphic\GraphicDataProviderMgr.cs" />
+    <Compile Include="graphic\GraphicDataProvider_Default.cs" />
+    <Compile Include="graphic\GraphicDataProvider_Tick.cs" />
+    <Compile Include="graphic\GraphicDataProvider_Time.cs" />
     <Compile Include="graphic\GraphicDrawer_Compound.cs" />
     <Compile Include="graphic\GraphicDrawer_Real.cs" />
     <Compile Include="graphic\GraphicDrawer_Switch.cs" />
@@ -63,6 +76,14 @@
     <Compile Include="graphic\StockGraph_Abstract.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\com.wer.sc.ana\com.wer.sc.ana.csproj">
+      <Project>{0ACF6F33-A700-47FD-AA61-5E0B3B4B8F80}</Project>
+      <Name>com.wer.sc.ana</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\com.wer.sc.data\com.wer.sc.data.csproj">
+      <Project>{1EE9E83B-FD37-42FA-A263-EEE93479AD45}</Project>
+      <Name>com.wer.sc.data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\com.wer.sc.plugin\com.wer.sc.plugin.csproj">
       <Project>{b8955457-f108-4060-a35b-69b482a19ab6}</Project>
       <Name>com.wer.sc.plugin</Name>
@@ -72,7 +93,11 @@
       <Name>com.wer.sc.utils</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="ana\AnaComponent.resx">
+      <DependentUpon>AnaComponent.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

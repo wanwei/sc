@@ -25,7 +25,7 @@ namespace com.wer.sc.data.provider
             this.provider_CodeInfo = new DataProvider_CodeInfo(providerConfig.ConfigPath);
             this.provider_OpenTime = new DataProvider_OpenTime(providerConfig.ConfigPath);
             this.provider_OpenDate = new DataProvider_OpenDate(providerConfig.ConfigPath);
-            this.provider_TickData = new DataProvider_TickData(providerConfig.DataPath);
+            this.provider_TickData = new DataProvider_TickData(providerConfig.ProviderDataPath);
         }
 
         public override List<CodeInfo> GetCodes()
@@ -41,6 +41,11 @@ namespace com.wer.sc.data.provider
         public override List<int> GetOpenDates()
         {
             return provider_OpenDate.GetOpenDates();
+        }
+
+        public override List<int> GetOpenDates(string code)
+        {
+            return provider_TickData.GetOpenDates(code);
         }
 
         public override List<double[]> GetOpenTime(string code, int date)

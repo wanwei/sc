@@ -84,6 +84,8 @@
     <None Include="Resources\DLm05.csv" />
     <None Include="Resources\m01_20131231.csv" />
     <None Include="Resources\m05_20040630.csv" />
+    <None Include="Resources\M05_20150106.csv" />
+    <None Include="Resources\M13_20150105.csv" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\com.wer.sc.data\com.wer.sc.data.csproj">

@@ -18,7 +18,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -58,6 +58,18 @@
     <Compile Include="FrmGraphicDrawer_Ana.Designer.cs">
       <DependentUpon>FrmGraphicDrawer_Ana.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmGraphicDrawer_Ana2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmGraphicDrawer_Ana2.Designer.cs">
+      <DependentUpon>FrmGraphicDrawer_Ana2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmGraphicDrawer_Ana3.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmGraphicDrawer_Ana3.Designer.cs">
+      <DependentUpon>FrmGraphicDrawer_Ana3.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmGraphicDrawer_Candle.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -69,6 +81,12 @@
     </Compile>
     <Compile Include="FrmGraphicDrawer_Candle2.Designer.cs">
       <DependentUpon>FrmGraphicDrawer_Candle2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmModel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmModel.Designer.cs">
+      <DependentUpon>FrmModel.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmTest.cs">
       <SubType>Form</SubType>
@@ -86,11 +104,20 @@
     <EmbeddedResource Include="FrmGraphicDrawer_Ana.resx">
       <DependentUpon>FrmGraphicDrawer_Ana.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrmGraphicDrawer_Ana2.resx">
+      <DependentUpon>FrmGraphicDrawer_Ana2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmGraphicDrawer_Ana3.resx">
+      <DependentUpon>FrmGraphicDrawer_Ana3.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmGraphicDrawer_Candle.resx">
       <DependentUpon>FrmGraphicDrawer_Candle.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmGraphicDrawer_Candle2.resx">
       <DependentUpon>FrmGraphicDrawer_Candle2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmModel.resx">
+      <DependentUpon>FrmModel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmTest.resx">
       <DependentUpon>FrmTest.cs</DependentUpon>

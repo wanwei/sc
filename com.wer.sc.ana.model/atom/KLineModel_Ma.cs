@@ -8,14 +8,19 @@ using System.Threading.Tasks;
 
 namespace com.wer.sc.ana.model.atom
 {
+    [ZbRegisterAttribute("均线")]
     public class KLineModel_Ma : KLineModel
     {
+        [ModelLines("ma5", "#111111", 1)]
         public float[] ma5;
 
+        [ModelLines("ma10", "#0000FF", 1)]
         public float[] ma10;
 
+        [ModelLines("ma20", "#FF0000", 1)]
         public float[] ma20;
 
+        [ModelLines("ma40", "#00FF00", 1)]
         public float[] ma40;
 
         public override void init(String code, KLineData data)

@@ -31,8 +31,8 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
-            this.tbSrcPath = new System.Windows.Forms.TextBox();
-            this.tbAdjustedPath = new System.Windows.Forms.TextBox();
+            this.tbPathProvider = new System.Windows.Forms.TextBox();
+            this.tbPathDataCenter = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.btStart = new System.Windows.Forms.Button();
@@ -73,8 +73,8 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 23F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 77F));
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.tbSrcPath, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.tbAdjustedPath, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.tbPathProvider, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.tbPathDataCenter, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
@@ -96,23 +96,23 @@
             this.label2.TabIndex = 4;
             this.label2.Text = "数据仓库目录";
             // 
-            // tbSrcPath
+            // tbPathProvider
             // 
-            this.tbSrcPath.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.tbSrcPath.Location = new System.Drawing.Point(137, 3);
-            this.tbSrcPath.Name = "tbSrcPath";
-            this.tbSrcPath.ReadOnly = true;
-            this.tbSrcPath.Size = new System.Drawing.Size(377, 26);
-            this.tbSrcPath.TabIndex = 0;
+            this.tbPathProvider.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.tbPathProvider.Location = new System.Drawing.Point(137, 3);
+            this.tbPathProvider.Name = "tbPathProvider";
+            this.tbPathProvider.ReadOnly = true;
+            this.tbPathProvider.Size = new System.Drawing.Size(377, 26);
+            this.tbPathProvider.TabIndex = 0;
             // 
-            // tbAdjustedPath
+            // tbPathDataCenter
             // 
-            this.tbAdjustedPath.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.tbAdjustedPath.Location = new System.Drawing.Point(137, 37);
-            this.tbAdjustedPath.Name = "tbAdjustedPath";
-            this.tbAdjustedPath.ReadOnly = true;
-            this.tbAdjustedPath.Size = new System.Drawing.Size(377, 26);
-            this.tbAdjustedPath.TabIndex = 1;
+            this.tbPathDataCenter.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.tbPathDataCenter.Location = new System.Drawing.Point(137, 37);
+            this.tbPathDataCenter.Name = "tbPathDataCenter";
+            this.tbPathDataCenter.ReadOnly = true;
+            this.tbPathDataCenter.Size = new System.Drawing.Size(377, 26);
+            this.tbPathDataCenter.TabIndex = 1;
             // 
             // label1
             // 
@@ -142,6 +142,7 @@
             this.btStart.TabIndex = 8;
             this.btStart.Text = "开始";
             this.btStart.UseVisualStyleBackColor = true;
+            this.btStart.Click += new System.EventHandler(this.btStart_Click);
             // 
             // btStop
             // 
@@ -152,6 +153,7 @@
             this.btStop.TabIndex = 7;
             this.btStop.Text = "停止";
             this.btStop.UseVisualStyleBackColor = true;
+            this.btStop.Click += new System.EventHandler(this.btStop_Click);
             // 
             // statusStrip1
             // 
@@ -166,8 +168,8 @@
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(74, 17);
-            this.toolStripStatusLabel1.Text = "正在生成......";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(26, 17);
+            this.toolStripStatusLabel1.Text = "......";
             // 
             // FormGenerator
             // 
@@ -197,8 +199,8 @@
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox tbSrcPath;
-        private System.Windows.Forms.TextBox tbAdjustedPath;
+        private System.Windows.Forms.TextBox tbPathProvider;
+        private System.Windows.Forms.TextBox tbPathDataCenter;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Button btStart;

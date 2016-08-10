@@ -43,7 +43,7 @@ namespace com.wer.sc.ana.test.model
 
         private float holdPrice;
 
-        public float earn = 0;
+        public float earn = 0;     
 
         public override void Loop()
         {

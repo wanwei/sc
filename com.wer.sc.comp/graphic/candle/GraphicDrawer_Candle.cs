@@ -110,12 +110,12 @@ namespace com.wer.sc.comp.graphic
         public SelectedPointInfo GetBlockInfo(int index)
         {
             KLineData data = dataProvider.GetKLineData();
-            KLineChart chart = new KLineChart(data, index);
-            KLineChart lastChart = new KLineChart(data, index - 1);
+            KLineChart_KLineData chart = new KLineChart_KLineData(data, index);
+            KLineChart_KLineData lastChart = new KLineChart_KLineData(data, index - 1);
             return GetBlockInfo(chart, lastChart);
         }
 
-        private SelectedPointInfo GetBlockInfo(KLineChart chart, KLineChart lastChart)
+        private SelectedPointInfo GetBlockInfo(KLineChart_KLineData chart, KLineChart_KLineData lastChart)
         {
             SelectedPointInfo b = new SelectedPointInfo();
             b.LineHeight = 20;
@@ -344,6 +344,11 @@ namespace com.wer.sc.comp.graphic
             float x = priceMapping.CalcX(selectIndex);
             float y = priceMapping.CalcY(drawer.DataProvider.GetKLineData().arr_end[selectIndex]);
             return new Point((int)x, (int)y);
+        }
+
+        public GraphicDataProvider GetDataProvider()
+        {
+            return this.drawer.DataProvider;
         }
     }
 }

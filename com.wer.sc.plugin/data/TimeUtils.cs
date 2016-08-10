@@ -98,5 +98,17 @@ namespace com.wer.sc.data
 
             return currentTime - endTime;
         }
+
+        public static TimeSpan Substract(double time1, double time2)
+        {
+            if (time1 < 1 && time2 < 1)
+            {
+                time1 += 20100101;
+                time2 += 20100101;
+            }
+            DateTime t1 = TimeConvert.ConvertToDateTime(time1);
+            DateTime t2 = TimeConvert.ConvertToDateTime(time2);
+            return t1.Subtract(t2);
+        }
     }
 }

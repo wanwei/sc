@@ -44,7 +44,7 @@ namespace com.wer.sc.plugin
         public abstract String GetDataPath();
 
         /// <summary>
-        /// 该插件提供的所有
+        /// 该插件提供的所有股票或期货信息
         /// </summary>
         /// <returns></returns>
         public abstract List<CodeInfo> GetCodes();
@@ -54,6 +54,13 @@ namespace com.wer.sc.plugin
         /// </summary>
         /// <returns></returns>
         public abstract List<int> GetOpenDates();
+
+        /// <summary>
+        /// 得到单一股票的所有开盘日
+        /// </summary>
+        /// <param name="code"></param>
+        /// <returns></returns>
+        public abstract List<int> GetOpenDates(String code);
 
         /// <summary>
         /// 得到某股票或期货当日开盘时间

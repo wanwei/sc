@@ -12,6 +12,16 @@ namespace com.wer.sc.comp.graphic
     /// </summary>
     public interface GraphicDataProvider
     {
+        String Code { get; }
+
+        /// <summary>
+        /// 设置或获取数据周期
+        /// </summary>
+        KLinePeriod Period
+        {
+            get;
+        }
+
         /// <summary>
         /// 获得当前数据
         /// </summary>
@@ -22,32 +32,11 @@ namespace com.wer.sc.comp.graphic
         /// 得到当前的Charts
         /// </summary>
         /// <returns></returns>
-        KLineChart GetCurrentChart();
+        IKLineChart GetCurrentChart();
 
-        int StartIndex
-        {
-            get;
-        }
+        int StartIndex { get; }
 
-        int EndIndex
-        {
-            get;
-            set;
-        }
-
-
-        String Code
-        {
-            get;
-        }
-
-        /// <summary>
-        /// 设置或获取数据周期
-        /// </summary>
-        KLinePeriod Period
-        {
-            get;
-        }
+        int EndIndex { get; set; }
 
         /// <summary>
         /// 设置或获取当前时间
@@ -67,7 +56,10 @@ namespace com.wer.sc.comp.graphic
             set;
         }
 
-        // 将创建的委托和特定事件关联,在这里特定的事件为KeyDown
+        void ChangeData(KLineData klineData);
+
+        void ChangeData(String code, int startDate, int endDate, KLinePeriod period);
+        
         //event DataChangeHandler DataChange;
     }
 

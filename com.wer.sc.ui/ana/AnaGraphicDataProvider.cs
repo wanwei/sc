@@ -100,14 +100,24 @@ namespace com.wer.sc.ui.ana
 
         public event DataChangeHandler DataChange;
 
-        public KLineChart GetCurrentChart()
+        public IKLineChart GetCurrentChart()
         {
-            return new KLineChart(klineDataWrap.KlineData, endIndex);
+            return new KLineChart_KLineData(klineDataWrap.KlineData, endIndex);
         }
 
         public KLineData GetKLineData()
         {
             return klineDataWrap.KlineData;
+        }
+        
+        public void ChangeData(string code, int startDate, int endDate, KLinePeriod period)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ChangeData(KLineData klineData)
+        {
+            throw new NotImplementedException();
         }
     }
 }

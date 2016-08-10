@@ -65,12 +65,12 @@ namespace com.wer.sc.comp.graphic
             int endIndex = DataProvider.EndIndex;
             for (int i = startIndex; i < endIndex; i++)
             {
-                DrawMount(g, new KLineChart(data, i), i);
+                DrawMount(g, new KLineChart_KLineData(data, i), i);
             }
             DrawMount(g, DataProvider.GetCurrentChart(), endIndex);
         }
 
-        private void DrawMount(Graphics g, KLineChart chart, int index)
+        private void DrawMount(Graphics g, IKLineChart chart, int index)
         {
             Rectangle rectangle = DisplayRect;
             bool isRed = chart.End > chart.Start;

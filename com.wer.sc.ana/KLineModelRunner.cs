@@ -1,10 +1,14 @@
-﻿using com.wer.sc.data;
+﻿using com.wer.sc.comp.graphic;
+using com.wer.sc.data;
 using com.wer.sc.plugin;
 using com.wer.sc.utils;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace com.wer.sc.ana
@@ -14,20 +18,19 @@ namespace com.wer.sc.ana
     /// </summary>
     public class KLineModelRunner
     {
-
         private KLineDataReader reader;
 
         //code
         private String code;
 
         //数据开始时间
-        private int dataStart = -1;
+        private int modelStartDate = -1;
 
         //开始日期
-        private int start;
+        private int startDate;
 
         //结束日期
-        private int end;
+        private int endDate;
 
         private KLinePeriod period;
 
@@ -36,9 +39,18 @@ namespace com.wer.sc.ana
         //测试所用的金额
         private float initMoney;
 
-        private KLineTradeFee fee;        
+        private KLineTradeFee fee;
 
         private KLineModel model;
+
+        public void SetData(String code, int startDate, int endDate, KLinePeriod period)
+        {
+            this.code = code;
+            this.startDate = startDate;
+            this.endDate = endDate;
+            this.period = period;
+            this.data = null;
+        }
 
         public string Code
         {
@@ -53,41 +65,54 @@ namespace com.wer.sc.ana
             }
         }
 
-        public int Start
+        public int StartDate
         {
             get
             {
-                return start;
+                return startDate;
             }
 
             set
             {
-                start = value;
+                startDate = value;
             }
         }
-        public int End
+        public int EndDate
         {
             get
             {
-                return end;
+                return endDate;
             }
 
             set
             {
-                end = value;
+                endDate = value;
             }
         }
 
-        public int DataStart
+        public KLinePeriod Period
         {
             get
             {
-                return dataStart;
+                return period;
             }
 
             set
             {
-                dataStart = value;
+                period = value;
+            }
+        }
+
+        public int ModelStartDate
+        {
+            get
+            {
+                return modelStartDate;
+            }
+
+            set
+            {
+                modelStartDate = value;
             }
         }
 
@@ -130,19 +155,6 @@ namespace com.wer.sc.ana
             }
         }
 
-        public KLinePeriod Period
-        {
-            get
-            {
-                return period;
-            }
-
-            set
-            {
-                period = value;
-            }
-        }
-
         private KLineData data;
 
         public KLineData Data
@@ -163,22 +175,50 @@ namespace com.wer.sc.ana
             this.reader = new KLineDataReader(datapath);
         }
 
+        public KLineModelRunner(DataReaderFactory fac)
+        {
+            this.reader = fac.KLineDataReader;
+        }
+
+        private Object lockRunObject = new object();
+
         public void run()
         {
-            if (Model.GetModelImports() == null)
-            {
-                executeNoImport();
+            lock (lockRunObject)
+            {                
+                if (Model.GetModelImports() == null)
+                {
+                    executeNoImport();
+                }
+                else
+                {
+                    executeImport();
+                }
+                DealModelDraw(model);
             }
-            else
-            {
-                executeImport();
-            }
-        }        
+        }
+
+        private KLineModelRunHandler handler;
+
+        public void RunAsync(KLineModelRunHandler callback)
+        {
+            this.handler = callback;
+            Thread t = new Thread(new ThreadStart(RunInternal));
+            t.Start();
+        }
+
+        private void RunInternal()
+        {
+            this.run();
+            if (this.handler != null)
+                this.handler(new KLineModelRunArgs(this));
+        }
 
         private void executeNoImport()
         {
-            int realDataStart = DataStart < 0 ? Start : DataStart;
-            data = this.reader.GetData(Code, realDataStart, End, Period);
+            int realModelStartDate = modelStartDate < 0 ? startDate : modelStartDate;
+            if (data == null)
+                data = this.reader.GetData(Code, StartDate, EndDate, Period);
             Model.init(Code, data, fee, DefaultHand, InitMoney);
             Model.ModelStart();
             while (true)
@@ -186,7 +226,7 @@ namespace com.wer.sc.ana
                 try
                 {
                     int date = Model.Date;
-                    if (date >= start)
+                    if (date >= realModelStartDate)
                         Model.ModelLoop();
                 }
                 catch (Exception e)
@@ -198,23 +238,66 @@ namespace com.wer.sc.ana
                 else
                     Model.NextBarPos();
             }
-            //		for (int i = 0; i < data.getLength(); i++) {
-            //			
-            //		}
-            Model.ModelEnd();
+            Model.ModelEnd();            
+        }
+
+        private void DealModelDraw(KLineModel model)
+        {
+            model.ClearPoints();
+            model.ClearPolyLine();
+            Type type = Model.GetType();
+            var fields = type.GetFields();
+
+            foreach (var field in fields)
+            {
+                bool isDefinedLines = field.IsDefined(typeof(ModelLinesAttribute), false);
+                bool isDefinedPoints = field.IsDefined(typeof(ModelPointsAttribute), false);
+                if (!isDefinedLines && !isDefinedPoints)
+                    continue;
+
+                var attributes = field.GetCustomAttributes();
+                foreach (var attribute in attributes)
+                {
+                    //获取属性的值
+                    var fieldValue = field.GetValue(Model);
+                    if (fieldValue == null)
+                        continue;
+
+                    Color color = (Color)attribute.GetType().GetProperty("Color").GetValue(attribute);
+                    int width = (int)attribute.GetType().GetProperty("Width").GetValue(attribute);
+
+                    if (fieldValue is List<PricePoint>)
+                    {
+                        if (isDefinedPoints)
+                            model.AddPoint(new PointList((List<PricePoint>)fieldValue, color, width));
+                        if (isDefinedLines)
+                            model.AddPolyLine(new PolyLineList((List<PricePoint>)fieldValue, color, width));
+                    }
+                    else if (fieldValue is Array)
+                    {
+                        if (isDefinedPoints)
+                            model.AddPoint(new PointArray((float[])fieldValue, color, width));
+                        if (isDefinedLines)
+                            model.AddPolyLine(new PolyLineArray((float[])fieldValue, color, width));
+                    }
+                }
+            }
         }
 
         private void executeImport()
         {
+            int realModelStartDate = modelStartDate < 0 ? startDate : modelStartDate;
+            if (data == null)
+                data = this.reader.GetData(Code, StartDate, EndDate, Period);
+
             //准备数据
             List<KLineModelImportWarp> importModels = importDataPrepare();
-            data = this.reader.GetData(Code, start, end, Period);
             Model.init(Code, data, fee, DefaultHand, InitMoney);
             Model.ModelStart();
             while (true)
             {
                 int date = Model.Date;
-                bool realStart = date >= start;
+                bool realStart = date >= realModelStartDate;
 
                 //首先将import进来的模型loop一遍			
                 loopImportWarps(importModels, Model.BarPos, realStart);
@@ -312,13 +395,48 @@ namespace com.wer.sc.ana
             {
                 KLineModelImport klineModel = importModels[i];
                 String importModelCode = StringUtils.IsEmpty(klineModel.Contract) ? Code : klineModel.Contract;
-                int realStart = DataStart < 0 ? Start : DataStart;
-                KLineData data = this.reader.GetData(importModelCode, realStart, End, klineModel.KLinePeriod);
+                int realStart = ModelStartDate < 0 ? StartDate : ModelStartDate;
+                KLineData data = this.reader.GetData(importModelCode, realStart, EndDate, klineModel.KLinePeriod);
                 klineModel.Model.init(importModelCode, data);
                 //klineModel.Model.setBarPos(-1);
                 modelWarps.Add(new KLineModelImportWarp(klineModel, data));
             }
             return modelWarps;
+        }
+    }
+
+    public delegate void KLineModelRunHandler(KLineModelRunArgs args);
+
+    public class KLineModelRunArgs
+    {
+        private KLineModelRunner runner;
+
+        private bool isCancel;
+
+        public KLineModelRunArgs(KLineModelRunner runner)
+        {
+            this.runner = runner;
+        }
+
+        public KLineModelRunner Runner
+        {
+            get
+            {
+                return runner;
+            }
+        }
+
+        public bool IsCancel
+        {
+            get
+            {
+                return isCancel;
+            }
+
+            set
+            {
+                isCancel = value;
+            }
         }
     }
 

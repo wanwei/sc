@@ -36,9 +36,11 @@ namespace com.wer.sc.data.update
         }
 
         public List<int> GetUpdateDates(string code, DataReaderFactory tmpFac)
-        {
+        {            
+            List<int> openDates = dataProvider.GetOpenDates(code);
+            if (openDates == null)
+                return new List<int>();
             List<int> updateDates = new List<int>();
-            List<int> openDates = dataProvider.GetOpenDates();
             List<int> currentDates = tmpFac.TickDataReader.GetTickDates(code);
             if (currentDates != null && openDates.Count == currentDates.Count)
                 return updateDates;

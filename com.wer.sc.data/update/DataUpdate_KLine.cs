@@ -41,9 +41,21 @@ namespace com.wer.sc.data.update
             return (int)time;
         }
 
-        public int GetUpdateLastTime(String code, DataReaderFactory dataReaderFactory, KLinePeriod period)
+        public int GetUpdateLastDate(String code, DataReaderFactory dataReaderFactory, KLinePeriod period)
         {
             return dataReaderFactory.KLineDataReader.GetLastDate(code, period);
+        }
+
+        public List<int> GetUpdateDates(String code, DataReaderFactory dataReaderFactory, KLinePeriod period)
+        {
+            List<int> openDates = dataProvider.GetOpenDates(code);
+            if (openDates == null)
+                return new List<int>();
+            int lastDate = GetUpdateLastDate(code, dataReaderFactory, period);
+            if (lastDate < 0)
+                return openDates;
+            int index = openDates.IndexOf(lastDate) + 1;
+            return openDates.GetRange(index, openDates.Count - index);
         }
 
         public void UpdateCode(String code, DataReaderFactory dataReaderFactory)
@@ -92,6 +104,41 @@ namespace com.wer.sc.data.update
             KLineData data = KLineData.Merge(klineDataList);
             store.Append(data);
             return data;
+        }
+
+        public KLineData UpdateByTick(string code, DataReaderFactory dataReaderFactory, KLinePeriod period, List<int> dates)
+        {
+            String path = utils.GetKLineDataPath(code, period);
+            KLineDataStore store = new KLineDataStore(path);
+
+            float lastPrice = -1;
+            List<KLineData> klineDataList = new List<KLineData>();
+            for (int i = 0; i < dates.Count; i++)
+            {
+                int openDate = dates[i];
+                TickData tickdata = dataReaderFactory.TickDataReader.GetTickData(code, openDate);
+                if (tickdata != null)
+                {
+                    List<double[]> openTimes = dataProvider.GetOpenTime(code, openDate);
+                    KLineData klineData = DataTransfer_Tick2KLine.Transfer(tickdata, period, openTimes, lastPrice);
+                    klineDataList.Add(klineData);
+                    lastPrice = klineData.arr_end[klineData.Length - 1];
+                }
+            }
+            if (klineDataList.Count == 0)
+                return null;
+            KLineData data = KLineData.Merge(klineDataList);
+            store.Append(data);
+            return data;
+        }
+
+        public KLineData UpdateByKLine(String code, DataReaderFactory dataReaderFactory, KLinePeriod period, KLineData originalData)
+        {
+            KLineData data_Target = DataTransfer_KLine2KLine.Transfer(originalData, period);
+            String path = utils.GetKLineDataPath(code, period);
+            KLineDataStore store = new KLineDataStore(path);
+            store.Append(data_Target);
+            return data_Target;
         }
 
         private void UpdateBy1Minute(String code, DataReaderFactory dataReaderFactory, KLinePeriod period)

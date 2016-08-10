@@ -45,7 +45,6 @@ namespace com.wer.sc.ana.test.model
 
         private int openDate;
 
-
         public override void Loop()
         {
             //如果今天开过仓，当日不平仓

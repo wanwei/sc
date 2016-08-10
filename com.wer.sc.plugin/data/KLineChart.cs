@@ -6,198 +6,111 @@ using System.Threading.Tasks;
 
 namespace com.wer.sc.data
 {
-    public class KLineChart
+    public class KLineChart : KLineChart_Abstract
     {
-        private KLineData data;
+        private string code;
 
-        private int index;
+        private double time;
 
-        public KLineData Data
+        private float start; //起始价        
+
+        private float high; //最高价
+
+        private float low; //最低价
+
+        private float end; //收盘价
+
+        private int mount;//成交量，单位是手
+
+        public override string Code
         {
             get
             {
-                return data;
-            }
-
-            set
-            {
-                data = value;
+                return this.code;
             }
         }
 
-        public int Index
+        public void SetCode(String code)
+        {
+            this.code = code;
+        }
+
+        public override double Time
         {
             get
             {
-                return index;
-            }
-
-            set
-            {
-                index = value;
+                return this.time;
             }
         }
 
-        public String toString()
+        public void SetTime(double time)
         {
-            StringBuilder sb = new StringBuilder();
-            sb.Append(Time).Append(",");
-            sb.Append(Start).Append(",");
-            sb.Append(High).Append(",");
-            sb.Append(Low).Append(",");
-            sb.Append(End).Append(",");
-            sb.Append(Mount);
-            //sb.Append(mount()).Append(",");
-            //sb.Append(hold());
-            return sb.ToString();
+            this.time = time;
         }
 
-        public KLineChart(KLineData data, int index)
-        {
-            this.Data = data;
-            this.Index = index;
-        }
-
-        public float Start
+        public override float Start
         {
             get
             {
-                return Data.arr_start[Index];
+                return start;
             }
         }
 
-        public float High
+        public void SetStart(float start)
+        {
+            this.start = start;
+        }
+
+        public override float High
         {
             get
             {
-                return Data.arr_high[Index];
+                return high;
             }
         }
 
-        public float Low
+        public void SetHigh(float high)
+        {
+            this.high = high;
+        }
+
+        public override float Low
         {
             get
             {
-                return Data.arr_low[Index];
+                return low;
             }
         }
 
-        public float End
+        public void SetLow(float low)
+        {
+            this.low = low;
+        }
+
+        public override float End
         {
             get
             {
-                return Data.arr_end[Index];
+                return end; 
             }
         }
 
-        public float Mount
+        public void SetEnd(float end)
+        {
+            this.end = end;
+        }
+
+        public override int Mount
         {
             get
             {
-                return Data.arr_mount[Index];
+                return mount;
             }
-        }
+        }       
 
-        public double Time
+        public void SetMount(int mount)
         {
-            get
-            {
-                return Data.arr_time[Index];
-            }
-        }
-
-        public float Height
-        {
-            get
-            {
-                return High - Low;
-            }
-        }
-
-        public float TopShadow
-        {
-            get
-            {
-                return High - BlockHigh;
-            }
-        }
-
-        public float BottomShadow
-        {
-            get
-            {
-                return BlockLow - Low;
-            }
-        }
-
-        /**
-         * 得到当日中间价
-         * @return
-         */
-        public float Middle
-        {
-            get
-            {
-                return (High + Low) / 2;
-            }
-        }
-
-        /**
-         * 得到开盘收盘的中间价
-         * @return
-         */
-        public float BlockMiddle
-        {
-            get
-            {
-                return (BlockHigh + BlockLow) / 2;
-            }
-        }
-
-        /**
-         * 得到开盘收盘价格低的那个
-         * @return
-         */
-        public float BlockLow
-        {
-            get
-            {
-                return Start < End ? Start : End;
-            }
-        }
-
-        /**
-         * 得到开盘收盘价格高的那个
-         * @return
-         */
-        public float BlockHigh
-        {
-            get
-            {
-                return Start > End ? Start : End;
-            }
-        }
-
-        /**
-         * 得到开盘收盘价格差
-         * @return
-         */
-        public float BlockHeight
-        {
-            get
-            {
-                return BlockHigh - BlockLow;
-            }
-        }
-
-        public bool isRed()
-        {
-            return End >= Start;
-        }
-
-        public Object clone()
-        {
-            return new KLineChart(Data, Index);
+            this.mount = mount;
         }
     }
 }

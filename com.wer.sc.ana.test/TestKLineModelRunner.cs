@@ -13,8 +13,8 @@ namespace com.wer.sc.ana.test
         {
             KLineModelRunner runner = new KLineModelRunner(@"D:\SCDATA\CNFUTURES");
             runner.Code = "m05";
-            runner.Start = 20100725;
-            runner.End = 20111125;
+            runner.StartDate = 20100725;
+            runner.EndDate = 20111125;
             runner.Period = new data.KLinePeriod(KLineTimeType.TYPE_DAY, 1);
 
             KLineModel_Simple model = new KLineModel_Simple();
@@ -40,8 +40,8 @@ namespace com.wer.sc.ana.test
         {
             KLineModelRunner runner = new KLineModelRunner(@"D:\SCDATA\CNFUTURES");
             runner.Code = "m05";
-            runner.Start = 20100725;
-            runner.End = 20111125;
+            runner.StartDate = 20100725;
+            runner.EndDate = 20111125;
             runner.Period = new data.KLinePeriod(KLineTimeType.TYPE_DAY, 1);
             KLineModel_Compound model = new KLineModel_Compound();
             runner.Model = model;
@@ -55,8 +55,8 @@ namespace com.wer.sc.ana.test
         {
             KLineModelRunner runner = new KLineModelRunner(@"D:\SCDATA\CNFUTURES");
             runner.Code = "m05";
-            runner.Start = 20100725;
-            runner.End = 20111125;
+            runner.StartDate = 20100725;
+            runner.EndDate = 20111125;
             runner.Period = new data.KLinePeriod(KLineTimeType.TYPE_MINUTE, 1);
             KLineModel_ImportPeriod model = new KLineModel_ImportPeriod();
             runner.Model = model;

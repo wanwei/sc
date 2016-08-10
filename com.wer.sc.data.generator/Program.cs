@@ -16,7 +16,16 @@ namespace com.wer.sc.data.generator
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormGenerator());
+
+            FormChoosePlugin formChoosePlugin = new FormChoosePlugin();
+            formChoosePlugin.ShowDialog();
+
+            if (formChoosePlugin.DialogResult == DialogResult.OK)
+            {
+                FormGenerator generator = new FormGenerator();
+                generator.LoadDataCenter(formChoosePlugin.ProviderName, formChoosePlugin.ProviderDataMgr);
+                Application.Run(generator);
+            }
         }
     }
 }

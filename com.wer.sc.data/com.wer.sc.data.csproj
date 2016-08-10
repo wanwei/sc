@@ -20,6 +20,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
@@ -41,13 +43,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CodeReader.cs" />
+    <Compile Include="DataNavigate.cs" />
+    <Compile Include="DataNavigate_Tick.cs" />
     <Compile Include="DataReaderFactory.cs" />
     <Compile Include="KLineDataWrap.cs" />
+    <Compile Include="OpenDateReader.cs" />
+    <Compile Include="RealDataReader.cs" />
     <Compile Include="store\CodeStore.cs" />
+    <Compile Include="store\DaySpliter.cs" />
+    <Compile Include="store\OpenDateStore.cs" />
     <Compile Include="update\DataMgr.cs" />
     <Compile Include="update\DataTransfer_KLine2KLine.cs" />
-    <Compile Include="update\DataTransfer_Tick2KLine2.cs" />
-    <Compile Include="update\TimeUtils.cs" />
+    <Compile Include="update\DataTransfer_KLine2Real.cs" />
+    <Compile Include="update\DataUpdate2.cs" />
+    <Compile Include="update\DataUpdate_OpenDate.cs" />
     <Compile Include="update\DataTransfer_Tick2KLine.cs" />
     <Compile Include="update\DataUpdateRunner.cs" />
     <Compile Include="update\DataUpdate_Code.cs" />

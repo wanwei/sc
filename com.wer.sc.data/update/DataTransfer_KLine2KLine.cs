@@ -1,4 +1,5 @@
-﻿using System;
+﻿using com.wer.sc.data.store;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -39,40 +40,43 @@ namespace com.wer.sc.data.update
         /// <returns></returns>
         public static KLineData Transfer_Day(KLineData data, KLinePeriod targetPeriod, double timeSplit)
         {
-            List<KLineChart> charts = new List<KLineChart>();
+            List<KLineChart2> charts = new List<KLineChart2>();
             int period = targetPeriod.Period;
 
             int startIndex = 0;
-            int endIndex = 0;
+            bool hasNight = false;
             for (int i = 1; i < data.Length; i++)
             {
                 double lastfulltime = data.arr_time[i - 1];
-                double lastdate = (int)lastfulltime;
-                double lasttime = lastfulltime - lastdate;
-
                 double fulltime = data.arr_time[i];
-                double date = (int)fulltime;
-                double time = fulltime - date;
 
-                if (date != lastdate || (lasttime < timeSplit && time > timeSplit))
+                double lastdate = (int)lastfulltime;
+                double date = (int)fulltime;
+
+                if (KLineDataIndex.IsNightStart(fulltime, lastfulltime))
                 {
-                    endIndex = i - 1;
-                    charts.Add(GetChart_Day(data, startIndex, endIndex));
-                    startIndex = endIndex + 1;
+                    charts.Add(GetChart_Day(data, startIndex, i - 1));
+                    startIndex = i;
+                    hasNight = true;
                 }
-                if (i == data.Length - 1)
+                else if (hasNight)
                 {
-                    endIndex = i;
-                    charts.Add(GetChart_Day(data, startIndex, endIndex));
+                    if (date != lastdate)
+                        hasNight = false;
+                }
+                else if (date != lastdate)
+                {
+                    charts.Add(GetChart_Day(data, startIndex, i - 1));
+                    startIndex = i;
                 }
             }
 
             return GetKLineData(charts);
         }
 
-        private static KLineChart GetChart_Day(KLineData data, int startIndex, int endIndex)
+        private static KLineChart2 GetChart_Day(KLineData data, int startIndex, int endIndex)
         {
-            KLineChart chart = GetChart(data, startIndex, endIndex);           
+            KLineChart2 chart = GetChart(data, startIndex, endIndex);
             chart.time = (int)data.arr_time[endIndex];
             return chart;
         }
@@ -83,7 +87,7 @@ namespace com.wer.sc.data.update
             if (sourcePeriod.PeriodType != targetPeriod.PeriodType)
                 return Transfer_DifferentPeriod(data, targetPeriod);
 
-            List<KLineChart> charts = new List<KLineChart>();
+            List<KLineChart2> charts = new List<KLineChart2>();
             int period = targetPeriod.Period;
 
             int startIndex = 0;
@@ -119,9 +123,9 @@ namespace com.wer.sc.data.update
             return endIndex;
         }
 
-        private static KLineChart GetChart(KLineData data, int startIndex, int endIndex)
+        private static KLineChart2 GetChart(KLineData data, int startIndex, int endIndex)
         {
-            KLineChart chart = new KLineChart();
+            KLineChart2 chart = new KLineChart2();
             chart.time = data.arr_time[startIndex];
             chart.start = data.arr_start[startIndex];
             chart.end = data.arr_end[endIndex];
@@ -147,12 +151,12 @@ namespace com.wer.sc.data.update
             return chart;
         }
 
-        private static KLineData GetKLineData(List<KLineChart> charts)
+        private static KLineData GetKLineData(List<KLineChart2> charts)
         {
             KLineData data = new KLineData(charts.Count);
             for (int i = 0; i < charts.Count; i++)
             {
-                KLineChart chart = charts[i];
+                KLineChart2 chart = charts[i];
                 data.arr_time[i] = chart.time;
                 data.arr_start[i] = chart.start;
                 data.arr_high[i] = chart.high;

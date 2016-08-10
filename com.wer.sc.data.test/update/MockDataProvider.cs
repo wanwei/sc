@@ -73,6 +73,12 @@ namespace com.wer.sc.data.update
             else
                 return openDates.GetRange(0, 10);
         }
+
+        public override List<int> GetOpenDates(String code)
+        {
+            return GetOpenDates();
+        }
+
         override
         public List<double[]> GetOpenTime(String code, int date)
         {

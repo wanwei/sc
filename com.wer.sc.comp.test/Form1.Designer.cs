@@ -33,6 +33,9 @@
             this.btCandle2 = new System.Windows.Forms.Button();
             this.btAna = new System.Windows.Forms.Button();
             this.btReal = new System.Windows.Forms.Button();
+            this.btModel = new System.Windows.Forms.Button();
+            this.btAna2 = new System.Windows.Forms.Button();
+            this.btAna3 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btCandle
@@ -67,7 +70,7 @@
             // 
             // btAna
             // 
-            this.btAna.Location = new System.Drawing.Point(251, 174);
+            this.btAna.Location = new System.Drawing.Point(251, 86);
             this.btAna.Name = "btAna";
             this.btAna.Size = new System.Drawing.Size(75, 23);
             this.btAna.TabIndex = 3;
@@ -77,7 +80,7 @@
             // 
             // btReal
             // 
-            this.btReal.Location = new System.Drawing.Point(251, 86);
+            this.btReal.Location = new System.Drawing.Point(57, 139);
             this.btReal.Name = "btReal";
             this.btReal.Size = new System.Drawing.Size(75, 23);
             this.btReal.TabIndex = 4;
@@ -85,11 +88,44 @@
             this.btReal.UseVisualStyleBackColor = true;
             this.btReal.Click += new System.EventHandler(this.btReal_Click);
             // 
+            // btModel
+            // 
+            this.btModel.Location = new System.Drawing.Point(57, 208);
+            this.btModel.Name = "btModel";
+            this.btModel.Size = new System.Drawing.Size(75, 23);
+            this.btModel.TabIndex = 5;
+            this.btModel.Text = "模型树";
+            this.btModel.UseVisualStyleBackColor = true;
+            this.btModel.Click += new System.EventHandler(this.btModel_Click);
+            // 
+            // btAna2
+            // 
+            this.btAna2.Location = new System.Drawing.Point(332, 86);
+            this.btAna2.Name = "btAna2";
+            this.btAna2.Size = new System.Drawing.Size(75, 23);
+            this.btAna2.TabIndex = 6;
+            this.btAna2.Text = "分析2";
+            this.btAna2.UseVisualStyleBackColor = true;
+            this.btAna2.Click += new System.EventHandler(this.btAna2_Click);
+            // 
+            // btAna3
+            // 
+            this.btAna3.Location = new System.Drawing.Point(251, 115);
+            this.btAna3.Name = "btAna3";
+            this.btAna3.Size = new System.Drawing.Size(75, 23);
+            this.btAna3.TabIndex = 7;
+            this.btAna3.Text = "分析3";
+            this.btAna3.UseVisualStyleBackColor = true;
+            this.btAna3.Click += new System.EventHandler(this.btAna3_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(481, 327);
+            this.Controls.Add(this.btAna3);
+            this.Controls.Add(this.btAna2);
+            this.Controls.Add(this.btModel);
             this.Controls.Add(this.btReal);
             this.Controls.Add(this.btAna);
             this.Controls.Add(this.btCandle2);
@@ -108,6 +144,9 @@
         private System.Windows.Forms.Button btCandle2;
         private System.Windows.Forms.Button btAna;
         private System.Windows.Forms.Button btReal;
+        private System.Windows.Forms.Button btModel;
+        private System.Windows.Forms.Button btAna2;
+        private System.Windows.Forms.Button btAna3;
     }
 }
 

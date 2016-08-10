@@ -22,7 +22,7 @@ namespace com.wer.sc.data.update
             openTime.Add(new double[] { .133000, .150000 });
             List<double> timePeriods = TimeUtils.GetKLineTimes(openTime, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1));
 
-            List<KLineChart> charts = KLineChartGen.GenerateCharts(tickData, timePeriods, -1);
+            List<KLineChart2> charts = KLineChartGen.GenerateCharts(tickData, timePeriods, -1);
             Assert.AreEqual("20131202.09,3730,3739,3730,3736,8154,0,719974", charts[0].ToString());
             Assert.AreEqual("20131202.0901,3736,3736,3735,3735,1568,0,720216", charts[1].ToString());
             Assert.AreEqual("20131202.103,3746,3746,3744,3745,4042,0,712060", charts[75].ToString());
@@ -42,7 +42,7 @@ namespace com.wer.sc.data.update
             openTime.Add(new double[] { .133000, .150000 });
             List<double> timePeriods = TimeUtils.GetKLineTimes(openTime, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1));
 
-            List<KLineChart> charts = KLineChartGen.GenerateCharts(tickData, timePeriods, 2262);
+            List<KLineChart2> charts = KLineChartGen.GenerateCharts(tickData, timePeriods, 2262);
             String[] result = ResourceLoader.GetResultData("m05_20040630_1minute.csv");
             for(int i = 0; i < charts.Count; i++)
             {
@@ -70,6 +70,24 @@ namespace com.wer.sc.data.update
             }
         }
 
+        [TestMethod]
+        public void TestTransferNight2()
+        {
+            List<double[]> openTime = new List<double[]>();
+            openTime.Add(new double[] { .210000, .023300 });
+            openTime.Add(new double[] { .090000, .101500 });
+            openTime.Add(new double[] { .103000, .113000 });
+            openTime.Add(new double[] { .133000, .150000 });
+            TickData data = ResourceLoader.LoadTickData_Night();
+            List<TickData> dataList = new List<TickData>();
+            dataList.Add(data);
+            KLineData klinedata = DataTransfer_Tick2KLine.Transfer(dataList, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1), openTime);
+            for (int i = 0; i < klinedata.Length; i++)
+            {
+                klinedata.BarPos = i;
+                Console.WriteLine(klinedata);
+            }
+        }
 
         [TestMethod]
         public void TestTransfer_M01()

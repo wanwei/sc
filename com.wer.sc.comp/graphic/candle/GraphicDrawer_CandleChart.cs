@@ -127,12 +127,12 @@ namespace com.wer.sc.comp.graphic
             int endIndex = DataProvider.EndIndex;
             for (int i = startIndex; i < endIndex; i++)
             {
-                DrawCandle(g, new KLineChart(data, i), i);
+                DrawCandle(g, new KLineChart_KLineData(data, i), i);
             }
             DrawCandle(g, DataProvider.GetCurrentChart(), endIndex);
         }
 
-        private void DrawCandle(Graphics g, KLineChart chart, int index)
+        private void DrawCandle(Graphics g, IKLineChart chart, int index)
         {
             bool isRed = chart.End > chart.Start;
             Brush b = isRed ? this.ColorConfig.Brush_CandleBlockUp : this.ColorConfig.Brush_CandleBlockDown;
@@ -176,20 +176,33 @@ namespace com.wer.sc.comp.graphic
 
         #region 画附加图
 
-        private List<PolyLine> polyLines = new List<PolyLine>();
+        private List<PolyLineArray> polyLines = new List<PolyLineArray>();
 
-        public void AddPolyLine(PolyLine polyLine)
+        public void AddPolyLine(PolyLineArray polyLine)
         {
             this.polyLines.Add(polyLine);
         }
-        public void AddPolyLines(List<PolyLine> polyLines)
+        public void AddPolyLines(List<PolyLineArray> polyLines)
         {
             this.polyLines.AddRange(polyLines);
         }
 
+        private List<PolyLineList> polyLineList = new List<PolyLineList>();
+
+        public void AddPolyLine(PolyLineList polyLine)
+        {
+            this.polyLineList.Add(polyLine);
+        }
+        public void AddPolyLines(List<PolyLineList> polyLines)
+        {
+            this.polyLineList.AddRange(polyLines);
+        }
+
+
         public void ClearPolyLine()
         {
             polyLines.Clear();
+            polyLineList.Clear();
         }
 
         private void DrawPolyLine(Graphics g)
@@ -198,9 +211,36 @@ namespace com.wer.sc.comp.graphic
             {
                 DrawPolyLine(g, polyLines[i]);
             }
+            for (int i = 0; i < polyLineList.Count; i++)
+            {
+                DrawPolyLine(g, polyLineList[i]);
+            }
         }
 
-        private void DrawPolyLine(Graphics g, PolyLine line)
+        private void DrawPolyLine(Graphics g, PolyLineList line)
+        {
+            int startIndex = DataProvider.StartIndex;
+            int endIndex = DataProvider.EndIndex;
+
+            Pen pen = new Pen(line.color, line.Width);
+            List<PricePoint> data = line.Data;
+            for (int i = 1; i < data.Count; i++)
+            {
+                PricePoint lastpoint = data[i - 1];
+                PricePoint point = data[i];
+                if (lastpoint.X >= DataProvider.StartIndex && point.X <= DataProvider.EndIndex)
+                {
+
+                    float x1 = PriceMapping.CalcX(lastpoint.X);
+                    float y1 = PriceMapping.CalcY(lastpoint.Y);
+                    float x2 = PriceMapping.CalcX(point.X);
+                    float y2 = PriceMapping.CalcY(point.Y);
+                    g.DrawLine(pen, x1, y1, x2, y2);
+                }
+            }
+        }
+
+        private void DrawPolyLine(Graphics g, PolyLineArray line)
         {
             int startIndex = DataProvider.StartIndex;
             int endIndex = DataProvider.EndIndex;
@@ -288,9 +328,12 @@ namespace com.wer.sc.comp.graphic
             for (int i = 0; i < data.Count; i++)
             {
                 PricePoint point = data[i];
-                float x1 = PriceMapping.CalcX(point.X);
-                float y1 = PriceMapping.CalcY(point.Y);
-                g.FillEllipse(b, x1 - w, y1 - w, points.Width, points.Width);
+                if (point.X >= DataProvider.StartIndex && point.X <= DataProvider.EndIndex)
+                {
+                    float x1 = PriceMapping.CalcX(point.X);
+                    float y1 = PriceMapping.CalcY(point.Y);
+                    g.FillEllipse(b, x1 - w, y1 - w, points.Width, points.Width);
+                }
             }
         }
 
