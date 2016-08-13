@@ -13,7 +13,7 @@ namespace com.wer.sc.plugin
     /// <summary>
     /// k线模型
     /// </summary>
-    public abstract class KLineModel
+    public abstract class Plugin_KLineModel
     {
         private KLineData data;
 
@@ -21,7 +21,7 @@ namespace com.wer.sc.plugin
 
         private String code;
 
-        public KLineModel()
+        public Plugin_KLineModel()
         {
         }
 
@@ -77,7 +77,7 @@ namespace com.wer.sc.plugin
         /// 该方法用于子类重载，主要用于多模型间复用
         /// </summary>
         /// <returns></returns>
-        public virtual List<KLineModel> GetCompoundModels()
+        public virtual List<Plugin_KLineModel> GetCompoundModels()
         {
             return null;
         }
@@ -107,7 +107,7 @@ namespace com.wer.sc.plugin
              */
             this.code = code;
             this.data = data;
-            List<KLineModel> models = GetCompoundModels();
+            List<Plugin_KLineModel> models = GetCompoundModels();
             if (models != null)
             {
                 for (int i = 0; i < models.Count; i++)
@@ -121,7 +121,7 @@ namespace com.wer.sc.plugin
 
         public void ModelLoop()
         {
-            List<KLineModel> models = GetCompoundModels();
+            List<Plugin_KLineModel> models = GetCompoundModels();
             if (models != null)
             {
                 for (int i = 0; i < models.Count; i++)

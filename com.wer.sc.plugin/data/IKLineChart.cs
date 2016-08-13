@@ -2,6 +2,9 @@
 {
     public interface IKLineChart
     {
+        /// <summary>
+        /// 得到当前
+        /// </summary>
         string Code { get; }
         float Start { get; }
         float High { get; }

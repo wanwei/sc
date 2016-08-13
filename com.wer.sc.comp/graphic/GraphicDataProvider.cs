@@ -44,7 +44,6 @@ namespace com.wer.sc.comp.graphic
         float CurrentTime
         {
             get;
-            set;
         }
 
         /// <summary>

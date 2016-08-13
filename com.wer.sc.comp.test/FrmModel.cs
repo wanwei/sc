@@ -14,7 +14,7 @@ namespace com.wer.sc.comp.test
 {
     public partial class FrmModel : Form
     {
-        private KLineModel model;
+        private Plugin_KLineModel model;
         private CompKLineModels modelComp;
 
         public FrmModel()
@@ -31,7 +31,7 @@ namespace com.wer.sc.comp.test
             this.Close();
         }
 
-        public KLineModel Model
+        public Plugin_KLineModel Model
         {
             get { return model; }
         }

@@ -41,7 +41,7 @@ namespace com.wer.sc.ana
 
         private KLineTradeFee fee;
 
-        private KLineModel model;
+        private Plugin_KLineModel model;
 
         public void SetData(String code, int startDate, int endDate, KLinePeriod period)
         {
@@ -142,7 +142,7 @@ namespace com.wer.sc.ana
             }
         }
 
-        public KLineModel Model
+        public Plugin_KLineModel Model
         {
             get
             {
@@ -241,7 +241,7 @@ namespace com.wer.sc.ana
             Model.ModelEnd();            
         }
 
-        private void DealModelDraw(KLineModel model)
+        private void DealModelDraw(Plugin_KLineModel model)
         {
             model.ClearPoints();
             model.ClearPolyLine();
@@ -332,7 +332,7 @@ namespace com.wer.sc.ana
              * 修改
              * 
              */
-            KLineModel importModel = importModelWarp.model.Model;
+            Plugin_KLineModel importModel = importModelWarp.model.Model;
             //int barPos = importModel.getBarPos();
             //确定是否要跳转到下一个bar
             if (isNextPos(importModel))
@@ -369,7 +369,7 @@ namespace com.wer.sc.ana
                 importModel.ModelLoop();
         }
 
-        private bool isNextPos(KLineModel importModel)
+        private bool isNextPos(Plugin_KLineModel importModel)
         {
             int nextBarPos = importModel.BarPos + 1;
             if (nextBarPos >= importModel.Length)

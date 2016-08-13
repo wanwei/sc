@@ -12,7 +12,7 @@ namespace com.wer.sc.comp.ana
 {
     public class CompKLineModels
     {
-        private List<KLineModel> models = new List<KLineModel>();
+        private List<Plugin_KLineModel> models = new List<Plugin_KLineModel>();
 
         private List<Type> modelTypes = new List<Type>();
 
@@ -26,7 +26,7 @@ namespace com.wer.sc.comp.ana
             }
             for (int i = 0; i < modelTypes.Count; i++)
             {
-                models.Add((KLineModel)Activator.CreateInstance(modelTypes[i]));
+                models.Add((Plugin_KLineModel)Activator.CreateInstance(modelTypes[i]));
             }
         }
 
@@ -63,12 +63,12 @@ namespace com.wer.sc.comp.ana
             this.treeView = null;
         }
 
-        public KLineModel CreateModel(Type type)
+        public Plugin_KLineModel CreateModel(Type type)
         {
-            return (KLineModel)Activator.CreateInstance(type);
+            return (Plugin_KLineModel)Activator.CreateInstance(type);
         }
 
-        public KLineModel CreateSelectModel()
+        public Plugin_KLineModel CreateSelectModel()
         {
             TreeNode node = treeView.SelectedNode;
             if (node == null)

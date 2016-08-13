@@ -31,6 +31,7 @@
             this.btDataBrowser = new System.Windows.Forms.Button();
             this.btTestGen = new System.Windows.Forms.Button();
             this.btLoadReal = new System.Windows.Forms.Button();
+            this.btDataNavigate = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btDataBrowser
@@ -63,11 +64,22 @@
             this.btLoadReal.UseVisualStyleBackColor = true;
             this.btLoadReal.Click += new System.EventHandler(this.btLoadReal_Click);
             // 
+            // btDataNavigate
+            // 
+            this.btDataNavigate.Location = new System.Drawing.Point(271, 162);
+            this.btDataNavigate.Name = "btDataNavigate";
+            this.btDataNavigate.Size = new System.Drawing.Size(75, 23);
+            this.btDataNavigate.TabIndex = 3;
+            this.btDataNavigate.Text = "数据导航";
+            this.btDataNavigate.UseVisualStyleBackColor = true;
+            this.btDataNavigate.Click += new System.EventHandler(this.btDataNavigate_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(547, 351);
+            this.Controls.Add(this.btDataNavigate);
             this.Controls.Add(this.btLoadReal);
             this.Controls.Add(this.btTestGen);
             this.Controls.Add(this.btDataBrowser);
@@ -82,6 +94,7 @@
         private System.Windows.Forms.Button btDataBrowser;
         private System.Windows.Forms.Button btTestGen;
         private System.Windows.Forms.Button btLoadReal;
+        private System.Windows.Forms.Button btDataNavigate;
     }
 }
 

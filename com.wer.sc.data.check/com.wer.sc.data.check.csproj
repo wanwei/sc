@@ -66,6 +66,12 @@
     <Compile Include="FrmDataBrowser.Designer.cs">
       <DependentUpon>FrmDataBrowser.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmDataNavigate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmDataNavigate.Designer.cs">
+      <DependentUpon>FrmDataNavigate.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmLoadRealData.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -88,6 +94,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmDataBrowser.resx">
       <DependentUpon>FrmDataBrowser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmDataNavigate.resx">
+      <DependentUpon>FrmDataNavigate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmLoadRealData.resx">
       <DependentUpon>FrmLoadRealData.cs</DependentUpon>

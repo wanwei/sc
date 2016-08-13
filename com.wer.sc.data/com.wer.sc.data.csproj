@@ -50,7 +50,7 @@
     <Compile Include="OpenDateReader.cs" />
     <Compile Include="RealDataReader.cs" />
     <Compile Include="store\CodeStore.cs" />
-    <Compile Include="store\DaySpliter.cs" />
+    <Compile Include="utils\DaySpliter.cs" />
     <Compile Include="store\OpenDateStore.cs" />
     <Compile Include="update\DataMgr.cs" />
     <Compile Include="update\DataTransfer_KLine2KLine.cs" />
@@ -70,6 +70,7 @@
     <Compile Include="store\TickDataStore.cs" />
     <Compile Include="TickDataReader.cs" />
     <Compile Include="update\DataProviderWrap.cs" />
+    <Compile Include="utils\TickDataIndeier.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="impl\" />

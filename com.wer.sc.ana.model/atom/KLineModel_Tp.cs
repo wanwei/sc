@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace com.wer.sc.ana.test.model
 {
     [ZbRegisterAttribute("转折点")]
-    public class KLineModel_Tp : KLineModel
+    public class KLineModel_Tp : Plugin_KLineModel
     {
         public int ZZLen = 2;
 

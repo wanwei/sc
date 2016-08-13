@@ -11,7 +11,7 @@ namespace com.wer.sc.ana.model
     /// 
     /// </summary>
     [ModelRegister("趋势放量模型")]
-    public class KLineModel_Trend_Volume : KLineModel
+    public class KLineModel_Trend_Volume : Plugin_KLineModel
     {
         public override void Loop()
         {

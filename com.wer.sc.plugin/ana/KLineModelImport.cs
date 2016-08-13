@@ -17,7 +17,7 @@ namespace com.wer.sc.ana
         /**
          * 要引用的模型
          */
-        public KLineModel Model;
+        public Plugin_KLineModel Model;
 
         /**
          * 所用的周期
@@ -38,20 +38,20 @@ namespace com.wer.sc.ana
         {
         }
 
-        public KLineModelImport(KLineModel model, KLinePeriod period)
+        public KLineModelImport(Plugin_KLineModel model, KLinePeriod period)
         {
             this.Model = model;
             this.KLinePeriod = period;
         }
 
-        public KLineModelImport(KLineModel model, KLinePeriod period, bool extendPeriod)
+        public KLineModelImport(Plugin_KLineModel model, KLinePeriod period, bool extendPeriod)
         {
             this.Model = model;
             this.KLinePeriod = period;
             this.extendPeriod = extendPeriod;
         }
 
-        public KLineModelImport(KLineModel model, String contract)
+        public KLineModelImport(Plugin_KLineModel model, String contract)
         {
             this.Model = model;
             this.Contract = contract;

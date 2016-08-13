@@ -29,7 +29,7 @@ namespace com.wer.sc.comp.test
             cbPeriod.SelectedIndex = 3;
         }
 
-        private KLineModel model;
+        private Plugin_KLineModel model;
 
         private void btModel_Click(object sender, EventArgs e)
         {
@@ -48,8 +48,9 @@ namespace com.wer.sc.comp.test
             int startDate = int.Parse(tbStart.Text);
             int endDate = int.Parse(tbEnd.Text);
             KLinePeriod period = new KLinePeriod(cbPeriod.SelectedIndex, int.Parse(tbPeriod.Text));
-            if (this.model == null)
-                this.anaComponent1.Drawer.Show(code, startDate, endDate, period);
+            if (this.model == null) { 
+                this.anaComponent1.Drawer.Show(code, startDate, endDate, period);                
+            }
             else
                 this.anaComponent1.Drawer.Run(code, startDate, endDate, period, model);
         }

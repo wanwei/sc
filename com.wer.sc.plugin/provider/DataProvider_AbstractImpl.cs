@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace com.wer.sc.data.provider
 {
-    public abstract class DataProvider_AbstractImpl : DataProvider
+    public abstract class DataProvider_AbstractImpl : Plugin_DataProvider
     {
         private DataProviderConfig providerConfig;
 

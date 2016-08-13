@@ -15,7 +15,8 @@ namespace com.wer.sc.data
         private OpenDateReader openDateReader;
         private TickDataReader tickDataReader;
         private KLineDataReader klineDataReader;
-        private RealDataReader realDataReader;        
+        private RealDataReader realDataReader;
+        private DataNavigate dataNavigate;
 
         public DataReaderFactory(String dataPath)
         {
@@ -26,6 +27,7 @@ namespace com.wer.sc.data
             this.tickDataReader = new TickDataReader(dataPath);
             this.klineDataReader = new KLineDataReader(dataPath);
             this.realDataReader = new RealDataReader(dataPath);
+            this.dataNavigate = new DataNavigate(this);
         }
 
         public CodeReader CodeReader
@@ -51,6 +53,11 @@ namespace com.wer.sc.data
         public TickDataReader TickDataReader
         {
             get { return tickDataReader; }
+        }
+
+        public DataNavigate DataNavigate
+        {
+            get { return dataNavigate; }
         }
 
         public DataPathUtils PathUtils

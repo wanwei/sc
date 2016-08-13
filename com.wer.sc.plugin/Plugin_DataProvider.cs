@@ -16,7 +16,7 @@ namespace com.wer.sc.plugin
     /// 2.k线数据，5秒、1分钟、15分钟、日线
     /// 3.code及其分类
     /// </summary>
-    public abstract class DataProvider
+    public abstract class Plugin_DataProvider
     {
         private PluginHelper pluginHelper;
 
@@ -28,7 +28,7 @@ namespace com.wer.sc.plugin
             }
         }
         
-        public DataProvider(PluginHelper helper)
+        public Plugin_DataProvider(PluginHelper helper)
         {
             this.pluginHelper = helper;
         }

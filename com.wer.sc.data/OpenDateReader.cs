@@ -20,6 +20,6 @@ namespace com.wer.sc.data
         public List<int> GetOpenDates()
         {
             return openDates;
-        }
+        }        
     }
 }

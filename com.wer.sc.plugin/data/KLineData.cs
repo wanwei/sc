@@ -9,11 +9,11 @@ namespace com.wer.sc.data
     /// <summary>
     /// k线数据类，该类描述了一套完整的k线数据
     /// </summary>
-    public class KLineData
+    public class KLineData : IKLineData
     {
         private KLinePeriod period;
 
-        public String code;
+        private String code;
 
         public double[] arr_time;
 
@@ -47,6 +47,18 @@ namespace com.wer.sc.data
             arr_mount = new int[length];
             arr_money = new float[length];
             arr_hold = new int[length];
+        }
+        public string Code
+        {
+            get
+            {
+                return code;
+            }
+
+            set
+            {
+                code = value;
+            }
         }
 
         public int BarPos

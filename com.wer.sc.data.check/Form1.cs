@@ -34,5 +34,11 @@ namespace com.wer.sc.data.check
             FrmLoadRealData frm = new FrmLoadRealData();
             frm.ShowDialog();
         }
+
+        private void btDataNavigate_Click(object sender, EventArgs e)
+        {
+            FrmDataNavigate frm = new FrmDataNavigate();
+            frm.ShowDialog();
+        }
     }
 }

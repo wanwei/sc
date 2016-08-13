@@ -9,7 +9,7 @@ namespace com.wer.sc.data.update
 {
     public class DataProviderWrap
     {
-        private DataProvider provider;
+        private Plugin_DataProvider provider;
 
         private CodeReader codeReader;
 
@@ -19,7 +19,7 @@ namespace com.wer.sc.data.update
 
         private DataReaderFactory factory;
 
-        public DataProviderWrap(DataProvider provider)
+        public DataProviderWrap(Plugin_DataProvider provider)
         {
             factory = new DataReaderFactory(provider.GetDataPath());
             this.provider = provider;
@@ -33,7 +33,7 @@ namespace com.wer.sc.data.update
             return factory;
         }
 
-        public DataProvider GetProvider()
+        public Plugin_DataProvider GetProvider()
         {
             return provider;
         }

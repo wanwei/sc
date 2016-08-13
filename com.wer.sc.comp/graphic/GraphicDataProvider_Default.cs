@@ -1,0 +1,132 @@
+﻿using com.wer.sc.data;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace com.wer.sc.comp.graphic
+{
+    public class GraphicDataProvider_Default : GraphicDataProvider
+    {
+        private String code;
+
+        private int blockMount;
+
+        private DataReaderFactory dataReaderFac;
+
+        private KLineData data;
+
+        private float currentTime;
+
+        private KLinePeriod period;
+
+        private int startIndex = 200;
+
+        private int endIndex = 300;
+
+        public GraphicDataProvider_Default(DataReaderFactory dataReaderFac)
+        {
+            this.dataReaderFac = dataReaderFac;
+        }
+
+        public void ChangeData(KLineData klineData)
+        {
+            this.data = klineData;
+            this.code = klineData.Code;
+            this.period = klineData.Period;
+        }
+
+        public void ChangeData(string code, int startDate, int endDate, KLinePeriod period)
+        {
+            this.data = dataReaderFac.KLineDataReader.GetData(code, startDate, endDate, period);
+            ChangeData(data);
+            //this.CurrentTime = currentTime;
+        }
+
+        public KLineData GetKLineData()
+        {
+            return data;
+        }
+        public IKLineChart GetCurrentChart()
+        {
+            return new KLineChart_KLineData(data, endIndex);
+        }
+
+        private void InitIndex()
+        {
+            startIndex = endIndex - blockMount + 1;
+        }
+    
+
+        public int StartIndex
+        {
+            get
+            {
+                return startIndex;
+            }
+        }
+
+        public int EndIndex
+        {
+            get
+            {
+                return endIndex;
+            }
+            set
+            {
+                this.endIndex = value;
+                InitIndex();
+            }
+        }
+
+        public string Code
+        {
+            get
+            {
+                return code;
+            }
+        }
+
+        public KLinePeriod Period
+        {
+            get
+            {
+                return period;
+            }            
+        }
+
+        public int BlockMount
+        {
+            get
+            {
+                return blockMount;
+            }
+
+            set
+            {
+                if (blockMount == value)
+                    return;
+                blockMount = value;
+                InitIndex();
+            }
+        }
+
+        public float CurrentTime
+        {
+            get
+            {
+                return currentTime;
+            }
+
+            set
+            {
+                currentTime = value;
+                InitIndex();
+            }
+        }
+
+        public event DataChangeHandler DataChange;
+
+    }
+}

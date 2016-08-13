@@ -11,14 +11,14 @@ namespace com.wer.sc.ana.test.model
     /// <summary>
     /// 组合策略，可以将各种策略组合起来形成一个新策略
     /// </summary>
-    public class KLineModel_Compound : KLineModel
+    public class KLineModel_Compound : Plugin_KLineModel
     {
 
         private KLineModel_Simple model_Simple;
 
         private KLineModel_Simple2 model_Simple2;
 
-        private List<KLineModel> models = new List<KLineModel>();
+        private List<Plugin_KLineModel> models = new List<Plugin_KLineModel>();
 
         public KLineModel_Compound()
         {
@@ -33,7 +33,7 @@ namespace com.wer.sc.ana.test.model
             Debug.WriteLine("earn:" + earn);
         }
 
-        public override List<KLineModel> GetCompoundModels()
+        public override List<Plugin_KLineModel> GetCompoundModels()
         {
             return models;
         }

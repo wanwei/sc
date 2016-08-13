@@ -35,6 +35,11 @@ namespace com.wer.sc.comp.test
             frm.ShowDialog();
         }
 
+        private void btCandle3_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void btAna_Click(object sender, EventArgs e)
         {
             FrmGraphicDrawer_Ana frm = new FrmGraphicDrawer_Ana();

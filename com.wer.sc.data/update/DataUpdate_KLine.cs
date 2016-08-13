@@ -12,9 +12,9 @@ namespace com.wer.sc.data.update
     public class DataUpdate_KLine
     {
         private DataPathUtils utils;
-        private DataProvider dataProvider;
+        private Plugin_DataProvider dataProvider;
 
-        public DataUpdate_KLine(DataProvider dataProvider)
+        public DataUpdate_KLine(Plugin_DataProvider dataProvider)
         {
             this.utils = new DataPathUtils(dataProvider.GetDataPath());
             this.dataProvider = dataProvider;

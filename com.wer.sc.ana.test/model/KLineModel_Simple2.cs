@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace com.wer.sc.ana.test.model
 {
-    public class KLineModel_Simple2 : KLineModel
+    public class KLineModel_Simple2 : Plugin_KLineModel
     {
         [ModelLines("#111111", 1)]
         public float[] ma5;

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace com.wer.sc.data.update
 {
-    public class MockDataProvider : DataProvider
+    public class MockDataProvider : Plugin_DataProvider
     {
         private bool append = false;
 

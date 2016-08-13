@@ -62,7 +62,7 @@ namespace com.wer.sc.ana
                 float money = tradeFee.calcMoney(true, cnt, price);
 
                 buyHoldInfo.addHold(true, price, cnt);
-                KLineTradeDetailInfo trade = new KLineTradeDetailInfo(data.code,data.FullTime, true, true, cnt, price, 0);
+                KLineTradeDetailInfo trade = new KLineTradeDetailInfo(data.Code,data.FullTime, true, true, cnt, price, 0);
                 details.Add(trade);
                 //减掉花掉的钱
                 this.money = this.money - money;
@@ -92,7 +92,7 @@ namespace com.wer.sc.ana
             float earn = calcEarn(buyHoldInfo);
 
             buyHoldInfo.removeHold(price, cnt);
-            KLineTradeDetailInfo trade = new KLineTradeDetailInfo(data.code, data.FullTime, false, true, cnt, price, earn);
+            KLineTradeDetailInfo trade = new KLineTradeDetailInfo(data.Code, data.FullTime, false, true, cnt, price, earn);
             details.Add(trade);
             this.money = this.money + money + earn;
         }
@@ -114,7 +114,7 @@ namespace com.wer.sc.ana
                 float money = tradeFee.calcMoney(true, cnt, price);
 
                 sellHoldInfo.addHold(false, price, cnt);
-                KLineTradeDetailInfo trade = new KLineTradeDetailInfo(data.code, data.FullTime, true, false, cnt, price,
+                KLineTradeDetailInfo trade = new KLineTradeDetailInfo(data.Code, data.FullTime, true, false, cnt, price,
                         0);
                 details.Add(trade);
                 this.money = this.money - money;
@@ -144,7 +144,7 @@ namespace com.wer.sc.ana
             float earn = calcEarn(sellHoldInfo);
 
             sellHoldInfo.removeHold(price, cnt);
-            KLineTradeDetailInfo trade = new KLineTradeDetailInfo(data.code, data.FullTime, false, false, cnt, price,
+            KLineTradeDetailInfo trade = new KLineTradeDetailInfo(data.Code, data.FullTime, false, false, cnt, price,
                     earn);
             details.Add(trade);
             this.money = this.money + money + earn;

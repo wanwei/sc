@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace com.wer.sc.ana.test.model
 {
-    public class KLineModel_ImportPeriod : KLineModel
+    public class KLineModel_ImportPeriod : Plugin_KLineModel
     {
         //15分钟模型
         private KLineModel_Simple2 model_15Minute;

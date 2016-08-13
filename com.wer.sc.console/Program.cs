@@ -18,7 +18,7 @@ namespace com.wer.sc.console
             {
                 Console.WriteLine(plugins[i]);
                 PluginInfo plugin = plugins[i];
-                DataProvider provider = plugin.CreateDataProvider(plugin.DataProviders[0]);
+                Plugin_DataProvider provider = plugin.CreateDataProvider(plugin.DataProviders[0]);
                 List<CodeInfo> codes = provider.GetCodes();
                 for(int j = 0; j < codes.Count; j++)
                 {

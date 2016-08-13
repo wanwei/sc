@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace com.wer.sc.data.update.cnstock
 {
-    public class DataProvider_CnStock : DataProvider
+    public class DataProvider_CnStock : Plugin_DataProvider
     {
         public DataProvider_CnStock() : this(null)
         {

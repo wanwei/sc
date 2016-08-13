@@ -37,7 +37,7 @@ namespace com.wer.sc.comp.test
         public void ChangeData(KLineData klineData)
         {
             this.data = klineData;
-            this.code = klineData.code;
+            this.code = klineData.Code;
             this.period = klineData.Period;
         }
 

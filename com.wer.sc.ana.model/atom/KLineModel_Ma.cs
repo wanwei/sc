@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace com.wer.sc.ana.model.atom
 {
     [ZbRegisterAttribute("均线")]
-    public class KLineModel_Ma : KLineModel
+    public class KLineModel_Ma : Plugin_KLineModel
     {
         [ModelLines("ma5", "#111111", 1)]
         public float[] ma5;

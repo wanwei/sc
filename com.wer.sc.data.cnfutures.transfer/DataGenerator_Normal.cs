@@ -394,7 +394,7 @@ namespace com.wer.sc.data.cnfutures.transfer
             for (int i = repeatEndIndex + 1; i < data.Length; i++)
             {
                 int currentDataCount = i - repeatEndIndex - 1 + repeatTimes;
-                TimeSpan span = TimeUtils.Subtract(data.arr_time[i], timeRepeat);
+                TimeSpan span = TimeUtils.Substract(data.arr_time[i], timeRepeat);
                 int currentCapcity = timesEverySecond * (span.Minutes * 60 + span.Seconds);
                 if (currentCapcity >= currentDataCount)
                 {
@@ -438,7 +438,7 @@ namespace com.wer.sc.data.cnfutures.transfer
             for (int i = repeatStartIndex - 1; i >= 0; i--)
             {
                 int currentDataCount = repeatStartIndex - i - 1 + repeatTimes;
-                TimeSpan span = TimeUtils.Subtract(timeRepeat, data.arr_time[i]);
+                TimeSpan span = TimeUtils.Substract(timeRepeat, data.arr_time[i]);
                 int currentCapcity = timesEverySecond * (span.Minutes * 60 + span.Seconds);
                 if (currentCapcity >= currentDataCount)
                 {
@@ -586,7 +586,7 @@ namespace com.wer.sc.data.cnfutures.transfer
                 }
             }
             double time = Math.Round(period.StartTime + data.Date, 6);
-            TimeSpan span = TimeUtils.Subtract(data.arr_time[startIndex], time);
+            TimeSpan span = TimeUtils.Substract(data.arr_time[startIndex], time);
             int timeDif = span.Minutes * 60 + span.Seconds;
             //开盘提前超过1分钟，认为该开盘时间可能有误
             if (timeDif < -60)
@@ -611,7 +611,7 @@ namespace com.wer.sc.data.cnfutures.transfer
                 }
             }
             double time = Math.Round(period.EndTime + data.Date, 6);
-            TimeSpan span = TimeUtils.Subtract(data.arr_time[endIndex], time);
+            TimeSpan span = TimeUtils.Substract(data.arr_time[endIndex], time);
             int timeDif = span.Minutes * 60 + span.Seconds;
             //收盘晚收超过1分钟，认为该收盘时间可能有误
             if (timeDif > 60)

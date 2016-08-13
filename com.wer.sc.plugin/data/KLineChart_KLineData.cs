@@ -36,21 +36,7 @@ namespace com.wer.sc.data
             {
                 index = value;
             }
-        }
-
-        public String toString()
-        {
-            StringBuilder sb = new StringBuilder();
-            sb.Append(Time).Append(",");
-            sb.Append(Start).Append(",");
-            sb.Append(High).Append(",");
-            sb.Append(Low).Append(",");
-            sb.Append(End).Append(",");
-            sb.Append(Mount);
-            //sb.Append(mount()).Append(",");
-            //sb.Append(hold());
-            return sb.ToString();
-        }
+        }    
 
         public KLineChart_KLineData(KLineData data, int index)
         {
@@ -62,7 +48,7 @@ namespace com.wer.sc.data
         {
             get
             {
-                return data.code;
+                return data.Code;
             }
         }
 

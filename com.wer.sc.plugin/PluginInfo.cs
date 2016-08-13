@@ -25,21 +25,21 @@ namespace com.wer.sc.plugin
 
         public List<Type> KLineModels = new List<Type>();
 
-        public DataProvider CreateDataProvider(Type type)
+        public Plugin_DataProvider CreateDataProvider(Type type)
         {
             PluginHelper helper = new PluginHelper();
             helper.ConfigPath = FullPath.Substring(0, FullPath.Length - 4) + "\\";
-            DataProvider dataProvider = (DataProvider)Activator.CreateInstance(type, new Object[] { helper });
+            Plugin_DataProvider dataProvider = (Plugin_DataProvider)Activator.CreateInstance(type, new Object[] { helper });
             return dataProvider;
         }
 
-        private List<DataProvider> providers;
+        private List<Plugin_DataProvider> providers;
 
-        public List<DataProvider> GetProviders()
+        public List<Plugin_DataProvider> GetProviders()
         {
             if (providers != null)
                 return providers;
-            providers = new List<DataProvider>();
+            providers = new List<Plugin_DataProvider>();
             for (int i = 0; i < DataProviders.Count; i++)
             {
                 providers.Add(CreateDataProvider(DataProviders[i]));

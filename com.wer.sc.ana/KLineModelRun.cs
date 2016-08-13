@@ -13,7 +13,7 @@ namespace com.wer.sc.ana
         /**
          * 要引用的模型
          */
-        public KLineModel Model;
+        public Plugin_KLineModel Model;
 
         public KLineData Data;
 

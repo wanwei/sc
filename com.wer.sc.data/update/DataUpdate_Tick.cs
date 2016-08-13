@@ -11,9 +11,9 @@ namespace com.wer.sc.data.update
     public class DataUpdate_Tick
     {
         private DataPathUtils utils;
-        private DataProvider dataProvider;
+        private Plugin_DataProvider dataProvider;
 
-        public DataUpdate_Tick(DataProvider dataProvider)
+        public DataUpdate_Tick(Plugin_DataProvider dataProvider)
         {
             this.utils = new DataPathUtils(dataProvider.GetDataPath());
             this.dataProvider = dataProvider;

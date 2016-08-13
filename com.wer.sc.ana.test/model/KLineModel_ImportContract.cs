@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace com.wer.sc.ana.test.model
 {
-    public class KLineModel_ImportContract : KLineModel
+    public class KLineModel_ImportContract : Plugin_KLineModel
     {
 
         //日模型

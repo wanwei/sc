@@ -35,9 +35,9 @@ namespace com.wer.sc.plugin
             for (int i = 0; i < types.Length; i++)
             {
                 Type t = types[i];
-                if (t.IsSubclassOf(typeof(DataProvider)))
+                if (t.IsSubclassOf(typeof(Plugin_DataProvider)))
                     plugin.DataProviders.Add(t);
-                if (t.IsSubclassOf(typeof(KLineModel)))
+                if (t.IsSubclassOf(typeof(Plugin_KLineModel)))
                     plugin.KLineModels.Add(t);
             }
             if (plugin.DataProviders.Count == 0 && plugin.KLineModels.Count == 0)

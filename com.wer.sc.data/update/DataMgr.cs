@@ -16,7 +16,7 @@ namespace com.wer.sc.data.update
 
         public DataMgr()
         {
-            List<DataProvider> pluginproviders = new List<DataProvider>();
+            List<Plugin_DataProvider> pluginproviders = new List<Plugin_DataProvider>();
             List<PluginInfo> plugs = PluginMgr.Instance.Load();
             for (int i = 0; i < plugs.Count; i++)
             {
@@ -27,7 +27,7 @@ namespace com.wer.sc.data.update
             this.dicProviders = new Dictionary<string, DataProviderWrap>();
             for (int i = 0; i < pluginproviders.Count; i++)
             {
-                DataProvider provider = pluginproviders[i];
+                Plugin_DataProvider provider = pluginproviders[i];
                 DataProviderWrap providerWrap = new DataProviderWrap(provider);
                 providers.Add(providerWrap);
                 dicProviders.Add(provider.GetName(), providerWrap);

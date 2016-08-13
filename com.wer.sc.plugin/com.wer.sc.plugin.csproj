@@ -52,7 +52,8 @@
     <Compile Include="ana\ModelRegisterAttribute.cs" />
     <Compile Include="ana\ZbRegisterAttribute.cs" />
     <Compile Include="data\CodeInfo.cs" />
-    <Compile Include="DataProvider.cs" />
+    <Compile Include="data\IKLineData.cs" />
+    <Compile Include="Plugin_DataProvider.cs" />
     <Compile Include="data\IKLineChart.cs" />
     <Compile Include="data\KLineChart_KLineData.cs" />
     <Compile Include="data\KLineChart.cs" />
@@ -69,7 +70,9 @@
     <Compile Include="draw\PolyLineList.cs" />
     <Compile Include="draw\PricePoint.cs" />
     <Compile Include="draw\PriceRectangle.cs" />
-    <Compile Include="KLineModel.cs" />
+    <Compile Include="Plugin_KLineModel.cs" />
+    <Compile Include="Plugin_MarketData.cs" />
+    <Compile Include="Plugin_Trader.cs" />
     <Compile Include="PluginHelper.cs" />
     <Compile Include="PluginInfo.cs" />
     <Compile Include="PluginMgr.cs" />

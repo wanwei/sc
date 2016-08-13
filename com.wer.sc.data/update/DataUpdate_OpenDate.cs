@@ -10,11 +10,11 @@ namespace com.wer.sc.data.update
 {
     public class DataUpdate_OpenDate
     {
-        private DataProvider dataProvider;
+        private Plugin_DataProvider dataProvider;
 
         private DataPathUtils pathUtils;
 
-        public DataUpdate_OpenDate(DataProvider dataProvider)
+        public DataUpdate_OpenDate(Plugin_DataProvider dataProvider)
         {
             this.pathUtils = new DataPathUtils(dataProvider.GetDataPath());
             this.dataProvider = dataProvider;

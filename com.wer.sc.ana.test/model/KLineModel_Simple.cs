@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace com.wer.sc.ana.test.model
 {
-    public class KLineModel_Simple : KLineModel
+    public class KLineModel_Simple : Plugin_KLineModel
     {
         public int ZZLen = 2;
 

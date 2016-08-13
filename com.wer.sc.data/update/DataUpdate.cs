@@ -16,7 +16,7 @@ namespace com.wer.sc.data.update
         public DataUpdate(DataProviderWrap dataProviderWrap)
         {
             this.dataProviderWrap = dataProviderWrap;
-            DataProvider dataProvider = dataProviderWrap.GetProvider();
+            Plugin_DataProvider dataProvider = dataProviderWrap.GetProvider();
             update_Code = new DataUpdate_Code(dataProvider);
             update_KLine = new DataUpdate_KLine(dataProvider);
             update_Tick = new DataUpdate_Tick(dataProvider);

@@ -76,6 +76,12 @@
     <Compile Include="FrmGraphicDrawer_Candle.Designer.cs">
       <DependentUpon>FrmGraphicDrawer_Candle.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmGraphicDrawer_Candle3.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmGraphicDrawer_Candle3.Designer.cs">
+      <DependentUpon>FrmGraphicDrawer_Candle3.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmGraphicDrawer_Candle2.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -112,6 +118,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmGraphicDrawer_Candle.resx">
       <DependentUpon>FrmGraphicDrawer_Candle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmGraphicDrawer_Candle3.resx">
+      <DependentUpon>FrmGraphicDrawer_Candle3.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmGraphicDrawer_Candle2.resx">
       <DependentUpon>FrmGraphicDrawer_Candle2.cs</DependentUpon>
