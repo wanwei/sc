@@ -30,7 +30,7 @@ namespace com.wer.sc.comp.test
             runner.Model = model;
             runner.run();
 
-            KLineData data = runner.Data;
+            IKLineData data = runner.Data;
             MockGraphicDataProvider dataProvider = new MockGraphicDataProvider();
             dataProvider.ChangeData(data);
             dataProvider.EndIndex = 200;

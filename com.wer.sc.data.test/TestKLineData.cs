@@ -23,17 +23,17 @@ namespace com.wer.sc.data
         public void TestKLineMerge()
         {
             KLineData data = ResourceLoader.GetKLineData_1Min();
-            KLineData d1 = data.SubData(0, 99);
-            KLineData d2 = data.SubData(100, 199);
-            KLineData d3 = data.SubData(200, 299);
-            KLineData d4 = data.SubData(300, data.Length - 1);
+            IKLineData d1 = data.GetRange(0, 99);
+            IKLineData d2 = data.GetRange(100, 199);
+            IKLineData d3 = data.GetRange(200, 299);
+            IKLineData d4 = data.GetRange(300, data.Length - 1);
 
-            List<KLineData> dataList = new List<KLineData>();
+            List<IKLineData> dataList = new List<IKLineData>();
             dataList.Add(d1);
             dataList.Add(d2);
             dataList.Add(d3);
             dataList.Add(d4);
-            KLineData dataResult = KLineData.Merge(dataList);
+            IKLineData dataResult = KLineData.Merge(dataList);
             Assert.AreEqual(dataResult.Length, data.Length);
             for (int i = 0; i < data.Length; i++)
             {

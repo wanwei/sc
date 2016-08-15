@@ -30,17 +30,17 @@ namespace com.wer.sc.comp.graphic
 
         private PriceRectangle GetPriceRectangle()
         {
-            KLineData data = DataProvider.GetKLineData();
+            IKLineData data = DataProvider.GetKLineData();
             int startIndex = DataProvider.StartIndex;
             int endIndex = DataProvider.EndIndex;
-            float priceBottom = data.arr_low[startIndex];
-            float priceTop = data.arr_high[startIndex];
+            float priceBottom = data.Arr_Low[startIndex];
+            float priceTop = data.Arr_High[startIndex];
             for (int i = startIndex + 1; i <= endIndex; i++)
             {
-                if (priceBottom > data.arr_low[i])
-                    priceBottom = data.arr_low[i];
-                if (priceTop < data.arr_high[i])
-                    priceTop = data.arr_high[i];
+                if (priceBottom > data.Arr_Low[i])
+                    priceBottom = data.Arr_Low[i];
+                if (priceTop < data.Arr_High[i])
+                    priceTop = data.Arr_High[i];
             }
             return new PriceRectangle(startIndex - 0.5f, endIndex + 0.5f, priceTop, priceBottom);
         }
@@ -122,7 +122,7 @@ namespace com.wer.sc.comp.graphic
 
         private void DrawCandle(Graphics g)
         {
-            KLineData data = DataProvider.GetKLineData();
+            IKLineData data = DataProvider.GetKLineData();
             int startIndex = DataProvider.StartIndex;
             int endIndex = DataProvider.EndIndex;
             for (int i = startIndex; i < endIndex; i++)

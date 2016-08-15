@@ -64,8 +64,8 @@ namespace com.wer.sc.ana.test.model
          */
         private void initTurnPoint()
         {
-            float[] arr_HighPrice = Arr_High;
-            float[] arr_LowPrice = Arr_Low;
+            IList<float> arr_HighPrice = Arr_High;
+            IList<float> arr_LowPrice = Arr_Low;
             //float[] arr_HighPrice = Arr_End;
             //float[] arr_LowPrice = Arr_End;
             int zzLen = ZZLen;
@@ -134,12 +134,12 @@ namespace com.wer.sc.ana.test.model
             AddPosPoint(zzLen, con_dd, con_gd);
         }
 
-        private void AddLowPoint(float[] arr_LowPrice, int pointPos)
+        private void AddLowPoint(IList<float> arr_LowPrice, int pointPos)
         {
             LowPoints.Add(new PricePoint(pointPos, arr_LowPrice[pointPos]));
         }
 
-        private void AddHighPoint(float[] arr_HighPrice, int pointPos)
+        private void AddHighPoint(IList<float> arr_HighPrice, int pointPos)
         {
             HighPoints.Add(new PricePoint(pointPos, arr_HighPrice[pointPos]));
         }

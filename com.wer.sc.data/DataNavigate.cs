@@ -60,7 +60,7 @@ namespace com.wer.sc.data
         {
             this.data = dataReaderFac.KLineDataReader.GetData(code, startDate, endDate, period);
             this.code = code;
-            this.Navigate(currentTime);
+            this.ChangeTime(currentTime);
         }
 
         /// <summary>
@@ -71,10 +71,10 @@ namespace com.wer.sc.data
         {
             this.data = dataReaderFac.KLineDataReader.GetData(code, startDate, endDate, period);
             this.period = period;
-            this.Navigate(currentTime);
+            this.ChangeTime(currentTime);
         }
 
-        public void Navigate(float time)
+        public void ChangeTime(float time)
         {
             this.currentTime = time;
         }
@@ -121,10 +121,15 @@ namespace com.wer.sc.data
         #endregion
     }
 
-    /// <summary>
-    /// 获得最近的一个k线数据
-    /// </summary>
     public class KLineChartBuilder
+    {
+
+    }
+
+    /// <summary>
+    /// 一分钟k线数据获得
+    /// </summary>
+    public class MinuteKLineChartBuilder
     {
         private KLineData klineData;
 
@@ -138,10 +143,10 @@ namespace com.wer.sc.data
 
         private double currentTime;
 
-        public KLineChartBuilder(DataReaderFactory dataReaderFac, KLineData klineData, double currentTime)
+        public MinuteKLineChartBuilder(DataReaderFactory dataReaderFac, KLineData minuteKlineData, double currentTime)
         {
             this.dataReaderFac = dataReaderFac;
-            this.klineData = klineData;
+            this.klineData = minuteKlineData;
             this.ChangeTime(currentTime);
         }
 

@@ -23,13 +23,13 @@ namespace com.wer.sc.comp.graphic
 
         private DataReaderFactory dataReaderFac;
 
-        private KLineData data;
+        private IKLineData data;
 
         private float currentTime;
 
         private KLinePeriod period;
 
-        private KLineChartBuilder currentKLineChartBuilder;
+        private MinuteKLineChartBuilder currentKLineChartBuilder;
 
         private int startDate;
 
@@ -46,13 +46,13 @@ namespace com.wer.sc.comp.graphic
         /// 修改提供的数据
         /// </summary>
         /// <param name="klineData"></param>
-        public void ChangeData(KLineData klineData)
+        public void ChangeData(IKLineData klineData)
         {
             this.data = klineData;
             this.code = klineData.Code;
             this.period = klineData.Period;
-            this.startDate = (int)klineData.arr_time[0];
-            this.endDate = (int)klineData.arr_time[klineData.Length - 1];
+            this.startDate = (int)klineData.Arr_Time[0];
+            this.endDate = (int)klineData.Arr_Time[klineData.Length - 1];
             this.endIndex = data.Length - 1;
             this.InitIndex();
         }
@@ -108,7 +108,7 @@ namespace com.wer.sc.comp.graphic
 
         #endregion
 
-        public KLineData GetKLineData()
+        public IKLineData GetKLineData()
         {
             return data;
         }

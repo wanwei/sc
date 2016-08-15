@@ -15,7 +15,7 @@ namespace com.wer.sc.comp.graphic
 
         private DataReaderFactory dataReaderFac;
 
-        private KLineData data;
+        private IKLineData data;
 
         private float currentTime;
 
@@ -30,7 +30,7 @@ namespace com.wer.sc.comp.graphic
             this.dataReaderFac = dataReaderFac;
         }
 
-        public void ChangeData(KLineData klineData)
+        public void ChangeData(IKLineData klineData)
         {
             this.data = klineData;
             this.code = klineData.Code;
@@ -44,7 +44,7 @@ namespace com.wer.sc.comp.graphic
             //this.CurrentTime = currentTime;
         }
 
-        public KLineData GetKLineData()
+        public IKLineData GetKLineData()
         {
             return data;
         }

@@ -61,19 +61,19 @@ namespace com.wer.sc.data.update
         public void UpdateCode(String code, DataReaderFactory dataReaderFactory)
         {
             //更新1分钟、15分钟、日线
-            KLineData data = Update(code, dataReaderFactory, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1));
+            IKLineData data = Update(code, dataReaderFactory, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1));
             if (data != null)
                 UpdateOther(code, dataReaderFactory, data);
         }
 
-        public KLineData Update(String code, DataReaderFactory dataReaderFactory, KLinePeriod period)
+        public IKLineData Update(String code, DataReaderFactory dataReaderFactory, KLinePeriod period)
         {
             if (period.PeriodType == KLinePeriod.TYPE_MINUTE && period.Period == 1)
                 return UpdateByTick(code, dataReaderFactory, period);
             return null;
         }
 
-        private KLineData UpdateByTick(string code, DataReaderFactory dataReaderFactory, KLinePeriod period)
+        private IKLineData UpdateByTick(string code, DataReaderFactory dataReaderFactory, KLinePeriod period)
         {
             String path = utils.GetKLineDataPath(code, period);
             KLineDataStore store = new KLineDataStore(path);
@@ -86,7 +86,7 @@ namespace com.wer.sc.data.update
                 lastIndex = openDates.IndexOf(lastDate);
 
             float lastPrice = -1;
-            List<KLineData> klineDataList = new List<KLineData>();
+            List<IKLineData> klineDataList = new List<IKLineData>();
             for (int i = lastIndex + 1; i < openDates.Count; i++)
             {
                 int openDate = openDates[i];
@@ -101,18 +101,18 @@ namespace com.wer.sc.data.update
             }
             if (klineDataList.Count == 0)
                 return null;
-            KLineData data = KLineData.Merge(klineDataList);
+            IKLineData data = KLineData.Merge(klineDataList);
             store.Append(data);
             return data;
         }
 
-        public KLineData UpdateByTick(string code, DataReaderFactory dataReaderFactory, KLinePeriod period, List<int> dates)
+        public IKLineData UpdateByTick(string code, DataReaderFactory dataReaderFactory, KLinePeriod period, List<int> dates)
         {
             String path = utils.GetKLineDataPath(code, period);
             KLineDataStore store = new KLineDataStore(path);
 
             float lastPrice = -1;
-            List<KLineData> klineDataList = new List<KLineData>();
+            List<IKLineData> klineDataList = new List<IKLineData>();
             for (int i = 0; i < dates.Count; i++)
             {
                 int openDate = dates[i];
@@ -127,14 +127,14 @@ namespace com.wer.sc.data.update
             }
             if (klineDataList.Count == 0)
                 return null;
-            KLineData data = KLineData.Merge(klineDataList);
+            IKLineData data = KLineData.Merge(klineDataList);
             store.Append(data);
             return data;
         }
 
-        public KLineData UpdateByKLine(String code, DataReaderFactory dataReaderFactory, KLinePeriod period, KLineData originalData)
+        public IKLineData UpdateByKLine(String code, DataReaderFactory dataReaderFactory, KLinePeriod period, IKLineData originalData)
         {
-            KLineData data_Target = DataTransfer_KLine2KLine.Transfer(originalData, period);
+            IKLineData data_Target = DataTransfer_KLine2KLine.Transfer(originalData, period);
             String path = utils.GetKLineDataPath(code, period);
             KLineDataStore store = new KLineDataStore(path);
             store.Append(data_Target);
@@ -144,24 +144,24 @@ namespace com.wer.sc.data.update
         private void UpdateBy1Minute(String code, DataReaderFactory dataReaderFactory, KLinePeriod period)
         {
             int lastDate = dataReaderFactory.KLineDataReader.GetLastDate(code, period);
-            KLineData data = dataReaderFactory.KLineDataReader.GetData(code, lastDate + 1, int.MaxValue, period);
-            KLineData data_Target = DataTransfer_KLine2KLine.Transfer(data, period);
+            IKLineData data = dataReaderFactory.KLineDataReader.GetData(code, lastDate + 1, int.MaxValue, period);
+            IKLineData data_Target = DataTransfer_KLine2KLine.Transfer(data, period);
             String path = utils.GetKLineDataPath(code, period);
             KLineDataStore store = new KLineDataStore(path);
             store.Append(data_Target);
         }
 
-        private void UpdateOther(String code, DataReaderFactory tmpFac, KLineData data)
+        private void UpdateOther(String code, DataReaderFactory tmpFac, IKLineData data)
         {
             DoUpdate(code, tmpFac, data, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 15));
             DoUpdate(code, tmpFac, data, new KLinePeriod(KLinePeriod.TYPE_HOUR, 1));
             DoUpdate(code, tmpFac, data, new KLinePeriod(KLinePeriod.TYPE_DAY, 1));
         }
 
-        private void DoUpdate(String code, DataReaderFactory tmpFac, KLineData data, KLinePeriod period)
+        private void DoUpdate(String code, DataReaderFactory tmpFac, IKLineData data, KLinePeriod period)
         {
             //TODO 检查已有文件的时间
-            KLineData data_Target = DataTransfer_KLine2KLine.Transfer(data, period);
+            IKLineData data_Target = DataTransfer_KLine2KLine.Transfer(data, period);
             String path = utils.GetKLineDataPath(code, period);
             KLineDataStore store = new KLineDataStore(path);
             store.Append(data_Target);

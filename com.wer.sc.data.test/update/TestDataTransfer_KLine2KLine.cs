@@ -13,10 +13,10 @@ namespace com.wer.sc.data.update
         [TestMethod]
         public void TestTransferKLine_Minute()
         {
-            KLineData data_1min = GetKLineData_1Minute();
+            IKLineData data_1min = GetKLineData_1Minute();
 
             //转换成5分钟线
-            KLineData data = DataTransfer_KLine2KLine.Transfer(data_1min, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 5));
+            IKLineData data = DataTransfer_KLine2KLine.Transfer(data_1min, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 5));
             Assert.AreEqual("20131216.09,3341,3343,3336,3338,70038,0,1659332", data.ToString());
             data.BarPos = 10;
             Assert.AreEqual("20131216.095,3357,3364,3356,3363,31524,0,1667394", data.ToString());
@@ -53,8 +53,8 @@ namespace com.wer.sc.data.update
         [TestMethod]
         public void TestTransferKLine_Day()
         {
-            KLineData data_1min = GetKLineData_1Minute();
-            KLineData data = DataTransfer_KLine2KLine.Transfer_Day(data_1min, new KLinePeriod(KLinePeriod.TYPE_DAY, 1),0.18);
+            IKLineData data_1min = GetKLineData_1Minute();
+            IKLineData data = DataTransfer_KLine2KLine.Transfer_Day(data_1min, new KLinePeriod(KLinePeriod.TYPE_DAY, 1),0.18);
 
             Assert.AreEqual("20131216,3341,3364,3335,3348,938428,0,1659396", data.ToString());
             data.BarPos = 1;
@@ -67,7 +67,7 @@ namespace com.wer.sc.data.update
             Assert.AreEqual("20131231,3352,3373,3350,3368,1049534,0,1556822", data.ToString());           
         }
 
-        public static KLineData GetKLineData_1Minute()
+        public static IKLineData GetKLineData_1Minute()
         {
             MockDataProvider dataProvider = new MockDataProvider();
             dataProvider.Append = true;

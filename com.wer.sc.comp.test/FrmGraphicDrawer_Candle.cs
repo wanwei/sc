@@ -51,11 +51,11 @@ namespace com.wer.sc.comp.test
 
         private void DrawOthers(MockGraphicDataProvider dataProvider)
         {
-            KLineData data = dataProvider.GetKLineData();
+            IKLineData data = dataProvider.GetKLineData();
             float[] ma = new float[data.Length];
             for (int i = 0; i < ma.Length; i++)
             {
-                ma[i] = this.ma(data.arr_end, i, 5);
+                ma[i] = this.ma(data.Arr_End, i, 5);
             }
             drawer.AddPolyLine(new PolyLineArray(ma, Color.Green));
 
@@ -63,12 +63,12 @@ namespace com.wer.sc.comp.test
             for (int i = 0; i < ma.Length; i++)
             {
                 float value = ma[i];
-                points[i] = (value > data.arr_high[i]) ? value : -1;
+                points[i] = (value > data.Arr_High[i]) ? value : -1;
             }
             drawer.AddPoint(new PointArray(points, Color.Blue, 5));
         }
 
-        public float ma(float[] values, int index, int len)
+        public float ma(IList<float> values, int index, int len)
         {
             float ma = 0;
             int startindex = index - len + 1;

@@ -21,7 +21,7 @@ namespace com.wer.sc.comp.ana
         private GraphicDrawer_Candle drawer = new GraphicDrawer_Candle();
         private GraphicDataProvider dataProvider;
 
-        private KLineData data;
+        private IKLineData data;
 
         public AnaDrawer_KLine(DataReaderFactory fac, GraphicDataProvider dataProvider)
         {
@@ -63,12 +63,12 @@ namespace com.wer.sc.comp.ana
             Run(this.data, model);
         }
 
-        public void Run(KLineData data, Plugin_KLineModel model)
+        public void Run(IKLineData data, Plugin_KLineModel model)
         {
             this.data = data;
             runner.Code = data.Code;
-            runner.StartDate = (int)data.arr_time[0];
-            runner.EndDate = (int)data.arr_time[data.Length - 1];
+            runner.StartDate = (int)data.Arr_Time[0];
+            runner.EndDate = (int)data.Arr_Time[data.Length - 1];
             runner.Period = data.Period;
             runner.Model = model;
             runner.Data = data;

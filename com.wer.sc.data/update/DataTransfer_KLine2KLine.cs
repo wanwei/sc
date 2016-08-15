@@ -17,7 +17,7 @@ namespace com.wer.sc.data.update
         /// <param name="targetPeriod"></param>
         /// <param name="openTimeList"></param>
         /// <returns></returns>
-        public static KLineData Transfer(KLineData data, KLinePeriod targetPeriod)
+        public static IKLineData Transfer(IKLineData data, KLinePeriod targetPeriod)
         {
             if (targetPeriod.PeriodType == KLinePeriod.TYPE_DAY)
                 return Transfer_Day(data, targetPeriod, 0.2);
@@ -38,7 +38,7 @@ namespace com.wer.sc.data.update
         /// <param name="targetPeriod"></param>
         /// <param name="timeSplit"></param>
         /// <returns></returns>
-        public static KLineData Transfer_Day(KLineData data, KLinePeriod targetPeriod, double timeSplit)
+        public static IKLineData Transfer_Day(IKLineData data, KLinePeriod targetPeriod, double timeSplit)
         {
             List<KLineChart2> charts = new List<KLineChart2>();
             int period = targetPeriod.Period;
@@ -47,8 +47,8 @@ namespace com.wer.sc.data.update
             bool hasNight = false;
             for (int i = 1; i < data.Length; i++)
             {
-                double lastfulltime = data.arr_time[i - 1];
-                double fulltime = data.arr_time[i];
+                double lastfulltime = data.Arr_Time[i - 1];
+                double fulltime = data.Arr_Time[i];
 
                 double lastdate = (int)lastfulltime;
                 double date = (int)fulltime;
@@ -74,14 +74,14 @@ namespace com.wer.sc.data.update
             return GetKLineData(charts);
         }
 
-        private static KLineChart2 GetChart_Day(KLineData data, int startIndex, int endIndex)
+        private static KLineChart2 GetChart_Day(IKLineData data, int startIndex, int endIndex)
         {
             KLineChart2 chart = GetChart(data, startIndex, endIndex);
-            chart.time = (int)data.arr_time[endIndex];
+            chart.time = (int)data.Arr_Time[endIndex];
             return chart;
         }
 
-        private static KLineData Transfer_SrcIs1Minute(KLineData data, KLinePeriod targetPeriod)
+        private static IKLineData Transfer_SrcIs1Minute(IKLineData data, KLinePeriod targetPeriod)
         {
             KLinePeriod sourcePeriod = data.Period;
             if (sourcePeriod.PeriodType != targetPeriod.PeriodType)
@@ -105,31 +105,31 @@ namespace com.wer.sc.data.update
             return GetKLineData(charts);
         }
 
-        private static int FindRealLastIndex_1Minute(KLineData data, int startIndex, int endIndex)
+        private static int FindRealLastIndex_1Minute(IKLineData data, int startIndex, int endIndex)
         {
             if (startIndex >= data.Length)
                 return endIndex;
             if (endIndex >= data.Length)
                 return data.Length - 1;
-            double between = data.arr_time[endIndex] - data.arr_time[startIndex];
+            double between = data.Arr_Time[endIndex] - data.Arr_Time[startIndex];
             if (between < 0.04)
                 return endIndex;
 
             while (between > 0.04)
             {
                 endIndex--;
-                between = data.arr_time[endIndex] - data.arr_time[startIndex];
+                between = data.Arr_Time[endIndex] - data.Arr_Time[startIndex];
             }
             return endIndex;
         }
 
-        private static KLineChart2 GetChart(KLineData data, int startIndex, int endIndex)
+        private static KLineChart2 GetChart(IKLineData data, int startIndex, int endIndex)
         {
             KLineChart2 chart = new KLineChart2();
-            chart.time = data.arr_time[startIndex];
-            chart.start = data.arr_start[startIndex];
-            chart.end = data.arr_end[endIndex];
-            chart.hold = data.arr_hold[endIndex];
+            chart.time = data.Arr_Time[startIndex];
+            chart.start = data.Arr_Start[startIndex];
+            chart.end = data.Arr_End[endIndex];
+            chart.hold = data.Arr_Hold[endIndex];
 
             float high = float.MinValue;
             float low = float.MaxValue;
@@ -137,12 +137,12 @@ namespace com.wer.sc.data.update
             float money = 0;
             for (int i = startIndex; i <= endIndex; i++)
             {
-                float chigh = data.arr_high[i];
-                float clow = data.arr_low[i];
+                float chigh = data.Arr_High[i];
+                float clow = data.Arr_Low[i];
                 high = high < chigh ? chigh : high;
                 low = low > clow ? clow : low;
-                mount += data.arr_mount[i];
-                money += data.arr_money[i];
+                mount += data.Arr_Mount[i];
+                money += data.Arr_Money[i];
             }
             chart.high = high;
             chart.low = low;
@@ -169,7 +169,7 @@ namespace com.wer.sc.data.update
             return data;
         }
 
-        private static KLineData Transfer_DifferentPeriod(KLineData data, KLinePeriod targetPeriod)
+        private static IKLineData Transfer_DifferentPeriod(IKLineData data, KLinePeriod targetPeriod)
         {
             KLinePeriod srcPeriod = data.Period;
             if (targetPeriod.PeriodType == KLinePeriod.TYPE_HOUR && srcPeriod.PeriodType == KLinePeriod.TYPE_MINUTE)

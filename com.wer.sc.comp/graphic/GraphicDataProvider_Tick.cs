@@ -18,7 +18,7 @@ namespace com.wer.sc.comp.graphic
 
         private DataReaderFactory dataReaderFac;
 
-        private KLineData data;
+        private IKLineData data;
 
         private float currentTime;
 
@@ -43,13 +43,13 @@ namespace com.wer.sc.comp.graphic
             this.dataReaderFac = dataReaderFac;
         }
 
-        public void ChangeData(KLineData klineData)
+        public void ChangeData(IKLineData klineData)
         {
             this.data = klineData;
             this.code = klineData.Code;
             this.period = klineData.Period;
-            this.startDate = (int)klineData.arr_time[0];
-            this.endDate = (int)klineData.arr_time[klineData.Length - 1];
+            this.startDate = (int)klineData.Arr_Time[0];
+            this.endDate = (int)klineData.Arr_Time[klineData.Length - 1];
         }
 
         public void ChangeData(String code, int startDate, int endDate, KLinePeriod period)
@@ -61,7 +61,7 @@ namespace com.wer.sc.comp.graphic
             this.endDate = endDate;
         }
 
-        public KLineData GetKLineData()
+        public IKLineData GetKLineData()
         {
             return data;
         }

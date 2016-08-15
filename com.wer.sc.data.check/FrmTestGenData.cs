@@ -17,7 +17,7 @@ namespace com.wer.sc.data.check
     {
         private DataMgr providerDataMgr;
 
-        private KLineData data;
+        private IKLineData data;
 
         public FrmTestGenData()
         {
@@ -56,7 +56,7 @@ namespace com.wer.sc.data.check
 
             String code = tbCode.Text;
             KLinePeriod period = new KLinePeriod(cbPeriod.SelectedIndex, int.Parse(tbPeriod.Text));
-            List<KLineData> klineDataList = new List<KLineData>();
+            List<IKLineData> klineDataList = new List<IKLineData>();
             float lastPrice = -1;
 
             for (int i = 0; i < dates.Count; i++)
@@ -77,7 +77,7 @@ namespace com.wer.sc.data.check
             Show(data);
         }
 
-        private void Show(KLineData data)
+        private void Show(IKLineData data)
         {
             int len = 1000;
             len = data.Length < 1000 ? data.Length : len;

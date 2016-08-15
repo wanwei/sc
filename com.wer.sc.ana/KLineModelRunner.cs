@@ -155,9 +155,9 @@ namespace com.wer.sc.ana
             }
         }
 
-        private KLineData data;
+        private IKLineData data;
 
-        public KLineData Data
+        public IKLineData Data
         {
             get
             {

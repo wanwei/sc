@@ -26,7 +26,7 @@ namespace com.wer.sc.comp.graphic
         /// 获得当前数据
         /// </summary>
         /// <returns></returns>
-        KLineData GetKLineData();
+        IKLineData GetKLineData();
 
         /// <summary>
         /// 得到当前的Charts
@@ -55,7 +55,7 @@ namespace com.wer.sc.comp.graphic
             set;
         }
 
-        void ChangeData(KLineData klineData);
+        void ChangeData(IKLineData klineData);
 
         void ChangeData(String code, int startDate, int endDate, KLinePeriod period);
         

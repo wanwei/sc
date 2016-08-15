@@ -53,12 +53,9 @@
     <Compile Include="ana\ZbRegisterAttribute.cs" />
     <Compile Include="data\CodeInfo.cs" />
     <Compile Include="data\IKLineData.cs" />
+    <Compile Include="data\KLineDataMath.cs" />
     <Compile Include="Plugin_DataProvider.cs" />
     <Compile Include="data\IKLineChart.cs" />
-    <Compile Include="data\KLineChart_KLineData.cs" />
-    <Compile Include="data\KLineChart.cs" />
-    <Compile Include="data\KLineChart_Abstract.cs" />
-    <Compile Include="data\KLineData.cs" />
     <Compile Include="data\KLinePeriod.cs" />
     <Compile Include="data\RealData.cs" />
     <Compile Include="data\TickData.cs" />

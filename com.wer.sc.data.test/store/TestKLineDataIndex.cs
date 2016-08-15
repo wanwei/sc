@@ -16,7 +16,7 @@ namespace com.wer.sc.data.store
         public void TestIndex()
         {
             KLineData data_ = ResourceLoader.GetKLineData_1Min();
-            KLineData data = data_.SubData(0, 449);
+            IKLineData data = data_.GetRange(0, 449);
 
             MockDataProvider provider = new MockDataProvider();
             String targetPath = provider.GetDataPath() + "\\testindex.kline";
@@ -32,7 +32,7 @@ namespace com.wer.sc.data.store
             Assert.AreEqual(20131202, result.DateList[0]);
             Assert.AreEqual(20131203, result.DateList[1]);
 
-            data = data_.SubData(450, data_.Length - 1);
+            data = data_.GetRange(450, data_.Length - 1);
             store.Append(data);
             indexer.DoIndex();
             result = indexer.GetIndex();

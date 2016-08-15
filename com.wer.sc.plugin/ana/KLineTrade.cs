@@ -15,7 +15,7 @@ namespace com.wer.sc.ana
          */
         public bool AutoFilter = true;
 
-        private KLineData data;
+        private IKLineData data;
 
         //初始现金
         private float initMoney;
@@ -34,7 +34,7 @@ namespace com.wer.sc.ana
 
         private List<KLineTradeDetailInfo> details = new List<KLineTradeDetailInfo>();
 
-        public KLineTrade(KLineData data, KLineTradeFee fee, int defaultHand, float initMoney)
+        public KLineTrade(IKLineData data, KLineTradeFee fee, int defaultHand, float initMoney)
         {
             this.data = data;
             this.tradeFee = fee;

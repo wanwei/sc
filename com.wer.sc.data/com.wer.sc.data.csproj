@@ -46,6 +46,11 @@
     <Compile Include="DataNavigate.cs" />
     <Compile Include="DataNavigate_Tick.cs" />
     <Compile Include="DataReaderFactory.cs" />
+    <Compile Include="IDataNavigate.cs" />
+    <Compile Include="impl\KLineChart.cs" />
+    <Compile Include="impl\KLineChart_Abstract.cs" />
+    <Compile Include="impl\KLineChart_KLineData.cs" />
+    <Compile Include="impl\KLineData.cs" />
     <Compile Include="KLineDataWrap.cs" />
     <Compile Include="OpenDateReader.cs" />
     <Compile Include="RealDataReader.cs" />
@@ -72,9 +77,7 @@
     <Compile Include="update\DataProviderWrap.cs" />
     <Compile Include="utils\TickDataIndeier.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="impl\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\com.wer.sc.plugin\com.wer.sc.plugin.csproj">
       <Project>{b8955457-f108-4060-a35b-69b482a19ab6}</Project>

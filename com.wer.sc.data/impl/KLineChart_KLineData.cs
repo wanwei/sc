@@ -8,11 +8,11 @@ namespace com.wer.sc.data
 {
     public class KLineChart_KLineData : KLineChart_Abstract
     {
-        private KLineData data;
+        private IKLineData data;
 
         private int index;
 
-        public KLineData Data
+        public IKLineData Data
         {
             get
             {
@@ -38,7 +38,7 @@ namespace com.wer.sc.data
             }
         }    
 
-        public KLineChart_KLineData(KLineData data, int index)
+        public KLineChart_KLineData(IKLineData data, int index)
         {
             this.Data = data;
             this.Index = index;
@@ -56,7 +56,7 @@ namespace com.wer.sc.data
         {
             get
             {
-                return Data.arr_start[Index];
+                return Data.Arr_Start[Index];
             }
         }
 
@@ -64,7 +64,7 @@ namespace com.wer.sc.data
         {
             get
             {
-                return Data.arr_high[Index];
+                return Data.Arr_High[Index];
             }
         }
 
@@ -72,7 +72,7 @@ namespace com.wer.sc.data
         {
             get
             {
-                return Data.arr_low[Index];
+                return Data.Arr_Low[Index];
             }
         }
 
@@ -80,7 +80,7 @@ namespace com.wer.sc.data
         {
             get
             {
-                return Data.arr_end[Index];
+                return Data.Arr_End[Index];
             }
         }
 
@@ -88,7 +88,7 @@ namespace com.wer.sc.data
         {
             get
             {
-                return Data.arr_mount[Index];
+                return Data.Arr_Mount[Index];
             }
         }
 
@@ -96,7 +96,7 @@ namespace com.wer.sc.data
         {
             get
             {
-                return Data.arr_time[Index];
+                return Data.Arr_Time[Index];
             }
         }
 

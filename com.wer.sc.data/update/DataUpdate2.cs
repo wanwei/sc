@@ -111,7 +111,7 @@ namespace com.wer.sc.data.update
             //KLineData data = UpdateKLineByTick(code, generate_KLine.dates_5second, period);
 
             KLinePeriod period = null;
-            KLineData data = null;
+            IKLineData data = null;
             if (generate_KLine.dates_1min.Count != 0)
             {
                 period = new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1);
@@ -181,12 +181,12 @@ namespace com.wer.sc.data.update
             return true;
         }
 
-        private KLineData UpdateKLineByTick(String code, List<int> dates, KLinePeriod period)
+        private IKLineData UpdateKLineByTick(String code, List<int> dates, KLinePeriod period)
         {
             return update_KLine.UpdateByTick(code, dataReaderFactory, period, dates);
         }
 
-        private KLineData UpdateKLineByKLine(String code, KLinePeriod period, KLineData data)
+        private IKLineData UpdateKLineByKLine(String code, KLinePeriod period, IKLineData data)
         {
             return update_KLine.UpdateByKLine(code, dataReaderFactory, period, data);
         }

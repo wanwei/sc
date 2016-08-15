@@ -103,7 +103,7 @@ namespace com.wer.sc.data.check
             KLineData klineData = fac.KLineDataReader.GetData(code, start, end, period);
             double time = double.Parse(tbTime.Text);            
 
-            KLineChartBuilder builder = new KLineChartBuilder(fac, klineData, time);
+            MinuteKLineChartBuilder builder = new MinuteKLineChartBuilder(fac, klineData, time);
             KLineChart chart = builder.GetCurrentChart();
 
             tbData.Clear();

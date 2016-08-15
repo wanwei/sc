@@ -44,7 +44,7 @@ namespace com.wer.sc.ana.test.model
             for (int i = 0; i < Arr_PosRealGD.Count; i++)
             {
                 int gdIndex = Arr_PosRealGD[i];
-                gdpoints.Add(new PricePoint(gdIndex, KLineData.arr_high[gdIndex]));
+                gdpoints.Add(new PricePoint(gdIndex, KLineData.Arr_High[gdIndex]));
             }
             this.AddPoint(new PointList(gdpoints, Color.Red, 8));
 
@@ -52,7 +52,7 @@ namespace com.wer.sc.ana.test.model
             for (int i = 0; i < Arr_PosRealDD.Count; i++)
             {
                 int ddIndex = Arr_PosRealDD[i];
-                ddpoints.Add(new PricePoint(ddIndex, KLineData.arr_low[ddIndex]));
+                ddpoints.Add(new PricePoint(ddIndex, KLineData.Arr_Low[ddIndex]));
             }
             this.AddPoint(new PointList(ddpoints, Color.Green, 8));
             //for (int i = 0; i < KLineData.Length; i++)
@@ -106,10 +106,8 @@ namespace com.wer.sc.ana.test.model
          */
         private void initTurnPoint()
         {
-            //float[] arr_HighPrice = Arr_End;
-            //float[] arr_LowPrice = Arr_End;
-            float[] arr_HighPrice = Arr_High;
-            float[] arr_LowPrice = Arr_Low;
+            IList<float> arr_HighPrice = Arr_High;
+            IList<float> arr_LowPrice = Arr_Low;
             int zzLen = ZZLen;
             int hlLen = HLLen;
 
@@ -186,13 +184,13 @@ namespace com.wer.sc.ana.test.model
             addPosPoint(zzLen, con_dd, con_gd);
         }
 
-        private void addRealDd(float[] arr_LowPrice, int pointPos)
+        private void addRealDd(IList<float> arr_LowPrice, int pointPos)
         {
             Arr_PosRealDD.Add(pointPos);
             Arr_RealDD.Add(arr_LowPrice[pointPos]);
         }
 
-        private void addRealGd(float[] arr_HighPrice, int pointPos)
+        private void addRealGd(IList<float> arr_HighPrice, int pointPos)
         {
             Arr_PosRealGD.Add(pointPos);
             Arr_RealGD.Add(arr_HighPrice[pointPos]);

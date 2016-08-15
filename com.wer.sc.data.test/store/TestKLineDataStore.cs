@@ -14,8 +14,8 @@ namespace com.wer.sc.data.store.test
             String path = System.Environment.CurrentDirectory + "test.kline";
             KLineData data = ResourceLoader.LoadKLineData();
 
-            KLineData d1 = data.SubData(0, 100);
-            KLineData d2 = data.SubData(101, data.Length - 1);
+            IKLineData d1 = data.GetRange(0, 100);
+            IKLineData d2 = data.GetRange(101, data.Length - 1);
 
             KLineDataStore store = new KLineDataStore(path);
             store.Save(d1);

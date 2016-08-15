@@ -8,9 +8,9 @@ namespace com.wer.sc.data.update2
 {
     class DataTransfer_Tick2KLine2
     {
-        public static KLineData Transfer(List<TickData> data, KLinePeriod targetPeriod, List<double[]> opentime)
+        public static IKLineData Transfer(List<TickData> data, KLinePeriod targetPeriod, List<double[]> opentime)
         {
-            List<KLineData> klineDataList = new List<KLineData>();
+            List<IKLineData> klineDataList = new List<IKLineData>();
             KLineData lastData = null;
             for (int i = 0; i < data.Count; i++)
             {

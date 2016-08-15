@@ -26,15 +26,15 @@ namespace com.wer.sc.comp.graphic
 
         private PriceRectangle GetPriceRectangle()
         {
-            KLineData data = DataProvider.GetKLineData();
+            IKLineData data = DataProvider.GetKLineData();
             int startIndex = DataProvider.StartIndex;
             int endIndex = DataProvider.EndIndex;
             float priceBottom = 0;
-            float priceTop = data.arr_mount[startIndex];
+            float priceTop = data.Arr_Mount[startIndex];
             for (int i = startIndex + 1; i <= endIndex; i++)
             {
-                if (priceTop < data.arr_mount[i])
-                    priceTop = data.arr_mount[i];
+                if (priceTop < data.Arr_Mount[i])
+                    priceTop = data.Arr_Mount[i];
             }
             return new PriceRectangle(startIndex - 0.5f, endIndex + 0.5f, priceTop, priceBottom);
         }
@@ -60,7 +60,7 @@ namespace com.wer.sc.comp.graphic
 
         private void DrawMount(Graphics g)
         {
-            KLineData data = DataProvider.GetKLineData();
+            IKLineData data = DataProvider.GetKLineData();
             int startIndex = DataProvider.StartIndex;
             int endIndex = DataProvider.EndIndex;
             for (int i = startIndex; i < endIndex; i++)

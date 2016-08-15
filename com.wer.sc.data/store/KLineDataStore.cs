@@ -25,7 +25,7 @@ namespace com.wer.sc.data.store
             this.indexer = new KLineDataIndex(path);
         }
 
-        public void Save(KLineData data)
+        public void Save(IKLineData data)
         {
             DirectoryInfo dir = Directory.GetParent(path);
             if (!dir.Exists)
@@ -43,7 +43,7 @@ namespace com.wer.sc.data.store
             }
         }
 
-        public void Append(KLineData data)
+        public void Append(IKLineData data)
         {
             byte[] bs = GetBytes(data);
             FileStream file = new FileStream(path, FileMode.Append);
@@ -138,7 +138,7 @@ namespace com.wer.sc.data.store
             return data;
         }
 
-        public byte[] GetBytes(KLineData data)
+        public byte[] GetBytes(IKLineData data)
         {
             int size = LEN_EVERYKLINE;
             byte[] bs = new byte[size * data.Length];

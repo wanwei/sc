@@ -109,7 +109,7 @@ namespace com.wer.sc.comp.graphic
 
         public SelectedPointInfo GetBlockInfo(int index)
         {
-            KLineData data = dataProvider.GetKLineData();
+            IKLineData data = dataProvider.GetKLineData();
             KLineChart_KLineData chart = new KLineChart_KLineData(data, index);
             KLineChart_KLineData lastChart = new KLineChart_KLineData(data, index - 1);
             return GetBlockInfo(chart, lastChart);
@@ -342,7 +342,7 @@ namespace com.wer.sc.comp.graphic
         {
             PriceGraphicMapping priceMapping = this.drawer.drawer_chart.PriceMapping;
             float x = priceMapping.CalcX(selectIndex);
-            float y = priceMapping.CalcY(drawer.DataProvider.GetKLineData().arr_end[selectIndex]);
+            float y = priceMapping.CalcY(drawer.DataProvider.GetKLineData().Arr_End[selectIndex]);
             return new Point((int)x, (int)y);
         }
 

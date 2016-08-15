@@ -16,7 +16,7 @@ namespace com.wer.sc.comp.test
 
         private DataReaderFactory fac;
 
-        private KLineData data;
+        private IKLineData data;
 
         private float currentTime;
 
@@ -34,7 +34,7 @@ namespace com.wer.sc.comp.test
             fac = new DataReaderFactory(@"D:\SCDATA\CNFUTURES");
         }
 
-        public void ChangeData(KLineData klineData)
+        public void ChangeData(IKLineData klineData)
         {
             this.data = klineData;
             this.code = klineData.Code;
@@ -50,7 +50,7 @@ namespace com.wer.sc.comp.test
             ChangeData(data);
         }
 
-        public KLineData GetKLineData()
+        public IKLineData GetKLineData()
         {
             return data;
         }
@@ -155,12 +155,12 @@ namespace com.wer.sc.comp.test
 
         private int findEndIndex(float currentTime)
         {
-            bool isSmaller = data.arr_time[0] < currentTime;
+            bool isSmaller = data.Arr_Time[0] < currentTime;
             if (!isSmaller)
                 return 0;
             for (int i = 0; i < data.Length; i++)
             {
-                if (data.arr_time[i] >= currentTime)
+                if (data.Arr_Time[i] >= currentTime)
                     return i;
             }
             return data.Length - 1;

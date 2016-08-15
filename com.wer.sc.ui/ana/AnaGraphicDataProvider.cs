@@ -105,7 +105,7 @@ namespace com.wer.sc.ui.ana
             return new KLineChart_KLineData(klineDataWrap.KlineData, endIndex);
         }
 
-        public KLineData GetKLineData()
+        public IKLineData GetKLineData()
         {
             return klineDataWrap.KlineData;
         }
@@ -115,7 +115,7 @@ namespace com.wer.sc.ui.ana
             throw new NotImplementedException();
         }
 
-        public void ChangeData(KLineData klineData)
+        public void ChangeData(IKLineData klineData)
         {
             throw new NotImplementedException();
         }

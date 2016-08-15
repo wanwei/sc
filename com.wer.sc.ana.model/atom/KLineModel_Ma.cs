@@ -23,7 +23,7 @@ namespace com.wer.sc.ana.model.atom
         [ModelLines("ma40", "#00FF00", 1)]
         public float[] ma40;
 
-        public override void init(String code, KLineData data)
+        public override void init(String code, IKLineData data)
         {
             base.init(code, data);
             ma5 = new float[data.Length];
@@ -34,10 +34,10 @@ namespace com.wer.sc.ana.model.atom
 
         public override void Loop()
         {
-            ma5[BarPos] = ma(Arr_End, 5);
-            ma10[BarPos] = ma(Arr_End, 10);
-            ma20[BarPos] = ma(Arr_End, 20);
-            ma40[BarPos] = ma(Arr_End, 40);
+            ma5[BarPos] = Ma(Arr_End, 5);
+            ma10[BarPos] = Ma(Arr_End, 10);
+            ma20[BarPos] = Ma(Arr_End, 20);
+            ma40[BarPos] = Ma(Arr_End, 40);
         }
     }
 }
