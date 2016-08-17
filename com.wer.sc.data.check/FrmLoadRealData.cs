@@ -15,7 +15,7 @@ namespace com.wer.sc.data.check
     {
         private DataMgr providerDataMgr;
 
-        private List<RealData> realdataList;
+        private List<IRealData> realdataList;
 
         public FrmLoadRealData()
         {
@@ -44,12 +44,12 @@ namespace com.wer.sc.data.check
             this.realdataList = fac.RealDataReader.GetData(code, startDate, endDate);
             for (int i = 0; i < realdataList.Count; i++)
             {
-                RealData r = this.realdataList[i];
+                IRealData r = this.realdataList[i];
                 printRealData(r);
             }
         }
 
-        private void printRealData(RealData r)
+        private void printRealData(IRealData r)
         {
             StringBuilder sb = new StringBuilder();
             for (int i = 0; i < r.Length; i++)

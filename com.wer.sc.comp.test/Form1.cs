@@ -35,10 +35,6 @@ namespace com.wer.sc.comp.test
             frm.ShowDialog();
         }
 
-        private void btCandle3_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void btAna_Click(object sender, EventArgs e)
         {
@@ -66,6 +62,18 @@ namespace com.wer.sc.comp.test
         private void btAna3_Click(object sender, EventArgs e)
         {
             FrmGraphicDrawer_Ana3 frm = new FrmGraphicDrawer_Ana3();
+            frm.ShowDialog();
+        }
+
+        private void btDataLoader_Click(object sender, EventArgs e)
+        {
+            FrmGraphicDrawer_DataLoader frm = new FrmGraphicDrawer_DataLoader();
+            frm.ShowDialog();
+        }
+
+        private void btDataNavigate_Click(object sender, EventArgs e)
+        {
+            FrmGraphicDrawer_DataNavigate frm = new FrmGraphicDrawer_DataNavigate();
             frm.ShowDialog();
         }
     }

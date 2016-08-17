@@ -28,7 +28,7 @@ namespace com.wer.sc.data.update
                 DataReaderFactory fac = new DataReaderFactory(dataProvider.GetDataPath());
                 KLineDataReader klineReader = fac.KLineDataReader;
 
-                KLineData data = klineReader.GetData("m01", 20131202, 20131213, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1));
+                IKLineData data = klineReader.GetData("m01", 20131202, 20131213, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1));
                 String[] dataResult = ResourceLoader.GetKLineData_1Min_Result();
                 for (int i = 0; i < data.Length; i++)
                 {

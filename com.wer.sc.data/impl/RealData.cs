@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace com.wer.sc.data
 {
-    public class RealData
+    public class RealData : IRealData
     {
         public String code;
 

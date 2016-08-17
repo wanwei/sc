@@ -36,7 +36,8 @@
             this.btModel = new System.Windows.Forms.Button();
             this.btAna2 = new System.Windows.Forms.Button();
             this.btAna3 = new System.Windows.Forms.Button();
-            this.btCandle3 = new System.Windows.Forms.Button();
+            this.btLoadData = new System.Windows.Forms.Button();
+            this.btDataNavigate = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btCandle
@@ -71,7 +72,7 @@
             // 
             // btAna
             // 
-            this.btAna.Location = new System.Drawing.Point(57, 86);
+            this.btAna.Location = new System.Drawing.Point(57, 135);
             this.btAna.Name = "btAna";
             this.btAna.Size = new System.Drawing.Size(75, 23);
             this.btAna.TabIndex = 3;
@@ -81,7 +82,7 @@
             // 
             // btReal
             // 
-            this.btReal.Location = new System.Drawing.Point(57, 131);
+            this.btReal.Location = new System.Drawing.Point(57, 180);
             this.btReal.Name = "btReal";
             this.btReal.Size = new System.Drawing.Size(75, 23);
             this.btReal.TabIndex = 4;
@@ -91,7 +92,7 @@
             // 
             // btModel
             // 
-            this.btModel.Location = new System.Drawing.Point(57, 175);
+            this.btModel.Location = new System.Drawing.Point(57, 224);
             this.btModel.Name = "btModel";
             this.btModel.Size = new System.Drawing.Size(75, 23);
             this.btModel.TabIndex = 5;
@@ -101,7 +102,7 @@
             // 
             // btAna2
             // 
-            this.btAna2.Location = new System.Drawing.Point(138, 86);
+            this.btAna2.Location = new System.Drawing.Point(138, 135);
             this.btAna2.Name = "btAna2";
             this.btAna2.Size = new System.Drawing.Size(75, 23);
             this.btAna2.TabIndex = 6;
@@ -111,7 +112,7 @@
             // 
             // btAna3
             // 
-            this.btAna3.Location = new System.Drawing.Point(219, 86);
+            this.btAna3.Location = new System.Drawing.Point(219, 135);
             this.btAna3.Name = "btAna3";
             this.btAna3.Size = new System.Drawing.Size(75, 23);
             this.btAna3.TabIndex = 7;
@@ -119,22 +120,33 @@
             this.btAna3.UseVisualStyleBackColor = true;
             this.btAna3.Click += new System.EventHandler(this.btAna3_Click);
             // 
-            // btCandle3
+            // btLoadData
             // 
-            this.btCandle3.Location = new System.Drawing.Point(219, 41);
-            this.btCandle3.Name = "btCandle3";
-            this.btCandle3.Size = new System.Drawing.Size(75, 23);
-            this.btCandle3.TabIndex = 8;
-            this.btCandle3.Text = "蜡烛图3";
-            this.btCandle3.UseVisualStyleBackColor = true;
-            this.btCandle3.Click += new System.EventHandler(this.btCandle3_Click);
+            this.btLoadData.Location = new System.Drawing.Point(57, 80);
+            this.btLoadData.Name = "btLoadData";
+            this.btLoadData.Size = new System.Drawing.Size(75, 23);
+            this.btLoadData.TabIndex = 8;
+            this.btLoadData.Text = "数据装载";
+            this.btLoadData.UseVisualStyleBackColor = true;
+            this.btLoadData.Click += new System.EventHandler(this.btDataLoader_Click);
+            // 
+            // btDataNavigate
+            // 
+            this.btDataNavigate.Location = new System.Drawing.Point(138, 80);
+            this.btDataNavigate.Name = "btDataNavigate";
+            this.btDataNavigate.Size = new System.Drawing.Size(75, 23);
+            this.btDataNavigate.TabIndex = 9;
+            this.btDataNavigate.Text = "数据导航";
+            this.btDataNavigate.UseVisualStyleBackColor = true;
+            this.btDataNavigate.Click += new System.EventHandler(this.btDataNavigate_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(554, 327);
-            this.Controls.Add(this.btCandle3);
+            this.Controls.Add(this.btDataNavigate);
+            this.Controls.Add(this.btLoadData);
             this.Controls.Add(this.btAna3);
             this.Controls.Add(this.btAna2);
             this.Controls.Add(this.btModel);
@@ -159,7 +171,8 @@
         private System.Windows.Forms.Button btModel;
         private System.Windows.Forms.Button btAna2;
         private System.Windows.Forms.Button btAna3;
-        private System.Windows.Forms.Button btCandle3;
+        private System.Windows.Forms.Button btLoadData;
+        private System.Windows.Forms.Button btDataNavigate;
     }
 }
 

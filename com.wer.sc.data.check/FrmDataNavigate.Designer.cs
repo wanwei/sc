@@ -29,6 +29,11 @@
         private void InitializeComponent()
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.btTickIndeier = new System.Windows.Forms.Button();
+            this.btLoadAll = new System.Windows.Forms.Button();
+            this.btLoadCurrentKLineChart = new System.Windows.Forms.Button();
+            this.cbProvider = new System.Windows.Forms.ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.tbTime = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.btLoadMinuteKLineChart = new System.Windows.Forms.Button();
@@ -42,11 +47,6 @@
             this.tbCode = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tbData = new System.Windows.Forms.TextBox();
-            this.cbProvider = new System.Windows.Forms.ComboBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.btLoadCurrentKLineChart = new System.Windows.Forms.Button();
-            this.btLoadAll = new System.Windows.Forms.Button();
-            this.btTickIndeier = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -86,6 +86,59 @@
             this.splitContainer1.Size = new System.Drawing.Size(698, 421);
             this.splitContainer1.SplitterDistance = 119;
             this.splitContainer1.TabIndex = 2;
+            // 
+            // btTickIndeier
+            // 
+            this.btTickIndeier.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btTickIndeier.Location = new System.Drawing.Point(16, 81);
+            this.btTickIndeier.Name = "btTickIndeier";
+            this.btTickIndeier.Size = new System.Drawing.Size(124, 28);
+            this.btTickIndeier.TabIndex = 32;
+            this.btTickIndeier.Text = "TICK索引器";
+            this.btTickIndeier.UseVisualStyleBackColor = true;
+            this.btTickIndeier.Click += new System.EventHandler(this.btIndeier_Click);
+            // 
+            // btLoadAll
+            // 
+            this.btLoadAll.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btLoadAll.Location = new System.Drawing.Point(484, 81);
+            this.btLoadAll.Name = "btLoadAll";
+            this.btLoadAll.Size = new System.Drawing.Size(185, 28);
+            this.btLoadAll.TabIndex = 31;
+            this.btLoadAll.Text = "装载到当前时间所有K线";
+            this.btLoadAll.UseVisualStyleBackColor = true;
+            this.btLoadAll.Click += new System.EventHandler(this.btLoadAll_Click);
+            // 
+            // btLoadCurrentKLineChart
+            // 
+            this.btLoadCurrentKLineChart.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btLoadCurrentKLineChart.Location = new System.Drawing.Point(320, 81);
+            this.btLoadCurrentKLineChart.Name = "btLoadCurrentKLineChart";
+            this.btLoadCurrentKLineChart.Size = new System.Drawing.Size(145, 28);
+            this.btLoadCurrentKLineChart.TabIndex = 30;
+            this.btLoadCurrentKLineChart.Text = "装载当前时间K线";
+            this.btLoadCurrentKLineChart.UseVisualStyleBackColor = true;
+            this.btLoadCurrentKLineChart.Click += new System.EventHandler(this.btLoadCurrentKLineChart_Click);
+            // 
+            // cbProvider
+            // 
+            this.cbProvider.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbProvider.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbProvider.FormattingEnabled = true;
+            this.cbProvider.Location = new System.Drawing.Point(94, 51);
+            this.cbProvider.Name = "cbProvider";
+            this.cbProvider.Size = new System.Drawing.Size(95, 24);
+            this.cbProvider.TabIndex = 29;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label6.Location = new System.Drawing.Point(22, 51);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(72, 16);
+            this.label6.TabIndex = 28;
+            this.label6.Text = "数据提供";
             // 
             // tbTime
             // 
@@ -213,58 +266,6 @@
             this.tbData.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.tbData.Size = new System.Drawing.Size(698, 298);
             this.tbData.TabIndex = 14;
-            // 
-            // cbProvider
-            // 
-            this.cbProvider.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbProvider.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.cbProvider.FormattingEnabled = true;
-            this.cbProvider.Location = new System.Drawing.Point(94, 51);
-            this.cbProvider.Name = "cbProvider";
-            this.cbProvider.Size = new System.Drawing.Size(95, 24);
-            this.cbProvider.TabIndex = 29;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label6.Location = new System.Drawing.Point(22, 51);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(72, 16);
-            this.label6.TabIndex = 28;
-            this.label6.Text = "数据提供";
-            // 
-            // btLoadCurrentKLineChart
-            // 
-            this.btLoadCurrentKLineChart.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btLoadCurrentKLineChart.Location = new System.Drawing.Point(320, 81);
-            this.btLoadCurrentKLineChart.Name = "btLoadCurrentKLineChart";
-            this.btLoadCurrentKLineChart.Size = new System.Drawing.Size(145, 28);
-            this.btLoadCurrentKLineChart.TabIndex = 30;
-            this.btLoadCurrentKLineChart.Text = "装载当前时间K线";
-            this.btLoadCurrentKLineChart.UseVisualStyleBackColor = true;
-            this.btLoadCurrentKLineChart.Click += new System.EventHandler(this.btLoadCurrentKLineChart_Click);
-            // 
-            // btLoadAll
-            // 
-            this.btLoadAll.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btLoadAll.Location = new System.Drawing.Point(484, 81);
-            this.btLoadAll.Name = "btLoadAll";
-            this.btLoadAll.Size = new System.Drawing.Size(185, 28);
-            this.btLoadAll.TabIndex = 31;
-            this.btLoadAll.Text = "装载到当前时间所有K线";
-            this.btLoadAll.UseVisualStyleBackColor = true;
-            // 
-            // btTickIndeier
-            // 
-            this.btTickIndeier.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btTickIndeier.Location = new System.Drawing.Point(16, 81);
-            this.btTickIndeier.Name = "btTickIndeier";
-            this.btTickIndeier.Size = new System.Drawing.Size(124, 28);
-            this.btTickIndeier.TabIndex = 32;
-            this.btTickIndeier.Text = "TICK索引器";
-            this.btTickIndeier.UseVisualStyleBackColor = true;
-            this.btTickIndeier.Click += new System.EventHandler(this.btIndeier_Click);
             // 
             // FrmDataNavigate
             // 

@@ -29,15 +29,18 @@ namespace com.wer.sc.comp.graphic
 
         private KLinePeriod period;
 
-        private MinuteKLineChartBuilder currentKLineChartBuilder;
+        private CurrentKLineChartBuilder currentKLineChartBuilder;
 
         private int startDate;
 
         private int endDate;
 
+        private IDataNavigate dataNavigate;
+
         public GraphicDataProvider_Time(DataReaderFactory dataReaderFac)
         {
             this.dataReaderFac = dataReaderFac;
+            this.dataNavigate = new DataNavigate(dataReaderFac);
         }
 
         #region 修改数据

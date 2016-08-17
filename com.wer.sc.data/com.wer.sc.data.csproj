@@ -43,7 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CodeReader.cs" />
-    <Compile Include="DataNavigate.cs" />
+    <Compile Include="impl\DataNavigate.cs" />
     <Compile Include="DataNavigate_Tick.cs" />
     <Compile Include="DataReaderFactory.cs" />
     <Compile Include="IDataNavigate.cs" />
@@ -51,6 +51,9 @@
     <Compile Include="impl\KLineChart_Abstract.cs" />
     <Compile Include="impl\KLineChart_KLineData.cs" />
     <Compile Include="impl\KLineData.cs" />
+    <Compile Include="utils\DayDataCache.cs" />
+    <Compile Include="utils\KLineDataIndeier.cs" />
+    <Compile Include="impl\RealData.cs" />
     <Compile Include="KLineDataWrap.cs" />
     <Compile Include="OpenDateReader.cs" />
     <Compile Include="RealDataReader.cs" />

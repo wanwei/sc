@@ -1,6 +1,6 @@
 ﻿namespace com.wer.sc.comp.test
 {
-    partial class FrmGraphicDrawer_Candle3
+    partial class FrmGraphicDrawer_DataNavigate
     {
         /// <summary>
         /// Required designer variable.
@@ -35,8 +35,6 @@
             this.cbPeriod = new System.Windows.Forms.ComboBox();
             this.tbPeriod = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.lbModel = new System.Windows.Forms.Label();
-            this.btModel = new System.Windows.Forms.Button();
             this.tbEnd = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.tbStart = new System.Windows.Forms.TextBox();
@@ -65,8 +63,6 @@
             this.splitContainer1.Panel1.Controls.Add(this.cbPeriod);
             this.splitContainer1.Panel1.Controls.Add(this.tbPeriod);
             this.splitContainer1.Panel1.Controls.Add(this.label5);
-            this.splitContainer1.Panel1.Controls.Add(this.lbModel);
-            this.splitContainer1.Panel1.Controls.Add(this.btModel);
             this.splitContainer1.Panel1.Controls.Add(this.tbEnd);
             this.splitContainer1.Panel1.Controls.Add(this.label3);
             this.splitContainer1.Panel1.Controls.Add(this.tbStart);
@@ -77,23 +73,23 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.anaComponent1);
-            this.splitContainer1.Size = new System.Drawing.Size(696, 382);
+            this.splitContainer1.Size = new System.Drawing.Size(832, 382);
             this.splitContainer1.SplitterDistance = 108;
             this.splitContainer1.TabIndex = 2;
             // 
             // tbTime
             // 
             this.tbTime.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.tbTime.Location = new System.Drawing.Point(91, 71);
+            this.tbTime.Location = new System.Drawing.Point(82, 55);
             this.tbTime.Name = "tbTime";
-            this.tbTime.Size = new System.Drawing.Size(167, 26);
+            this.tbTime.Size = new System.Drawing.Size(211, 26);
             this.tbTime.TabIndex = 13;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label4.Location = new System.Drawing.Point(13, 74);
+            this.label4.Location = new System.Drawing.Point(13, 58);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(72, 16);
             this.label4.TabIndex = 12;
@@ -102,7 +98,7 @@
             // btRun
             // 
             this.btRun.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btRun.Location = new System.Drawing.Point(580, 68);
+            this.btRun.Location = new System.Drawing.Point(474, 55);
             this.btRun.Name = "btRun";
             this.btRun.Size = new System.Drawing.Size(65, 28);
             this.btRun.TabIndex = 11;
@@ -137,26 +133,6 @@
             this.label5.Size = new System.Drawing.Size(40, 16);
             this.label5.TabIndex = 8;
             this.label5.Text = "周期";
-            // 
-            // lbModel
-            // 
-            this.lbModel.AutoSize = true;
-            this.lbModel.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lbModel.Location = new System.Drawing.Point(386, 71);
-            this.lbModel.Name = "lbModel";
-            this.lbModel.Size = new System.Drawing.Size(56, 16);
-            this.lbModel.TabIndex = 7;
-            this.lbModel.Text = "......";
-            // 
-            // btModel
-            // 
-            this.btModel.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btModel.Location = new System.Drawing.Point(315, 68);
-            this.btModel.Name = "btModel";
-            this.btModel.Size = new System.Drawing.Size(65, 28);
-            this.btModel.TabIndex = 6;
-            this.btModel.Text = "模型";
-            this.btModel.UseVisualStyleBackColor = true;
             // 
             // tbEnd
             // 
@@ -222,18 +198,18 @@
             this.anaComponent1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.anaComponent1.Location = new System.Drawing.Point(0, 0);
             this.anaComponent1.Name = "anaComponent1";
-            this.anaComponent1.Size = new System.Drawing.Size(696, 270);
+            this.anaComponent1.Size = new System.Drawing.Size(832, 270);
             this.anaComponent1.TabIndex = 0;
             // 
-            // FrmGraphicDrawer_Candle3
+            // FrmGraphicDrawer_DataNavigate
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(696, 382);
+            this.ClientSize = new System.Drawing.Size(832, 382);
             this.Controls.Add(this.splitContainer1);
             this.KeyPreview = true;
-            this.Name = "FrmGraphicDrawer_Candle3";
-            this.Text = "FrmGraphicDrawer_Candle2";
+            this.Name = "FrmGraphicDrawer_DataNavigate";
+            this.Text = "测试数据导航";
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
@@ -252,8 +228,6 @@
         private System.Windows.Forms.ComboBox cbPeriod;
         private System.Windows.Forms.TextBox tbPeriod;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label lbModel;
-        private System.Windows.Forms.Button btModel;
         private System.Windows.Forms.TextBox tbEnd;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox tbStart;

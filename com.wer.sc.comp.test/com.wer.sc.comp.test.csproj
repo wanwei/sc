@@ -76,11 +76,17 @@
     <Compile Include="FrmGraphicDrawer_Candle.Designer.cs">
       <DependentUpon>FrmGraphicDrawer_Candle.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmGraphicDrawer_Candle3.cs">
+    <Compile Include="FrmGraphicDrawer_DataNavigate.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmGraphicDrawer_Candle3.Designer.cs">
-      <DependentUpon>FrmGraphicDrawer_Candle3.cs</DependentUpon>
+    <Compile Include="FrmGraphicDrawer_DataNavigate.Designer.cs">
+      <DependentUpon>FrmGraphicDrawer_DataNavigate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmGraphicDrawer_DataLoader.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmGraphicDrawer_DataLoader.Designer.cs">
+      <DependentUpon>FrmGraphicDrawer_DataLoader.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmGraphicDrawer_Candle2.cs">
       <SubType>Form</SubType>
@@ -119,8 +125,11 @@
     <EmbeddedResource Include="FrmGraphicDrawer_Candle.resx">
       <DependentUpon>FrmGraphicDrawer_Candle.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmGraphicDrawer_Candle3.resx">
-      <DependentUpon>FrmGraphicDrawer_Candle3.cs</DependentUpon>
+    <EmbeddedResource Include="FrmGraphicDrawer_DataNavigate.resx">
+      <DependentUpon>FrmGraphicDrawer_DataNavigate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmGraphicDrawer_DataLoader.resx">
+      <DependentUpon>FrmGraphicDrawer_DataLoader.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmGraphicDrawer_Candle2.resx">
       <DependentUpon>FrmGraphicDrawer_Candle2.cs</DependentUpon>

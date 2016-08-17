@@ -36,7 +36,7 @@ namespace com.wer.sc.data
             {
                 index = value;
             }
-        }    
+        }
 
         public KLineChart_KLineData(IKLineData data, int index)
         {
@@ -49,6 +49,14 @@ namespace com.wer.sc.data
             get
             {
                 return data.Code;
+            }
+        }
+
+        public override double Time
+        {
+            get
+            {
+                return Data.Arr_Time[Index];
             }
         }
 
@@ -92,14 +100,21 @@ namespace com.wer.sc.data
             }
         }
 
-        public override double Time
+        public override float Money
         {
             get
             {
-                return Data.Arr_Time[Index];
+                return data.Arr_Money[index];
             }
         }
 
+        public override int Hold
+        {
+            get
+            {
+                return data.Arr_Hold[index];
+            }
+        }
 
         public Object clone()
         {

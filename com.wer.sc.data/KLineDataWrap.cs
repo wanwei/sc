@@ -17,7 +17,7 @@ namespace com.wer.sc.data
 
         private KLinePeriod period;
 
-        private KLineData klineData;
+        private IKLineData klineData;
 
         private KLineDataReader dataReader;
 
@@ -68,7 +68,7 @@ namespace com.wer.sc.data
             }
         }
 
-        public KLineData KlineData
+        public IKLineData KlineData
         {
             get
             {

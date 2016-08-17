@@ -15,7 +15,7 @@ namespace com.wer.sc.utils
     {
         private T[] array;
 
-        private int tmpIndex;
+        private int tmpIndex = -1;
 
         private T tmpValue;
 

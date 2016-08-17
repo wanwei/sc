@@ -74,7 +74,7 @@ namespace com.wer.sc.data.store
             }
         }
 
-        public KLineData LoadByIndex(int startIndex, int endIndex)
+        public IKLineData LoadByIndex(int startIndex, int endIndex)
         {
             FileStream file = new FileStream(path, FileMode.Open);
             try
@@ -217,13 +217,30 @@ namespace com.wer.sc.data.store
             }
         }
 
-        public KLineData Load(int startDate, int endDate)
+        public IKLineData Load(int startDate, int endDate)
         {
             KLineDataIndexResult result = LoadIndex();
             return Load(startDate, endDate, result);
         }
 
-        internal KLineData Load(int startDate, int endDate, KLineDataIndexResult result)
+        public IKLineData Load(int date, int beforeDayCount, int afterDayCount)
+        {
+            KLineDataIndexResult result = LoadIndex();
+            int index = FindIndex(result, date, true);
+            if (index < 0)
+                return null;
+            int startIndex = index - beforeDayCount;
+            if (startIndex < 0)
+                startIndex = 0;
+
+            int endIndex = index + afterDayCount;
+            if (endIndex >= result.DateList.Count)
+                endIndex = result.DateList.Count - 1;
+
+            return LoadByIndex(startIndex, endIndex);
+        }
+
+        internal IKLineData Load(int startDate, int endDate, KLineDataIndexResult result)
         {
             int startIndex = GetStartIndex(startDate, result);
             int endIndex = GetEndIndex(endDate, result);

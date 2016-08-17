@@ -48,7 +48,7 @@ namespace com.wer.sc.data.utils
                 lastTime = time;
             }
             return indeies;
-        }
+        }        
 
         public static bool IsNightStart(double time, double lastTime)
         {

@@ -28,6 +28,10 @@ namespace com.wer.sc.data.update
                     targetPeriod = new KLinePeriod(sourcePeriod.PeriodType, targetPeriod.Period * 60);
                 return Transfer_SrcIs1Minute(data, targetPeriod);
             }
+            if (sourcePeriod.PeriodType == KLinePeriod.TYPE_HOUR)
+            {
+                return Transfer_SrcIs1Minute(data, targetPeriod);
+            }
             return null;
         }
 
@@ -81,6 +85,7 @@ namespace com.wer.sc.data.update
             return chart;
         }
 
+
         private static IKLineData Transfer_SrcIs1Minute(IKLineData data, KLinePeriod targetPeriod)
         {
             KLinePeriod sourcePeriod = data.Period;
@@ -92,8 +97,9 @@ namespace com.wer.sc.data.update
 
             int startIndex = 0;
             int endIndex = startIndex + period - 1;
+            endIndex = FindRealLastIndex_1Minute(data, startIndex, endIndex);
 
-            while (endIndex < data.Length)
+            while (startIndex < data.Length && endIndex < data.Length)
             {
                 charts.Add(GetChart(data, startIndex, endIndex));
                 startIndex = endIndex + 1;
@@ -105,12 +111,13 @@ namespace com.wer.sc.data.update
             return GetKLineData(charts);
         }
 
+
         private static int FindRealLastIndex_1Minute(IKLineData data, int startIndex, int endIndex)
         {
-            if (startIndex >= data.Length)
-                return endIndex;
             if (endIndex >= data.Length)
                 return data.Length - 1;
+            if (startIndex >= data.Length)
+                return endIndex;
             double between = data.Arr_Time[endIndex] - data.Arr_Time[startIndex];
             if (between < 0.04)
                 return endIndex;
@@ -125,6 +132,7 @@ namespace com.wer.sc.data.update
 
         private static KLineChart2 GetChart(IKLineData data, int startIndex, int endIndex)
         {
+            //KLineChart chart = new KLineChart();
             KLineChart2 chart = new KLineChart2();
             chart.time = data.Arr_Time[startIndex];
             chart.start = data.Arr_Start[startIndex];

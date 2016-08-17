@@ -22,6 +22,10 @@ namespace com.wer.sc.data
 
         private int mount;//成交量，单位是手
 
+        private float money;
+
+        private int hold;
+
         public override string Code
         {
             get
@@ -91,7 +95,7 @@ namespace com.wer.sc.data
         {
             get
             {
-                return end; 
+                return end;
             }
         }
 
@@ -106,11 +110,38 @@ namespace com.wer.sc.data
             {
                 return mount;
             }
-        }       
+        }
 
         public void SetMount(int mount)
         {
             this.mount = mount;
+        }
+
+
+        public override float Money
+        {
+            get
+            {
+                return money;
+            }
+        }
+
+        public void SetMoney(float money)
+        {
+            this.money = money;
+        }
+
+        public override int Hold
+        {
+            get
+            {
+                return this.hold;
+            }
+        }
+
+        public void SetHold(int hold)
+        {
+            this.hold = hold;
         }
     }
 }

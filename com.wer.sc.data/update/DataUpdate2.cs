@@ -128,7 +128,7 @@ namespace com.wer.sc.data.update
                 else
                 {
                     List<int> days = generate_KLine.dates_15min;
-                    KLineData dataFor15min = dataReaderFactory.KLineDataReader.GetData(code, days[0], days[days.Count - 1], new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1));
+                    IKLineData dataFor15min = dataReaderFactory.KLineDataReader.GetData(code, days[0], days[days.Count - 1], new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1));
                     UpdateKLineByKLine(code, period, dataFor15min);
                 }
             }
@@ -142,7 +142,7 @@ namespace com.wer.sc.data.update
                 else
                 {
                     List<int> days = generate_KLine.dates_1hour;
-                    KLineData dataFor1Hour = dataReaderFactory.KLineDataReader.GetData(code, days[0], days[days.Count - 1], new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1));
+                    IKLineData dataFor1Hour = dataReaderFactory.KLineDataReader.GetData(code, days[0], days[days.Count - 1], new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1));
                     UpdateKLineByKLine(code, period, dataFor1Hour);
                 }
             }
@@ -156,7 +156,7 @@ namespace com.wer.sc.data.update
                 else
                 {
                     List<int> days = generate_KLine.dates_Day;
-                    KLineData dataForDay = dataReaderFactory.KLineDataReader.GetData(code, days[0], days[days.Count - 1], new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1));
+                    IKLineData dataForDay = dataReaderFactory.KLineDataReader.GetData(code, days[0], days[days.Count - 1], new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1));
                     UpdateKLineByKLine(code, period, dataForDay);
                 }
             }

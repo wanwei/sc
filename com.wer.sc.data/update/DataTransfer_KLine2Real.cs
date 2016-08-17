@@ -13,12 +13,12 @@ namespace com.wer.sc.data.update
     /// </summary>
     public class DataTransfer_KLine2Real
     {
-        public static List<RealData> Convert(KLineData data, float lastEndPrice)
+        public static List<IRealData> Convert(IKLineData data, float lastEndPrice)
         {
             DaySpliter splitter = new DaySpliter();
             List<int[]> splitResult = splitter.Split(new KLineDataTimeGetter(data));
 
-            List<RealData> realdataList = new List<RealData>(splitResult.Count);
+            List<IRealData> realdataList = new List<IRealData>(splitResult.Count);
             for (int i = 0; i < splitResult.Count; i++)
             {
                 int[] split = splitResult[i];
@@ -38,22 +38,22 @@ namespace com.wer.sc.data.update
             return realdataList;
         }
 
-        private static void Convert2RealData(KLineData data, int startIndex, int endIndex, RealData r)
+        private static void Convert2RealData(IKLineData data, int startIndex, int endIndex, RealData r)
         {
             for (int i = startIndex; i <= endIndex; i++)
             {
                 int currentRealIndex = i - startIndex;
-                r.arr_time[currentRealIndex] = data.arr_time[i];
-                r.arr_price[currentRealIndex] = data.arr_end[i];
-                r.arr_mount[currentRealIndex] = data.arr_mount[i];
-                r.arr_hold[currentRealIndex] = data.arr_hold[i];
+                r.arr_time[currentRealIndex] = data.Arr_Time[i];
+                r.arr_price[currentRealIndex] = data.Arr_End[i];
+                r.arr_mount[currentRealIndex] = data.Arr_Mount[i];
+                r.arr_hold[currentRealIndex] = data.Arr_Hold[i];
             }
         }
 
         class KLineDataTimeGetter : TimeGetter
         {
-            private KLineData data;
-            public KLineDataTimeGetter(KLineData data)
+            private IKLineData data;
+            public KLineDataTimeGetter(IKLineData data)
             {
                 this.data = data;
             }
@@ -65,7 +65,7 @@ namespace com.wer.sc.data.update
 
             public double GetTime(int index)
             {
-                return data.arr_time[index];
+                return data.Arr_Time[index];
             }
         }
     }

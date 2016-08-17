@@ -1,4 +1,5 @@
-﻿using com.wer.sc.utils;
+﻿using com.wer.sc.data.utils;
+using com.wer.sc.utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,9 +34,12 @@ namespace com.wer.sc.data
         public int[] arr_hold;
 
         private int barPos;
+
+        private KLineDataIndeier indeier;
+
         public KLineData()
         {
-
+            this.indeier = new KLineDataIndeier(this);
         }
 
         public KLineData(int length)
@@ -48,6 +52,7 @@ namespace com.wer.sc.data
             arr_mount = new int[length];
             arr_money = new float[length];
             arr_hold = new int[length];
+            this.indeier = new KLineDataIndeier(this);
         }
 
         public string Code
@@ -80,13 +85,13 @@ namespace com.wer.sc.data
         {
             get
             {
-                return arr_time[barPos];
+                return Arr_Time[barPos];
             }
         }
 
         public int Date
         {
-            get { return (int)arr_time[barPos]; }
+            get { return (int)Arr_Time[barPos]; }
         }
 
         public double Time
@@ -101,7 +106,7 @@ namespace com.wer.sc.data
         {
             get
             {
-                return arr_start[barPos];
+                return Arr_Start[barPos];
             }
         }
 
@@ -109,7 +114,7 @@ namespace com.wer.sc.data
         {
             get
             {
-                return arr_high[BarPos];
+                return Arr_High[BarPos];
             }
         }
 
@@ -117,7 +122,7 @@ namespace com.wer.sc.data
         {
             get
             {
-                return arr_low[BarPos];
+                return Arr_Low[BarPos];
             }
         }
 
@@ -125,7 +130,7 @@ namespace com.wer.sc.data
         {
             get
             {
-                return arr_end[BarPos];
+                return Arr_End[BarPos];
             }
         }
 
@@ -133,7 +138,7 @@ namespace com.wer.sc.data
         {
             get
             {
-                return arr_mount[BarPos];
+                return Arr_Mount[BarPos];
             }
         }
 
@@ -141,7 +146,7 @@ namespace com.wer.sc.data
         {
             get
             {
-                return arr_money[BarPos];
+                return Arr_Money[BarPos];
             }
         }
 
@@ -149,7 +154,7 @@ namespace com.wer.sc.data
         {
             get
             {
-                return arr_hold[BarPos];
+                return Arr_Hold[BarPos];
             }
         }
 
@@ -158,9 +163,47 @@ namespace com.wer.sc.data
             return new KLineChart_KLineData(this, BarPos);
         }
 
-        public void ChangeCurrentChart(IKLineChart chart)
+        public void ChangeChart(IKLineChart chart,int index)
         {
-            //TODO
+            ReadOnlyList_TmpValue<double> timelist = (ReadOnlyList_TmpValue<double>)Arr_Time;
+            ReadOnlyList_TmpValue<float> startlist = (ReadOnlyList_TmpValue<float>)Arr_Start;
+            ReadOnlyList_TmpValue<float> highlist = (ReadOnlyList_TmpValue<float>)Arr_High;
+            ReadOnlyList_TmpValue<float> lowlist = (ReadOnlyList_TmpValue<float>)Arr_Low;
+            ReadOnlyList_TmpValue<float> endlist = (ReadOnlyList_TmpValue<float>)Arr_End;
+            ReadOnlyList_TmpValue<int> mountlist = (ReadOnlyList_TmpValue<int>)Arr_Mount;
+            ReadOnlyList_TmpValue<float> moneylist = (ReadOnlyList_TmpValue<float>)Arr_Money;
+            ReadOnlyList_TmpValue<int> holdlist = (ReadOnlyList_TmpValue<int>)Arr_Hold;
+            if (chart == null)
+            {
+                timelist.ClearTmpValue();
+                startlist.ClearTmpValue();
+                highlist.ClearTmpValue();
+                lowlist.ClearTmpValue();
+                endlist.ClearTmpValue();
+                mountlist.ClearTmpValue();
+                moneylist.ClearTmpValue();
+                holdlist.ClearTmpValue();
+            }
+            else
+            {
+                timelist.SetTmpValue(index, chart.Time);
+                startlist.SetTmpValue(index, chart.Start);
+                highlist.SetTmpValue(index, chart.High);
+                lowlist.SetTmpValue(index, chart.Low);
+                endlist.SetTmpValue(index, chart.End);
+                mountlist.SetTmpValue(index, chart.Mount);
+                moneylist.SetTmpValue(index, chart.Money);
+                holdlist.SetTmpValue(index, chart.Hold);
+            }
+        }
+
+        /// <summary>
+        /// 修改当前chart，
+        /// </summary>
+        /// <param name="chart"></param>
+        public void ChangeChart(IKLineChart chart)
+        {
+            ChangeChart(chart, BarPos);
         }
 
         public int Length
@@ -197,6 +240,34 @@ namespace com.wer.sc.data
                 d1.arr_hold[i - start] = data.arr_hold[i];
             }
             return d1;
+        }
+
+        public IKLineChart GetAggrChart(int startIndex, int endIndex)
+        {
+            KLineChart chart = new KLineChart();
+            chart.SetTime(this.Arr_Time[startIndex]);
+            chart.SetStart(this.Arr_Start[startIndex]);
+            chart.SetEnd(this.Arr_End[endIndex]);
+            chart.SetHold(this.Arr_Hold[endIndex]);
+
+            float high = float.MinValue;
+            float low = float.MaxValue;
+            int mount = 0;
+            float money = 0;
+            for (int i = startIndex; i <= endIndex; i++)
+            {
+                float chigh = this.Arr_High[i];
+                float clow = this.Arr_Low[i];
+                high = high < chigh ? chigh : high;
+                low = low > clow ? clow : low;
+                mount += this.Arr_Mount[i];
+                money += this.Arr_Money[i];
+            }
+            chart.SetHigh(high);
+            chart.SetLow(low);
+            chart.SetMount(mount);
+            chart.SetMoney(money);
+            return chart;
         }
 
         #region 得到完整数据
@@ -509,6 +580,11 @@ namespace com.wer.sc.data
                 period.PeriodType = KLinePeriod.TYPE_DAY;
             }
             return period;
+        }
+
+        public int IndexOfTime(double time)
+        {
+            return this.indeier.GetTimeIndex(time);
         }
     }
 }

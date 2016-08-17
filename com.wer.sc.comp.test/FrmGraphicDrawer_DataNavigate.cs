@@ -12,9 +12,9 @@ using System.Windows.Forms;
 
 namespace com.wer.sc.comp.test
 {
-    public partial class FrmGraphicDrawer_Candle3 : Form
+    public partial class FrmGraphicDrawer_DataNavigate : Form
     {
-        public FrmGraphicDrawer_Candle3()
+        public FrmGraphicDrawer_DataNavigate()
         {
             InitializeComponent();
             GraphicDrawer_Candle drawer = new GraphicDrawer_Candle();            

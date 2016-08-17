@@ -46,7 +46,7 @@ namespace com.wer.sc.data.check
 
             String code = tbCode.Text;
 
-            KLineData minuteKLineData = fac.KLineDataReader.GetData(code, date, date, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1));
+            IKLineData minuteKLineData = fac.KLineDataReader.GetData(code, date, date, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1));
             TickData tickData = fac.TickDataReader.GetTickData(code, date);
 
             KLineChartBuilder_FromTick builder = new KLineChartBuilder_FromTick(minuteKLineData, tickData, currentTime);
@@ -67,7 +67,7 @@ namespace com.wer.sc.data.check
             DataReaderFactory fac = dataProvider.GetFactory();
 
             String code = tbCode.Text;
-            KLineData minuteKLineData = fac.KLineDataReader.GetData(code, date, date, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1));
+            IKLineData minuteKLineData = fac.KLineDataReader.GetData(code, date, date, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1));
             TickData tickData = fac.TickDataReader.GetTickData(code, date);
 
             TickDataIndeier indeier = new TickDataIndeier(tickData, minuteKLineData);
@@ -84,7 +84,7 @@ namespace com.wer.sc.data.check
             for (int i = 0; i < minuteKLineData.Length; i++)
             {
                 //sb.Append(splits[i]).Append("\r\n");
-                double t = minuteKLineData.arr_time[i];
+                double t = minuteKLineData.Arr_Time[i];
                 sb.Append(i + ":" + t + "," + indeier.GetTickSplitIndex(i) + "," + indeier.GetTickSplitIndex(t)).Append("\r\n");
             }
             tbData.AppendText(sb.ToString());
@@ -98,16 +98,62 @@ namespace com.wer.sc.data.check
             int end = int.Parse(tbEnd.Text);
             KLinePeriod period = new KLinePeriod(cbPeriod.SelectedIndex, int.Parse(tbPeriod.Text));
 
+            double time = double.Parse(tbTime.Text);
+            int date = (int)time;
+            if (time - date > 0.18)
+                date += 1;
+
             DataProviderWrap dataProvider = providerDataMgr.GetProvider(cbProvider.SelectedItem.ToString());
             DataReaderFactory fac = dataProvider.GetFactory();
-            KLineData klineData = fac.KLineDataReader.GetData(code, start, end, period);
-            double time = double.Parse(tbTime.Text);            
+            IKLineData klineData = fac.KLineDataReader.GetData(code, start, end, period);
+            IKLineData minuteKLineData = fac.KLineDataReader.GetData(code, date, date, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1));
+            TickData tickData = fac.TickDataReader.GetTickData(code, date);
 
-            MinuteKLineChartBuilder builder = new MinuteKLineChartBuilder(fac, klineData, time);
-            KLineChart chart = builder.GetCurrentChart();
+            CurrentKLineChartBuilder builder = new CurrentKLineChartBuilder(klineData, minuteKLineData, tickData, time);
+            IKLineChart chart = builder.GetCurrentChart();
 
             tbData.Clear();
             tbData.AppendText(chart.ToString());
+        }
+
+        private void btLoadAll_Click(object sender, EventArgs e)
+        {
+            String code = tbCode.Text;
+            int start = int.Parse(tbStart.Text);
+            int end = int.Parse(tbEnd.Text);
+            KLinePeriod period = new KLinePeriod(cbPeriod.SelectedIndex, int.Parse(tbPeriod.Text));
+
+            double time = double.Parse(tbTime.Text);
+            int date = (int)time;
+            if (time - date > 0.18)
+                date += 1;
+
+            DataProviderWrap dataProvider = providerDataMgr.GetProvider(cbProvider.SelectedItem.ToString());
+            DataReaderFactory fac = dataProvider.GetFactory();
+            DataNavigate navigate = new DataNavigate(fac);
+
+            
+
+            //IKLineData klineData = fac.KLineDataReader.GetData(code, start, end, period);
+            //IKLineData minuteKLineData = fac.KLineDataReader.GetData(code, date, date, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1));
+            //TickData tickData = fac.TickDataReader.GetTickData(code, date);
+
+            //CurrentKLineChartBuilder builder = new CurrentKLineChartBuilder(klineData, minuteKLineData, tickData, time);
+            //IKLineChart chart = builder.GetCurrentChart();
+
+            navigate.Change(code, time, period);
+
+            IKLineData data = navigate.CurrentKLineData;
+
+            tbData.Clear();
+            //tbData.AppendText(chart.ToString());
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i <= navigate.CurrentIndex; i++)
+            {
+                data.BarPos = i;
+                sb.Append(data).Append("\r\n");                
+            }
+            tbData.AppendText(sb.ToString());
         }
     }
 }

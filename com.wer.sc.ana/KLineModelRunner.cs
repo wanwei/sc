@@ -396,7 +396,7 @@ namespace com.wer.sc.ana
                 KLineModelImport klineModel = importModels[i];
                 String importModelCode = StringUtils.IsEmpty(klineModel.Contract) ? Code : klineModel.Contract;
                 int realStart = ModelStartDate < 0 ? StartDate : ModelStartDate;
-                KLineData data = this.reader.GetData(importModelCode, realStart, EndDate, klineModel.KLinePeriod);
+                IKLineData data = this.reader.GetData(importModelCode, realStart, EndDate, klineModel.KLinePeriod);
                 klineModel.Model.init(importModelCode, data);
                 //klineModel.Model.setBarPos(-1);
                 modelWarps.Add(new KLineModelImportWarp(klineModel, data));
@@ -444,9 +444,9 @@ namespace com.wer.sc.ana
     {
         public KLineModelImport model;
 
-        public KLineData data;
+        public IKLineData data;
 
-        public KLineModelImportWarp(KLineModelImport model, KLineData data)
+        public KLineModelImportWarp(KLineModelImport model, IKLineData data)
         {
             this.model = model;
             this.data = data;

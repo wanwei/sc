@@ -19,8 +19,12 @@ namespace com.wer.sc.data
         public abstract float Low { get; }
 
         public abstract float End { get; }
-        
-        public abstract int Mount { get; }               
+
+        public abstract int Mount { get; }
+
+        public abstract float Money { get; }
+
+        public abstract int Hold { get; }
 
         public float Height
         {
