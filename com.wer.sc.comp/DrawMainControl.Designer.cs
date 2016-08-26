@@ -1,6 +1,6 @@
-﻿namespace com.wer.sc.comp.ana
+﻿namespace com.wer.sc.comp
 {
-    partial class AnaComponent
+    partial class DrawMainControl
     {
         /// <summary> 
         /// 必需的设计器变量。
@@ -30,12 +30,12 @@
         {
             this.SuspendLayout();
             // 
-            // AnaComponent
+            // DrawMainControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Name = "AnaComponent";
-            this.Size = new System.Drawing.Size(262, 272);
+            this.Name = "DrawMainControl";
+            this.Size = new System.Drawing.Size(356, 284);
             this.ResumeLayout(false);
 
         }

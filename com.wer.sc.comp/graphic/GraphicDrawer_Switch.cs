@@ -18,20 +18,40 @@ namespace com.wer.sc.comp.graphic
                 return drawers;
             }
         }
-
         private int currentIndex;
+
+        public int CurrentIndex
+        {
+            get
+            {
+                return currentIndex;
+            }
+
+            set
+            {
+                currentIndex = value;
+            }
+        }
 
         public void Switch(int index)
         {
-            this.currentIndex = index;
+            for (int i = 0; i < drawers.Count; i++)
+            {
+                if (i == index)
+                    Drawers[i].IsEnable = true;
+                else
+                    Drawers[i].IsEnable = false;
+            }
+            this.CurrentIndex = index;            
         }
 
         public override void DrawGraph(Graphics graphic)
         {
-            GraphicDrawer_Abstract drawer = drawers[currentIndex];
+            GraphicDrawer_Abstract drawer = drawers[CurrentIndex];
             Rectangle rect = control.DisplayRectangle;
             drawer.SetDrawRect(rect);
-            drawer.DrawGraph(graphic);
+            drawer.DrawGraph(graphic);            
+            //drawer.DrawGraph();
         }
     }
 }

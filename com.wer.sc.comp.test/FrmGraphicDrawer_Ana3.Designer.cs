@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.anaComponent1 = new com.wer.sc.comp.ana.AnaComponent();
+            this.anaComponent1 = new com.wer.sc.comp.AnaComponent();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.btRun = new System.Windows.Forms.Button();
             this.cbPeriod = new System.Windows.Forms.ComboBox();
@@ -246,7 +246,7 @@
 
         #endregion
 
-        private ana.AnaComponent anaComponent1;
+        private AnaComponent anaComponent1;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.TextBox tbCode;
         private System.Windows.Forms.Label label1;

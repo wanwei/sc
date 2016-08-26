@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 namespace com.wer.sc.comp.graphic
 {
     /// <summary>
-    /// 图像数据提供
+    /// 蜡烛图数据提供
     /// </summary>
-    public interface GraphicDataProvider
+    public interface IGraphicDataProvider_Candle
     {
         String Code { get; }
 

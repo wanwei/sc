@@ -27,8 +27,10 @@ namespace com.wer.sc.data
             KLineDataIndexResult result = store.LoadIndex();
             if (!result.IndexDic.Keys.Contains(date))
                 return null;
-
-            return GetData(code, date, date, store, result)[0];
+            List<IRealData> dataList = GetData(code, date, date, store, result);
+            if (dataList.Count == 0)
+                return null;
+            return dataList[0];
         }
 
         public List<IRealData> GetData(String code, int startDate, int endDate)
@@ -46,6 +48,7 @@ namespace com.wer.sc.data
 
             int lastEndIndex = startIndex - 1;
             IKLineData lastEndData = store.LoadByIndex(lastEndIndex, lastEndIndex);
+            ((KLineData)data).Code = code;
             float lastEndPrice = lastEndData.Arr_End[0];
             return DataTransfer_KLine2Real.Convert(data, lastEndPrice);
         }

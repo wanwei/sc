@@ -13,9 +13,9 @@ namespace com.wer.sc.comp.graphic
 {
     public class GraphicDrawer_Candle : GraphicDrawer_Compound
     {
-        private GraphicDataProvider dataProvider;
+        private IGraphicDataProvider_Candle dataProvider;
 
-        public GraphicDataProvider DataProvider
+        public IGraphicDataProvider_Candle DataProvider
         {
             get
             {
@@ -29,6 +29,21 @@ namespace com.wer.sc.comp.graphic
                 drawer_mount.DataProvider = value;
             }
         }
+
+        public override bool IsEnable
+        {
+            get
+            {
+                return base.IsEnable;
+            }
+
+            set
+            {
+                base.IsEnable = value;
+                crossHairDrawer.Enable = value;
+            }
+        }
+
         private int selectIndex;
         public int SelectIndex
         {
@@ -66,6 +81,14 @@ namespace com.wer.sc.comp.graphic
 
         CrossHairDrawer crossHairDrawer;
 
+        public CrossHairDrawer CrossHairDrawer
+        {
+            get
+            {
+                return crossHairDrawer;
+            }
+        }
+
         public override void BindControl(Control control)
         {
             base.BindControl(control);
@@ -80,8 +103,12 @@ namespace com.wer.sc.comp.graphic
 
         public override void DrawGraph(Graphics graphic)
         {
+            if (!IsEnable)
+                return;
+            //crossHairDrawer.DrawGraphic(graphic);
             base.DrawGraph(graphic);
             DrawSelectBlock(graphic);
+            crossHairDrawer.DrawGraphic(graphic);
         }
 
         public void DrawSelectBlock(Graphics g)
@@ -91,20 +118,7 @@ namespace com.wer.sc.comp.graphic
             SelectedPointInfo blockInfo = GetBlockInfo(selectIndex);
             if (blockInfo == null)
                 return;
-            Point p = blockInfo.StartPoint;
-            int blockWidth = CalcBlockInfoWidth(blockInfo);
-            int blockHeight = CalcBlockInfoHeight(blockInfo);
-            g.FillRectangle(new SolidBrush(Color.Black), p.X, p.Y, blockWidth, blockHeight);
-            g.DrawRectangle(ColorConfig.Pen_CrossHair, p.X, p.Y, blockWidth, blockHeight);
-
-            Point linePoint = p;
-            linePoint.Y += blockInfo.Gap;
-            for (int i = 0; i < blockInfo.Lines.Count; i++)
-            {
-                BlockLineInfo lineInfo = blockInfo.Lines[i];
-                g.DrawString(lineInfo.Text, lineInfo.TextFont, lineInfo.TextBrush, linePoint);
-                linePoint.Y += blockInfo.LineHeight;
-            }
+            blockInfo.DrawGraph(g, ColorConfig);
         }
 
         public SelectedPointInfo GetBlockInfo(int index)
@@ -124,8 +138,8 @@ namespace com.wer.sc.comp.graphic
 
             double lastEndPrice = lastChart != null ? lastChart.End : chart.Start;
             Pen pen = new Pen(Color.White);
-            Brush brushNormal = new SolidBrush(Color.White);
 
+            Brush brushNormal = new SolidBrush(Color.White);
             Font font = new Font("New Times Roman", 10, FontStyle.Regular);
 
             //int len = chart.Time.Length;
@@ -153,114 +167,8 @@ namespace com.wer.sc.comp.graphic
             Brush brushLose = new SolidBrush(ColorUtils.GetColor("#00CC00"));
             return price >= referPrice ? brushEarn : brushLose;
         }
-        private int CalcBlockInfoHeight(SelectedPointInfo blockInfo)
-        {
-            if (blockInfo.Height > 0)
-                return blockInfo.Height;
-            return (int)(blockInfo.Lines.Count * blockInfo.LineHeight + blockInfo.Gap);
-        }
-
-        private int CalcBlockInfoWidth(SelectedPointInfo blockInfo)
-        {
-            if (blockInfo.Width > 0)
-                return blockInfo.Width;
-            return 20;
-        }
     }
-    /// <summary>
-    /// 选中的信息
-    /// </summary>
-    public class SelectedPointInfo
-    {
-        private int height = -1;
-        /// <summary>
-        /// 如不设置，系统会自动计算
-        /// </summary>
-        public int Height
-        {
-            get { return height; }
-            set { height = value; }
-        }
-
-        private int width = -1;
-        /// <summary>
-        /// 如不设置，系统会自动计算
-        /// </summary>
-        public int Width
-        {
-            get { return width; }
-            set { width = value; }
-        }
-
-        private int gap;
-
-        public int Gap
-        {
-            get { return gap; }
-            set { gap = value; }
-        }
-
-        private int lineHeight;
-
-        public int LineHeight
-        {
-            get { return lineHeight; }
-            set { lineHeight = value; }
-        }
-
-        private Point startPoint;
-
-        public Point StartPoint
-        {
-            get { return startPoint; }
-            set { startPoint = value; }
-        }
-
-        private List<BlockLineInfo> lines = new List<BlockLineInfo>();
-
-        public List<BlockLineInfo> Lines
-        {
-            get { return lines; }
-        }
-    }
-
-    public class BlockLineInfo
-    {
-        private String text;
-
-        public String Text
-        {
-            get { return text; }
-            set { text = value; }
-        }
-
-        private Brush textBrush;
-
-        public Brush TextBrush
-        {
-            get { return textBrush; }
-            set { textBrush = value; }
-        }
-
-        private Font textFont;
-
-        public Font TextFont
-        {
-            get { return textFont; }
-            set { textFont = value; }
-        }
-
-        public BlockLineInfo()
-        {
-        }
-
-        public BlockLineInfo(String text, Brush brush, Font font)
-        {
-            this.text = text;
-            this.textBrush = brush;
-            this.textFont = font;
-        }
-    }
+ 
     public class CrossHairDataPrivider_Candle : CrossHairDataPrivider
     {
         private GraphicDrawer_Candle drawer;
@@ -346,9 +254,16 @@ namespace com.wer.sc.comp.graphic
             return new Point((int)x, (int)y);
         }
 
-        public GraphicDataProvider GetDataProvider()
+        public IGraphicDataProvider_Candle GetDataProvider()
         {
             return this.drawer.DataProvider;
+        }
+
+        public int[] IndexRange
+        {
+            get {
+                return new int[] { drawer.DataProvider.StartIndex, drawer.DataProvider.EndIndex };
+            }
         }
     }
 }

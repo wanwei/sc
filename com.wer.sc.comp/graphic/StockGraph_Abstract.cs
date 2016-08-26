@@ -15,9 +15,9 @@ namespace com.wer.sc.comp.graphic
     public abstract class StockGraph_Abstract
     {
         protected ColorConfig config;
-        protected GraphicDataProvider data;
+        protected IGraphicDataProvider_Candle data;
 
-        public StockGraph_Abstract(GraphicDataProvider data, ColorConfig config)
+        public StockGraph_Abstract(IGraphicDataProvider_Candle data, ColorConfig config)
         {
             this.config = config;
             //this.displayRectangle = config.DisplayRectangle;
@@ -40,7 +40,7 @@ namespace com.wer.sc.comp.graphic
             get { return config; }
         }
 
-        public GraphicDataProvider DataProvider
+        public IGraphicDataProvider_Candle DataProvider
         {
             get { return data; }
         }

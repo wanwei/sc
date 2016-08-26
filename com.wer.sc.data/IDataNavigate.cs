@@ -11,9 +11,25 @@ namespace com.wer.sc.data
     /// </summary>
     public interface IDataNavigate
     {
+        String Code { get; }
+
+        /// <summary>
+        /// 得到当前K线数据
+        /// </summary>
         IKLineData CurrentKLineData { get; }
 
-        int CurrentIndex { get; }
+        int CurrentKLineIndex { get; }
+
+        /// <summary>
+        /// 得到当前分时数据
+        /// </summary>
+        IRealData CurrentRealData { get; }        
+
+        int CurrentRealIndex { get; }
+
+        ITickData CurrentTickData { get; }
+
+        int CurrentTickIndex { get; }
 
         double CurrentTime { get; }
 
@@ -24,6 +40,8 @@ namespace com.wer.sc.data
         void ChangeCode(String code);
 
         void ChangeTime(double time);
+
+        void ChangeIndex(int index);
 
         void ChangePeriod(KLinePeriod period);
     }

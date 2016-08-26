@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace com.wer.sc.data
 {
-    public class TickData
+    public class TickData : ITickData
     {
         public String code;
 
@@ -42,24 +42,7 @@ namespace com.wer.sc.data
 
         private int barPos;
 
-        private int[] arr_hold;
 
-        public int[] Arr_Hold
-        {
-            get
-            {
-                if (arr_hold != null)
-                    return arr_hold;
-                this.arr_hold = new int[Length];
-                int currentHold = 0;
-                for (int i = 0; i < arr_add.Length; i++)
-                {
-                    currentHold += arr_add[i];
-                    arr_hold[i] = currentHold;
-                }
-                return arr_hold;
-            }
-        }
 
         public TickData(int length)
         {
@@ -72,7 +55,7 @@ namespace com.wer.sc.data
             this.arr_buyMount = new int[length];
             this.arr_sellPrice = new float[length];
             this.arr_sellMount = new int[length];
-            this.arr_isBuy = new bool[length];            
+            this.arr_isBuy = new bool[length];
         }
 
         public int BarPos
@@ -191,6 +174,84 @@ namespace com.wer.sc.data
             return d1;
         }
 
+        public IList<double> Arr_Time { get { return arr_time; } }
+
+        // 交易价格
+        public IList<float> Arr_Price { get { return arr_price; } }
+
+        // 交易量
+        public IList<int> Arr_Mount { get { return arr_mount; } }
+
+        // 到现在为止总成交量
+        public IList<int> Arr_TotalMount { get { return arr_totalMount; } }
+
+        // 持仓增减
+        public IList<int> Arr_Add { get { return arr_add; } }
+
+        // 买价
+        public IList<float> Arr_BuyPrice
+        {
+            get
+            {
+                return arr_buyPrice;
+            }
+        }
+
+        // 买量
+        public IList<int> Arr_BuyMount
+        {
+            get
+            {
+                return arr_buyMount;
+            }
+        }
+
+        // 卖价
+        public IList<float> Arr_SellPrice
+        {
+            get
+            {
+                return arr_sellPrice;
+            }
+        }
+
+        // 卖量
+        public IList<int> Arr_SellMount
+        {
+            get
+            {
+                return arr_sellMount;
+            }
+        }
+
+        private int[] arr_hold;
+
+        public IList<int> Arr_Hold
+        {
+            get
+            {
+                if (arr_hold != null)
+                    return arr_hold;
+                this.arr_hold = new int[Length];
+                int currentHold = 0;
+                for (int i = 0; i < arr_add.Length; i++)
+                {
+                    currentHold += arr_add[i];
+                    arr_hold[i] = currentHold;
+                }
+                return arr_hold;
+            }
+        }
+
+        // 买OR卖
+        public IList<Boolean> Arr_IsBuy
+        {
+            get
+            {
+                return arr_isBuy;
+            }
+        }
+
         override
         public String ToString()
         {
@@ -206,6 +267,11 @@ namespace com.wer.sc.data
             sb.Append(SellMount).Append(",");
             sb.Append(IsBuy ? 1 : 0);
             return sb.ToString();
+        }
+
+        public ITickChart GetChart(int index)
+        {
+            return new TickChart_TickData(this, index);
         }
     }
 }

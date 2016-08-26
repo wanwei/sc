@@ -1,4 +1,5 @@
-﻿using com.wer.sc.data.provider;
+﻿using com.wer.sc.data;
+using com.wer.sc.data.provider;
 using System;
 using System.Collections.Generic;
 using System.IO;

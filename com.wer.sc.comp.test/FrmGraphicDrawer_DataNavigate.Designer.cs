@@ -41,7 +41,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.tbCode = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.anaComponent1 = new com.wer.sc.comp.ana.AnaComponent();
+            this.anaComponent1 = new com.wer.sc.comp.AnaComponent();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -234,6 +234,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox tbCode;
         private System.Windows.Forms.Label label1;
-        private ana.AnaComponent anaComponent1;
+        private AnaComponent anaComponent1;
     }
 }

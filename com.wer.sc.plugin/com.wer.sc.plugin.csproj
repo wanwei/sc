@@ -53,12 +53,16 @@
     <Compile Include="ana\ZbRegisterAttribute.cs" />
     <Compile Include="data\CodeInfo.cs" />
     <Compile Include="data\IKLineData.cs" />
+    <Compile Include="data\IRealChart.cs" />
     <Compile Include="data\IRealData.cs" />
+    <Compile Include="data\ITickChart.cs" />
+    <Compile Include="data\ITickData.cs" />
     <Compile Include="data\KLineDataMath.cs" />
+    <Compile Include="data\TickChart_TickData.cs" />
+    <Compile Include="data\TickData.cs" />
     <Compile Include="Plugin_DataProvider.cs" />
     <Compile Include="data\IKLineChart.cs" />
     <Compile Include="data\KLinePeriod.cs" />
-    <Compile Include="data\TickData.cs" />
     <Compile Include="data\TimeConvert.cs" />
     <Compile Include="data\TimeUtils.cs" />
     <Compile Include="draw\PointArray.cs" />

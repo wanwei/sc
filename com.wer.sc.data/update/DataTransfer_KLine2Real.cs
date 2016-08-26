@@ -31,6 +31,7 @@ namespace com.wer.sc.data.update
                     todayEndIndex = splitResult[i + 1][1];
                 int len = todayEndIndex - todayStartIndex + 1;
                 RealData r = new RealData(date, lastEndPrice, len);
+                r.code = data.Code;
                 Convert2RealData(data, todayStartIndex, todayEndIndex, r);
                 realdataList.Add(r);
             }

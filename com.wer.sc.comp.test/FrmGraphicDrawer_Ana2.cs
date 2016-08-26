@@ -22,7 +22,7 @@ namespace com.wer.sc.comp.test
             InitializeComponent();
 
             DataReaderFactory fac = new DataReaderFactory(@"D:\SCDATA\CNFUTURES");
-            GraphicDataProvider_Default dataProvider = new GraphicDataProvider_Default(fac);
+            GraphicDataProvider_CandleDefault dataProvider = new GraphicDataProvider_CandleDefault(fac);
             AnaDrawer_KLine drawer = new AnaDrawer_KLine(fac, dataProvider);
             drawer.Bind(this);
             drawer.Show("m13", 20100101, 20150101, new KLinePeriod(KLinePeriod.TYPE_DAY, 1));

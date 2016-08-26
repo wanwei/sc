@@ -43,35 +43,61 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ana\AnaComponent.cs">
+    <Compile Include="AnaComponent.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ana\AnaComponent.Designer.cs">
+    <Compile Include="AnaComponent.Designer.cs">
       <DependentUpon>AnaComponent.cs</DependentUpon>
     </Compile>
     <Compile Include="ana\AnaDrawer_KLine.cs" />
     <Compile Include="ana\CompKLineModels.cs" />
+    <Compile Include="DrawControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DrawControl.Designer.cs">
+      <DependentUpon>DrawControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DrawMainControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DrawMainControl.Designer.cs">
+      <DependentUpon>DrawMainControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GraphicDrawerHelper.cs" />
+    <Compile Include="graphic\candle\GraphicOperator_Candle.cs" />
     <Compile Include="graphic\ColorConfig.cs" />
     <Compile Include="graphic\candle\GraphicDrawer_Candle.cs" />
     <Compile Include="graphic\candle\GraphicDrawer_Candle_Abstract.cs" />
     <Compile Include="graphic\candle\GraphicDrawer_CandleMount.cs" />
-    <Compile Include="graphic\GraphicDataProviderMgr.cs" />
-    <Compile Include="graphic\GraphicDataProvider_Default.cs" />
-    <Compile Include="graphic\GraphicDataProvider_Tick.cs" />
-    <Compile Include="graphic\GraphicDataProvider_Time.cs" />
+    <Compile Include="graphic\candle\GraphicDataProvider_CandleDefault.cs" />
+    <Compile Include="graphic\candle\GraphicDataProvider_CandleNav.cs" />
+    <Compile Include="graphic\info\CurrentInfo.cs" />
+    <Compile Include="graphic\info\GraphicOperator_CurrentInfo_Nav.cs" />
+    <Compile Include="graphic\info\IGraphicDataProvider_CurrentInfo.cs" />
+    <Compile Include="graphic\info\GraphicDataProvider_CurrentInfo_Nav.cs" />
+    <Compile Include="graphic\info\GraphicDrawer_CurrentInfo.cs" />
+    <Compile Include="graphic\info\IGraphicOperator_CurrentInfo.cs" />
+    <Compile Include="graphic\main\GraphicDataOperator_Main.cs" />
+    <Compile Include="graphic\main\GraphicDataProvider_Main.cs" />
     <Compile Include="graphic\GraphicDrawer_Compound.cs" />
-    <Compile Include="graphic\GraphicDrawer_Real.cs" />
+    <Compile Include="graphic\main\GraphicDrawer_Main.cs" />
     <Compile Include="graphic\GraphicDrawer_Switch.cs" />
+    <Compile Include="graphic\real\IGraphicDataProvider_Real.cs" />
+    <Compile Include="graphic\real\GraphicDataProvider_RealNav.cs" />
     <Compile Include="graphic\real\GraphicDrawer_Real.cs" />
+    <Compile Include="graphic\real\GraphicDrawer_RealChart.cs" />
+    <Compile Include="graphic\real\GraphicDrawer_RealMount.cs" />
+    <Compile Include="graphic\real\GraphicDrawer_Real_Abstract.cs" />
     <Compile Include="graphic\utils\CrossHairDrawer.cs" />
     <Compile Include="graphic\utils\PriceGraphicArgs.cs" />
     <Compile Include="graphic\utils\PriceGraphicDrawerUtils.cs" />
     <Compile Include="graphic\GraphicDrawer_Abstract.cs" />
-    <Compile Include="graphic\GraphicDataProvider.cs" />
+    <Compile Include="graphic\candle\IGraphicDataProvider_Candle.cs" />
     <Compile Include="graphic\candle\GraphicDrawer_CandleChart.cs" />
     <Compile Include="graphic\GraphicMarginInfo.cs" />
     <Compile Include="graphic\GraphicPaddingInfo.cs" />
     <Compile Include="graphic\utils\PriceGraphicMapping.cs" />
+    <Compile Include="graphic\utils\SelectPointInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="graphic\StockGraph_Abstract.cs" />
   </ItemGroup>
@@ -94,9 +120,18 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="ana\AnaComponent.resx">
+    <EmbeddedResource Include="AnaComponent.resx">
       <DependentUpon>AnaComponent.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="DrawControl.resx">
+      <DependentUpon>DrawControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DrawMainControl.resx">
+      <DependentUpon>DrawMainControl.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="graphic\tick\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

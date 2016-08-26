@@ -75,6 +75,26 @@ namespace com.wer.sc.comp.graphic
             get { return pen_FrameLine; }
         }
 
+        private Pen pen_Line_RealMount = new Pen(ColorUtils.GetColor("#CCCC00"));
+        public Pen Pen_Line_RealMount
+        {
+            get { return pen_Line_RealMount; }
+        }
+
+        private Pen pen_FrameDashLine = new Pen(ColorUtils.GetColor("#8A0000"));
+
+        /// <summary>
+        /// 边框使用的笔
+        /// </summary>
+        public Pen Pen_FrameDashLine
+        {
+            get
+            {
+                pen_FrameDashLine.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
+                return pen_FrameDashLine;
+            }
+        }
+
         private Pen pen_CandleFrameScaleLine = GetPenFrameScaleLine();
 
         private static Pen GetPenFrameScaleLine()
@@ -90,7 +110,8 @@ namespace com.wer.sc.comp.graphic
             set { pen_CandleFrameScaleLine = value; }
         }
 
-        private Font font_CandleFrameScaleFont = new Font("宋体", 10, FontStyle.Bold);
+        //private Font font_CandleFrameScaleFont = new Font("宋体", 10, FontStyle.Bold);
+        private Font font_CandleFrameScaleFont = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 
         public Font Font_CandleFrameScaleFont
         {

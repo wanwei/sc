@@ -11,9 +11,9 @@ namespace com.wer.sc.comp.graphic
     /// 画图的数据提供者
     /// 可自由指定时间
     /// </summary>
-    public class GraphicDataProvider_Time : GraphicDataProvider
+    public class GraphicDataProvider_CandleNav : IGraphicDataProvider_Candle
     {
-        private String code;
+        //private String code;
 
         private int startIndex = 200;
 
@@ -23,25 +23,31 @@ namespace com.wer.sc.comp.graphic
 
         private DataReaderFactory dataReaderFac;
 
-        private IKLineData data;
+        //private IKLineData data;
 
-        private float currentTime;
+        //private float currentTime;
 
-        private KLinePeriod period;
+        //private KLinePeriod period;
 
-        private CurrentKLineChartBuilder currentKLineChartBuilder;
+        //private CurrentKLineChartBuilder currentKLineChartBuilder;
 
-        private int startDate;
+        //private int startDate;
 
-        private int endDate;
+        //private int endDate;
 
         private IDataNavigate dataNavigate;
 
-        public GraphicDataProvider_Time(DataReaderFactory dataReaderFac)
+        public GraphicDataProvider_CandleNav(DataReaderFactory dataReaderFac)
         {
             this.dataReaderFac = dataReaderFac;
             this.dataNavigate = new DataNavigate(dataReaderFac);
         }
+
+        public GraphicDataProvider_CandleNav(DataReaderFactory dataReaderFac, IDataNavigate dataNavigate)
+        {
+            this.dataReaderFac = dataReaderFac;
+            this.dataNavigate = dataNavigate;            
+        }        
 
         #region 修改数据
 
@@ -51,13 +57,14 @@ namespace com.wer.sc.comp.graphic
         /// <param name="klineData"></param>
         public void ChangeData(IKLineData klineData)
         {
-            this.data = klineData;
-            this.code = klineData.Code;
-            this.period = klineData.Period;
-            this.startDate = (int)klineData.Arr_Time[0];
-            this.endDate = (int)klineData.Arr_Time[klineData.Length - 1];
-            this.endIndex = data.Length - 1;
-            this.InitIndex();
+            //this.data = klineData;
+            //this.code = klineData.Code;
+            //this.period = klineData.Period;
+            //this.startDate = (int)klineData.Arr_Time[0];
+            //this.endDate = (int)klineData.Arr_Time[klineData.Length - 1];
+            //this.endIndex = data.Length - 1;
+            //this.InitIndex();
+            this.dataNavigate.Change(klineData, klineData.Arr_Time[klineData.Length - 1]);
         }
 
         /// <summary>
@@ -69,28 +76,13 @@ namespace com.wer.sc.comp.graphic
         /// <param name="period"></param>
         public void ChangeData(String code, int startDate, int endDate, KLinePeriod period)
         {
-            this.data = dataReaderFac.KLineDataReader.GetData(code, startDate, endDate, period);
-            this.code = code;
-            this.period = period;
-            this.startDate = startDate;
-            this.endDate = endDate;
-            int currentDate = (int)currentTime;
-            if (currentDate >= startDate && currentDate <= endDate)
-            {
-                this.ChangeTime(currentTime);
-            }
-            else
-            {
-                this.endIndex = data.Length - 1;
-                this.InitIndex();
-            }
+            IKLineData data = dataReaderFac.KLineDataReader.GetData(code, startDate, endDate, period);
+            this.ChangeData(data);
         }
 
         public void ChangeCode(String code)
         {
-            this.data = dataReaderFac.KLineDataReader.GetData(code, startDate, endDate, period);
-            this.code = code;
-            this.ChangeTime(currentTime);
+            this.dataNavigate.ChangeCode(code);
         }
 
         /// <summary>
@@ -99,31 +91,24 @@ namespace com.wer.sc.comp.graphic
         /// <param name="period"></param>
         public void ChangePeriod(KLinePeriod period)
         {
-            this.data = dataReaderFac.KLineDataReader.GetData(code, startDate, endDate, period);
-            this.period = period;
-            this.ChangeTime(currentTime);
+            this.dataNavigate.ChangePeriod(period);
         }
 
         public void ChangeTime(float time)
         {
-            this.currentTime = time;
+            this.dataNavigate.ChangeTime(time);
         }
 
         #endregion
 
         public IKLineData GetKLineData()
         {
-            return data;
+            return dataNavigate.CurrentKLineData;
         }
 
         public IKLineChart GetCurrentChart()
         {
-            return currentKLineChartBuilder.GetCurrentChart();
-        }
-
-        private void InitIndex()
-        {
-            startIndex = endIndex - blockMount + 1;
+            return new KLineChart_KLineData(GetKLineData(), dataNavigate.CurrentKLineIndex);
         }
 
         public int StartIndex
@@ -138,10 +123,16 @@ namespace com.wer.sc.comp.graphic
         {
             get
             {
+                int index = dataNavigate.CurrentKLineIndex;
+                if (index != endIndex) { 
+                    endIndex = index;
+                    InitIndex();
+                }
                 return endIndex;
             }
             set
             {
+                dataNavigate.ChangeIndex(value);
                 this.endIndex = value;
                 InitIndex();
             }
@@ -151,7 +142,7 @@ namespace com.wer.sc.comp.graphic
         {
             get
             {
-                return code;
+                return dataNavigate.CurrentKLineData.Code;
             }
         }
 
@@ -159,7 +150,7 @@ namespace com.wer.sc.comp.graphic
         {
             get
             {
-                return period;
+                return dataNavigate.CurrentKLineData.Period;
             }
         }
 
@@ -179,16 +170,19 @@ namespace com.wer.sc.comp.graphic
             }
         }
 
+        private void InitIndex()
+        {
+            startIndex = endIndex - blockMount + 1;
+        }
+
         public float CurrentTime
         {
             get
             {
-                return currentTime;
+                return (float)dataNavigate.CurrentTime;
             }
         }
 
         public event DataChangeHandler DataChange;
     }
-
-  
 }

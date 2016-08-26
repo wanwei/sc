@@ -16,8 +16,26 @@ namespace com.wer.sc.comp.graphic
     {
         #region 通用属性
 
+        private bool isEnable = true;
+        public virtual bool IsEnable
+        {
+            get
+            {
+                return isEnable;
+            }
+
+            set
+            {
+                isEnable = value;
+            }
+        }
+
         private Rectangle displayRect;
 
+        /// <summary>
+        /// 设置和获取显示区域
+        /// 显示区域指最终的画K线图、分时图等的区域
+        /// </summary>
         public Rectangle DisplayRect
         {
             get
@@ -33,6 +51,10 @@ namespace com.wer.sc.comp.graphic
 
         private Rectangle frameRect;
 
+        /// <summary>
+        /// 设置和获取边框区域
+        /// 边框区域指k线图或分时图的边框
+        /// </summary>
         public Rectangle FrameRect
         {
             get
@@ -87,6 +109,7 @@ namespace com.wer.sc.comp.graphic
                 colorConfig = value;
             }
         }
+
         #endregion
 
         #region 绑定控件
@@ -111,11 +134,16 @@ namespace com.wer.sc.comp.graphic
 
         private void Control_SizeChanged(object sender, EventArgs e)
         {
+            if (!isEnable)
+                return;
+
             DrawGraphBind();
         }
 
         private void Control_Paint(object sender, PaintEventArgs e)
         {
+            if (!isEnable)
+                return;
             DrawGraphBind();
         }
 
@@ -161,6 +189,10 @@ namespace com.wer.sc.comp.graphic
                     myBuffer.Dispose();
                     drawing = false;
                 }
+                //catch(Exception e)
+                //{
+                //    throw new ApplicationException("绘图错误", e);
+                //}
                 finally
                 {
                     drawing = false;
@@ -168,6 +200,11 @@ namespace com.wer.sc.comp.graphic
             }
         }
 
+        /// <summary>
+        /// 画图
+        /// 抽象方法
+        /// </summary>
+        /// <param name="graphic"></param>
         public abstract void DrawGraph(Graphics graphic);
 
         public event AfterGraphicDrawHandler AfterGraphicDraw;

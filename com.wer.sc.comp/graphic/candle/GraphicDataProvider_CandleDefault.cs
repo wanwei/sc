@@ -7,10 +7,7 @@ using System.Threading.Tasks;
 
 namespace com.wer.sc.comp.graphic
 {
-    /// <summary>
-    /// 该数据提供者能够让数据根据tick数据向前进
-    /// </summary>
-    public class GraphicDataProvider_Tick : GraphicDataProvider
+    public class GraphicDataProvider_CandleDefault : IGraphicDataProvider_Candle
     {
         private String code;
 
@@ -26,19 +23,9 @@ namespace com.wer.sc.comp.graphic
 
         private int startIndex = 200;
 
-        private int endIndex = 300;        
+        private int endIndex = 300;
 
-        private TickData todayTickData;
-
-        private KLineData todayMinuteData;
-
-        private KLineChart currentChart = new KLineChart();
-
-        private int startDate;
-
-        private int endDate;
-
-        public GraphicDataProvider_Tick(DataReaderFactory dataReaderFac)
+        public GraphicDataProvider_CandleDefault(DataReaderFactory dataReaderFac)
         {
             this.dataReaderFac = dataReaderFac;
         }
@@ -48,41 +35,29 @@ namespace com.wer.sc.comp.graphic
             this.data = klineData;
             this.code = klineData.Code;
             this.period = klineData.Period;
-            this.startDate = (int)klineData.Arr_Time[0];
-            this.endDate = (int)klineData.Arr_Time[klineData.Length - 1];
         }
 
-        public void ChangeData(String code, int startDate, int endDate, KLinePeriod period)
+        public void ChangeData(string code, int startDate, int endDate, KLinePeriod period)
         {
             this.data = dataReaderFac.KLineDataReader.GetData(code, startDate, endDate, period);
-            this.code = code;
-            this.period = period;
-            this.startDate = startDate;
-            this.endDate = endDate;
+            ChangeData(data);
+            //this.CurrentTime = currentTime;
         }
 
         public IKLineData GetKLineData()
         {
             return data;
         }
-
         public IKLineChart GetCurrentChart()
         {
             return new KLineChart_KLineData(data, endIndex);
-        }
-
-        private void InitCharts()
-        {
-            if (code == null || period == null)
-                return;
-            this.data = dataReaderFac.KLineDataReader.GetData(code, 20100101, 20150101, period);
         }
 
         private void InitIndex()
         {
             startIndex = endIndex - blockMount + 1;
         }
-
+    
 
         public int StartIndex
         {
@@ -111,14 +86,6 @@ namespace com.wer.sc.comp.graphic
             {
                 return code;
             }
-
-            set
-            {
-                if (this.code != null && this.code.Equals(value))
-                    return;
-                this.code = value;
-                InitCharts();
-            }
         }
 
         public KLinePeriod Period
@@ -126,15 +93,7 @@ namespace com.wer.sc.comp.graphic
             get
             {
                 return period;
-            }
-
-            set
-            {
-                if (this.period != null && period.Equals(value))
-                    return;
-                period = value;
-                InitCharts();
-            }
+            }            
         }
 
         public int BlockMount
@@ -168,5 +127,6 @@ namespace com.wer.sc.comp.graphic
         }
 
         public event DataChangeHandler DataChange;
+
     }
 }

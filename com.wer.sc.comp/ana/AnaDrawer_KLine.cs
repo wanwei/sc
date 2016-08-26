@@ -19,11 +19,11 @@ namespace com.wer.sc.comp.ana
         private KLineModelRunner runner;
         private Control control;
         private GraphicDrawer_Candle drawer = new GraphicDrawer_Candle();
-        private GraphicDataProvider dataProvider;
+        private IGraphicDataProvider_Candle dataProvider;
 
         private IKLineData data;
 
-        public AnaDrawer_KLine(DataReaderFactory fac, GraphicDataProvider dataProvider)
+        public AnaDrawer_KLine(DataReaderFactory fac, IGraphicDataProvider_Candle dataProvider)
         {
             this.fac = fac;
             this.runner = new KLineModelRunner(fac);

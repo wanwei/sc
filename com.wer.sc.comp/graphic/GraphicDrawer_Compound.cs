@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace com.wer.sc.comp.graphic
 {
+    /// <summary>
+    /// 组合画图器，可以将多个图纵向的依次画出来
+    /// </summary>
     public class GraphicDrawer_Compound : GraphicDrawer_Abstract
     {
         private List<GraphicDrawer_Abstract> drawers = new List<GraphicDrawer_Abstract>();

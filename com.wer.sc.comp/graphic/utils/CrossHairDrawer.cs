@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -24,7 +25,57 @@ namespace com.wer.sc.comp.graphic.utils
 
         private CrossHairDataPrivider provider;
 
-        private Point point;
+        private Point crossPoint;
+
+        private bool enable = true;
+
+        public bool Enable
+        {
+            get
+            {
+                return enable;
+            }
+
+            set
+            {
+                enable = value;
+            }
+        }
+
+        public bool ShowCrossHair
+        {
+            get
+            {
+                return showCrossHair;
+            }
+
+            set
+            {
+                showCrossHair = value;
+                //ShowCursor(!value);
+            }
+        }
+
+        public Point CrossPoint
+        {
+            get
+            {
+                return crossPoint;
+            }
+        }
+
+        //public CrossHairDataPrivider Provider
+        //{
+        //    get
+        //    {
+        //        return provider;
+        //    }
+
+        //    set
+        //    {
+        //        provider = value;
+        //    }
+        //}
 
         public CrossHairDrawer()
         {
@@ -39,12 +90,14 @@ namespace com.wer.sc.comp.graphic.utils
             this.control.MouseUp += Control_MouseUp;
             this.control.MouseMove += Control_MouseMove;
             this.control.PreviewKeyDown += Control_PreviewKeyDown;
-            this.provider.AfterGraphicDraw += Provider_AfterGraphicDraw;
+            //this.provider.AfterGraphicDraw += Provider_AfterGraphicDraw;
         }
 
         private void Control_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
-            if (showCrossHair)
+            if (!enable)
+                return;
+            if (ShowCrossHair)
             {
                 if (e.KeyCode != Keys.Left && e.KeyCode != Keys.Right)
                     return;
@@ -77,14 +130,14 @@ namespace com.wer.sc.comp.graphic.utils
                     }
                 }
                 provider.DoSelectIndexChange(this.selectIndex);
-                point = provider.GetCrossHairPoint(this.selectIndex);
+                crossPoint = provider.GetCrossHairPoint(this.selectIndex);
                 provider.DoRedraw();
             }
         }
 
         private void Provider_AfterGraphicDraw(object sender, GraphicRefreshArgs e)
         {
-            DrawGraphic(e.Graphic);
+            //DrawGraphic(e.Graphic);
         }
 
         public void UnBind()
@@ -96,52 +149,50 @@ namespace com.wer.sc.comp.graphic.utils
             this.control = null;
         }
 
+        /// <summary>
+        /// 设置鼠标状态的计数器（非状态）
+        /// </summary>
+        /// <param name="bShow">状态</param>
+        /// <returns>状态技术</returns>
+        [DllImport("user32.dll", EntryPoint = "ShowCursor", CharSet = CharSet.Auto)]
+        public static extern int ShowCursor(bool bShow);
+       
+
         private void Control_MouseUp(object sender, MouseEventArgs e)
         {
-            this.showCrossHair = !showCrossHair;
-            if (!this.showCrossHair)
+            if (!enable)
+                return;
+            if (e.Button == MouseButtons.Left)
             {
-                this.selectIndex = -1;
-                provider.DoSelectIndexChange(selectIndex);
+                Point p = e.Location;
+                Rectangle rec = provider.DrawRect;                
+                if (!rec.Contains(p)) {
+                    return;
+                }
+                
+                this.ShowCrossHair = !ShowCrossHair;
+                if (!this.ShowCrossHair)
+                {
+                    this.selectIndex = -1;
+                    provider.DoSelectIndexChange(selectIndex);
+                }
+                provider.DoRedraw();
             }
-            provider.DoRedraw();
         }
 
         private DateTime lastMouseMoveTime = DateTime.Now;
         private int selectIndex;
 
+
         private void Control_MouseMove(object sender, MouseEventArgs e)
         {
-            if (showCrossHair)
+            if (!enable)
+                return;
+            if (ShowCrossHair)
             {
-                if (lastMouseMoveTime.AddTicks(100) < DateTime.Now)
+                if (lastMouseMoveTime.AddTicks(50) < DateTime.Now)
                 {
-                    this.point = GetMousePosition();
-                    if (!provider.DrawRect.Contains(point.X, point.Y))
-                    {
-                        showCrossHair = false;
-                        provider.DoSelectIndexChange(-1);
-                        lastMouseMoveTime = DateTime.Now;
-                        provider.DoRedraw();
-                        return;
-                    }
-                    int index = (int)provider.PriceMapping.CalcPriceX(point.X);
-                    GraphicDataProvider dataProvider = provider.GetDataProvider();
-                    if (index >= dataProvider.StartIndex && index <= dataProvider.EndIndex)
-                    {
-                        //if(index>provider.)
-                        if (this.selectIndex != index)
-                        {
-                            this.selectIndex = index;
-                            provider.DoSelectIndexChange(this.selectIndex);
-                        }
-                    }
-                    //如果selectIndex<0，说明鼠标移出了该控件，此时应该不需要显示十字线了
-                    if (this.selectIndex < 0)
-                        showCrossHair = false;
-
-                    lastMouseMoveTime = DateTime.Now;
-                    provider.DoRedraw();
+                    ChangeCrossPoint(GetMousePosition());                    
                 }
             }
             else
@@ -149,6 +200,35 @@ namespace com.wer.sc.comp.graphic.utils
                 this.selectIndex = -1;
                 provider.DoSelectIndexChange(this.selectIndex);
             }
+        }
+
+        public void ChangeCrossPoint(Point point)
+        {
+            this.crossPoint = point;
+            if (!provider.DrawRect.Contains(point.X, point.Y))
+            {
+                ShowCrossHair = false;
+                provider.DoSelectIndexChange(-1);
+                lastMouseMoveTime = DateTime.Now;
+                provider.DoRedraw();
+                return;
+            }
+            int index = (int)provider.PriceMapping.CalcPriceX(point.X);
+            int[] range = provider.IndexRange;
+            if (index >= range[0] && index <= range[1])
+            {
+                //if(index>provider.)
+                if (this.selectIndex != index)
+                {
+                    this.selectIndex = index;
+                    provider.DoSelectIndexChange(this.selectIndex);
+                }
+            }
+            //如果selectIndex<0，说明鼠标移出了该控件，此时应该不需要显示十字线了
+            if (this.selectIndex < 0)
+                ShowCrossHair = false;
+            lastMouseMoveTime = DateTime.Now;
+            provider.DoRedraw();
         }
 
         private Point GetMousePosition()
@@ -160,14 +240,16 @@ namespace com.wer.sc.comp.graphic.utils
 
         public void DrawGraphic(Graphics g)
         {
-            if (showCrossHair)
+            if (!enable)
+                return;
+            if (ShowCrossHair)
             {
                 Pen pen = provider.Pen;
-                Rectangle rec = provider.DrawRect;
-                g.DrawLine(pen, new Point(point.X, rec.Top), new Point(point.X, rec.Bottom));
-                g.DrawLine(pen, new Point(rec.X, point.Y), new Point(rec.Right, point.Y));
+                Rectangle rec = provider.DrawRect;                
+                g.DrawLine(pen, new Point(crossPoint.X, rec.Top), new Point(crossPoint.X, rec.Bottom));
+                g.DrawLine(pen, new Point(rec.X, crossPoint.Y), new Point(rec.Right, crossPoint.Y));
 
-                DrawCrossHairsPrice(g, point, rec);
+                DrawCrossHairsPrice(g, crossPoint, rec);
             }
         }
 
@@ -203,7 +285,7 @@ namespace com.wer.sc.comp.graphic.utils
         /// <summary>
         /// 画图事件，十字线画图器可以侦听画图，画完图后再画十字线
         /// </summary>
-        event AfterGraphicDrawHandler AfterGraphicDraw;
+        //event AfterGraphicDrawHandler AfterGraphicDraw;
 
         /// <summary>
         /// 获得
@@ -229,6 +311,7 @@ namespace com.wer.sc.comp.graphic.utils
 
         bool DoMovePrev();
 
-        GraphicDataProvider GetDataProvider();
+        //GraphicDataProvider_Candle GetDataProvider();
+        int[] IndexRange { get; }
     }
 }

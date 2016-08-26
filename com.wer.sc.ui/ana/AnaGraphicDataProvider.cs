@@ -8,7 +8,7 @@ using com.wer.sc.data;
 
 namespace com.wer.sc.ui.ana
 {
-    public class AnaGraphicDataProvider : GraphicDataProvider
+    public class AnaGraphicDataProvider : IGraphicDataProvider_Candle
     {
         private KLineDataWrap klineDataWrap;
 

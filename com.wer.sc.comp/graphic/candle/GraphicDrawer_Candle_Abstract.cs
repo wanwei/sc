@@ -10,9 +10,9 @@ namespace com.wer.sc.comp.graphic
     {
         #region 初始化需要设置的属性        
 
-        private GraphicDataProvider dataProvider;
+        private IGraphicDataProvider_Candle dataProvider;
 
-        public GraphicDataProvider DataProvider
+        public IGraphicDataProvider_Candle DataProvider
         {
             get
             {

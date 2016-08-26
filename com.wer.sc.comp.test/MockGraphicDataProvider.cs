@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace com.wer.sc.comp.test
 {
-    public class MockGraphicDataProvider : GraphicDataProvider
+    public class MockGraphicDataProvider : IGraphicDataProvider_Candle
     {
         private String code;
 

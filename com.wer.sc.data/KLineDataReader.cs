@@ -51,7 +51,9 @@ namespace com.wer.sc.data
         {
             String path = utils.GetKLineDataPath(code, period);
             KLineDataStore store = new KLineDataStore(path);
-            return store.Load(startDate, endDate);
+            KLineData data = (KLineData)store.Load(startDate, endDate);
+            data.Code = code;
+            return data;
         }
 
         public int GetLastDate(String code, KLinePeriod period)

@@ -44,7 +44,14 @@ namespace com.wer.sc.comp.test
 
         private void btReal_Click(object sender, EventArgs e)
         {
-            
+            FrmGraphicDrawer_Real frm = new FrmGraphicDrawer_Real();
+            frm.ShowDialog();    
+        }
+
+        private void btReal2_Click(object sender, EventArgs e)
+        {
+            FrmGraphicDrawer_Real2 frm = new FrmGraphicDrawer_Real2();
+            frm.ShowDialog();
         }
 
         private void btModel_Click(object sender, EventArgs e)
@@ -74,6 +81,24 @@ namespace com.wer.sc.comp.test
         private void btDataNavigate_Click(object sender, EventArgs e)
         {
             FrmGraphicDrawer_DataNavigate frm = new FrmGraphicDrawer_DataNavigate();
+            frm.ShowDialog();
+        }
+
+        private void btSwitch_Click(object sender, EventArgs e)
+        {
+            FrmGraphicDrawer_Switch frm = new FrmGraphicDrawer_Switch();
+            frm.ShowDialog();
+        }
+
+        private void btSwitch2_Click(object sender, EventArgs e)
+        {
+            FrmGraphicDrawer_Switch2 frm = new FrmGraphicDrawer_Switch2();
+            frm.ShowDialog();
+        }
+
+        private void btCurrentInfo_Click(object sender, EventArgs e)
+        {
+            FrmGraphicDrawer_CurrentInfo frm = new FrmGraphicDrawer_CurrentInfo();
             frm.ShowDialog();
         }
     }

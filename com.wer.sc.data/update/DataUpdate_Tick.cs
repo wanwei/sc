@@ -71,6 +71,7 @@ namespace com.wer.sc.data.update
                 DoUpdate(code, date);
             }
         }
+
         public void DoUpdate(string code, int date)
         {
             TickData tickData = dataProvider.GetTickData(code, date);

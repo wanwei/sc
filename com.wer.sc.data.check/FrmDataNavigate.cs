@@ -148,7 +148,7 @@ namespace com.wer.sc.data.check
             tbData.Clear();
             //tbData.AppendText(chart.ToString());
             StringBuilder sb = new StringBuilder();
-            for (int i = 0; i <= navigate.CurrentIndex; i++)
+            for (int i = 0; i <= navigate.CurrentKLineIndex; i++)
             {
                 data.BarPos = i;
                 sb.Append(data).Append("\r\n");                

@@ -38,6 +38,11 @@
             this.btAna3 = new System.Windows.Forms.Button();
             this.btLoadData = new System.Windows.Forms.Button();
             this.btDataNavigate = new System.Windows.Forms.Button();
+            this.btReal2 = new System.Windows.Forms.Button();
+            this.btSwitch = new System.Windows.Forms.Button();
+            this.btSwitch2 = new System.Windows.Forms.Button();
+            this.btSwitch3 = new System.Windows.Forms.Button();
+            this.btCurrentInfo = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btCandle
@@ -92,7 +97,7 @@
             // 
             // btModel
             // 
-            this.btModel.Location = new System.Drawing.Point(57, 224);
+            this.btModel.Location = new System.Drawing.Point(57, 304);
             this.btModel.Name = "btModel";
             this.btModel.Size = new System.Drawing.Size(75, 23);
             this.btModel.TabIndex = 5;
@@ -140,11 +145,65 @@
             this.btDataNavigate.UseVisualStyleBackColor = true;
             this.btDataNavigate.Click += new System.EventHandler(this.btDataNavigate_Click);
             // 
+            // btReal2
+            // 
+            this.btReal2.Location = new System.Drawing.Point(138, 180);
+            this.btReal2.Name = "btReal2";
+            this.btReal2.Size = new System.Drawing.Size(75, 23);
+            this.btReal2.TabIndex = 10;
+            this.btReal2.Text = "分时图2";
+            this.btReal2.UseVisualStyleBackColor = true;
+            this.btReal2.Click += new System.EventHandler(this.btReal2_Click);
+            // 
+            // btSwitch
+            // 
+            this.btSwitch.Location = new System.Drawing.Point(57, 223);
+            this.btSwitch.Name = "btSwitch";
+            this.btSwitch.Size = new System.Drawing.Size(75, 23);
+            this.btSwitch.TabIndex = 11;
+            this.btSwitch.Text = "切换";
+            this.btSwitch.UseVisualStyleBackColor = true;
+            this.btSwitch.Click += new System.EventHandler(this.btSwitch_Click);
+            // 
+            // btSwitch2
+            // 
+            this.btSwitch2.Location = new System.Drawing.Point(138, 223);
+            this.btSwitch2.Name = "btSwitch2";
+            this.btSwitch2.Size = new System.Drawing.Size(75, 23);
+            this.btSwitch2.TabIndex = 12;
+            this.btSwitch2.Text = "切换2";
+            this.btSwitch2.UseVisualStyleBackColor = true;
+            this.btSwitch2.Click += new System.EventHandler(this.btSwitch2_Click);
+            // 
+            // btSwitch3
+            // 
+            this.btSwitch3.Location = new System.Drawing.Point(219, 223);
+            this.btSwitch3.Name = "btSwitch3";
+            this.btSwitch3.Size = new System.Drawing.Size(75, 23);
+            this.btSwitch3.TabIndex = 13;
+            this.btSwitch3.Text = "切换3";
+            this.btSwitch3.UseVisualStyleBackColor = true;
+            // 
+            // btCurrentInfo
+            // 
+            this.btCurrentInfo.Location = new System.Drawing.Point(57, 263);
+            this.btCurrentInfo.Name = "btCurrentInfo";
+            this.btCurrentInfo.Size = new System.Drawing.Size(75, 23);
+            this.btCurrentInfo.TabIndex = 14;
+            this.btCurrentInfo.Text = "当前信息";
+            this.btCurrentInfo.UseVisualStyleBackColor = true;
+            this.btCurrentInfo.Click += new System.EventHandler(this.btCurrentInfo_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(554, 327);
+            this.ClientSize = new System.Drawing.Size(567, 342);
+            this.Controls.Add(this.btCurrentInfo);
+            this.Controls.Add(this.btSwitch3);
+            this.Controls.Add(this.btSwitch2);
+            this.Controls.Add(this.btSwitch);
+            this.Controls.Add(this.btReal2);
             this.Controls.Add(this.btDataNavigate);
             this.Controls.Add(this.btLoadData);
             this.Controls.Add(this.btAna3);
@@ -173,6 +232,11 @@
         private System.Windows.Forms.Button btAna3;
         private System.Windows.Forms.Button btLoadData;
         private System.Windows.Forms.Button btDataNavigate;
+        private System.Windows.Forms.Button btReal2;
+        private System.Windows.Forms.Button btSwitch;
+        private System.Windows.Forms.Button btSwitch2;
+        private System.Windows.Forms.Button btSwitch3;
+        private System.Windows.Forms.Button btCurrentInfo;
     }
 }
 
