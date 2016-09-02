@@ -297,5 +297,21 @@ namespace com.wer.sc.data
             sb.Append(Hold);
             return sb.ToString();
         }
+
+        public string PrintAll()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("barpos:").Append(BarPos).Append("/r/n");
+            for (int i = 0; i < Length; i++)
+            {
+                sb.Append(Arr_Time).Append(",");
+                sb.Append(Arr_Price).Append(",");
+                sb.Append(Arr_UpRange).Append(",");
+                sb.Append(Arr_UpPercent).Append(",");
+                sb.Append(Arr_Mount).Append(",");
+                sb.Append(Arr_Hold).Append("/r/n");
+            }
+            return sb.ToString();
+        }
     }
 }

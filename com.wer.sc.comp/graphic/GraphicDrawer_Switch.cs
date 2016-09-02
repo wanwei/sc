@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace com.wer.sc.comp.graphic
 {
+    /// <summary>
+    /// 切换画图器
+    /// 类似tab页控件，可自由切换显示其中一个画图器
+    /// </summary>
     public class GraphicDrawer_Switch : GraphicDrawer_Abstract
     {
         private List<GraphicDrawer_Abstract> drawers = new List<GraphicDrawer_Abstract>();
@@ -42,16 +42,15 @@ namespace com.wer.sc.comp.graphic
                 else
                     Drawers[i].IsEnable = false;
             }
-            this.CurrentIndex = index;            
+            this.CurrentIndex = index;
         }
 
         public override void DrawGraph(Graphics graphic)
         {
             GraphicDrawer_Abstract drawer = drawers[CurrentIndex];
-            Rectangle rect = control.DisplayRectangle;
+            Rectangle rect = this.DisplayRect;
             drawer.SetDrawRect(rect);
-            drawer.DrawGraph(graphic);            
-            //drawer.DrawGraph();
+            drawer.DrawGraph(graphic);
         }
     }
 }

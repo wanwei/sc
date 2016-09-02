@@ -104,11 +104,23 @@
     <Compile Include="FrmGraphicDrawer_Candle2.Designer.cs">
       <DependentUpon>FrmGraphicDrawer_Candle2.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmGraphicDrawer_DataNavigate2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmGraphicDrawer_DataNavigate2.Designer.cs">
+      <DependentUpon>FrmGraphicDrawer_DataNavigate2.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmGraphicDrawer_Main.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FrmGraphicDrawer_Main.Designer.cs">
       <DependentUpon>FrmGraphicDrawer_Main.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmGraphicDrawer_Main2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmGraphicDrawer_Main2.Designer.cs">
+      <DependentUpon>FrmGraphicDrawer_Main2.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmGraphicDrawer_Real.cs">
       <SubType>Form</SubType>
@@ -134,12 +146,6 @@
     <Compile Include="FrmGraphicDrawer_Switch.Designer.cs">
       <DependentUpon>FrmGraphicDrawer_Switch.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmGraphicDrawer_Switch3.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FrmGraphicDrawer_Switch3.Designer.cs">
-      <DependentUpon>FrmGraphicDrawer_Switch3.cs</DependentUpon>
-    </Compile>
     <Compile Include="FrmModel.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -151,6 +157,18 @@
     </Compile>
     <Compile Include="FrmTest.Designer.cs">
       <DependentUpon>FrmTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmTestCross.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmTestCross.Designer.cs">
+      <DependentUpon>FrmTestCross.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmTestRegion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmTestRegion.Designer.cs">
+      <DependentUpon>FrmTestRegion.cs</DependentUpon>
     </Compile>
     <Compile Include="GraphicDrawer_Test.cs" />
     <Compile Include="MockGraphicDataProvider.cs" />
@@ -184,8 +202,14 @@
     <EmbeddedResource Include="FrmGraphicDrawer_Candle2.resx">
       <DependentUpon>FrmGraphicDrawer_Candle2.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrmGraphicDrawer_DataNavigate2.resx">
+      <DependentUpon>FrmGraphicDrawer_DataNavigate2.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmGraphicDrawer_Main.resx">
       <DependentUpon>FrmGraphicDrawer_Main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmGraphicDrawer_Main2.resx">
+      <DependentUpon>FrmGraphicDrawer_Main2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmGraphicDrawer_Real.resx">
       <DependentUpon>FrmGraphicDrawer_Real.cs</DependentUpon>
@@ -204,6 +228,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmTest.resx">
       <DependentUpon>FrmTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmTestCross.resx">
+      <DependentUpon>FrmTestCross.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmTestRegion.resx">
+      <DependentUpon>FrmTestRegion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

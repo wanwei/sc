@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace com.wer.sc.data
+namespace com.wer.sc.data.reader
 {
-    public class TickDataReader
+    public class TickDataReader : ITickDataReader
     {
         private String dataPath;
         private DataPathUtils utils;

@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using com.wer.sc.data.reader;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -19,7 +20,7 @@ namespace com.wer.sc.data.update
             update.Update();
 
             DataReaderFactory fac = new DataReaderFactory(dataProvider.GetDataPath());
-            CodeReader codeReader = fac.CodeReader;
+            ICodeReader codeReader = fac.CodeReader;
 
             List<CodeInfo> codes = codeReader.GetAllCodes();
             Assert.AreEqual(62, codes.Count);

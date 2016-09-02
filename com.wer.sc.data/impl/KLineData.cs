@@ -163,7 +163,7 @@ namespace com.wer.sc.data
             return new KLineChart_KLineData(this, BarPos);
         }
 
-        public void ChangeChart(IKLineChart chart,int index)
+        public void ChangeChart(IKLineChart chart, int index)
         {
             ReadOnlyList_TmpValue<double> timelist = (ReadOnlyList_TmpValue<double>)Arr_Time;
             ReadOnlyList_TmpValue<float> startlist = (ReadOnlyList_TmpValue<float>)Arr_Start;
@@ -551,6 +551,24 @@ namespace com.wer.sc.data
             sb.Append(Mount).Append(",");
             sb.Append(Money).Append(",");
             sb.Append(Hold);
+            return sb.ToString();
+        }
+
+        public string PrintAll()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("barpos:").Append(BarPos).Append("/r/n");
+            for (int i = 0; i < Length; i++)
+            {
+                sb.Append(Arr_Time[i]).Append(",");
+                sb.Append(Arr_Start[i]).Append(",");
+                sb.Append(Arr_High[i]).Append(",");
+                sb.Append(Arr_Low[i]).Append(",");
+                sb.Append(Arr_End[i]).Append(",");
+                sb.Append(Arr_Mount[i]).Append(",");
+                sb.Append(Arr_Money[i]).Append(",");
+                sb.Append(Arr_Hold[i]).Append("/r/n");
+            }
             return sb.ToString();
         }
 

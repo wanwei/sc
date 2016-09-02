@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace com.wer.sc.data
+namespace com.wer.sc.data.reader
 {
-    public class CodeReader
+    public class CodeReader : ICodeReader
     {
         private List<CodeInfo> codes = new List<CodeInfo>();
 

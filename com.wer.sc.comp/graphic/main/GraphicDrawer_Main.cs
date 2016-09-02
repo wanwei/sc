@@ -1,4 +1,6 @@
-﻿using com.wer.sc.comp.graphic.real;
+﻿using com.wer.sc.comp.graphic.info;
+using com.wer.sc.comp.graphic.main;
+using com.wer.sc.comp.graphic.real;
 using com.wer.sc.comp.graphic.utils;
 using com.wer.sc.data;
 using System;
@@ -10,14 +12,13 @@ using System.Windows.Forms;
 
 namespace com.wer.sc.comp.graphic
 {
-    public class GraphicDrawer_Main : GraphicDrawer_Switch
+    public class GraphicDrawer_Main : GraphicDrawer_Compound
     {
-        private GraphicDataProvider_Main dataProvider;
+        private GraphicDrawer_Switch_CandleReal graphicDrawer_Left;
+        private GraphicDrawer_CurrentInfo graphicDrawer_Right;
+        private IGraphicDataProvider_Main dataProvider;
 
-        private GraphicDrawer_Candle drawer_Candle;
-        private GraphicDrawer_Real drawer_Real;
-
-        public GraphicDataProvider_Main DataProvider
+        public IGraphicDataProvider_Main DataProvider
         {
             get
             {
@@ -27,70 +28,26 @@ namespace com.wer.sc.comp.graphic
             set
             {
                 dataProvider = value;
-                drawer_Candle.DataProvider = dataProvider.DataProvider_Candle;
-                drawer_Real.DataProvider = dataProvider.DataProvider_Real;
+                graphicDrawer_Left.DataProvider = value;
+                graphicDrawer_Right.DataProvider = dataProvider.DataProvider_Info;
             }
         }
 
         public GraphicDrawer_Main()
         {
-            drawer_Candle = new GraphicDrawer_Candle();
-            drawer_Real = new GraphicDrawer_Real();
-      
-            this.Drawers.Add(drawer_Candle);
-            this.Drawers.Add(drawer_Real);
-            this.Switch(0);
+            this.IsVertical = false;
+
+            graphicDrawer_Left = new GraphicDrawer_Switch_CandleReal();
+            graphicDrawer_Right = new GraphicDrawer_CurrentInfo();
+
+            this.AddGraph(graphicDrawer_Left, 100);
+            this.AddGraph(graphicDrawer_Right, 100, true);
         }
 
         public override void BindControl(Control control)
         {
             base.BindControl(control);
-            drawer_Candle.BindControl(control);
-            drawer_Real.BindControl(control);
-            control.KeyUp += Control_KeyUp;
-        }
-
-        private void Control_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.F5)
-            {
-                if (this.CurrentIndex == 0)
-                {
-                    CrossHairDrawer currentdrawer = this.drawer_Candle.CrossHairDrawer;
-                    bool showCross = currentdrawer.ShowCrossHair;
-                    if (showCross)
-                    {
-                        this.drawer_Real.CrossHairDrawer.ShowCrossHair = true;
-                        this.drawer_Real.CrossHairDrawer.ChangeCrossPoint(currentdrawer.CrossPoint);
-                    }
-                    else
-                    {
-                        this.drawer_Real.CrossHairDrawer.ShowCrossHair = false;
-                    }
-                    this.Switch(1);
-                }
-                else
-                {
-                    CrossHairDrawer currentdrawer = this.drawer_Real.CrossHairDrawer;
-                    bool showCross = currentdrawer.ShowCrossHair;
-                    if (showCross)
-                    {
-                        this.drawer_Candle.CrossHairDrawer.ShowCrossHair = true;
-                        this.drawer_Candle.CrossHairDrawer.ChangeCrossPoint(currentdrawer.CrossPoint);
-                    }
-                    else
-                    {
-                        this.drawer_Candle.CrossHairDrawer.ShowCrossHair = false;
-                    }
-                    this.Switch(0);
-                }
-                this.DrawGraph();
-            }
-        }
-
-        public override void UnBindControl()
-        {
-            base.UnBindControl();
+            this.graphicDrawer_Left.BindOthers(control);
         }
     }
 }

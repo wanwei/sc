@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace com.wer.sc.comp.test
 {
-    public partial class FrmGraphicDrawer_Switch3 : Form
+    public partial class FrmGraphicDrawer_Main2 : Form
     {
-        public FrmGraphicDrawer_Switch3()
+        public FrmGraphicDrawer_Main2()
         {
             InitializeComponent();
         }

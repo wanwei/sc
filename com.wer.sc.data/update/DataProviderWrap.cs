@@ -11,11 +11,11 @@ namespace com.wer.sc.data.update
     {
         private Plugin_DataProvider provider;
 
-        private CodeReader codeReader;
+        private ICodeReader codeReader;
 
-        private KLineDataReader klineDataReader;
+        private IKLineDataReader klineDataReader;
 
-        private TickDataReader tickDataReader;
+        private ITickDataReader tickDataReader;
 
         private DataReaderFactory factory;
 

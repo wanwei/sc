@@ -1,4 +1,6 @@
-﻿using System;
+﻿using com.wer.sc.data.navigate;
+using com.wer.sc.data.reader;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -30,17 +32,17 @@ namespace com.wer.sc.data
             this.dataNavigate = new DataNavigate(this);
         }
 
-        public CodeReader CodeReader
+        public ICodeReader CodeReader
         {
             get { return codeReader; }
         }
 
-        public OpenDateReader OpenDateReader
+        public IOpenDateReader OpenDateReader
         {
             get { return openDateReader; }
         }
 
-        public KLineDataReader KLineDataReader
+        public IKLineDataReader KLineDataReader
         {
             get { return klineDataReader; }
         }

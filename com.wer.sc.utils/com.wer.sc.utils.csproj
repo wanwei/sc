@@ -57,6 +57,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="ReadOnlyList_Sub.cs" />
     <Compile Include="ReadOnlyList_TmpValue.cs" />
     <Compile Include="RectUtils.cs" />
     <Compile Include="StringUtils.cs" />

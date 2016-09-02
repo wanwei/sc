@@ -27,22 +27,30 @@ namespace com.wer.sc.plugin
 
         private PluginInfo LoadAssembly(String path)
         {
-            PluginInfo plugin = new PluginInfo();
-            Assembly ass = Assembly.LoadFrom(path);
-            plugin.FullPath = path;
-            plugin.AssemblyName = ass.GetName().Name;
-            Type[] types = ass.GetTypes();
-            for (int i = 0; i < types.Length; i++)
+            try
             {
-                Type t = types[i];
-                if (t.IsSubclassOf(typeof(Plugin_DataProvider)))
-                    plugin.DataProviders.Add(t);
-                if (t.IsSubclassOf(typeof(Plugin_KLineModel)))
-                    plugin.KLineModels.Add(t);
+                PluginInfo plugin = new PluginInfo();
+                Assembly ass = Assembly.LoadFrom(path);
+                plugin.FullPath = path;
+                plugin.AssemblyName = ass.GetName().Name;
+                Type[] types = ass.GetTypes();
+                for (int i = 0; i < types.Length; i++)
+                {
+                    Type t = types[i];
+                    if (t.IsSubclassOf(typeof(Plugin_DataProvider)))
+                        plugin.DataProviders.Add(t);
+                    if (t.IsSubclassOf(typeof(Plugin_KLineModel)))
+                        plugin.KLineModels.Add(t);
+                }
+                if (plugin.DataProviders.Count == 0 && plugin.KLineModels.Count == 0)
+                    return null;
+                return plugin;
             }
-            if (plugin.DataProviders.Count == 0 && plugin.KLineModels.Count == 0)
+            catch (Exception e)
+            {
                 return null;
-            return plugin;
+                //throw new ApplicationException("装载插件出错", e);
+            }            
         }
     }
 }

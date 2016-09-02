@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using com.wer.sc.data.reader;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -26,7 +27,7 @@ namespace com.wer.sc.data.update
                 update.Update();
 
                 DataReaderFactory fac = new DataReaderFactory(dataProvider.GetDataPath());
-                KLineDataReader klineReader = fac.KLineDataReader;
+                IKLineDataReader klineReader = fac.KLineDataReader;
 
                 IKLineData data = klineReader.GetData("m01", 20131202, 20131213, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1));
                 String[] dataResult = ResourceLoader.GetKLineData_1Min_Result();

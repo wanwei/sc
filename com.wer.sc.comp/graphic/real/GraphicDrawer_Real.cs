@@ -104,6 +104,12 @@ namespace com.wer.sc.comp.graphic.real
         public override void BindControl(Control control)
         {
             base.BindControl(control);
+            this.BindOthers(control);
+        }
+
+        public void BindOthers(Control control)
+        {
+            this.control = control;
             CrossHairDataPrivider_Real crossHairProvider = new CrossHairDataPrivider_Real(this);
             crossHairDrawer.Bind(crossHairProvider);
         }
@@ -127,6 +133,15 @@ namespace com.wer.sc.comp.graphic.real
             sb.Append("画分时线" + dataProvider.CurrentTime + "；十字线位置：" + crossHairDrawer.CrossPoint
                 + ";共花费" + (span.Seconds * 1000 + span.Milliseconds) + "毫秒");
             LogHelper.Info(typeof(GraphicDrawer_Real), sb.ToString());
+        }
+
+        public void DrawGraph(Graphics graphic, Rectangle rect)
+        {
+            if (!IsEnable)
+                return;
+            drawer_chart.DrawGraph(graphic, rect);
+            drawer_mount.DrawGraph(graphic, rect);
+            DrawSelectBlock(graphic);
         }
 
         public void DrawSelectBlock(Graphics g)
@@ -214,6 +229,12 @@ namespace com.wer.sc.comp.graphic.real
         //    if (this.AfterGraphicDraw != null)
         //        this.AfterGraphicDraw(sender, e);
         //}
+        private CrossHairDrawer crossDrawer;
+        public CrossHairDrawer CrossDrawer
+        {
+            get { return crossDrawer; }
+            set { crossDrawer = value; }
+        }
 
         public Control Control
         {
@@ -262,6 +283,11 @@ namespace com.wer.sc.comp.graphic.real
         public void DoRedraw()
         {
             this.drawer.DrawGraph();
+        }
+
+        public void DoRedraw(Graphics g, Rectangle rect)
+        {
+            this.drawer.DrawGraph(g, rect);
         }
 
         public void DoSelectIndexChange(int index)

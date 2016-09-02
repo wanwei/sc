@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace com.wer.sc.data
+namespace com.wer.sc.data.reader
 {
-    public class RealDataReader
+    public class RealDataReader : IRealDataReader
     {
         private string dataPath;
         private DataPathUtils utils;
@@ -41,7 +41,7 @@ namespace com.wer.sc.data
             return GetData(code, startDate, endDate, store, result);
         }
 
-        public List<IRealData> GetData(String code, int startDate, int endDate, KLineDataStore store, KLineDataIndexResult result)
+        private List<IRealData> GetData(String code, int startDate, int endDate, KLineDataStore store, KLineDataIndexResult result)
         {
             int startIndex = store.GetStartIndex(startDate, result);
             IKLineData data = store.Load(startDate, endDate, result);

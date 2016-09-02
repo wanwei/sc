@@ -1,5 +1,6 @@
 ﻿using com.wer.sc.comp.graphic;
 using com.wer.sc.data;
+using com.wer.sc.data.reader;
 using com.wer.sc.plugin;
 using com.wer.sc.utils;
 using System;
@@ -18,7 +19,7 @@ namespace com.wer.sc.ana
     /// </summary>
     public class KLineModelRunner
     {
-        private KLineDataReader reader;
+        private IKLineDataReader reader;
 
         //code
         private String code;

@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace com.wer.sc.data
+namespace com.wer.sc.data.reader
 {
-    public class KLineDataReader
+    public class KLineDataReader : IKLineDataReader
     {
         private string dataPath;
         private DataPathUtils utils;
@@ -54,6 +54,16 @@ namespace com.wer.sc.data
             KLineData data = (KLineData)store.Load(startDate, endDate);
             data.Code = code;
             return data;
+        }
+
+        public int GetFirstDate(String code, KLinePeriod period)
+        {
+            String path = utils.GetKLineDataPath(code, period);
+            if (!File.Exists(path))
+                return -1;
+            KLineDataStore store = new KLineDataStore(path);
+            double time = store.GetFirstTime();
+            return (int)time;
         }
 
         public int GetLastDate(String code, KLinePeriod period)

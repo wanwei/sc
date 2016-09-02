@@ -12,9 +12,15 @@ namespace com.wer.sc.comp.graphic.utils
     /// </summary>
     public class PriceGraphicMapping
     {
-        public PriceRectangle PriceRect;
+        private PriceRectangle priceRect;
 
-        public Rectangle DrawRect;
+        private Rectangle drawRect;
+
+        private float priceScaleWidth;
+
+        private float priceScaleHeight;
+
+
 
         public PointF CalcPoint(PricePoint pricePoint)
         {
@@ -30,10 +36,11 @@ namespace com.wer.sc.comp.graphic.utils
         /// <returns></returns>
         public float CalcX(float priceX)
         {
-            if (PriceRect.PriceWidth == 0)
-                return DrawRect.X;
-            float percentX = (priceX - PriceRect.PriceLeft) / PriceRect.PriceWidth;
-            return DrawRect.Left + DrawRect.Width * percentX;
+            return drawRect.Left + (priceX - priceRect.PriceLeft) * priceScaleWidth;
+            //if (PriceRect.PriceWidth == 0)
+            //    return DrawRect.X;
+            //float percentX = (float)Math.Round((priceX - PriceRect.PriceLeft) / PriceRect.PriceWidth, 2);
+            //return (float)Math.Round(DrawRect.Left + DrawRect.Width * percentX, 2);
         }
 
         /// <summary>
@@ -43,10 +50,11 @@ namespace com.wer.sc.comp.graphic.utils
         /// <returns></returns>
         public float CalcY(float priceY)
         {
-            if (PriceRect.PriceHeight == 0)
-                return DrawRect.Y;
-            float percentY = (PriceRect.PriceTop - priceY) / PriceRect.PriceHeight;
-            return DrawRect.Top + DrawRect.Height * percentY;
+            return drawRect.Top + (priceRect.PriceTop - priceY) * priceScaleHeight;
+            //if (PriceRect.PriceHeight == 0)
+            //    return DrawRect.Y;
+            //float percentY = (float)Math.Round((PriceRect.PriceTop - priceY) / PriceRect.PriceHeight, 2);
+            //return (float)Math.Round(DrawRect.Top + DrawRect.Height * percentY, 2);
         }
 
         public float PriceWidth
@@ -62,6 +70,58 @@ namespace com.wer.sc.comp.graphic.utils
             get
             {
                 return DrawRect.Height / PriceRect.PriceHeight;
+            }
+        }
+
+        public PriceRectangle PriceRect
+        {
+            get
+            {
+                return priceRect;
+            }
+
+            set
+            {
+                priceRect = value;
+                RecalcScale();
+            }
+        }
+
+        public Rectangle DrawRect
+        {
+            get
+            {
+                return drawRect;
+            }
+
+            set
+            {
+                drawRect = value;
+                RecalcScale();
+            }
+        }
+
+        private void RecalcScale()
+        {
+            if (priceRect == null)
+                return;
+            this.priceScaleWidth = drawRect.Width / priceRect.PriceWidth;
+            this.priceScaleHeight = drawRect.Height / priceRect.PriceHeight;
+        }
+
+        public float PriceScaleWidth
+        {
+            get
+            {
+                return priceScaleWidth;
+            }
+        }
+
+        public float PriceScaleHeight
+        {
+            get
+            {
+                return priceScaleHeight;
             }
         }
 

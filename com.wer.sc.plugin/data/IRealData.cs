@@ -47,5 +47,7 @@ namespace com.wer.sc.data
         int IndexOfTime(double time);
 
         #endregion
+
+        string PrintAll();
     }
 }

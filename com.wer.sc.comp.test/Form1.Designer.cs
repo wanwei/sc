@@ -41,8 +41,12 @@
             this.btReal2 = new System.Windows.Forms.Button();
             this.btSwitch = new System.Windows.Forms.Button();
             this.btSwitch2 = new System.Windows.Forms.Button();
-            this.btSwitch3 = new System.Windows.Forms.Button();
             this.btCurrentInfo = new System.Windows.Forms.Button();
+            this.btMain = new System.Windows.Forms.Button();
+            this.btMain2 = new System.Windows.Forms.Button();
+            this.btTestRegion = new System.Windows.Forms.Button();
+            this.btCross = new System.Windows.Forms.Button();
+            this.btNavigate2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btCandle
@@ -97,7 +101,7 @@
             // 
             // btModel
             // 
-            this.btModel.Location = new System.Drawing.Point(57, 304);
+            this.btModel.Location = new System.Drawing.Point(57, 334);
             this.btModel.Name = "btModel";
             this.btModel.Size = new System.Drawing.Size(75, 23);
             this.btModel.TabIndex = 5;
@@ -175,15 +179,6 @@
             this.btSwitch2.UseVisualStyleBackColor = true;
             this.btSwitch2.Click += new System.EventHandler(this.btSwitch2_Click);
             // 
-            // btSwitch3
-            // 
-            this.btSwitch3.Location = new System.Drawing.Point(219, 223);
-            this.btSwitch3.Name = "btSwitch3";
-            this.btSwitch3.Size = new System.Drawing.Size(75, 23);
-            this.btSwitch3.TabIndex = 13;
-            this.btSwitch3.Text = "切换3";
-            this.btSwitch3.UseVisualStyleBackColor = true;
-            // 
             // btCurrentInfo
             // 
             this.btCurrentInfo.Location = new System.Drawing.Point(57, 263);
@@ -194,13 +189,66 @@
             this.btCurrentInfo.UseVisualStyleBackColor = true;
             this.btCurrentInfo.Click += new System.EventHandler(this.btCurrentInfo_Click);
             // 
+            // btMain
+            // 
+            this.btMain.Location = new System.Drawing.Point(57, 300);
+            this.btMain.Name = "btMain";
+            this.btMain.Size = new System.Drawing.Size(75, 23);
+            this.btMain.TabIndex = 15;
+            this.btMain.Text = "主图";
+            this.btMain.UseVisualStyleBackColor = true;
+            this.btMain.Click += new System.EventHandler(this.btMain_Click);
+            // 
+            // btMain2
+            // 
+            this.btMain2.Location = new System.Drawing.Point(138, 300);
+            this.btMain2.Name = "btMain2";
+            this.btMain2.Size = new System.Drawing.Size(75, 23);
+            this.btMain2.TabIndex = 16;
+            this.btMain2.Text = "主图2";
+            this.btMain2.UseVisualStyleBackColor = true;
+            // 
+            // btTestRegion
+            // 
+            this.btTestRegion.Location = new System.Drawing.Point(138, 12);
+            this.btTestRegion.Name = "btTestRegion";
+            this.btTestRegion.Size = new System.Drawing.Size(94, 23);
+            this.btTestRegion.TabIndex = 17;
+            this.btTestRegion.Text = "测试画图区块";
+            this.btTestRegion.UseVisualStyleBackColor = true;
+            this.btTestRegion.Click += new System.EventHandler(this.btTestRegion_Click);
+            // 
+            // btCross
+            // 
+            this.btCross.Location = new System.Drawing.Point(238, 12);
+            this.btCross.Name = "btCross";
+            this.btCross.Size = new System.Drawing.Size(94, 23);
+            this.btCross.TabIndex = 18;
+            this.btCross.Text = "测试画十字线";
+            this.btCross.UseVisualStyleBackColor = true;
+            this.btCross.Click += new System.EventHandler(this.btCross_Click);
+            // 
+            // btNavigate2
+            // 
+            this.btNavigate2.Location = new System.Drawing.Point(219, 80);
+            this.btNavigate2.Name = "btNavigate2";
+            this.btNavigate2.Size = new System.Drawing.Size(75, 23);
+            this.btNavigate2.TabIndex = 19;
+            this.btNavigate2.Text = "数据导航2";
+            this.btNavigate2.UseVisualStyleBackColor = true;
+            this.btNavigate2.Click += new System.EventHandler(this.btNavigate2_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(567, 342);
+            this.ClientSize = new System.Drawing.Size(567, 378);
+            this.Controls.Add(this.btNavigate2);
+            this.Controls.Add(this.btCross);
+            this.Controls.Add(this.btTestRegion);
+            this.Controls.Add(this.btMain2);
+            this.Controls.Add(this.btMain);
             this.Controls.Add(this.btCurrentInfo);
-            this.Controls.Add(this.btSwitch3);
             this.Controls.Add(this.btSwitch2);
             this.Controls.Add(this.btSwitch);
             this.Controls.Add(this.btReal2);
@@ -235,8 +283,12 @@
         private System.Windows.Forms.Button btReal2;
         private System.Windows.Forms.Button btSwitch;
         private System.Windows.Forms.Button btSwitch2;
-        private System.Windows.Forms.Button btSwitch3;
         private System.Windows.Forms.Button btCurrentInfo;
+        private System.Windows.Forms.Button btMain;
+        private System.Windows.Forms.Button btMain2;
+        private System.Windows.Forms.Button btTestRegion;
+        private System.Windows.Forms.Button btCross;
+        private System.Windows.Forms.Button btNavigate2;
     }
 }
 

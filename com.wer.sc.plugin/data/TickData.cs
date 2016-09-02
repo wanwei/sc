@@ -8,7 +8,7 @@ namespace com.wer.sc.data
 {
     public class TickData : ITickData
     {
-        public String code;
+        private String code;
 
         // 交易时间
         public double[] arr_time;
@@ -252,6 +252,19 @@ namespace com.wer.sc.data
             }
         }
 
+        public string Code
+        {
+            get
+            {
+                return code;
+            }
+
+            set
+            {
+                code = value;
+            }
+        }
+
         override
         public String ToString()
         {
@@ -266,6 +279,26 @@ namespace com.wer.sc.data
             sb.Append(SellPrice).Append(",");
             sb.Append(SellMount).Append(",");
             sb.Append(IsBuy ? 1 : 0);
+            return sb.ToString();
+        }
+
+        public String PrintAll()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("barpos:").Append(BarPos).Append("/r/n");
+            for (int i = 0; i < Length; i++)
+            {
+                sb.Append(Arr_Time[i]).Append(",");
+                sb.Append(Arr_Price[i]).Append(",");
+                sb.Append(Arr_Mount[i]).Append(",");
+                sb.Append(Arr_TotalMount[i]).Append(",");
+                sb.Append(Arr_Add[i]).Append(",");
+                sb.Append(Arr_BuyPrice[i]).Append(",");
+                sb.Append(Arr_BuyMount[i]).Append(",");
+                sb.Append(Arr_SellPrice[i]).Append(",");
+                sb.Append(Arr_SellMount[i]).Append(",");
+                sb.Append(Arr_IsBuy[i] ? 1 : 0).Append("/r/n");
+            }
             return sb.ToString();
         }
 

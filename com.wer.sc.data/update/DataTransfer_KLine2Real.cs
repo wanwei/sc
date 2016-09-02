@@ -16,19 +16,19 @@ namespace com.wer.sc.data.update
         public static List<IRealData> Convert(IKLineData data, float lastEndPrice)
         {
             DaySpliter splitter = new DaySpliter();
-            List<int[]> splitResult = splitter.Split(new KLineDataTimeGetter(data));
+            List<SplitterResult> splitResult = splitter.Split(new KLineDataTimeGetter(data));
 
             List<IRealData> realdataList = new List<IRealData>(splitResult.Count);
             for (int i = 0; i < splitResult.Count; i++)
             {
-                int[] split = splitResult[i];
-                int date = split[0];
-                int todayStartIndex = split[1];
+                SplitterResult split = splitResult[i];
+                int date = split.Date;
+                int todayStartIndex = split.Index;
                 int todayEndIndex;
                 if (i == splitResult.Count - 1)
                     todayEndIndex = data.Length - 1;
                 else
-                    todayEndIndex = splitResult[i + 1][1];
+                    todayEndIndex = splitResult[i + 1].Index;
                 int len = todayEndIndex - todayStartIndex + 1;
                 RealData r = new RealData(date, lastEndPrice, len);
                 r.code = data.Code;

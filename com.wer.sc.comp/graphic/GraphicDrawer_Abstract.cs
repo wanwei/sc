@@ -189,10 +189,10 @@ namespace com.wer.sc.comp.graphic
                     myBuffer.Dispose();
                     drawing = false;
                 }
-                //catch(Exception e)
-                //{
-                //    throw new ApplicationException("绘图错误", e);
-                //}
+                catch (Exception e)
+                {                    
+                    throw new ApplicationException(e.StackTrace, e);
+                }
                 finally
                 {
                     drawing = false;

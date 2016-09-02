@@ -48,8 +48,8 @@ namespace com.wer.sc.data.check
             int endDate = int.Parse(tbEndDate.Text);
             DataProviderWrap provider = this.providerDataMgr.GetProviders()[cbProvider.SelectedIndex];
             DataReaderFactory fac = new DataReaderFactory(provider.GetDataPath());
-
-            List<int> allDates = fac.OpenDateReader.GetOpenDates();
+            
+            List<int> allDates = fac.OpenDateReader.GetAllOpenDates();
             int startIndex = allDates.IndexOf(startDate);
             int endIndex = allDates.IndexOf(endDate);
             List<int> dates = allDates.GetRange(startIndex, endIndex - startIndex + 1);

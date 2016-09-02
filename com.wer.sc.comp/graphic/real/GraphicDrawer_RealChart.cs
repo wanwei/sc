@@ -52,6 +52,15 @@ namespace com.wer.sc.comp.graphic.real
             DrawReal(graphic, realData);
         }
 
+        public override void DrawGraph(Graphics graphic, Rectangle rect)
+        {
+            //TODO 只画区块
+            this.BlockWidth = this.DisplayRect.Width / (DataProvider.GetRealData().Length - 1);
+            IRealData realData = DataProvider.GetRealData();
+            DrawFrame(graphic, realData);
+            DrawReal(graphic, realData);
+        }
+
         private void DrawFrame(Graphics g, IRealData realData)
         {
             Rectangle rectangleScale = FrameRect;
@@ -95,16 +104,23 @@ namespace com.wer.sc.comp.graphic.real
         {
             Pen pen = new Pen(ColorConfig.Color_White, 1);
 
+            float lastx = PriceMapping.CalcX(0);
+            float lasty = PriceMapping.CalcY(realData.Arr_Price[0]); 
             for (int i = 1; i <= DataProvider.CurrentIndex; i++)
             {
                 float lastprice = realData.Arr_Price[i - 1];
                 float price = realData.Arr_Price[i];
+                //float lastprice = 2858f;
+                //float price = 2858f;
 
-                float x1 = PriceMapping.CalcX(i - 1);
-                float y1 = PriceMapping.CalcY(lastprice);
+                //float x1 = PriceMapping.CalcX(i - 1);
+                //float y1 = PriceMapping.CalcY(lastprice);
                 float x2 = PriceMapping.CalcX(i);
                 float y2 = PriceMapping.CalcY(price);
-                g.DrawLine(pen, x1, y1, x2, y2);
+                g.DrawLine(pen, lastx, lasty, x2, y2);
+
+                lastx = x2;
+                lasty = y2;
             }
         }
     }

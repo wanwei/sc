@@ -31,9 +31,18 @@ namespace com.wer.sc.comp.graphic.real
         /// <summary>
         /// 获取当前时间
         /// </summary>
-        double CurrentTime
+        double CurrentTime { get; }
+
+        //event DataChange
+    }
+
+    public delegate void DataChangeEventHandler(Object source, DataChangeEventArgs e);
+
+    public class DataChangeEventArgs : System.EventArgs
+    {
+        public DataChangeEventArgs()
         {
-            get;
-        }
+            
+        }        
     }
 }

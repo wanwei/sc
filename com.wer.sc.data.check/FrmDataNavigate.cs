@@ -1,4 +1,6 @@
-﻿using com.wer.sc.data.update;
+﻿using com.wer.sc.data.cache;
+using com.wer.sc.data.navigate;
+using com.wer.sc.data.update;
 using com.wer.sc.data.utils;
 using System;
 using System.Collections.Generic;
@@ -46,10 +48,13 @@ namespace com.wer.sc.data.check
 
             String code = tbCode.Text;
 
-            IKLineData minuteKLineData = fac.KLineDataReader.GetData(code, date, date, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1));
-            TickData tickData = fac.TickDataReader.GetTickData(code, date);
+            DataCacheFactory cacheFactory = new DataCacheFactory(fac);
+            IDataCache_Code cache = cacheFactory.CreateCache_Code(code);
 
-            KLineChartBuilder_FromTick builder = new KLineChartBuilder_FromTick(minuteKLineData, tickData, currentTime);
+            //IKLineData minuteKLineData = fac.KLineDataReader.GetData(code, date, date, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1));
+            //TickData tickData = fac.TickDataReader.GetTickData(code, date);
+
+            KLineChartBuilder_1Minute builder = new KLineChartBuilder_1Minute(cache.GetCache_CodeDate(date), currentTime);
             KLineChart chart = builder.GetCurrentChart();
 
             tbData.Clear();
@@ -105,11 +110,12 @@ namespace com.wer.sc.data.check
 
             DataProviderWrap dataProvider = providerDataMgr.GetProvider(cbProvider.SelectedItem.ToString());
             DataReaderFactory fac = dataProvider.GetFactory();
+            DataCacheFactory cacheFactory = new DataCacheFactory(fac);
             IKLineData klineData = fac.KLineDataReader.GetData(code, start, end, period);
-            IKLineData minuteKLineData = fac.KLineDataReader.GetData(code, date, date, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1));
-            TickData tickData = fac.TickDataReader.GetTickData(code, date);
+            //IKLineData minuteKLineData = fac.KLineDataReader.GetData(code, date, date, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1));
+            //TickData tickData = fac.TickDataReader.GetTickData(code, date);
 
-            CurrentKLineChartBuilder builder = new CurrentKLineChartBuilder(klineData, minuteKLineData, tickData, time);
+            KLineChartBuilder_AllPeriod builder = new KLineChartBuilder_AllPeriod(klineData, cacheFactory.CreateCache_Code(code, start, end), time);
             IKLineChart chart = builder.GetCurrentChart();
 
             tbData.Clear();
@@ -132,7 +138,7 @@ namespace com.wer.sc.data.check
             DataReaderFactory fac = dataProvider.GetFactory();
             DataNavigate navigate = new DataNavigate(fac);
 
-            
+
 
             //IKLineData klineData = fac.KLineDataReader.GetData(code, start, end, period);
             //IKLineData minuteKLineData = fac.KLineDataReader.GetData(code, date, date, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1));
@@ -151,7 +157,7 @@ namespace com.wer.sc.data.check
             for (int i = 0; i <= navigate.CurrentKLineIndex; i++)
             {
                 data.BarPos = i;
-                sb.Append(data).Append("\r\n");                
+                sb.Append(data).Append("\r\n");
             }
             tbData.AppendText(sb.ToString());
         }

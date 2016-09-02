@@ -11,11 +11,17 @@ namespace com.wer.sc.comp.graphic.utils
 {
     /// <summary>
     /// 十字线
-    /// 1.点击屏幕出现十字线
+    /// 1.点击屏幕出现十字线，再次点击会消失
     /// 2.十字线选中的block或者real可以显示详细信息
     /// 3.点左右按钮可以移动十字线
     /// 4.如果在最右端，继续右移整个k线向右移动；向左同理
-    /// 5.有十字线的时候再点击一次十字线消失
+    /// 5.当十字线显示的时候鼠标移动，它会跟随移动
+    /// 
+    /// 画图方法：
+    /// 1.点击屏幕：
+    /// 判断之前有没有
+    /// 2.
+    /// 3.点左右移动十字线
     /// </summary>
     public class CrossHairDrawer
     {
@@ -26,6 +32,8 @@ namespace com.wer.sc.comp.graphic.utils
         private CrossHairDataPrivider provider;
 
         private Point crossPoint;
+
+        private Point lastCrossPoint;
 
         private bool enable = true;
 
@@ -86,6 +94,7 @@ namespace com.wer.sc.comp.graphic.utils
             if (this.provider != null)
                 UnBind();
             this.provider = provider;
+            this.provider.CrossDrawer = this;
             this.control = provider.Control;
             this.control.MouseUp += Control_MouseUp;
             this.control.MouseMove += Control_MouseMove;
@@ -156,7 +165,6 @@ namespace com.wer.sc.comp.graphic.utils
         /// <returns>状态技术</returns>
         [DllImport("user32.dll", EntryPoint = "ShowCursor", CharSet = CharSet.Auto)]
         public static extern int ShowCursor(bool bShow);
-       
 
         private void Control_MouseUp(object sender, MouseEventArgs e)
         {
@@ -165,19 +173,38 @@ namespace com.wer.sc.comp.graphic.utils
             if (e.Button == MouseButtons.Left)
             {
                 Point p = e.Location;
-                Rectangle rec = provider.DrawRect;                
-                if (!rec.Contains(p)) {
+                Rectangle rec = provider.DrawRect;
+                if (!rec.Contains(p))
+                {
                     return;
                 }
-                
+
                 this.ShowCrossHair = !ShowCrossHair;
                 if (!this.ShowCrossHair)
                 {
                     this.selectIndex = -1;
                     provider.DoSelectIndexChange(selectIndex);
+                    //provider.DoRedraw()
+                    //RemoveLastCrossPoint()
+                    RemoveLastCrossPoint();
+                    return;
                 }
-                provider.DoRedraw();
+                //provider.DoRedraw();
+                DrawGraphic();
             }
+        }
+
+        private void DoRedraw(Rectangle rect)
+        {
+            BufferedGraphicsContext currentContext = BufferedGraphicsManager.Current;
+            BufferedGraphics myBuffer = currentContext.Allocate(control.CreateGraphics(), rect);
+            Graphics g = myBuffer.Graphics;
+
+            provider.DoRedraw(g, rect);
+
+            myBuffer.Render();
+            myBuffer.Dispose();
+            currentContext.Dispose();
         }
 
         private DateTime lastMouseMoveTime = DateTime.Now;
@@ -192,7 +219,7 @@ namespace com.wer.sc.comp.graphic.utils
             {
                 if (lastMouseMoveTime.AddTicks(50) < DateTime.Now)
                 {
-                    ChangeCrossPoint(GetMousePosition());                    
+                    ChangeCrossPoint(GetMousePosition());
                 }
             }
             else
@@ -238,6 +265,11 @@ namespace com.wer.sc.comp.graphic.utils
             return new Point(x, y);
         }
 
+        public void DrawGraphic()
+        {
+            this.DrawGraphic(control.CreateGraphics());
+        }
+
         public void DrawGraphic(Graphics g)
         {
             if (!enable)
@@ -245,12 +277,77 @@ namespace com.wer.sc.comp.graphic.utils
             if (ShowCrossHair)
             {
                 Pen pen = provider.Pen;
-                Rectangle rec = provider.DrawRect;                
+                Rectangle rec = provider.DrawRect;
                 g.DrawLine(pen, new Point(crossPoint.X, rec.Top), new Point(crossPoint.X, rec.Bottom));
                 g.DrawLine(pen, new Point(rec.X, crossPoint.Y), new Point(rec.Right, crossPoint.Y));
 
+                lastCrossPoint = crossPoint;
                 DrawCrossHairsPrice(g, crossPoint, rec);
             }
+        }
+
+        private void DrawCross()
+        {
+            if (lastCrossPoint.X >= 0)
+                RemoveLastCrossPoint();
+            Graphics g = control.CreateGraphics();
+            DrawCross(g);
+        }
+
+        private void DrawCross(Graphics g)
+        {
+            if (!showCrossHair)
+                return;
+            Rectangle rect = provider.DrawRect;
+            Pen pen = new Pen(Color.White);
+            g.DrawLine(pen, new Point(rect.X, crossPoint.Y), new Point(rect.Right / 2 - 2, crossPoint.Y));
+            g.DrawLine(pen, new Point(crossPoint.X, rect.Top), new Point(crossPoint.X, rect.Bottom));
+            lastCrossPoint = crossPoint;
+        }
+
+        private void RemoveLastCrossPoint()
+        {
+            RemoveLastCrossPoint(control.CreateGraphics(), lastCrossPoint);
+            lastCrossPoint.X = -1;
+            lastCrossPoint.Y = -1;
+        }
+
+        private void RemoveLastCrossPoint(Graphics g, Point p)
+        {
+            RemoveHorzonalLine(g, p);
+            RemoveVerticalLine(g, p);
+        }
+
+        private void RemoveHorzonalLine(Graphics g, Point point)
+        {
+            Rectangle rect = provider.DrawRect;
+            Rectangle drawRect = new Rectangle(rect.X, point.Y - 2, rect.Width, 4);
+
+            BufferedGraphicsContext currentContext = BufferedGraphicsManager.Current;
+            BufferedGraphics myBuffer = currentContext.Allocate(g, drawRect);
+            Graphics graphic = myBuffer.Graphics;
+
+            provider.DoRedraw(graphic, drawRect);
+
+            myBuffer.Render();
+            myBuffer.Dispose();
+            currentContext.Dispose();
+        }
+
+        private void RemoveVerticalLine(Graphics g, Point point)
+        {
+            Rectangle rect = provider.DrawRect;
+            Rectangle drawRect = new Rectangle(point.X - 2, rect.Y, 4, rect.Height);
+
+            BufferedGraphicsContext currentContext = BufferedGraphicsManager.Current;
+            BufferedGraphics myBuffer = currentContext.Allocate(g, drawRect);
+            Graphics graphic = myBuffer.Graphics;
+
+            provider.DoRedraw(graphic, drawRect);
+
+            myBuffer.Render();
+            myBuffer.Dispose();
+            currentContext.Dispose();
         }
 
         private void DrawCrossHairsPrice(Graphics g, Point point, Rectangle rec)
@@ -267,6 +364,11 @@ namespace com.wer.sc.comp.graphic.utils
     /// </summary>
     public interface CrossHairDataPrivider
     {
+        /// <summary>
+        /// 设置和得到十字线画线控件，在CrossHairDrawer的Bind方法里会进行设置
+        /// </summary>
+        CrossHairDrawer CrossDrawer { get; set; }
+
         /// <summary>
         /// 得到要画的控件
         /// </summary>
@@ -305,7 +407,16 @@ namespace com.wer.sc.comp.graphic.utils
         /// <param name="index"></param>
         void DoSelectIndexChange(int index);
 
+        /// <summary>
+        /// 重新绘制整个图形
+        /// </summary>
         void DoRedraw();
+
+        /// <summary>
+        /// 重新绘制，只绘制区块内的图
+        /// </summary>
+        /// <param name="rect"></param>
+        void DoRedraw(Graphics g, Rectangle rect);
 
         bool DoMoveNext();
 

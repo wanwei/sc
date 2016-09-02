@@ -92,6 +92,12 @@ namespace com.wer.sc.comp.graphic
         public override void BindControl(Control control)
         {
             base.BindControl(control);
+            BindOthers(control);
+        }
+
+        public void BindOthers(Control control)
+        {
+            this.control = control;
             CrossHairDataPrivider_Candle crossHairProvider = new CrossHairDataPrivider_Candle(this);
             crossHairDrawer.Bind(crossHairProvider);
         }
@@ -125,7 +131,11 @@ namespace com.wer.sc.comp.graphic
         {
             IKLineData data = dataProvider.GetKLineData();
             KLineChart_KLineData chart = new KLineChart_KLineData(data, index);
-            KLineChart_KLineData lastChart = new KLineChart_KLineData(data, index - 1);
+            KLineChart_KLineData lastChart;
+            if (index == 0)
+                lastChart = null;
+            else
+                lastChart = new KLineChart_KLineData(data, index - 1);
             return GetBlockInfo(chart, lastChart);
         }
 
@@ -168,10 +178,11 @@ namespace com.wer.sc.comp.graphic
             return price >= referPrice ? brushEarn : brushLose;
         }
     }
- 
+
     public class CrossHairDataPrivider_Candle : CrossHairDataPrivider
     {
         private GraphicDrawer_Candle drawer;
+        private CrossHairDrawer crossDrawer;
 
         public CrossHairDataPrivider_Candle(GraphicDrawer_Candle drawer)
         {
@@ -184,7 +195,19 @@ namespace com.wer.sc.comp.graphic
             if (this.AfterGraphicDraw != null)
                 this.AfterGraphicDraw(sender, e);
         }
+        
+        public CrossHairDrawer CrossDrawer
+        {
+            get
+            {
+                return crossDrawer;
+            }
 
+            set
+            {
+                this.crossDrawer = value;
+            }
+        }
         public Control Control
         {
             get
@@ -241,6 +264,11 @@ namespace com.wer.sc.comp.graphic
             this.drawer.DrawGraph();
         }
 
+        public void DoRedraw(Graphics g, Rectangle rect)
+        {
+
+        }
+
         public void DoSelectIndexChange(int index)
         {
             this.drawer.SelectIndex = index;
@@ -261,9 +289,11 @@ namespace com.wer.sc.comp.graphic
 
         public int[] IndexRange
         {
-            get {
+            get
+            {
                 return new int[] { drawer.DataProvider.StartIndex, drawer.DataProvider.EndIndex };
             }
         }
+
     }
 }

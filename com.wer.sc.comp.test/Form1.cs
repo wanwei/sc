@@ -101,5 +101,29 @@ namespace com.wer.sc.comp.test
             FrmGraphicDrawer_CurrentInfo frm = new FrmGraphicDrawer_CurrentInfo();
             frm.ShowDialog();
         }
+
+        private void btMain_Click(object sender, EventArgs e)
+        {
+            FrmGraphicDrawer_Main frm = new FrmGraphicDrawer_Main();
+            frm.ShowDialog();
+        }
+
+        private void btTestRegion_Click(object sender, EventArgs e)
+        {
+            FrmTestRegion frm = new FrmTestRegion();
+            frm.ShowDialog();
+        }
+
+        private void btCross_Click(object sender, EventArgs e)
+        {
+            FrmTestCross frm = new FrmTestCross();
+            frm.ShowDialog();
+        }
+
+        private void btNavigate2_Click(object sender, EventArgs e)
+        {
+            FrmGraphicDrawer_DataNavigate2 frm = new FrmGraphicDrawer_DataNavigate2();
+            frm.ShowDialog();
+        }
     }
 }

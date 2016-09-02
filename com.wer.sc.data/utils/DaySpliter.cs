@@ -8,13 +8,19 @@ namespace com.wer.sc.data.utils
 {
     public class DaySpliter
     {
-        public List<int[]> Split(TimeGetter timeGetter)
+        /// <summary>
+        /// 返回一个整型数组的list
+        /// 整型数组第一项是日期，第二项是index
+        /// </summary>
+        /// <param name="timeGetter"></param>
+        /// <returns></returns>
+        public List<SplitterResult> Split(TimeGetter timeGetter)
         {
             double lastTime = timeGetter.GetTime(0);
             double time = timeGetter.GetTime(1);
 
             //算法                
-            List<int[]> indeies = new List<int[]>(500);
+            List<SplitterResult> indeies = new List<SplitterResult>(500);
             int len = timeGetter.Count;
             int currentIndex = 0;
             bool hasNight = false;
@@ -28,7 +34,7 @@ namespace com.wer.sc.data.utils
                 //夜盘开始，则一定是新的一天开始
                 if (IsNightStart(time, lastTime))
                 {
-                    indeies.Add(new int[] { ((int)lastTime), currentIndex });
+                    indeies.Add(new SplitterResult((int)lastTime, currentIndex));
                     currentIndex = index;
                     hasNight = true;
                 }
@@ -41,14 +47,14 @@ namespace com.wer.sc.data.utils
                 //只要过了夜都算第二天的
                 else if (date != lastDate)
                 {
-                    indeies.Add(new int[] { ((int)lastTime), currentIndex });
+                    indeies.Add(new SplitterResult((int)lastTime, currentIndex));
                     currentIndex = index;
                 }
 
                 lastTime = time;
             }
             return indeies;
-        }        
+        }
 
         public static bool IsNightStart(double time, double lastTime)
         {
@@ -71,10 +77,10 @@ namespace com.wer.sc.data.utils
             return false;
         }
 
-        public static int GetTimeDate(float time, OpenDateReader openDateReader)
+        public static int GetTimeDate(double time, IOpenDateReader openDateReader)
         {
             int date = (int)time;
-            float t = time - date;
+            double t = time - date;
             if (t < 0.18)
                 return date;
             //openDateReader.GetOpenDates()
@@ -83,6 +89,43 @@ namespace com.wer.sc.data.utils
     }
 
 
+    public struct SplitterResult
+    {
+        private int date;
+        private int index;
+
+        public SplitterResult(int date, int index)
+        {
+            this.date = date;
+            this.index = index;
+        }
+
+        public int Date
+        {
+            get
+            {
+                return date;
+            }
+
+            set
+            {
+                date = value;
+            }
+        }
+
+        public int Index
+        {
+            get
+            {
+                return index;
+            }
+
+            set
+            {
+                index = value;
+            }
+        }
+    }
 
     public interface TimeGetter
     {
