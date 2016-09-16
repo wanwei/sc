@@ -31,5 +31,15 @@ namespace com.wer.sc.data
         {
             return code + "," + name + "," + catelog;
         }
+
+        public override bool Equals(object obj)
+        {
+            return this.ToString().Equals(obj.ToString());
+        }
+
+        public override int GetHashCode()
+        {
+            return code.GetHashCode();
+        }
     }
 }

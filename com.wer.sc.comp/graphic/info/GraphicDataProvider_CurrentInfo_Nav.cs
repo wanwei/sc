@@ -41,9 +41,9 @@ namespace com.wer.sc.comp.graphic.info
 
             //RealDataInfo r = reals[reals.Count - 1];
             //ChartInfo chart = charts[0];
-            IRealData realData = navigate.CurrentRealData;
+            ITimeLineData realData = navigate.CurrentRealData;
 
-            IRealChart realChart = realData.GetCurrentChart();
+            ITimeLineChart realChart = realData.GetCurrentChart();
             chartinfo.upRange = Math.Round(realChart.UpRange, 2);
             chartinfo.upPercent = realChart.UpPercent;
             chartinfo.upSpeed = 0;

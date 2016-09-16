@@ -1,4 +1,5 @@
-﻿using System;
+﻿using com.wer.sc.data.update;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,12 +19,17 @@ namespace com.wer.sc.data.cache.impl
 
         private IKLineData minuteKLineData;
 
-        public DataCache_CodeDate(DataReaderFactory dataReaderFactory, string code, int date, IKLineData minuteKLineData)
+        private ITimeLineData realData;
+
+        private float lastEndPrice;
+
+        internal DataCache_CodeDate(DataReaderFactory dataReaderFactory, string code, int date, IKLineData minuteKLineData, float lastEndPrice)
         {
             this.dataReaderFactory = dataReaderFactory;
             this.code = code;
             this.date = date;
             this.minuteKLineData = minuteKLineData;
+            this.lastEndPrice = lastEndPrice;
         }
 
         public String Code
@@ -59,9 +65,21 @@ namespace com.wer.sc.data.cache.impl
             return tickData;
         }
 
-        public IRealData GetRealData()
+        private Object lockObj_Real = new object();
+
+        public ITimeLineData GetRealData()
         {
-            return null;
+            if (realData == null)
+            {
+                lock (lockObj_Real)
+                {
+                    if (realData == null)
+                        realData = DataTransfer_KLine2TimeLine.ConvertTimeLineData(date, minuteKLineData, lastEndPrice);
+                }
+            }
+            //TODO realdata是可以被修改的，所以此处线程不安全
+            //应该给IRealData提供两个实现，一个是静态的，一个是动态的，缓存静态的实现，给外部生成时提供动态实现。
+            return realData;
         }
     }
 }

@@ -50,27 +50,33 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="ResourceGenerator.cs" />
-    <Compile Include="ResourceLoader.cs" />
-    <Compile Include="store\TestKLineDataIndex.cs" />
-    <Compile Include="TestKLineData.cs" />
-    <Compile Include="TestKLineDataReader.cs" />
-    <Compile Include="TestResourceLoader.cs" />
-    <Compile Include="update\TestDataTransfer_KLine2KLine.cs" />
-    <Compile Include="update\TestTickUpdate.cs" />
-    <Compile Include="update\MockDataProvider.cs" />
-    <Compile Include="update\TestDataTransfer_Tick2KLine.cs" />
-    <Compile Include="update\TestCodeUpdate.cs" />
+    <Compile Include="navigate\TestDataNavigate.cs" />
+    <Compile Include="navigate\TestDataNavigate_Night.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="DataTestUtils.cs" />
+    <Compile Include="ResourceLoader.cs" />
+    <Compile Include="store\TestCodeStore.cs" />
+    <Compile Include="store\TestKLineDataIndex.cs" />
+    <Compile Include="TestKLineData.cs" />
+    <Compile Include="TestKLineDataReader.cs" />
+    <Compile Include="TestResourceLoader.cs" />
+    <Compile Include="update\TestDataTransfer_KLine2KLine.cs" />
+    <Compile Include="update\TestDataTransfer_Tick2KLineGenerator.cs" />
+    <Compile Include="update\TestTickUpdate.cs" />
+    <Compile Include="update\MockDataProvider.cs" />
+    <Compile Include="update\TestDataTransfer_Tick2KLine.cs" />
+    <Compile Include="update\TestCodeUpdate.cs" />
     <Compile Include="store\TestGetBytes.cs" />
     <Compile Include="store\TestKLineDataStore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="store\TestTickDataStore.cs" />
     <Compile Include="update\TestKLineUpdater.cs" />
+    <Compile Include="utils\TestDaySplitter.cs" />
+    <Compile Include="utils\TestTickDataIndeier.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -80,10 +86,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AG05_20141230.csv" />
-    <None Include="Resources\codes.csv" />
     <None Include="Resources\DLm05.csv" />
     <None Include="Resources\m01_20131231.csv" />
     <None Include="Resources\m05_20040630.csv" />
+    <None Include="Resources\M05_20141229.csv" />
     <None Include="Resources\M05_20150106.csv" />
     <None Include="Resources\M13_20150105.csv" />
   </ItemGroup>
@@ -97,7 +103,84 @@
       <Name>com.wer.sc.plugin</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\TimePeriod_M01_20131202.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TimePeriod_M05_20141229.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TimePeriod_M05_20141230.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TimePeriod_M05_20150629.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TimePeriod_M05_20150624.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Tick2Charts_M01_20131202.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Tick2Charts_M05_20141230.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Tick2Charts_M05_20150624.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Tick2Charts_M05_20141229.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Tick2Charts_M05_20150504.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Tick2Charts_M05_20150506.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Tick2Charts_M05_20040630.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AG05_20141230_Result.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\M05_20150106_Result.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Tick2Kline_M01_20131202_20131213.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Tick2Kline_M05_20131202_20131231.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Tick2Kline_M01_20131202_20131213_15Second.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TimePeriod_M05_20141229_5Second.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Kline2Kline_M05_20131216_20131231_5Minute.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Kline2Kline_M05_20131216_20131231_15Minute.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Kline2Kline_M05_20131216_20131231_1Hour.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DaySplit_M05_20131201_20131231.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DaySplit_M05_20141229_20150115.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DaySplit_M05_20150625_20150715.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Store_Code.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Store_Catelog.txt" />
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

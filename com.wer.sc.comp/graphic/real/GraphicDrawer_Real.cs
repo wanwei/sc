@@ -157,7 +157,7 @@ namespace com.wer.sc.comp.graphic.real
 
         public SelectedPointInfo GetBlockInfo(int index, int timeIndex)
         {
-            IRealData data = dataProvider.GetRealData();
+            ITimeLineData data = dataProvider.GetRealData();
 
             SelectedPointInfo info = new SelectedPointInfo();
             info.LineHeight = 20;
@@ -207,7 +207,7 @@ namespace com.wer.sc.comp.graphic.real
 
         private int GetHoldAdd(int index)
         {
-            IRealData data = dataProvider.GetRealData();
+            ITimeLineData data = dataProvider.GetRealData();
             if (index == 0)
                 return data.Arr_Hold[0];
             return (data.Arr_Hold[index] - data.Arr_Hold[index - 1]);

@@ -13,13 +13,13 @@ namespace com.wer.sc.utils
     /// <typeparam name="T"></typeparam>
     public class ReadOnlyList_TmpValue<T> : IList<T>
     {
-        private T[] array;
+        private IList<T> array;
 
         private int tmpIndex = -1;
 
         private T tmpValue;
 
-        public ReadOnlyList_TmpValue(T[] array)
+        public ReadOnlyList_TmpValue(IList<T> array)
         {
             this.array = array;
         }
@@ -43,7 +43,7 @@ namespace com.wer.sc.utils
         {
             get
             {
-                return array.Length;
+                return array.Count;
             }
         }
 
@@ -73,13 +73,13 @@ namespace com.wer.sc.utils
 
         public int IndexOf(T item)
         {
-            return Array.IndexOf(this.array, item);
+            return this.array.IndexOf(item);
         }
 
-        public T[] GetArray()
-        {
-            return array;
-        }
+        //public T[] GetArray()
+        //{
+        //    return array;
+        //}
 
         public void SetTmpValue(int index, T value)
         {

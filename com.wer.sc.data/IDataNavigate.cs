@@ -23,7 +23,7 @@ namespace com.wer.sc.data
         /// <summary>
         /// 得到当前分时数据
         /// </summary>
-        IRealData CurrentRealData { get; }
+        ITimeLineData CurrentRealData { get; }
 
         int CurrentRealIndex { get; }
 
@@ -53,12 +53,12 @@ namespace com.wer.sc.data
         /// <summary>
         /// 设置或获取导航的开始日期
         /// </summary>
-        int StartDate { get; set; }
+        int StartDate { get;  }
 
         /// <summary>
         /// 设置或获取导航的结束时间
         /// </summary>
-        int EndDate { get; set; }
+        int EndDate { get; }
 
         /// <summary>
         /// 得到当前股票或期货代码
@@ -81,7 +81,7 @@ namespace com.wer.sc.data
         /// 得到当前的分时线
         /// </summary>
         /// <returns></returns>
-        IRealData GetRealData();
+        ITimeLineData GetRealData();
 
         /// <summary>
         /// 得到今日的TICK数据

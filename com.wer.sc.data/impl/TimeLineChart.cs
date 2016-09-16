@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace com.wer.sc.data
 {
-    public class RealChart : RealChart_Abstract
+    public class TimeLineChart : TimeLineChart_Abstract
     {
         private string code;
 

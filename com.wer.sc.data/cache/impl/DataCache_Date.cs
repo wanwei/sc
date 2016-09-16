@@ -10,7 +10,7 @@ namespace com.wer.sc.data.cache.impl
     {
         private DataReaderFactory dataReaderFac;
 
-        private Dictionary<DayDataKey, IRealData> dicRealData = new Dictionary<DayDataKey, IRealData>();
+        private Dictionary<DayDataKey, ITimeLineData> dicRealData = new Dictionary<DayDataKey, ITimeLineData>();
 
         private List<DayDataKey> keies = new List<DayDataKey>();
 
@@ -29,13 +29,13 @@ namespace com.wer.sc.data.cache.impl
             return dataReaderFac.KLineDataReader.GetData(code, date, date, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1));
         }
 
-        public IRealData GetRealData(string code, int date)
+        public ITimeLineData GetRealData(string code, int date)
         {
             DayDataKey key = new DayDataKey(code, date);
             if (dicRealData.ContainsKey(key))
                 return dicRealData[key];
 
-            IRealData realdata = dataReaderFac.RealDataReader.GetData(code, date);
+            ITimeLineData realdata = dataReaderFac.RealDataReader.GetData(code, date);
             if (keies.Count > 10)
             {
                 DayDataKey firstKey = keies[0];

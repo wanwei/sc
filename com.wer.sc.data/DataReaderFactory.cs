@@ -1,4 +1,5 @@
-﻿using com.wer.sc.data.navigate;
+﻿using com.wer.sc.data.cache;
+using com.wer.sc.data.navigate;
 using com.wer.sc.data.reader;
 using System;
 using System.Collections.Generic;
@@ -17,8 +18,10 @@ namespace com.wer.sc.data
         private OpenDateReader openDateReader;
         private TickDataReader tickDataReader;
         private KLineDataReader klineDataReader;
-        private RealDataReader realDataReader;
+        private TimeLineDataReader realDataReader;
         private DataNavigate dataNavigate;
+        private DataCacheFactory cacheFactory;
+        private DataNavigateMgr dataNavigateMgr;
 
         public DataReaderFactory(String dataPath)
         {
@@ -28,8 +31,10 @@ namespace com.wer.sc.data
             this.openDateReader = new OpenDateReader(PathUtils.GetOpenDatePath());
             this.tickDataReader = new TickDataReader(dataPath);
             this.klineDataReader = new KLineDataReader(dataPath);
-            this.realDataReader = new RealDataReader(dataPath);
+            this.realDataReader = new TimeLineDataReader(this);
             this.dataNavigate = new DataNavigate(this);
+            this.cacheFactory = new DataCacheFactory(this);
+            this.dataNavigateMgr = new DataNavigateMgr(this);
         }
 
         public ICodeReader CodeReader
@@ -47,7 +52,7 @@ namespace com.wer.sc.data
             get { return klineDataReader; }
         }
 
-        public RealDataReader RealDataReader
+        public TimeLineDataReader RealDataReader
         {
             get { return realDataReader; }
         }
@@ -65,6 +70,22 @@ namespace com.wer.sc.data
         public DataPathUtils PathUtils
         {
             get { return pathUtils; }
+        }
+
+        public DataCacheFactory CacheFactory
+        {
+            get
+            {
+                return cacheFactory;
+            }
+        }
+
+        public DataNavigateMgr DataNavigateMgr
+        {
+            get
+            {
+                return dataNavigateMgr;
+            }
         }
     }
 }

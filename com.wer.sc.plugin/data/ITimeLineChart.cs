@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace com.wer.sc.data
 {
-    public interface IRealChart
+    public interface ITimeLineChart
     {
         string Code { get; }
 

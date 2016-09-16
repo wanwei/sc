@@ -1,17 +1,12 @@
 ﻿using com.wer.sc.data.cache;
 using com.wer.sc.data.utils;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace com.wer.sc.data.navigate
 {
     /// <summary>
     /// 当前k线数据获得
     /// </summary>
-    public class KLineChartBuilder_AllPeriod
+    public class RealTimeDataBuilder_KLine
     {
         private IDataCache_Code dataCache_Code;
 
@@ -19,9 +14,9 @@ namespace com.wer.sc.data.navigate
 
         private IKLineData klineData;
 
-        private KLineChartBuilder_1Minute klineChartBuilder_1Minute;
+        private RealTimeDataBuilder_DayData klineChartBuilder_1Minute;
 
-        public KLineChartBuilder_1Minute ChartBuilder_FromTick
+        public RealTimeDataBuilder_DayData ChartBuilder_FromTick
         {
             get { return klineChartBuilder_1Minute; }
         }
@@ -45,7 +40,7 @@ namespace com.wer.sc.data.navigate
             get { return klineData.Code; }
         }
 
-        public KLineChartBuilder_AllPeriod(IKLineData srcData, IDataCache_Code cache_Code, double currentTime)
+        public RealTimeDataBuilder_KLine(IKLineData srcData, IDataCache_Code cache_Code, double currentTime)
         {
             this.dataCache_Code = cache_Code;
             this.klineData = srcData;
@@ -60,13 +55,14 @@ namespace com.wer.sc.data.navigate
             //1分钟线可以正常显示
             //日线需要将            
 
-            int date = DaySpliter.GetTimeDate(time, dataCache_Code.GetCodeOpenDateReader());
+            int date = DaySpliter.GetTimeDate(time, dataCache_Code.GetOpenDateReader());
             if (currentDate != date)
             {
                 //TODO 将以前生成的klineChartBuilder_1Minute cache下来
                 this.currentDataCache_CodeDate = dataCache_Code.GetCache_CodeDate(date);
-                this.klineChartBuilder_1Minute = new KLineChartBuilder_1Minute(currentDataCache_CodeDate, currentTime);
-            }            
+                this.klineChartBuilder_1Minute = new RealTimeDataBuilder_DayData(currentDataCache_CodeDate, time);
+                this.currentDate = date;
+            }
 
             int index = klineData.IndexOfTime(time);
             double t = klineData.Arr_Time[index];
@@ -74,6 +70,7 @@ namespace com.wer.sc.data.navigate
             IKLineData todayMinuteKLineData = klineChartBuilder_1Minute.MinuteKlineData;
             KLineChart currentMinuteChart = klineChartBuilder_1Minute.GetCurrentChart();
 
+            //TODO 这里最多只支持到日线，两日线或以上不支持
             int startIndex;
             if (t == (int)t)
                 startIndex = 0;
@@ -81,11 +78,9 @@ namespace com.wer.sc.data.navigate
                 startIndex = todayMinuteKLineData.IndexOfTime(t);
             int endIndex = todayMinuteKLineData.IndexOfTime(currentMinuteChart.Time);
 
-            //TODO 下面算法不好，在多线程下会有问题
-            ((KLineData)todayMinuteKLineData).ChangeChart(currentMinuteChart, endIndex);
-            this.currentChart = todayMinuteKLineData.GetAggrChart(startIndex, endIndex);
-            ((KLineData)todayMinuteKLineData).ChangeChart(null);
-
+            IKLineChart currentChart = todayMinuteKLineData.GetAggrChart(startIndex, endIndex - 1);
+            KLineChartMerge.Merge((KLineChart)currentChart, currentMinuteChart);
+            this.currentChart = currentChart;
             this.currentTime = time;
         }
 

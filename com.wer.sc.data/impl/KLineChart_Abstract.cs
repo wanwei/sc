@@ -8,23 +8,23 @@ namespace com.wer.sc.data
 {
     public abstract class KLineChart_Abstract : IKLineChart
     {
-        public abstract string Code { get; }
+        public abstract string Code { get; set; }
 
-        public abstract double Time { get; }
+        public abstract double Time { get; set; }
 
-        public abstract float Start { get; }
+        public abstract float Start { get; set; }
 
-        public abstract float High { get; }
+        public abstract float High { get; set; }
 
-        public abstract float Low { get; }
+        public abstract float Low { get; set; }
 
-        public abstract float End { get; }
+        public abstract float End { get; set; }
 
-        public abstract int Mount { get; }
+        public abstract int Mount { get; set; }
 
-        public abstract float Money { get; }
+        public abstract float Money { get; set; }
 
-        public abstract int Hold { get; }
+        public abstract int Hold { get; set; }
 
         public float Height
         {
@@ -118,14 +118,15 @@ namespace com.wer.sc.data
         public override String ToString()
         {
             StringBuilder sb = new StringBuilder();
+            sb.Append(Code).Append(",");
             sb.Append(Time).Append(",");
             sb.Append(Start).Append(",");
             sb.Append(High).Append(",");
             sb.Append(Low).Append(",");
             sb.Append(End).Append(",");
-            sb.Append(Mount);
-            //sb.Append(mount()).Append(",");
-            //sb.Append(hold());
+            sb.Append(Mount).Append(",");
+            sb.Append(Money).Append(",");
+            sb.Append(Hold);
             return sb.ToString();
         }
     }

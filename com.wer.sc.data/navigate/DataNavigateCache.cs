@@ -9,8 +9,10 @@ namespace com.wer.sc.data.navigate
 
     public class DataNavigateCache
     {
+        private Dictionary<string, DataNavigate> dicNavigate = new Dictionary<string, DataNavigate>();        
+
         public IKLineData GetData(String code, KLinePeriod period, float time)
-        {
+        {            
             return null;
         }
     }

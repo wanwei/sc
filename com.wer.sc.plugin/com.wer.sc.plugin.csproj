@@ -53,8 +53,8 @@
     <Compile Include="ana\ZbRegisterAttribute.cs" />
     <Compile Include="data\CodeInfo.cs" />
     <Compile Include="data\IKLineData.cs" />
-    <Compile Include="data\IRealChart.cs" />
-    <Compile Include="data\IRealData.cs" />
+    <Compile Include="data\ITimeLineChart.cs" />
+    <Compile Include="data\ITimeLineData.cs" />
     <Compile Include="data\ITickChart.cs" />
     <Compile Include="data\ITickData.cs" />
     <Compile Include="data\KLineDataMath.cs" />

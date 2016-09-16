@@ -47,10 +47,15 @@ namespace com.wer.sc.data.store
             if (!File.Exists(path))
                 return new List<CodeInfo>();
             String[] strs = File.ReadAllLines(path);
+            return GetCodes(strs);
+        }
+
+        public static List<CodeInfo> GetCodes(string[] strs)
+        {
             List<CodeInfo> codes = new List<CodeInfo>();
             for (int i = 0; i < strs.Length; i++)
             {
-                String line = strs[i];
+                String line = strs[i].Trim();
                 String[] arr = line.Split(',');
                 codes.Add(new CodeInfo(arr[0], arr[1], arr[2]));
             }

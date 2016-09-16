@@ -16,7 +16,7 @@ namespace com.wer.sc.comp.test
 
         private int date = 20150108;
 
-        private IRealData data;
+        private ITimeLineData data;
 
         public MockGraphicDataProvider_Real()
         {
@@ -48,12 +48,12 @@ namespace com.wer.sc.comp.test
             }
         }
 
-        public IRealChart GetCurrentChart()
+        public ITimeLineChart GetCurrentChart()
         {
             return data.GetCurrentChart();
         }
 
-        public IRealData GetRealData()
+        public ITimeLineData GetRealData()
         {
             return data;
         }

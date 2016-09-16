@@ -1,8 +1,5 @@
-﻿using System;
+﻿using com.wer.sc.data.reader;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace com.wer.sc.data.utils
 {
@@ -16,18 +13,21 @@ namespace com.wer.sc.data.utils
         /// </summary>
         private List<int> dates = new List<int>();
 
+        private OpenDateCache openDateCache;
+
         /// <summary>
         /// k线数据里所有日期开始位置对应节点
         /// </summary>
-        private Dictionary<double, int> dicDateSplitter = new Dictionary<double, int>();
-
-        private Dictionary<double, int> dic = new Dictionary<double, int>();
+        private Dictionary<int, int> dicDateStartIndex = new Dictionary<int, int>();
 
         private IKLineData klineData;
 
-        public KLineDataIndeier(IKLineData data)
+        private IOpenDateReader openDateReader;
+
+        public KLineDataIndeier(IKLineData data, IOpenDateReader openDateReader)
         {
             this.klineData = data;
+            this.openDateReader = openDateReader;
             this.DoIndex();
         }
 
@@ -41,27 +41,41 @@ namespace com.wer.sc.data.utils
 
         private void DoIndex()
         {
-            for (int i = 0; i < klineData.Length; i++)
+            KLineTimeGetter timeGetter = new KLineTimeGetter(this.klineData);
+            List<SplitterResult> splitResults = DaySpliter.Split(timeGetter, openDateReader);
+            for (int i = 0; i < splitResults.Count; i++)
             {
-                double time = klineData.Arr_Time[i];
+                SplitterResult result = splitResults[i];
+                dates.Add(result.Date);
+                dicDateStartIndex.Add(result.Date, result.Index);
+                this.openDateCache = new OpenDateCache(dates);
             }
         }
 
         public int GetTimeDate(double time)
         {
-
-            return -1;
+            return DaySpliter.GetTimeDate(time, openDateCache);
         }
 
         public int GetTimeDateIndex(double time)
         {
+
             return -1;
         }
 
         public int GetTimeIndex(double time)
         {
-            //TODO 现在仅简单处理
-            return GetTimeIndex(time, 0);
+            if (klineData.Period.PeriodType == KLinePeriod.TYPE_DAY)
+            {
+                //TODO 现在只支持1日线，2日及以上不支持
+                int timeDate = (int)time;
+                int index = GetTimeIndex(timeDate, 0);
+                return DaySpliter.IsNight(time) ? index + 1 : index;
+            }
+
+            int date = GetTimeDate(time);
+            int dateStartIndex = dicDateStartIndex[date];
+            return GetTimeIndex(time, dateStartIndex);
         }
 
         private int GetTimeIndex(double time, int startIndex)
@@ -77,6 +91,28 @@ namespace com.wer.sc.data.utils
             }
 
             return -1;
+        }
+    }
+
+    public class KLineTimeGetter : TimeGetter
+    {
+        private IKLineData klineData;
+        public KLineTimeGetter(IKLineData klineData)
+        {
+            this.klineData = klineData;
+        }
+
+        public int Count
+        {
+            get
+            {
+                return klineData.Length;
+            }
+        }
+
+        public double GetTime(int index)
+        {
+            return klineData.Arr_Time[index];
         }
     }
 }

@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace com.wer.sc.data
 {
-    public class RealChart_RealData : RealChart_Abstract
+    public class TimeLineChart_RealData : TimeLineChart_Abstract
     {
-        private IRealData realData;
+        private ITimeLineData realData;
         private int index;
 
-        public RealChart_RealData(IRealData realData, int index)
+        public TimeLineChart_RealData(ITimeLineData realData, int index)
         {
             this.realData = realData;
             this.index = index;
@@ -108,7 +108,7 @@ namespace com.wer.sc.data
             }
         }
 
-        public IRealData RealData
+        public ITimeLineData RealData
         {
             get
             {

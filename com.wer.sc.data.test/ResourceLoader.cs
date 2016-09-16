@@ -12,21 +12,21 @@ namespace com.wer.sc.data
 {
     public class ResourceLoader
     {
-        public static TickData LoadTickData()
+        public static TickData LoadTickData_M01_20131231()
         {
             String csv = Resources.m01_20131231;
             String[] lines = csv.Split("\r".ToCharArray());
-            return ReadLinesToTickData(lines);
+            return ReadLinesToTickData("m01", lines);
         }
 
-        public static TickData LoadTickData2()
+        public static TickData LoadTickData_AG05_20141230()
         {
             String csv = Resources.AG05_20141230;
             String[] lines = csv.Split("\r".ToCharArray());
-            return ReadLinesToTickData(lines);
+            return ReadLinesToTickData("ag05", lines);
         }
 
-        public static TickData LoadTickData_Night()
+        public static TickData LoadTickData_M05_20150106()
         {
             String csv = Resources.M05_20150106;
             String[] lines = csv.Split("\r".ToCharArray());
@@ -35,8 +35,8 @@ namespace com.wer.sc.data
 
         private static TickData ReadLinesToTickData2(string[] lines)
         {
-            TickData data = new TickData(lines.Length-1);
-            for (int i = 0; i < lines.Length-1; i++)
+            TickData data = new TickData(lines.Length - 1);
+            for (int i = 0; i < lines.Length - 1; i++)
             {
                 String line = lines[i];
                 if (line.Equals(""))
@@ -89,31 +89,31 @@ namespace com.wer.sc.data
             get { return System.Environment.CurrentDirectory + "\\data\\"; }
         }
 
-        public static List<CodeInfo> GetCodes()
-        {
-            String csv = Resources.codes;
-            String[] lines = csv.Split("\r".ToCharArray());
-            List<CodeInfo> codeList = new List<CodeInfo>();
-            TickData data = new TickData(lines.Length);
-            //int loopLength = Append ? lines.Length - 1 : lines.Length - 101;
-            for (int i = 0; i < lines.Length; i++)
-            {
-                String line = lines[i];
-                if (line.Equals(""))
-                    continue;
-                String[] dataArr = line.Split(',');
-                if (dataArr.Length < 3)
-                    continue;
-                CodeInfo strs = new CodeInfo();
-                String d1 = dataArr[0];
-                if (d1.StartsWith("\n"))
-                    d1 = d1.Substring(1);
-                strs.code = d1;
-                strs.catelog = dataArr[4];
-                codeList.Add(strs);
-            }
-            return codeList;
-        }
+        //public static List<CodeInfo> GetCodes()
+        //{
+        //    String csv = Resources.codes;
+        //    String[] lines = csv.Split("\r".ToCharArray());
+        //    List<CodeInfo> codeList = new List<CodeInfo>();
+        //    TickData data = new TickData(lines.Length);
+        //    //int loopLength = Append ? lines.Length - 1 : lines.Length - 101;
+        //    for (int i = 0; i < lines.Length; i++)
+        //    {
+        //        String line = lines[i];
+        //        if (line.Equals(""))
+        //            continue;
+        //        String[] dataArr = line.Split(',');
+        //        if (dataArr.Length < 3)
+        //            continue;
+        //        CodeInfo strs = new CodeInfo();
+        //        String d1 = dataArr[0];
+        //        if (d1.StartsWith("\n"))
+        //            d1 = d1.Substring(1);
+        //        strs.code = d1;
+        //        strs.catelog = dataArr[4];
+        //        codeList.Add(strs);
+        //    }
+        //    return codeList;
+        //}
 
         public static List<int> GetOpenDates()
         {
@@ -135,13 +135,14 @@ namespace com.wer.sc.data
             if (!File.Exists(path))
                 return null;
             String[] lines = File.ReadAllLines(path);
-            return ReadLinesToTickData(lines);
+            return ReadLinesToTickData(code, lines);
         }
 
-        public static TickData ReadLinesToTickData(string[] lines)
+        public static TickData ReadLinesToTickData(string code, string[] lines)
         {
             int cnt = GetEmptyLines(lines);
             TickData data = new TickData(lines.Length - 1 - cnt);
+            data.Code = code.ToUpper();
             for (int i = 0; i < lines.Length - 1 - cnt; i++)
             {
                 String line = lines[i + 1];
@@ -224,6 +225,21 @@ namespace com.wer.sc.data
         {
             String path = DataPath + fileName;
             return File.ReadAllLines(path);
+        }
+
+        public static DataReaderFactory GetDefaultDataReaderFactory()
+        {
+            return new DataReaderFactory(@"d:\scdata\cnfutures\");
+        }
+
+        public static String GetTestOutputPath()
+        {
+            return @"d:\sctest\datatest\";
+        }
+
+        public static String GetTestOutputPath(String path)
+        {
+            return @"d:\sctest\datatest\" + path;
         }
     }
 }

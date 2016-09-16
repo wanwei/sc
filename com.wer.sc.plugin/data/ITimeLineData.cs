@@ -2,7 +2,7 @@
 
 namespace com.wer.sc.data
 {
-    public interface IRealData
+    public interface ITimeLineData
     {
         string Code { get; }
 
@@ -11,6 +11,10 @@ namespace com.wer.sc.data
         int Date { get; }
 
         int BarPos { get; set; }
+
+        int IndexOfTime(double time);
+
+        void SetBarPosByTime(double time);
 
         double Time { get; }
 
@@ -24,9 +28,9 @@ namespace com.wer.sc.data
 
         float UpRange { get; }
 
-        IRealChart GetCurrentChart();
+        ITimeLineChart GetCurrentChart();
 
-        IRealChart GetCurrentChart(int index);
+        ITimeLineChart GetCurrentChart(int index);
 
         #region 完整数据信息
 
@@ -42,9 +46,7 @@ namespace com.wer.sc.data
 
         IList<float> Arr_UpPercent { get; }
 
-        IList<float> Arr_UpRange { get; }
-
-        int IndexOfTime(double time);
+        IList<float> Arr_UpRange { get; }        
 
         #endregion
 

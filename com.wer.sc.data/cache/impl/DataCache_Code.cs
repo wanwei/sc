@@ -1,4 +1,5 @@
 ﻿using com.wer.sc.data.reader;
+using com.wer.sc.data.utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,17 +18,17 @@ namespace com.wer.sc.data.cache.impl
 
         private int endDate;
 
-        private OpenDateCache cache;
+        private OpenDateCache openDateCache;
 
         private MinuteKLineData_DateGetter minuteDataGetter;
 
         private IKLineData dayKLineData;
 
-        private List<int> cachedDates = new List<int>();
+        private List<int> cachedKeies = new List<int>();
 
         private Dictionary<int, DataCache_CodeDate> dicDateCache = new Dictionary<int, DataCache_CodeDate>();
 
-        private int maxCacheDateCount = 20;        
+        private int maxCacheDateCount = 20;
 
         internal DataCache_Code(DataReaderFactory dataReaderFactory, string code)
         {
@@ -51,9 +52,14 @@ namespace com.wer.sc.data.cache.impl
             this.dataReaderFactory = dataReaderFactory;
 
             IKLineData minuteKLineData = dataReaderFactory.KLineDataReader.GetData(code, startDate, endDate, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1));
-            this.minuteDataGetter = new MinuteKLineData_DateGetter(minuteKLineData);
-            this.cache = new OpenDateCache(this.minuteDataGetter.GetOpenDates());
+            this.minuteDataGetter = new MinuteKLineData_DateGetter(minuteKLineData, dataReaderFactory.OpenDateReader);
+            this.openDateCache = new OpenDateCache(this.minuteDataGetter.GetOpenDates());
             this.dayKLineData = dataReaderFactory.KLineDataReader.GetData(code, startDate, endDate, new KLinePeriod(KLinePeriod.TYPE_DAY, 1));
+        }
+
+        public string Code
+        {
+            get { return code; }
         }
 
         public int StartDate
@@ -64,11 +70,20 @@ namespace com.wer.sc.data.cache.impl
         public int EndDate
         {
             get { return endDate; }
-        }        
+        }
 
-        public IOpenDateReader GetCodeOpenDateReader()
+        public IOpenDateReader GetOpenDateReader()
         {
-            return cache;
+            return openDateCache;
+        }
+
+        public int GetOpenDate(double time)
+        {
+            int date = (int)time;
+            if (!DaySpliter.IsNight(time))
+                return date;
+
+            return openDateCache.GetNextOpenDate(date);
         }
 
         public int MaxCacheDateCount
@@ -101,17 +116,23 @@ namespace com.wer.sc.data.cache.impl
                     return dicDateCache[date];
 
                 IKLineData klineData = minuteDataGetter.GetKLineData(date);
-                DataCache_CodeDate cache = new DataCache_CodeDate(dataReaderFactory, code, date, klineData);
-                if (cachedDates.Count > maxCacheDateCount)
+                DataCache_CodeDate cache = new DataCache_CodeDate(dataReaderFactory, code, date, klineData, minuteDataGetter.LastEndPrice(date));
+                if (cachedKeies.Count > maxCacheDateCount)
                 {
-                    int removeDate = cachedDates[0];
-                    cachedDates.RemoveAt(0);
-                    dicDateCache.Remove(removeDate);
+                    int removedKey = cachedKeies[0];
+                    cachedKeies.RemoveAt(0);
+                    dicDateCache.Remove(removedKey);
                 }
-                cachedDates.Add(date);
+                cachedKeies.Add(date);
                 dicDateCache.Add(date, cache);
                 return cache;
             }
+        }
+
+        public IDataCache_CodeDate GetCache_CodeDate(double time)
+        {
+            int date = GetOpenDate(time);
+            return GetCache_CodeDate(date);
         }
     }
 
@@ -121,9 +142,9 @@ namespace com.wer.sc.data.cache.impl
 
         private Dictionary<int, IKLineData> dicDateKLineData = new Dictionary<int, IKLineData>();
 
-        public MinuteKLineData_DateGetter(IKLineData klineData)
+        public MinuteKLineData_DateGetter(IKLineData klineData, IOpenDateReader openDateReader)
         {
-            dataGetter = new DayMinuteKLineDataGetter(klineData);
+            dataGetter = new DayMinuteKLineDataGetter(klineData, openDateReader);
         }
 
         public IKLineData GetKLineData(int date)
@@ -135,6 +156,11 @@ namespace com.wer.sc.data.cache.impl
                 return null;
             dicDateKLineData.Add(date, klineData);
             return klineData;
+        }
+
+        public float LastEndPrice(int date)
+        {
+            return dataGetter.LastEndPrice(date);
         }
 
         public List<int> GetOpenDates()

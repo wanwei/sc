@@ -8,18 +8,19 @@ using System.Threading.Tasks;
 
 namespace com.wer.sc.data.reader
 {
-    public class RealDataReader : IRealDataReader
+    public class TimeLineDataReader : ITimeLineDataReader
     {
+        private DataReaderFactory dataReaderFactory;
         private string dataPath;
         private DataPathUtils utils;
 
-        public RealDataReader(string dataPath)
+        public TimeLineDataReader(DataReaderFactory dataReaderFactory)
         {
-            this.dataPath = dataPath;
-            this.utils = new DataPathUtils(this.dataPath);
+            this.dataReaderFactory = dataReaderFactory;
+            this.utils = dataReaderFactory.PathUtils;
         }
 
-        public IRealData GetData(String code, int date)
+        public ITimeLineData GetData(String code, int date)
         {
             String path = utils.GetKLineDataPath(code, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1));
             KLineDataStore store = new KLineDataStore(path);
@@ -27,13 +28,13 @@ namespace com.wer.sc.data.reader
             KLineDataIndexResult result = store.LoadIndex();
             if (!result.IndexDic.Keys.Contains(date))
                 return null;
-            List<IRealData> dataList = GetData(code, date, date, store, result);
+            List<ITimeLineData> dataList = GetData(code, date, date, store, result);
             if (dataList.Count == 0)
                 return null;
             return dataList[0];
         }
 
-        public List<IRealData> GetData(String code, int startDate, int endDate)
+        public List<ITimeLineData> GetData(String code, int startDate, int endDate)
         {
             String path = utils.GetKLineDataPath(code, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1));
             KLineDataStore store = new KLineDataStore(path);
@@ -41,7 +42,7 @@ namespace com.wer.sc.data.reader
             return GetData(code, startDate, endDate, store, result);
         }
 
-        private List<IRealData> GetData(String code, int startDate, int endDate, KLineDataStore store, KLineDataIndexResult result)
+        private List<ITimeLineData> GetData(String code, int startDate, int endDate, KLineDataStore store, KLineDataIndexResult result)
         {
             int startIndex = store.GetStartIndex(startDate, result);
             IKLineData data = store.Load(startDate, endDate, result);
@@ -50,7 +51,7 @@ namespace com.wer.sc.data.reader
             IKLineData lastEndData = store.LoadByIndex(lastEndIndex, lastEndIndex);
             ((KLineData)data).Code = code;
             float lastEndPrice = lastEndData.Arr_End[0];
-            return DataTransfer_KLine2Real.Convert(data, lastEndPrice);
+            return DataTransfer_KLine2TimeLine.ConvertRealDataList(data, lastEndPrice, dataReaderFactory.OpenDateReader);
         }
     }
 

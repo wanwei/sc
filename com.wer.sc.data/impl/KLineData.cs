@@ -2,9 +2,7 @@
 using com.wer.sc.utils;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace com.wer.sc.data
 {
@@ -39,7 +37,8 @@ namespace com.wer.sc.data
 
         public KLineData()
         {
-            this.indeier = new KLineDataIndeier(this);
+            //this.indeier = new KLineDataIndeier(this);
+            //this.indeier = new KLineDataIndeier(this);
         }
 
         public KLineData(int length)
@@ -52,7 +51,6 @@ namespace com.wer.sc.data
             arr_mount = new int[length];
             arr_money = new float[length];
             arr_hold = new int[length];
-            this.indeier = new KLineDataIndeier(this);
         }
 
         public string Code
@@ -79,6 +77,11 @@ namespace com.wer.sc.data
             {
                 barPos = value;
             }
+        }
+
+        public void SetBarPosByTime(double time)
+        {
+            this.barPos = IndexOfTime(time);
         }
 
         public double FullTime
@@ -602,7 +605,10 @@ namespace com.wer.sc.data
 
         public int IndexOfTime(double time)
         {
+            if (this.indeier == null)
+                this.indeier = new KLineDataIndeier(this, null);
             return this.indeier.GetTimeIndex(time);
+            //return -1;
         }
     }
 }

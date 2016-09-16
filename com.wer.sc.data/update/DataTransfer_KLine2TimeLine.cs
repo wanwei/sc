@@ -11,14 +11,22 @@ namespace com.wer.sc.data.update
     /// <summary>
     /// 将k线数据转换成分时线数据
     /// </summary>
-    public class DataTransfer_KLine2Real
+    public class DataTransfer_KLine2TimeLine
     {
-        public static List<IRealData> Convert(IKLineData data, float lastEndPrice)
+        public static ITimeLineData ConvertTimeLineData(int date, IKLineData data, float lastEndPrice)
         {
-            DaySpliter splitter = new DaySpliter();
-            List<SplitterResult> splitResult = splitter.Split(new KLineDataTimeGetter(data));
+            TimeLineData r = new TimeLineData(date, lastEndPrice, data.Length);
+            r.code = data.Code;
+            Convert2RealData(data, 0, data.Length - 1, r);
+            return r;
+        }
 
-            List<IRealData> realdataList = new List<IRealData>(splitResult.Count);
+        public static List<ITimeLineData> ConvertRealDataList(IKLineData data, float lastEndPrice, IOpenDateReader openDateReader)
+        {
+
+            List<SplitterResult> splitResult = DaySpliter.Split(new KLineDataTimeGetter(data), openDateReader);
+
+            List<ITimeLineData> realdataList = new List<ITimeLineData>(splitResult.Count);
             for (int i = 0; i < splitResult.Count; i++)
             {
                 SplitterResult split = splitResult[i];
@@ -30,7 +38,7 @@ namespace com.wer.sc.data.update
                 else
                     todayEndIndex = splitResult[i + 1].Index;
                 int len = todayEndIndex - todayStartIndex + 1;
-                RealData r = new RealData(date, lastEndPrice, len);
+                TimeLineData r = new TimeLineData(date, lastEndPrice, len);
                 r.code = data.Code;
                 Convert2RealData(data, todayStartIndex, todayEndIndex, r);
                 realdataList.Add(r);
@@ -39,7 +47,7 @@ namespace com.wer.sc.data.update
             return realdataList;
         }
 
-        private static void Convert2RealData(IKLineData data, int startIndex, int endIndex, RealData r)
+        private static void Convert2RealData(IKLineData data, int startIndex, int endIndex, TimeLineData r)
         {
             for (int i = startIndex; i <= endIndex; i++)
             {

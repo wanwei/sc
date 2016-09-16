@@ -54,7 +54,7 @@ namespace com.wer.sc.data.check
             //IKLineData minuteKLineData = fac.KLineDataReader.GetData(code, date, date, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1));
             //TickData tickData = fac.TickDataReader.GetTickData(code, date);
 
-            KLineChartBuilder_1Minute builder = new KLineChartBuilder_1Minute(cache.GetCache_CodeDate(date), currentTime);
+            RealTimeDataBuilder_DayData builder = new RealTimeDataBuilder_DayData(cache.GetCache_CodeDate(date), currentTime);
             KLineChart chart = builder.GetCurrentChart();
 
             tbData.Clear();
@@ -115,7 +115,7 @@ namespace com.wer.sc.data.check
             //IKLineData minuteKLineData = fac.KLineDataReader.GetData(code, date, date, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1));
             //TickData tickData = fac.TickDataReader.GetTickData(code, date);
 
-            KLineChartBuilder_AllPeriod builder = new KLineChartBuilder_AllPeriod(klineData, cacheFactory.CreateCache_Code(code, start, end), time);
+            RealTimeDataBuilder_KLine builder = new RealTimeDataBuilder_KLine(klineData, cacheFactory.CreateCache_Code(code, start, end), time);
             IKLineChart chart = builder.GetCurrentChart();
 
             tbData.Clear();

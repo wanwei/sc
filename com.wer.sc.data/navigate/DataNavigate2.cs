@@ -1,9 +1,7 @@
-﻿
+﻿using com.wer.sc.data.cache;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.Caching;
 
 namespace com.wer.sc.data.navigate
 {
@@ -15,25 +13,34 @@ namespace com.wer.sc.data.navigate
         private string code;
         private double time;
 
-        private KLineChartBuilder_AllPeriod chartBuilder;
+        private Dictionary<KLinePeriod, DataNavigate_KLine> dicNavigateKLine = new Dictionary<KLinePeriod, DataNavigate_KLine>();
+
+        private DataNavigate_Code currentNavigate_Code;
+
+        private Dictionary<string, DataNavigate_Code> dicNavigate_Code = new Dictionary<string, DataNavigate_Code>();
 
         public DataNavigate2(DataReaderFactory factory, String code, double time)
         {
-            this.code = code;
-            this.time = time;
-            int date = (int)time;
-            //this.startDate = date - 200;
-            //this.endDate = date + 200;
+            DataCacheFactory cacheFactory = new DataCacheFactory(factory);
+            IDataCache_Code cache = cacheFactory.CreateCache_Code(code);
+            IOpenDateReader openDateReader = cache.GetOpenDateReader();
+            Init(factory, code, time, openDateReader.FirstOpenDate, openDateReader.LastOpenDate);
         }
 
         public DataNavigate2(DataReaderFactory factory, String code, double time, int startDate, int endDate)
         {
+            Init(factory, code, time, startDate, endDate);
+        }
+
+        private void Init(DataReaderFactory factory, string code, double time, int startDate, int endDate)
+        {
+            this.factory = factory;
             this.code = code;
             this.time = time;
-            int date = (int)time;
             this.startDate = startDate;
             this.endDate = endDate;
-            //this.chartBuilder = new CurrentKLineChartBuilder();
+            this.currentNavigate_Code = new DataNavigate_Code(factory, code, startDate, endDate, time);
+            dicNavigate_Code.Add(code, currentNavigate_Code);
         }
 
         public string Code
@@ -58,11 +65,6 @@ namespace com.wer.sc.data.navigate
             {
                 return startDate;
             }
-
-            set
-            {
-                startDate = value;
-            }
         }
 
         public int EndDate
@@ -71,48 +73,51 @@ namespace com.wer.sc.data.navigate
             {
                 return endDate;
             }
-
-            set
-            {
-                endDate = value;
-            }
         }
 
         public event DataChangeEventHandler OnDataChangeHandler;
 
         public void ChangeData(string code, double time)
         {
-            throw new NotImplementedException();
+            if (currentNavigate_Code == null || currentNavigate_Code.Code != code)
+            {
+
+            }
+            //currentNavigate_Code = new DataNavigate_Code(fac,co)
+
+            //System.Runtime.
+            //ObjectCache
+            //TODO 要新生成一个Navigate
         }
 
         public void ChangeTime(double time)
         {
-            throw new NotImplementedException();
+            currentNavigate_Code.ChangeTime(time);
         }
 
         public void Forward(KLinePeriod period, int len)
         {
-            throw new NotImplementedException();
+            currentNavigate_Code.Forward(period, len);
         }
 
         public void ForwardTick(int len)
         {
-            throw new NotImplementedException();
+            currentNavigate_Code.ForwardTick(len);
         }
 
         public IKLineData GetKLineData(KLinePeriod period)
         {
-            return null;
+            return currentNavigate_Code.GetKLineData(period);
         }
 
-        public IRealData GetRealData()
+        public ITimeLineData GetRealData()
         {
-            return null;
+            return currentNavigate_Code.GetRealData();
         }
 
         public ITickData GetTickData()
         {
-            return null;
+            return currentNavigate_Code.GetTickData();
         }
     }
 }

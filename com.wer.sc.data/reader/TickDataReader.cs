@@ -39,7 +39,9 @@ namespace com.wer.sc.data.reader
         {
             string realPath = utils.GetTickPath(code, date);
             TickDataStore store = new TickDataStore(realPath);
-            return store.load();
+            TickData tickData = store.load();
+            tickData.Code = code.ToUpper();
+            return tickData;
         }
     }
 }

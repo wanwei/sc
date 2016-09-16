@@ -22,7 +22,7 @@ namespace com.wer.sc.comp.graphic.real
 
         private PriceRectangle GetPriceRectangle()
         {
-            IRealData realData = DataProvider.GetRealData();
+            ITimeLineData realData = DataProvider.GetRealData();
             int startIndex = 0;
             int endIndex = DataProvider.CurrentIndex;
 
@@ -47,7 +47,7 @@ namespace com.wer.sc.comp.graphic.real
         public override void DrawGraph(Graphics graphic)
         {
             this.BlockWidth = this.DisplayRect.Width / (DataProvider.GetRealData().Length - 1);
-            IRealData realData = DataProvider.GetRealData();
+            ITimeLineData realData = DataProvider.GetRealData();
             DrawFrame(graphic, realData);
             DrawReal(graphic, realData);
         }
@@ -56,12 +56,12 @@ namespace com.wer.sc.comp.graphic.real
         {
             //TODO 只画区块
             this.BlockWidth = this.DisplayRect.Width / (DataProvider.GetRealData().Length - 1);
-            IRealData realData = DataProvider.GetRealData();
+            ITimeLineData realData = DataProvider.GetRealData();
             DrawFrame(graphic, realData);
             DrawReal(graphic, realData);
         }
 
-        private void DrawFrame(Graphics g, IRealData realData)
+        private void DrawFrame(Graphics g, ITimeLineData realData)
         {
             Rectangle rectangleScale = FrameRect;
             Pen pen = this.ColorConfig.Pen_FrameLine;
@@ -72,7 +72,7 @@ namespace com.wer.sc.comp.graphic.real
             DrawHorizonal(g, realData);
         }
 
-        private void DrawHorizonal(Graphics g, IRealData realData)
+        private void DrawHorizonal(Graphics g, ITimeLineData realData)
         {
             Pen pen2 = this.ColorConfig.Pen_FrameLine;
             pen2.DashStyle = System.Drawing.Drawing2D.DashStyle.Solid;
@@ -100,7 +100,7 @@ namespace com.wer.sc.comp.graphic.real
             }
         }
 
-        private void DrawReal(Graphics g, IRealData realData)
+        private void DrawReal(Graphics g, ITimeLineData realData)
         {
             Pen pen = new Pen(ColorConfig.Color_White, 1);
 

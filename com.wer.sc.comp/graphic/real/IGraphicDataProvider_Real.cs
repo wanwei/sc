@@ -15,13 +15,13 @@ namespace com.wer.sc.comp.graphic.real
         /// 获得当前数据
         /// </summary>
         /// <returns></returns>
-        IRealData GetRealData();
+        ITimeLineData GetRealData();
 
         /// <summary>
         /// 得到当前的Charts
         /// </summary>
         /// <returns></returns>
-        IRealChart GetCurrentChart();
+        ITimeLineChart GetCurrentChart();
 
         /// <summary>
         /// 得到或设置当前的index

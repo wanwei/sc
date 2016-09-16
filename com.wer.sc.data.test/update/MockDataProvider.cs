@@ -51,14 +51,16 @@ namespace com.wer.sc.data.update
         override
         public List<CodeInfo> GetCodes()
         {
-            if (Append)
-                return ResourceLoader.GetCodes();
-            else
-            {
-                List<CodeInfo> codes = ResourceLoader.GetCodes();
-                return codes.GetRange(0, codes.Count - 100);
-            }
+            //if (Append)
+            //    return ResourceLoader.GetCodes();
+            //else
+            //{
+            //    List<CodeInfo> codes = ResourceLoader.GetCodes();
+            //    return codes.GetRange(0, codes.Count - 100);
+            //}
+            return null;
         }
+
         override
         public string GetDataPath()
         {

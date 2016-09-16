@@ -15,17 +15,20 @@ namespace com.wer.sc.data.cache.impl
         private List<int> openDates = new List<int>();
         private Dictionary<int, int[]> dicDateStartEnd = new Dictionary<int, int[]>();
 
-        public DayMinuteKLineDataGetter(IKLineData klineData)
+        private IOpenDateReader openDateReader;
+
+        public DayMinuteKLineDataGetter(IKLineData klineData, IOpenDateReader openDateReader)
         {
             this.klineData = klineData;
+            this.openDateReader = openDateReader;
             this.initIndex();
         }
 
         private void initIndex()
         {
             KLineTimeGetter timeGetter = new KLineTimeGetter(klineData);
-            DaySpliter spliter = new DaySpliter();
-            List<SplitterResult> splitResults = spliter.Split(timeGetter);
+
+            List<SplitterResult> splitResults = DaySpliter.Split(timeGetter, openDateReader);
             for (int i = 0; i < splitResults.Count; i++)
             {
                 SplitterResult result = splitResults[i];
@@ -44,34 +47,24 @@ namespace com.wer.sc.data.cache.impl
             return new KLineData_Sub(klineData, startEnd[0], startEnd[1]);
         }
 
+        public float LastEndPrice(int date)
+        {
+            if (!dicDateStartEnd.ContainsKey(date))
+                return -1;
+            int[] startEnd = dicDateStartEnd[date];
+            int lastEndIndex = startEnd[0];
+            int index = lastEndIndex - 1;
+            if (index < 0)
+                return klineData.Arr_Start[0];
+            return klineData.Arr_End[index];
+        }
+
         public List<int> OpenDates
         {
             get
             {
                 return openDates;
             }
-        }
-    }
-
-    public class KLineTimeGetter : TimeGetter
-    {
-        private IKLineData klineData;
-        public KLineTimeGetter(IKLineData klineData)
-        {
-            this.klineData = klineData;
-        }
-
-        public int Count
-        {
-            get
-            {
-                return klineData.Length;
-            }
-        }
-
-        public double GetTime(int index)
-        {
-            return klineData.Arr_Time[index];
         }
     }
 }

@@ -13,7 +13,7 @@ namespace com.wer.sc.data.store
     public class TestKLineDataIndex
     {
         [TestMethod]
-        public void TestIndex()
+        public void TestDoIndex()
         {
             KLineData data_ = ResourceLoader.GetKLineData_1Min();
             IKLineData data = data_.GetRange(0, 449);

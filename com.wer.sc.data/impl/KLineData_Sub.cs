@@ -58,6 +58,13 @@ namespace com.wer.sc.data.impl
             }
         }
 
+        public void SetBarPosByTime(double time)
+        {
+            throw new NotImplementedException();
+        }
+
+
+
         public double FullTime
         {
             get
@@ -191,7 +198,7 @@ namespace com.wer.sc.data.impl
 
         public int IndexOfTime(double time)
         {
-            throw new NotImplementedException();
+            return klineData.IndexOfTime(time) - startIndex;
         }
 
         public string PrintAll()
@@ -207,7 +214,7 @@ namespace com.wer.sc.data.impl
         {
             get
             {
-                return null;
+                return arr_time;
             }
         }
 
@@ -217,7 +224,7 @@ namespace com.wer.sc.data.impl
         {
             get
             {
-                return null;
+                return arr_start;
             }
         }
 
@@ -226,7 +233,7 @@ namespace com.wer.sc.data.impl
         {
             get
             {
-                return null;
+                return arr_high;
             }
         }
 
@@ -236,7 +243,7 @@ namespace com.wer.sc.data.impl
         {
             get
             {
-                return null;
+                return arr_low;
             }
         }
         private IList<float> arr_end;
@@ -245,7 +252,7 @@ namespace com.wer.sc.data.impl
         {
             get
             {
-                return null;
+                return arr_end;
             }
         }
 
@@ -255,7 +262,7 @@ namespace com.wer.sc.data.impl
         {
             get
             {
-                return null;
+                return arr_mount;
             }
         }
         private IList<float> arr_money;
@@ -264,7 +271,7 @@ namespace com.wer.sc.data.impl
         {
             get
             {
-                return null;
+                return arr_money;
             }
         }
         private IList<int> arr_hold;
@@ -272,7 +279,7 @@ namespace com.wer.sc.data.impl
         {
             get
             {
-                return null;
+                return arr_hold;
             }
         }
         private IList<float> arr_height;
@@ -283,7 +290,7 @@ namespace com.wer.sc.data.impl
         {
             get
             {
-                return null;
+                return arr_height;
             }
         }
         private IList<float> arr_heightPercent;
@@ -294,7 +301,7 @@ namespace com.wer.sc.data.impl
         {
             get
             {
-                return null;
+                return arr_heightPercent;
             }
         }
         private IList<float> arr_blockHigh;
@@ -302,7 +309,7 @@ namespace com.wer.sc.data.impl
         {
             get
             {
-                return null;
+                return arr_blockHigh;
             }
         }
         private IList<float> arr_BlockLow;
@@ -310,7 +317,7 @@ namespace com.wer.sc.data.impl
         {
             get
             {
-                return null;
+                return arr_BlockLow;
             }
         }
         private IList<float> arr_blockHeight;
@@ -318,7 +325,7 @@ namespace com.wer.sc.data.impl
         {
             get
             {
-                return null;
+                return arr_blockHeight;
             }
         }
         private IList<float> arr_blockHeightPercent;
@@ -326,7 +333,7 @@ namespace com.wer.sc.data.impl
         {
             get
             {
-                return null;
+                return arr_blockHeightPercent;
             }
         }
 
@@ -336,7 +343,7 @@ namespace com.wer.sc.data.impl
         {
             get
             {
-                return null;
+                return arr_upPercent;
             }
         }
 

@@ -8,7 +8,7 @@
 
         IKLineData GetMinuteKLineData();
 
-        IRealData GetRealData();
+        ITimeLineData GetRealData();
 
         ITickData GetTickData();
     }

@@ -1,4 +1,5 @@
 ﻿using com.wer.sc.data.store;
+using com.wer.sc.data.utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,7 @@ namespace com.wer.sc.data.update
         public static IKLineData Transfer(IKLineData data, KLinePeriod targetPeriod)
         {
             if (targetPeriod.PeriodType == KLinePeriod.TYPE_DAY)
-                return Transfer_Day(data, targetPeriod, 0.2);
+                return Transfer_Day(data, targetPeriod);
             KLinePeriod sourcePeriod = data.Period;
             if (sourcePeriod.PeriodType == KLinePeriod.TYPE_MINUTE)
             {
@@ -42,11 +43,11 @@ namespace com.wer.sc.data.update
         /// <param name="targetPeriod"></param>
         /// <param name="timeSplit"></param>
         /// <returns></returns>
-        public static IKLineData Transfer_Day(IKLineData data, KLinePeriod targetPeriod, double timeSplit)
+        public static IKLineData Transfer_Day(IKLineData data, KLinePeriod targetPeriod)
         {
-            List<KLineChart2> charts = new List<KLineChart2>();
+            List<KLineChart> charts = new List<KLineChart>();
             int period = targetPeriod.Period;
-
+            //DaySpliter.Split()
             int startIndex = 0;
             bool hasNight = false;
             for (int i = 1; i < data.Length; i++)
@@ -78,10 +79,10 @@ namespace com.wer.sc.data.update
             return GetKLineData(charts);
         }
 
-        private static KLineChart2 GetChart_Day(IKLineData data, int startIndex, int endIndex)
+        private static KLineChart GetChart_Day(IKLineData data, int startIndex, int endIndex)
         {
-            KLineChart2 chart = GetChart(data, startIndex, endIndex);
-            chart.time = (int)data.Arr_Time[endIndex];
+            KLineChart chart = GetChart(data, startIndex, endIndex);
+            chart.Time = (int)data.Arr_Time[endIndex];
             return chart;
         }
 
@@ -92,7 +93,7 @@ namespace com.wer.sc.data.update
             if (sourcePeriod.PeriodType != targetPeriod.PeriodType)
                 return Transfer_DifferentPeriod(data, targetPeriod);
 
-            List<KLineChart2> charts = new List<KLineChart2>();
+            List<KLineChart> charts = new List<KLineChart>();
             int period = targetPeriod.Period;
 
             int startIndex = 0;
@@ -130,14 +131,14 @@ namespace com.wer.sc.data.update
             return endIndex;
         }
 
-        private static KLineChart2 GetChart(IKLineData data, int startIndex, int endIndex)
+        private static KLineChart GetChart(IKLineData data, int startIndex, int endIndex)
         {
             //KLineChart chart = new KLineChart();
-            KLineChart2 chart = new KLineChart2();
-            chart.time = data.Arr_Time[startIndex];
-            chart.start = data.Arr_Start[startIndex];
-            chart.end = data.Arr_End[endIndex];
-            chart.hold = data.Arr_Hold[endIndex];
+            KLineChart chart = new KLineChart();
+            chart.Time = data.Arr_Time[startIndex];
+            chart.Start = data.Arr_Start[startIndex];
+            chart.End = data.Arr_End[endIndex];
+            chart.Hold = data.Arr_Hold[endIndex];
 
             float high = float.MinValue;
             float low = float.MaxValue;
@@ -152,27 +153,27 @@ namespace com.wer.sc.data.update
                 mount += data.Arr_Mount[i];
                 money += data.Arr_Money[i];
             }
-            chart.high = high;
-            chart.low = low;
-            chart.mount = mount;
-            chart.money = money;
+            chart.High = high;
+            chart.Low = low;
+            chart.Mount = mount;
+            chart.Money = money;
             return chart;
         }
 
-        private static KLineData GetKLineData(List<KLineChart2> charts)
+        private static KLineData GetKLineData(List<KLineChart> charts)
         {
             KLineData data = new KLineData(charts.Count);
             for (int i = 0; i < charts.Count; i++)
             {
-                KLineChart2 chart = charts[i];
-                data.arr_time[i] = chart.time;
-                data.arr_start[i] = chart.start;
-                data.arr_high[i] = chart.high;
-                data.arr_low[i] = chart.low;
-                data.arr_end[i] = chart.end;
-                data.arr_mount[i] = chart.mount;
-                data.arr_money[i] = chart.money;
-                data.arr_hold[i] = chart.hold;
+                KLineChart chart = charts[i];
+                data.arr_time[i] = chart.Time;
+                data.arr_start[i] = chart.Start;
+                data.arr_high[i] = chart.High;
+                data.arr_low[i] = chart.Low;
+                data.arr_end[i] = chart.End;
+                data.arr_mount[i] = chart.Mount;
+                data.arr_money[i] = chart.Money;
+                data.arr_hold[i] = chart.Hold;
             }
             return data;
         }

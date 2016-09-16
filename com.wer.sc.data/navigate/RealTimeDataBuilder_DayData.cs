@@ -11,19 +11,39 @@ namespace com.wer.sc.data.navigate
     /// <summary>
     /// 当前的一分钟k线数据构造器
     /// </summary>
-    public class KLineChartBuilder_1Minute
+    public class RealTimeDataBuilder_DayData
     {
         private ITickData tickData;
 
-        private IKLineData minuteKlineData;        
+        private IKLineData minuteKlineData;
 
         private double currentTime;
 
         private TickDataIndeier tickDataIndeier;
 
-        private int currentTickIndex;
+        private KLineChart currentChart = new KLineChart();      
 
-        private KLineChart currentChart = new KLineChart();
+        public RealTimeDataBuilder_DayData(IDataCache_CodeDate cache_CodeDate, double currentTime)
+        {
+            this.minuteKlineData = cache_CodeDate.GetMinuteKLineData();
+            this.tickData = cache_CodeDate.GetTickData();
+            this.tickDataIndeier = new TickDataIndeier(tickData, minuteKlineData);
+            this.ChangeTime(currentTime);
+        }
+
+        public void ChangeTime(double time)
+        {
+            if (this.currentTime == time)
+                return;
+            this.currentTime = time;
+            double splitTime = Math.Round(currentTime, 4);
+            int splitIndex = tickDataIndeier.GetTickIndex(splitTime);
+            int currentTickIndex = tickDataIndeier.GetTickIndex(currentTime);
+            tickData.BarPos = currentTickIndex;
+
+            currentChart.SetTime(splitTime);
+            ModifyChart(currentChart, splitIndex, currentTickIndex);
+        }
 
         public IKLineData MinuteKlineData
         {
@@ -41,40 +61,12 @@ namespace com.wer.sc.data.navigate
             }
         }
 
-        public int CurrentTickIndex
-        {
-            get
-            {
-                return currentTickIndex;
-            }
-        }
-
-        public KLineChartBuilder_1Minute(IDataCache_CodeDate cache_CodeDate, double currentTime)
-        {            
-            this.minuteKlineData = cache_CodeDate.GetMinuteKLineData(); 
-            this.tickData = cache_CodeDate.GetTickData();
-            this.tickDataIndeier = new TickDataIndeier(tickData, minuteKlineData);
-            this.ChangeTime(currentTime);
-        }
-
-        public void ChangeTime(double time)
-        {
-            if (this.currentTime == time)
-                return;
-            this.currentTime = time;
-            double splitTime = Math.Round(currentTime, 4);
-            int splitIndex = tickDataIndeier.GetTickIndex(splitTime);
-            this.currentTickIndex = tickDataIndeier.GetTickIndex(currentTime);
-            currentChart.SetTime(splitTime);
-            ModifyChart(splitIndex, currentTickIndex, currentChart);
-        }
-
         public KLineChart GetCurrentChart()
         {
             return currentChart;
         }
 
-        private void ModifyChart(int tickStart, int tickEnd, KLineChart chart)
+        private void ModifyChart(KLineChart chart, int tickStart, int tickEnd)
         {
             float high = 0;
             float low = float.MaxValue;
@@ -98,9 +90,14 @@ namespace com.wer.sc.data.navigate
             chart.SetHold(tickData.Arr_Hold[tickEnd]);
         }
 
-        public void NextTick()
+        public bool Forward(KLinePeriod period, int len)
         {
-            //TODO        
+            return false;
+        }
+
+        public bool ForwardTick(int len)
+        {
+            return false;
         }
     }
 }

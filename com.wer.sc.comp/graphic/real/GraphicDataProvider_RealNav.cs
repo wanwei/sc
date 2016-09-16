@@ -43,12 +43,12 @@ namespace com.wer.sc.comp.graphic.real
             }
         }
 
-        public IRealChart GetCurrentChart()
+        public ITimeLineChart GetCurrentChart()
         {
-            return new RealChart_RealData(GetRealData(), CurrentIndex);
+            return new TimeLineChart_RealData(GetRealData(), CurrentIndex);
         }
 
-        public IRealData GetRealData()
+        public ITimeLineData GetRealData()
         {
             return dataNavigate.CurrentRealData;
         }

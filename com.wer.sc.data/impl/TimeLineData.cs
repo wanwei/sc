@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace com.wer.sc.data
 {
-    public class RealData : IRealData
+    public class TimeLineData : ITimeLineData
     {
         public String code;
 
@@ -40,7 +40,7 @@ namespace com.wer.sc.data
 
         private int barPos;
 
-        public RealData(int date, float yesterdayEnd, int length)
+        public TimeLineData(int date, float yesterdayEnd, int length)
         {
             this.date = date;
             this.yesterdayEnd = yesterdayEnd;
@@ -66,6 +66,12 @@ namespace com.wer.sc.data
             {
                 barPos = value;
             }
+        }
+
+        public void SetBarPosByTime(double time)
+        {
+            int index = IndexOfTime(time);
+            this.barPos = index;
         }
 
         public float YesterdayEnd
@@ -138,18 +144,18 @@ namespace com.wer.sc.data
             }
         }
 
-        public IRealChart GetCurrentChart()
+        public ITimeLineChart GetCurrentChart()
         {
-            return new RealChart_RealData(this, BarPos);
+            return new TimeLineChart_RealData(this, BarPos);
         }
 
-        public IRealChart GetCurrentChart(int index)
+        public ITimeLineChart GetCurrentChart(int index)
         {
-            return new RealChart_RealData(this, index);
+            return new TimeLineChart_RealData(this, index);
         }
 
 
-        public void ChangeChart(IRealChart chart, int index)
+        public void ChangeChart(ITimeLineChart chart, int index)
         {
             ReadOnlyList_TmpValue<double> timelist = (ReadOnlyList_TmpValue<double>)Arr_Time;
             ReadOnlyList_TmpValue<float> pricelist = (ReadOnlyList_TmpValue<float>)Arr_Price;
@@ -182,7 +188,7 @@ namespace com.wer.sc.data
         /// 修改当前chart，
         /// </summary>
         /// <param name="chart"></param>
-        public void ChangeChart(IRealChart chart)
+        public void ChangeChart(ITimeLineChart chart)
         {
             ChangeChart(chart, BarPos);
         }
@@ -194,6 +200,7 @@ namespace com.wer.sc.data
                 return arr_price.Length;
             }
         }
+
         public IList<double> Arr_Time
         {
             get

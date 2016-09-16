@@ -50,6 +50,7 @@ namespace com.wer.sc.data
             {
                 return data.Code;
             }
+            set { throw new NotImplementedException(); }
         }
 
         public override double Time
@@ -58,6 +59,7 @@ namespace com.wer.sc.data
             {
                 return Data.Arr_Time[Index];
             }
+            set { throw new NotImplementedException(); }
         }
 
         public override float Start
@@ -66,6 +68,7 @@ namespace com.wer.sc.data
             {
                 return Data.Arr_Start[Index];
             }
+            set { throw new NotImplementedException(); }
         }
 
         public override float High
@@ -74,6 +77,7 @@ namespace com.wer.sc.data
             {
                 return Data.Arr_High[Index];
             }
+            set { throw new NotImplementedException(); }
         }
 
         public override float Low
@@ -82,6 +86,7 @@ namespace com.wer.sc.data
             {
                 return Data.Arr_Low[Index];
             }
+            set { throw new NotImplementedException(); }
         }
 
         public override float End
@@ -90,6 +95,7 @@ namespace com.wer.sc.data
             {
                 return Data.Arr_End[Index];
             }
+            set { throw new NotImplementedException(); }
         }
 
         public override int Mount
@@ -98,6 +104,7 @@ namespace com.wer.sc.data
             {
                 return Data.Arr_Mount[Index];
             }
+            set { throw new NotImplementedException(); }
         }
 
         public override float Money
@@ -106,6 +113,7 @@ namespace com.wer.sc.data
             {
                 return data.Arr_Money[index];
             }
+            set { throw new NotImplementedException(); }
         }
 
         public override int Hold
@@ -114,6 +122,7 @@ namespace com.wer.sc.data
             {
                 return data.Arr_Hold[index];
             }
+            set { throw new NotImplementedException(); }
         }
 
         public Object clone()

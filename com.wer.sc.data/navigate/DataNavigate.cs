@@ -19,7 +19,7 @@ namespace com.wer.sc.data.navigate
 
         private KLineData klineData;
 
-        private IRealData realData;
+        private ITimeLineData realData;
 
         private String code;
 
@@ -29,7 +29,7 @@ namespace com.wer.sc.data.navigate
 
         private int currentKLineIndex;
 
-        private KLineChartBuilder_AllPeriod chartBuilder;
+        private RealTimeDataBuilder_KLine chartBuilder;
 
         public event DataChangeEventHandler OnDataChangeHandler;
 
@@ -138,7 +138,7 @@ namespace com.wer.sc.data.navigate
             //    date = (int)(this.klineData.IndexOfTime(date));
             //}
             if (this.chartBuilder == null || this.chartBuilder.Code != this.code)            
-                this.chartBuilder = new KLineChartBuilder_AllPeriod(klineData, dataCache_Code, time);            
+                this.chartBuilder = new RealTimeDataBuilder_KLine(klineData, dataCache_Code, time);            
 
             //int date = DaySpliter.GetTimeDate(time, dataReaderFac.OpenDateReader);
             //if (this.chartBuilder == null || this.chartBuilder.Date != date || this.chartBuilder.Code != this.code)
@@ -170,7 +170,7 @@ namespace com.wer.sc.data.navigate
             }
         }
 
-        public IRealData CurrentRealData
+        public ITimeLineData CurrentRealData
         {
             get
             {
@@ -215,7 +215,7 @@ namespace com.wer.sc.data.navigate
         {
             get
             {
-                return chartBuilder.ChartBuilder_FromTick.CurrentTickIndex;
+                return chartBuilder.ChartBuilder_FromTick.TickData.BarPos;
             }
         }
 

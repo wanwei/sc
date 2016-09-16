@@ -32,6 +32,7 @@ namespace com.wer.sc.data
             {
                 return this.code;
             }
+            set { this.code = value; }
         }
 
         public void SetCode(String code)
@@ -45,6 +46,7 @@ namespace com.wer.sc.data
             {
                 return this.time;
             }
+            set { this.time = value; }
         }
 
         public void SetTime(double time)
@@ -58,6 +60,7 @@ namespace com.wer.sc.data
             {
                 return start;
             }
+            set { this.start = value; }
         }
 
         public void SetStart(float start)
@@ -71,6 +74,7 @@ namespace com.wer.sc.data
             {
                 return high;
             }
+            set { this.high = value; }
         }
 
         public void SetHigh(float high)
@@ -84,6 +88,7 @@ namespace com.wer.sc.data
             {
                 return low;
             }
+            set { this.low = value; }
         }
 
         public void SetLow(float low)
@@ -97,6 +102,7 @@ namespace com.wer.sc.data
             {
                 return end;
             }
+            set { this.end = value; }
         }
 
         public void SetEnd(float end)
@@ -110,6 +116,7 @@ namespace com.wer.sc.data
             {
                 return mount;
             }
+            set { this.mount = value; }
         }
 
         public void SetMount(int mount)
@@ -124,6 +131,7 @@ namespace com.wer.sc.data
             {
                 return money;
             }
+            set { this.money = value; }
         }
 
         public void SetMoney(float money)
@@ -137,6 +145,7 @@ namespace com.wer.sc.data
             {
                 return this.hold;
             }
+            set { this.hold = value; }
         }
 
         public void SetHold(int hold)
