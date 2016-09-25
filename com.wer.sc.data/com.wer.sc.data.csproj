@@ -52,6 +52,9 @@
     <Compile Include="cache\IDataCache_Code.cs" />
     <Compile Include="ICodeReader.cs" />
     <Compile Include="IKLineDataReader.cs" />
+    <Compile Include="impl\KLineData_Abstract.cs" />
+    <Compile Include="impl\KLineData_RealTime.cs" />
+    <Compile Include="impl\TimeLineData_RealTime.cs" />
     <Compile Include="ITimeLineDataReader.cs" />
     <Compile Include="ITickDataReader.cs" />
     <Compile Include="navigate\DataNavigate_Code.cs" />
@@ -81,7 +84,9 @@
     <Compile Include="impl\TimeLineChart_RealData.cs" />
     <Compile Include="IOpenDateReader.cs" />
     <Compile Include="store\KLineDataStore_Csv.cs" />
+    <Compile Include="store\TickDataStore_Csv.cs" />
     <Compile Include="update\DataTransfer_Tick2KLineGenerator.cs" />
+    <Compile Include="update\KLineDataTimeGetter.cs" />
     <Compile Include="utils\DataCache.cs" />
     <Compile Include="utils\DayDataCache.cs" />
     <Compile Include="utils\KLineChartMerge.cs" />
@@ -97,14 +102,14 @@
     <Compile Include="update\DataMgr.cs" />
     <Compile Include="update\DataTransfer_KLine2KLine.cs" />
     <Compile Include="update\DataTransfer_KLine2TimeLine.cs" />
-    <Compile Include="update\DataUpdate2.cs" />
+    <Compile Include="update\DataUpdate.cs" />
     <Compile Include="update\DataUpdate_OpenDate.cs" />
     <Compile Include="update\DataTransfer_Tick2KLine.cs" />
     <Compile Include="update\DataUpdateRunner.cs" />
     <Compile Include="update\DataUpdate_Code.cs" />
     <Compile Include="update\DataPathUtils.cs" />
     <Compile Include="reader\KLineDataReader.cs" />
-    <Compile Include="update\DataUpdate.cs" />
+    <Compile Include="update\DataUpdate_Old.cs" />
     <Compile Include="update\DataUpdate_KLine.cs" />
     <Compile Include="update\DataUpdate_Tick.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

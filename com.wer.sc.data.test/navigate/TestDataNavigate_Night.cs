@@ -19,10 +19,10 @@ namespace com.wer.sc.data.test.navigate
     [TestClass]
     public class TestDataNavigate_Night
     {
-        [TestMethod]
-        public void Test()
-        {
+        //[TestMethod]
+        //public void Test()
+        //{
 
-        }
+        //}
     }
 }

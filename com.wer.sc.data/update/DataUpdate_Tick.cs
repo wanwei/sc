@@ -79,7 +79,7 @@ namespace com.wer.sc.data.update
                 return;
             String path = utils.GetTickPath(code, date);
             TickDataStore store = new TickDataStore(path);
-            store.save(tickData);
+            store.Save(tickData);
         }
     }
 }

@@ -19,6 +19,7 @@ namespace com.wer.sc.data.store
             IKLineData data = data_.GetRange(0, 449);
 
             MockDataProvider provider = new MockDataProvider();
+            provider.DataPathDir = "testindex";
             String targetPath = provider.GetDataPath() + "\\testindex.kline";
 
             KLineDataStore store = new KLineDataStore(targetPath);

@@ -180,8 +180,6 @@ namespace com.wer.sc.data.test.update
             openTime.Add(new double[] { .133000, .150000 });
 
             List<KLineChart> charts = DataTransfer_Tick2KLineGenerator.GenerateCharts(tickData, openTime, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1), -1);
-            //for (int i = 0; i < charts.Count; i++)
-            //    Console.WriteLine(charts[i]);
             AssertTick2Charts(charts, Resources.Tick2Charts_M05_20150624);
         }
 
@@ -205,23 +203,6 @@ namespace com.wer.sc.data.test.update
             //List<double> periods = DataTransfer_Tick2KLineGenerator.GetTodayTimePeriods(tickData, openTime);
             //AssertTimePeriods(periods, Resources.TimePeriod_M05_20141229);
         }
-
-        //[TestMethod]
-        //public void TestTick2Charts_WeekendNight2()
-        //{
-        //    DataReaderFactory fac = ResourceLoader.GetDefaultDataReaderFactory();
-
-        //    TickData tickData = fac.TickDataReader.GetTickData("m05", 20150629);
-
-        //    List<double[]> openTime = new List<double[]>();
-        //    openTime.Add(new double[] { .210000, .233000 });
-        //    openTime.Add(new double[] { .090000, .101500 });
-        //    openTime.Add(new double[] { .103000, .113000 });
-        //    openTime.Add(new double[] { .133000, .150000 });
-
-        //    List<double> periods = DataTransfer_Tick2KLineGenerator.GetTodayTimePeriods(tickData, openTime);
-        //    AssertTimePeriods(periods, Resources.TimePeriod_M05_20150629);
-        //}
 
         [TestMethod]
         public void TestTick2Charts_Limit()

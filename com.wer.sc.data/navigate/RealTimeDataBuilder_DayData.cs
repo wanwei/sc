@@ -21,7 +21,7 @@ namespace com.wer.sc.data.navigate
 
         private TickDataIndeier tickDataIndeier;
 
-        private KLineChart currentChart = new KLineChart();      
+        private KLineChart currentChart = new KLineChart();
 
         public RealTimeDataBuilder_DayData(IDataCache_CodeDate cache_CodeDate, double currentTime)
         {
@@ -41,7 +41,7 @@ namespace com.wer.sc.data.navigate
             int currentTickIndex = tickDataIndeier.GetTickIndex(currentTime);
             tickData.BarPos = currentTickIndex;
 
-            currentChart.SetTime(splitTime);
+            currentChart.FullTime = splitTime;
             ModifyChart(currentChart, splitIndex, currentTickIndex);
         }
 
@@ -81,13 +81,13 @@ namespace com.wer.sc.data.navigate
                 mount += tickData.Arr_Mount[i];
             }
 
-            chart.SetCode(tickData.Code);
-            chart.SetStart(tickData.Arr_Price[tickStart]);
-            chart.SetEnd(tickData.Arr_Price[tickEnd]);
-            chart.SetHigh(high);
-            chart.SetLow(low);
-            chart.SetMount(mount);
-            chart.SetHold(tickData.Arr_Hold[tickEnd]);
+            chart.Code = tickData.Code;
+            chart.Start = tickData.Arr_Price[tickStart];
+            chart.End = tickData.Arr_Price[tickEnd];
+            chart.High = high;
+            chart.Low = low;
+            chart.Mount = mount;
+            chart.Hold = tickData.Arr_Hold[tickEnd];
         }
 
         public bool Forward(KLinePeriod period, int len)

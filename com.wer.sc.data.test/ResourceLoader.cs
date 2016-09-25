@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -58,62 +59,10 @@ namespace com.wer.sc.data
             return data;
         }
 
-        public static KLineData LoadKLineData()
-        {
-            String csv = Resources.DLm05;
-            String[] lines = csv.Split("\r".ToCharArray());
-            KLineData data = new KLineData(lines.Length);
-            for (int i = 0; i < lines.Length; i++)
-            {
-                String line = lines[i];
-                if (line.Equals(""))
-                    continue;
-                String[] dataArr = line.Split(',');
-
-                String[] timeArr = dataArr[0].Split('/');
-                double time = double.Parse(timeArr[0] + timeArr[1] + timeArr[2]);
-
-                data.arr_time[i] = time;
-                data.arr_start[i] = float.Parse(dataArr[1]);
-                data.arr_high[i] = float.Parse(dataArr[2]);
-                data.arr_low[i] = float.Parse(dataArr[3]);
-                data.arr_end[i] = float.Parse(dataArr[4]);
-                data.arr_mount[i] = (int)float.Parse(dataArr[5]);
-                data.arr_money[i] = float.Parse(dataArr[6]);
-            }
-            return data;
-        }
-
         public static String DataPath
         {
             get { return System.Environment.CurrentDirectory + "\\data\\"; }
         }
-
-        //public static List<CodeInfo> GetCodes()
-        //{
-        //    String csv = Resources.codes;
-        //    String[] lines = csv.Split("\r".ToCharArray());
-        //    List<CodeInfo> codeList = new List<CodeInfo>();
-        //    TickData data = new TickData(lines.Length);
-        //    //int loopLength = Append ? lines.Length - 1 : lines.Length - 101;
-        //    for (int i = 0; i < lines.Length; i++)
-        //    {
-        //        String line = lines[i];
-        //        if (line.Equals(""))
-        //            continue;
-        //        String[] dataArr = line.Split(',');
-        //        if (dataArr.Length < 3)
-        //            continue;
-        //        CodeInfo strs = new CodeInfo();
-        //        String d1 = dataArr[0];
-        //        if (d1.StartsWith("\n"))
-        //            d1 = d1.Substring(1);
-        //        strs.code = d1;
-        //        strs.catelog = dataArr[4];
-        //        codeList.Add(strs);
-        //    }
-        //    return codeList;
-        //}
 
         public static List<int> GetOpenDates()
         {
@@ -186,45 +135,13 @@ namespace com.wer.sc.data
 
         public static KLineData GetKLineData_1Min()
         {
-            String path = DataPath + "m01_1minute.kline";
-            KLineDataStore store = new KLineDataStore(path);
-            return store.Load();
+            return ResourceLoader.GetKLineData(Resources.Resource_M01_1Minute);
         }
 
-        public static String[] GetKLineData_1Min_Result()
+        public static KLineData GetKLineData(String resource)
         {
-            String path = DataPath + "m01_1minute.csv";
-            return File.ReadAllLines(path);
-        }
-
-        public static String[] GetKLineData_15Second_Result()
-        {
-            String path = DataPath + "m01_15second.csv";
-            return File.ReadAllLines(path);
-        }
-
-        public static String[] GetKLineData_15Minute_Result()
-        {
-            String path = DataPath + "m01_15minute.csv";
-            return File.ReadAllLines(path);
-        }
-
-        public static String[] GetKLineData_1Hour_Result()
-        {
-            String path = DataPath + "m01_1hour.csv";
-            return File.ReadAllLines(path);
-        }
-
-        public static String[] GetKLineData_15Minute_Append_Result()
-        {
-            String path = DataPath + "m01_15minute_Append.csv";
-            return File.ReadAllLines(path);
-        }
-
-        public static String[] GetResultData(String fileName)
-        {
-            String path = DataPath + fileName;
-            return File.ReadAllLines(path);
+            string[] lines = resource.Split('\r');
+            return (KLineData)KLineDataStore_Csv.LoadKLineData(lines);
         }
 
         public static DataReaderFactory GetDefaultDataReaderFactory()

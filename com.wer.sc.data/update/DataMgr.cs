@@ -50,13 +50,13 @@ namespace com.wer.sc.data.update
             return null;
         }
 
-        private Dictionary<String, DataUpdate> dicDataUpdate = new Dictionary<string, DataUpdate>();
+        private Dictionary<String, DataUpdate_Old> dicDataUpdate = new Dictionary<string, DataUpdate_Old>();
 
-        public DataUpdate GetDataUpdate(String providerName)
+        public DataUpdate_Old GetDataUpdate(String providerName)
         {
             if (dicDataUpdate.ContainsKey(providerName))
                 return dicDataUpdate[providerName];
-            DataUpdate update = new DataUpdate(GetProvider(providerName));
+            DataUpdate_Old update = new DataUpdate_Old(GetProvider(providerName));
             dicDataUpdate.Add(providerName, update);
             return update;
         }

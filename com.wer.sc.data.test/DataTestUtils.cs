@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 
 namespace com.wer.sc.data.test
-{    
+{
     public class DataTestUtils
     {
         public static IKLineData GetKLineData(string code, int start, int end, KLinePeriod period, List<double[]> openTime)
@@ -23,7 +23,7 @@ namespace com.wer.sc.data.test
             }
             return DataTransfer_Tick2KLine.Transfer(dataList, period, openTime);
         }
-        
+
         public static List<double[]> GetOpenTimeOverNight()
         {
             List<double[]> openTime = new List<double[]>();
@@ -60,6 +60,27 @@ namespace com.wer.sc.data.test
                 klineData.BarPos = i;
                 string periodStr = periodArr[i].Trim();
                 Assert.AreEqual(periodStr, klineData.ToString());
+            }
+        }
+
+        public static void AssertTickDataResult(ITickData tickData, string txt)
+        {
+            string[] periodArr = txt.Split('\r');
+            Assert.AreEqual(periodArr.Length, tickData.Length);
+            for (int i = 0; i < tickData.Length; i++)
+            {
+                tickData.BarPos = i;
+                string periodStr = periodArr[i].Trim();
+                Assert.AreEqual(periodStr, tickData.ToString());
+            }
+        }
+
+        public static void AssertDates(List<int> dates, string txt)
+        {
+            string[] periodArr = txt.Split('\r');
+            for (int i = 0; i < dates.Count; i++)
+            {
+                Assert.AreEqual(int.Parse(periodArr[i]), dates[i]);
             }
         }
     }

@@ -68,7 +68,7 @@ namespace com.wer.sc.data.update
             for (int i = 0; i < charts.Count; i++)
             {
                 KLineChart chart = charts[i];
-                data.arr_time[i] = chart.Time;
+                data.arr_time[i] = chart.FullTime;
                 data.arr_start[i] = chart.Start;
                 data.arr_high[i] = chart.High;
                 data.arr_low[i] = chart.Low;

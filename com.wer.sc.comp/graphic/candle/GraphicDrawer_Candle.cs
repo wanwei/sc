@@ -153,7 +153,7 @@ namespace com.wer.sc.comp.graphic
             Font font = new Font("New Times Roman", 10, FontStyle.Regular);
 
             //int len = chart.Time.Length;
-            b.Lines.Add(new BlockLineInfo(chart.Time.ToString(), brushNormal, font));
+            b.Lines.Add(new BlockLineInfo(chart.FullTime.ToString(), brushNormal, font));
             b.Lines.Add(new BlockLineInfo("开盘", brushNormal, font));
             b.Lines.Add(new BlockLineInfo(chart.Start.ToString(), GetPriceBrush(chart.Start, lastEndPrice), font));
             b.Lines.Add(new BlockLineInfo("最高", brushNormal, font));

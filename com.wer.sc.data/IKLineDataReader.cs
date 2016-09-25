@@ -2,6 +2,8 @@
 {
     public interface IKLineDataReader
     {
+        IKLineData GetAllData(string code, KLinePeriod period);
+
         IKLineData GetData(string code, int startDate, int endDate, KLinePeriod period);
 
         int GetFirstDate(string code, KLinePeriod period);

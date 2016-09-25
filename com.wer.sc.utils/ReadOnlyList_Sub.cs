@@ -24,6 +24,8 @@ namespace com.wer.sc.utils
         {
             get
             {
+                if (index >= this.Count)
+                    throw new IndexOutOfRangeException(index + "超出了列表界线" + Count);
                 return list[index + startIndex];
             }
 
@@ -48,7 +50,6 @@ namespace com.wer.sc.utils
                 return true;
             }
         }
-
 
         public int IndexOf(T item)
         {
@@ -75,7 +76,6 @@ namespace com.wer.sc.utils
         {
             throw new NotImplementedException();
         }
-
 
         public void CopyTo(T[] array, int arrayIndex)
         {

@@ -45,36 +45,15 @@ namespace com.wer.sc.data.update
         /// <returns></returns>
         public static IKLineData Transfer_Day(IKLineData data, KLinePeriod targetPeriod)
         {
-            List<KLineChart> charts = new List<KLineChart>();
-            int period = targetPeriod.Period;
-            //DaySpliter.Split()
-            int startIndex = 0;
-            bool hasNight = false;
-            for (int i = 1; i < data.Length; i++)
+            List<SplitterResult> results = DaySpliter.Split(new KLineDataTimeGetter(data));
+
+            List<KLineChart> charts = new List<KLineChart>(results.Count);
+            for (int i = 0; i < results.Count; i++)
             {
-                double lastfulltime = data.Arr_Time[i - 1];
-                double fulltime = data.Arr_Time[i];
-
-                double lastdate = (int)lastfulltime;
-                double date = (int)fulltime;
-
-                if (KLineDataIndex.IsNightStart(fulltime, lastfulltime))
-                {
-                    charts.Add(GetChart_Day(data, startIndex, i - 1));
-                    startIndex = i;
-                    hasNight = true;
-                }
-                else if (hasNight)
-                {
-                    if (date != lastdate)
-                        hasNight = false;
-                }
-                else if (date != lastdate)
-                {
-                    charts.Add(GetChart_Day(data, startIndex, i - 1));
-                    startIndex = i;
-                }
-            }
+                int startIndex = results[i].Index;
+                int endIndex = (i == results.Count - 1) ? data.Length - 1 : results[i + 1].Index - 1;
+                charts.Add(GetChart_Day(data, startIndex, endIndex));
+            }         
 
             return GetKLineData(charts);
         }
@@ -82,7 +61,7 @@ namespace com.wer.sc.data.update
         private static KLineChart GetChart_Day(IKLineData data, int startIndex, int endIndex)
         {
             KLineChart chart = GetChart(data, startIndex, endIndex);
-            chart.Time = (int)data.Arr_Time[endIndex];
+            chart.FullTime = (int)data.Arr_Time[endIndex];
             return chart;
         }
 
@@ -135,7 +114,7 @@ namespace com.wer.sc.data.update
         {
             //KLineChart chart = new KLineChart();
             KLineChart chart = new KLineChart();
-            chart.Time = data.Arr_Time[startIndex];
+            chart.FullTime = data.Arr_Time[startIndex];
             chart.Start = data.Arr_Start[startIndex];
             chart.End = data.Arr_End[endIndex];
             chart.Hold = data.Arr_Hold[endIndex];
@@ -166,7 +145,7 @@ namespace com.wer.sc.data.update
             for (int i = 0; i < charts.Count; i++)
             {
                 KLineChart chart = charts[i];
-                data.arr_time[i] = chart.Time;
+                data.arr_time[i] = chart.FullTime;
                 data.arr_start[i] = chart.Start;
                 data.arr_high[i] = chart.High;
                 data.arr_low[i] = chart.Low;

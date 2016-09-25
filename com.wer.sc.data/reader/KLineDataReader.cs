@@ -20,6 +20,11 @@ namespace com.wer.sc.data.reader
             this.utils = new DataPathUtils(this.dataPath);
         }
 
+        public IKLineData GetAllData(string code, KLinePeriod period)
+        {
+            return GetData(code, -1, int.MaxValue, period);
+        }
+
         public IKLineData GetData(String code, int startDate, int endDate, KLinePeriod period)
         {
             if (period.PeriodType == KLinePeriod.TYPE_MINUTE)
@@ -52,6 +57,8 @@ namespace com.wer.sc.data.reader
             String path = utils.GetKLineDataPath(code, period);
             KLineDataStore store = new KLineDataStore(path);
             KLineData data = (KLineData)store.Load(startDate, endDate);
+            if (data == null)
+                return data;
             data.Code = code;
             return data;
         }

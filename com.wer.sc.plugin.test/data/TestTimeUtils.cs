@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace com.wer.sc.data.test
 {
     [TestClass]
-    public class TestTime
+    public class TestTimeUtils
     {
 
         [TestMethod]

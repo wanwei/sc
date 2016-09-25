@@ -23,7 +23,6 @@ namespace com.wer.sc.data.update
 
         public static List<ITimeLineData> ConvertRealDataList(IKLineData data, float lastEndPrice, IOpenDateReader openDateReader)
         {
-
             List<SplitterResult> splitResult = DaySpliter.Split(new KLineDataTimeGetter(data), openDateReader);
 
             List<ITimeLineData> realdataList = new List<ITimeLineData>(splitResult.Count);
@@ -56,25 +55,6 @@ namespace com.wer.sc.data.update
                 r.arr_price[currentRealIndex] = data.Arr_End[i];
                 r.arr_mount[currentRealIndex] = data.Arr_Mount[i];
                 r.arr_hold[currentRealIndex] = data.Arr_Hold[i];
-            }
-        }
-
-        class KLineDataTimeGetter : TimeGetter
-        {
-            private IKLineData data;
-            public KLineDataTimeGetter(IKLineData data)
-            {
-                this.data = data;
-            }
-
-            public int Count
-            {
-                get { return data.Length; }
-            }
-
-            public double GetTime(int index)
-            {
-                return data.Arr_Time[index];
             }
         }
     }

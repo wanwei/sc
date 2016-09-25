@@ -118,9 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="DLm05" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\DLm05.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
-  </data>
   <data name="m01_20131231" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\m01_20131231.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
   </data>
@@ -208,10 +205,79 @@
   <data name="Kline2Kline_M05_20131216_20131231_5Minute" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Kline2Kline_M05_20131216_20131231_5Minute.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
   </data>
+  <data name="KLineData_M05_20000717_20131225" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\KLineData_M05_20000717_20131225.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
+  </data>
   <data name="Store_Catelog" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Store_Catelog.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
   </data>
   <data name="Store_Code" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Store_Code.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
+  </data>
+  <data name="MockData_Code" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MockData_Code.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
+  </data>
+  <data name="MockData_OpenDate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MockData_OpenDate.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
+  </data>
+  <data name="Store_OpenDate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Store_OpenDate.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
+  </data>
+  <data name="Store_KlineData" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Store_KlineData.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
+  </data>
+  <data name="Store_TickData" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Store_TickData.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
+  </data>
+  <data name="TickData_M01_20131231" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TickData_M01_20131231.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
+  </data>
+  <data name="MockData_Code2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MockData_Code2.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
+  </data>
+  <data name="MockData_OpenDate2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MockData_OpenDate2.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
+  </data>
+  <data name="TickData_M01_20141223" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TickData_M01_20141223.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
+  </data>
+  <data name="KLineData_M05_20141215_20150116_1Minute" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\KLineData_M05_20141215_20150116_1Minute.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
+  </data>
+  <data name="TickData_M05_20150121" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TickData_M05_20150121.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
+  </data>
+  <data name="TickData_M09_20141223" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TickData_M09_20141223.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
+  </data>
+  <data name="Kline2kline_M05_20131216_20131231_Day" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Kline2kline_M05_20131216_20131231_Day.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
+  </data>
+  <data name="Kline2Kline_M05_20141215_20150116_Day" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Kline2Kline_M05_20141215_20150116_Day.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
+  </data>
+  <data name="KLineData_M05_20141215_20150116_15Minute" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\KLineData_M05_20141215_20150116_15Minute.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
+  </data>
+  <data name="KLineData_M05_20141215_20150116_Day" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\KLineData_M05_20141215_20150116_Day.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
+  </data>
+  <data name="KLineData_M05_20141215_20150127_15Minute" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\KLineData_M05_20141215_20150127_15Minute.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
+  </data>
+  <data name="KLineData_M05_20141215_20150127_1Minute" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\KLineData_M05_20141215_20150127_1Minute.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
+  </data>
+  <data name="KLineData_M05_20141215_20150127_Day" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\KLineData_M05_20141215_20150127_Day.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
+  </data>
+  <data name="KLineData_M09_20141215_20150127_1Minute" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\KLineData_M09_20141215_20150127_1Minute.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
+  </data>
+  <data name="DataUpdate_DataPrepare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DataUpdate_DataPrepare.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
+  </data>
+  <data name="Resource_M01_1Minute" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Resource_M01_1Minute.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
   </data>
 </root>

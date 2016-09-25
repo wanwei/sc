@@ -29,6 +29,7 @@ namespace com.wer.sc.data.utils
             int len = timeGetter.Count;
             int currentIndex = 0;
             bool hasNight = IsNight(timeGetter.GetTime(0));
+            bool overNight = false;
             for (int index = 1; index < len; index++)
             {
                 time = timeGetter.GetTime(index);
@@ -44,17 +45,26 @@ namespace com.wer.sc.data.utils
                  * 4.有夜盘，要过夜，而且是周末：如20141226210000、...、20141227023000、...、20141229090000
                  */
 
+                /*
+                 * 规则：
+                 * 1.夜盘开始，一定是新的一天开始
+                 * 2.
+                 */
+
                 //夜盘开始，则一定是新的一天开始
                 if (IsNightStart(time, lastTime))
                 {
                     indeies.Add(new SplitterResult((int)lastTime, currentIndex));
+                    overNight = false;
                     currentIndex = index;
                     hasNight = true;
                 }
                 else if (hasNight)
                 {
+                    if (date != lastDate)
+                        overNight = true;
                     //对于夜盘来说，如果到了第二天，而且时间大于6点，则说明夜盘结束了
-                    if (date != lastDate && (time - (int)time) > 0.06)
+                    if (overNight && (time - (int)time) > 0.06)
                         hasNight = false;
                 }
                 //只要过了夜都算第二天的
@@ -62,13 +72,20 @@ namespace com.wer.sc.data.utils
                 {
                     indeies.Add(new SplitterResult((int)lastTime, currentIndex));
                     currentIndex = index;
+                    overNight = false;
                 }
 
                 lastTime = time;
             }
-            indeies.Add(new SplitterResult((int)lastTime, currentIndex));
+
+            //如果最后一个时间是晚上
+            int endDate = (int)lastTime;
+            if (IsNight(lastTime))
+                endDate += 1;
+
+            indeies.Add(new SplitterResult(endDate, currentIndex));
             return indeies;
-        }        
+        }
 
         public static bool IsNight(double time)
         {

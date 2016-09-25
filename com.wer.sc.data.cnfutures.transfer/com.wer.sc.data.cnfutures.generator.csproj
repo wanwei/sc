@@ -59,6 +59,7 @@
     <Compile Include="FormDataGenerator.Designer.cs">
       <DependentUpon>FormDataGenerator.cs</DependentUpon>
     </Compile>
+    <Compile Include="DataCheck_OpenTime.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DataGenerator_Normal.cs" />

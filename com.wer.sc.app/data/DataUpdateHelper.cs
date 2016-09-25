@@ -33,14 +33,14 @@ namespace com.wer.sc.app.data
 
         public void Update(String code)
         {
-            DataUpdate update = dataMgr.GetDataUpdate(providerName);
+            DataUpdate_Old update = dataMgr.GetDataUpdate(providerName);
 
             updateTick(code, update);
 
             update.UpdateKLine(code);
         }
 
-        private void updateTick(string code, DataUpdate update)
+        private void updateTick(string code, DataUpdate_Old update)
         {
             List<int> updateDates = update.Update_Tick.GetUpdateDates(code, dataReaderFactory);
             for (int i = 0; i < updateDates.Count; i++)
@@ -52,7 +52,7 @@ namespace com.wer.sc.app.data
             }
         }
 
-        private void updateKLine(String code, DataUpdate update)
+        private void updateKLine(String code, DataUpdate_Old update)
         {
             //update.Update_KLine.
         }

@@ -59,6 +59,8 @@ namespace com.wer.sc.data.store
 
         public KLineData Load()
         {
+            if (!File.Exists(path))
+                return null;
             FileStream file = new FileStream(path, FileMode.Open);
             try
             {
@@ -76,6 +78,8 @@ namespace com.wer.sc.data.store
 
         public IKLineData LoadByIndex(int startIndex, int endIndex)
         {
+            if (!File.Exists(path))
+                return null;
             FileStream file = new FileStream(path, FileMode.Open);
             try
             {
@@ -102,7 +106,7 @@ namespace com.wer.sc.data.store
             return FromBytes(bs, 0, bs.Length);
         }
 
-        public KLineData FromBytes(byte[] bs, int start, int len)
+        public static KLineData FromBytes(byte[] bs, int start, int len)
         {
             int size = LEN_EVERYKLINE;
             int dataLength = len / size;
@@ -138,7 +142,7 @@ namespace com.wer.sc.data.store
             return data;
         }
 
-        public byte[] GetBytes(IKLineData data)
+        public static byte[] GetBytes(IKLineData data)
         {
             int size = LEN_EVERYKLINE;
             byte[] bs = new byte[size * data.Length];
@@ -183,6 +187,8 @@ namespace com.wer.sc.data.store
 
         public double GetFirstTime()
         {
+            if (!File.Exists(path))
+                return -1;
             FileStream file = new FileStream(path, FileMode.Open);
             try
             {
@@ -219,12 +225,16 @@ namespace com.wer.sc.data.store
 
         public IKLineData Load(int startDate, int endDate)
         {
+            if (!File.Exists(path))
+                return null;
             KLineDataIndexResult result = LoadIndex();
             return Load(startDate, endDate, result);
         }
 
         public IKLineData Load(int date, int beforeDayCount, int afterDayCount)
         {
+            if (!File.Exists(path))
+                return null;
             KLineDataIndexResult result = LoadIndex();
             int index = FindIndex(result, date, true);
             if (index < 0)
@@ -294,7 +304,7 @@ namespace com.wer.sc.data.store
             {
                 int lastDate = dateList[0];
                 if (lastDate > date)
-                    return 0;
+                    return lastDate;
                 for (int i = 1; i < dateList.Count; i++)
                 {
                     if (dateList[i] > date && dateList[i - 1] < date)
@@ -305,7 +315,7 @@ namespace com.wer.sc.data.store
             {
                 int lastDate = dateList[dateList.Count - 1];
                 if (lastDate < date)
-                    return 0;
+                    return lastDate;
                 for (int i = dateList.Count - 2; i >= 0; i--)
                 {
                     if (dateList[i] < date && dateList[i + 1] > date)

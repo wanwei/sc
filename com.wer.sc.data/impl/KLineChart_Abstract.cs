@@ -1,4 +1,5 @@
-﻿using System;
+﻿using com.wer.sc.utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,11 @@ namespace com.wer.sc.data
     {
         public abstract string Code { get; set; }
 
-        public abstract double Time { get; set; }
+        public abstract double FullTime { get; set; }
+
+        //public abstract int Date { get; set; }
+
+        //public abstract double Time { get; }
 
         public abstract float Start { get; set; }
 
@@ -110,6 +115,21 @@ namespace com.wer.sc.data
             }
         }
 
+        public float HeightPercent
+        {
+            get
+            {
+                return (float)NumberUtils.percent(Height, End);
+            }
+        }
+        public float BlockHeightPercent
+        {
+            get
+            {
+                return (float)NumberUtils.percent(BlockHeight, End);
+            }
+        }
+
         public bool isRed()
         {
             return End >= Start;
@@ -119,7 +139,7 @@ namespace com.wer.sc.data
         {
             StringBuilder sb = new StringBuilder();
             sb.Append(Code).Append(",");
-            sb.Append(Time).Append(",");
+            sb.Append(FullTime).Append(",");
             sb.Append(Start).Append(",");
             sb.Append(High).Append(",");
             sb.Append(Low).Append(",");

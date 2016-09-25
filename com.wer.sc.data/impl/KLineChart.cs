@@ -12,6 +12,8 @@ namespace com.wer.sc.data
 
         private double time;
 
+        private int date;
+
         private float start; //起始价        
 
         private float high; //最高价
@@ -26,6 +28,24 @@ namespace com.wer.sc.data
 
         private int hold;
 
+        public KLineChart()
+        {
+
+        }
+
+        public KLineChart(IKLineData data, int index)
+        {
+            this.code = data.Code;
+            this.time = data.Arr_Time[index];
+            this.start = data.Arr_Start[index];
+            this.high = data.Arr_High[index];
+            this.low = data.Arr_Low[index];
+            this.end = data.Arr_End[index];
+            this.mount = data.Arr_Mount[index];
+            this.money = data.Arr_Money[index];
+            this.hold = data.Arr_Hold[index];
+        }
+
         public override string Code
         {
             get
@@ -35,12 +55,7 @@ namespace com.wer.sc.data
             set { this.code = value; }
         }
 
-        public void SetCode(String code)
-        {
-            this.code = code;
-        }
-
-        public override double Time
+        public override double FullTime
         {
             get
             {
@@ -49,10 +64,27 @@ namespace com.wer.sc.data
             set { this.time = value; }
         }
 
-        public void SetTime(double time)
-        {
-            this.time = time;
-        }
+
+        //public override int Date
+        //{
+        //    get
+        //    {
+        //        return this.date;
+        //    }
+
+        //    set
+        //    {
+        //        this.date = value;
+        //    }
+        //}
+
+        //public override double Time
+        //{
+        //    get
+        //    {
+        //        return FullTime - (int)FullTime;
+        //    }
+        //}
 
         public override float Start
         {
@@ -61,11 +93,6 @@ namespace com.wer.sc.data
                 return start;
             }
             set { this.start = value; }
-        }
-
-        public void SetStart(float start)
-        {
-            this.start = start;
         }
 
         public override float High
@@ -77,11 +104,6 @@ namespace com.wer.sc.data
             set { this.high = value; }
         }
 
-        public void SetHigh(float high)
-        {
-            this.high = high;
-        }
-
         public override float Low
         {
             get
@@ -89,11 +111,6 @@ namespace com.wer.sc.data
                 return low;
             }
             set { this.low = value; }
-        }
-
-        public void SetLow(float low)
-        {
-            this.low = low;
         }
 
         public override float End
@@ -105,11 +122,6 @@ namespace com.wer.sc.data
             set { this.end = value; }
         }
 
-        public void SetEnd(float end)
-        {
-            this.end = end;
-        }
-
         public override int Mount
         {
             get
@@ -117,11 +129,6 @@ namespace com.wer.sc.data
                 return mount;
             }
             set { this.mount = value; }
-        }
-
-        public void SetMount(int mount)
-        {
-            this.mount = mount;
         }
 
 
@@ -134,11 +141,6 @@ namespace com.wer.sc.data
             set { this.money = value; }
         }
 
-        public void SetMoney(float money)
-        {
-            this.money = money;
-        }
-
         public override int Hold
         {
             get
@@ -146,11 +148,6 @@ namespace com.wer.sc.data
                 return this.hold;
             }
             set { this.hold = value; }
-        }
-
-        public void SetHold(int hold)
-        {
-            this.hold = hold;
         }
     }
 }

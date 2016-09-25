@@ -118,7 +118,7 @@ namespace com.wer.sc.app.data
             GetCurrentDataUpdate().UpdateCodeInfos();
         }
 
-        private DataUpdate GetCurrentDataUpdate()
+        private DataUpdate_Old GetCurrentDataUpdate()
         {
             return mgr.GetDataUpdate(currentProviderName);
         }
@@ -134,7 +134,7 @@ namespace com.wer.sc.app.data
             for (int i = 0; i < objs.Count; i++)
             {
                 CodeInfo code = (CodeInfo)objs[i];
-                DataUpdate dataUpdater = GetCurrentDataUpdate();
+                DataUpdate_Old dataUpdater = GetCurrentDataUpdate();
                 dataUpdater.UpdateTick(code.code);
                 dataUpdater.UpdateKLine(code.code);
             }

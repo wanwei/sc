@@ -56,12 +56,12 @@ namespace com.wer.sc.data.provider
             return dataPath + "\\" + code + "\\" + code + "_" + date + ".csv";
         }
 
-        private TickData ReadLinesToTickData(string[] lines)
+        public static TickData ReadLinesToTickData(string[] lines)
         {
             TickData data = new TickData(lines.Length);
             for (int i = 0; i < lines.Length; i++)
             {
-                String line = lines[i];
+                String line = lines[i].Trim();
                 if (line.Equals(""))
                     continue;
                 String[] dataArr = line.Split(',');

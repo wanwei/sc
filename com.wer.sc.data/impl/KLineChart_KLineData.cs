@@ -53,7 +53,7 @@ namespace com.wer.sc.data
             set { throw new NotImplementedException(); }
         }
 
-        public override double Time
+        public override double FullTime
         {
             get
             {
@@ -61,6 +61,27 @@ namespace com.wer.sc.data
             }
             set { throw new NotImplementedException(); }
         }
+
+        //public override int Date
+        //{
+        //    get
+        //    {
+        //        return Data.Date;
+        //    }
+
+        //    set
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //}
+
+        //public override double Time
+        //{
+        //    get
+        //    {
+        //        return Data.Time;
+        //    }
+        //}
 
         public override float Start
         {
@@ -124,6 +145,7 @@ namespace com.wer.sc.data
             }
             set { throw new NotImplementedException(); }
         }
+
 
         public Object clone()
         {

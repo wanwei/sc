@@ -36,7 +36,7 @@ namespace com.wer.sc.data.generator
 
         private void btStart_Click(object sender, EventArgs e)
         {
-            DataUpdate2 generator = new DataUpdate2(dataProvider);
+            DataUpdate generator = new DataUpdate(dataProvider);
             generator.AfterPrepared = new AfterPreparedHandler(AfterPrepared);
             generator.AfterGeneratedPeriod = new AfterGeneratedPeriodHandler(AfterGeneratedPeriod);
             generator.AfterGenerated = new AfterGeneratedHandler(AfterGenerated);

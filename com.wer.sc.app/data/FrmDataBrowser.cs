@@ -47,7 +47,7 @@ namespace com.wer.sc.app.data
                 else if (fileName.EndsWith("tick"))
                 {
                     TickDataStore store = new TickDataStore(fileName);
-                    TickData data = store.load();
+                    TickData data = store.Load();
                     StringBuilder sb = new StringBuilder();
                     for (int i = 0; i < data.Length; i++)
                     {

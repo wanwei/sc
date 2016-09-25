@@ -248,7 +248,7 @@ namespace com.wer.sc.plugin
         {
             get
             {
-                return this.data.GetCurrentChart();
+                return this.data.GetCurrentBar();
             }
         }
 

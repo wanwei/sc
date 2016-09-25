@@ -17,7 +17,7 @@ namespace com.wer.sc.data.navigate
 
         private IDataCache_Code dataCache_Code;
 
-        private KLineData klineData;
+        private KLineData_RealTime klineData;
 
         private ITimeLineData realData;
 
@@ -44,7 +44,7 @@ namespace com.wer.sc.data.navigate
 
         public void Change(IKLineData data, double time)
         {
-            this.klineData = (KLineData)data;
+            this.klineData = (KLineData_RealTime)data;
             this.code = data.Code;
             this.period = data.Period;
             this.ChangeTime(time);
@@ -81,7 +81,8 @@ namespace com.wer.sc.data.navigate
             int date = (int)time;
             int start = (int)TimeUtils.AddDays(date, -extendBefore);
             int end = (int)TimeUtils.AddDays(date, extendAfter);
-            this.klineData = (KLineData)dataReaderFac.KLineDataReader.GetData(code, start, end, period);
+            KLineData data = (KLineData)dataReaderFac.KLineDataReader.GetData(code, start, end, period);
+            this.klineData = new KLineData_RealTime(data);
             this.code = code;
             this.period = period;
 
@@ -116,16 +117,16 @@ namespace com.wer.sc.data.navigate
             this.currentKLineIndex = klineData.IndexOfTime(time);
             this.chartBuilder.ChangeTime(time);
             IKLineChart chart = this.chartBuilder.GetCurrentChart();
-            klineData.ChangeChart(chart, currentKLineIndex);
+            klineData.SetRealTimeData(chart, currentKLineIndex);
         }
 
         public void ChangeIndex(int index)
         {
             if (index >= klineData.Length)
                 return;
-            klineData.ChangeChart(null);
+            klineData.SetRealTimeData(null);
             this.currentKLineIndex = index;
-            this.time = klineData.arr_time[index];
+            this.time = klineData.Arr_Time[index];
         }
 
         private void RefreshChartBuilder(double time)

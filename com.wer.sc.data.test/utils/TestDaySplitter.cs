@@ -34,6 +34,18 @@ namespace com.wer.sc.data.utils
                 Console.WriteLine(results[i]);
         }
 
+        [TestMethod]
+        public void TestSplit_EndInNight()
+        {
+            IKLineData klineData = ResourceLoader.GetDefaultDataReaderFactory().KLineDataReader.GetData("m05", 20150105, 20150106, KLinePeriod.KLinePeriod_1Minute);
+            IKLineData subData = klineData.Sub(0, 570);
+            List<SplitterResult> results = DaySpliter.Split(new MockTimeGetter(subData));
+            //for (int i = 0; i < results.Count; i++)
+            //    Console.WriteLine(results[i]);
+            Assert.AreEqual("20150105,0", results[0].ToString());
+            Assert.AreEqual("20150106,225", results[1].ToString());
+        }
+
         //[TestMethod]
         //public void TestSplit_Mix()
         //{

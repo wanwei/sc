@@ -71,51 +71,33 @@ namespace com.wer.sc.data.update
             return updateCodes;
         }
 
-        /// <summary>
-        /// 得到现在所有开盘日
-        /// </summary>
-        /// <returns></returns>
-        public List<int> GetCurrentOpenDates()
-        {
-            return null;
-        }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="type">
+        ///// 0:1分钟
+        ///// 1:15分钟
+        ///// 2:1小时
+        ///// 3:1日
+        ///// </param>
+        ///// <returns></returns>
+        //public int GetCurrentKLineUpdateDate(String code, int type)
+        //{
+        //    if (type == 0)
+        //        return klineDataReader.GetLastDate(code, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1));
+        //    if (type == 1)
+        //        return klineDataReader.GetLastDate(code, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 15));
+        //    if (type == 2)
+        //        return klineDataReader.GetLastDate(code, new KLinePeriod(KLinePeriod.TYPE_HOUR, 1));
+        //    if (type == 3)
+        //        return klineDataReader.GetLastDate(code, new KLinePeriod(KLinePeriod.TYPE_DAY, 1));
+        //    return -1;
+        //}
 
-        /// <summary>
-        /// 得到要更新的开盘日
-        /// </summary>
-        /// <returns></returns>
-        public List<int> GetUpdateOpenDates()
-        {
-            return null;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="type">
-        /// 0:1分钟
-        /// 1:15分钟
-        /// 2:1小时
-        /// 3:1日
-        /// </param>
-        /// <returns></returns>
-        public int GetCurrentKLineUpdateDate(String code, int type)
-        {
-            if (type == 0)
-                return klineDataReader.GetLastDate(code, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1));
-            if (type == 1)
-                return klineDataReader.GetLastDate(code, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 15));
-            if (type == 2)
-                return klineDataReader.GetLastDate(code, new KLinePeriod(KLinePeriod.TYPE_HOUR, 1));
-            if (type == 3)
-                return klineDataReader.GetLastDate(code, new KLinePeriod(KLinePeriod.TYPE_DAY, 1));
-            return -1;
-        }
-
-        public int GetCurrentTickUpdateDate(String code)
-        {
-            List<int> dates = tickDataReader.GetTickDates(code);
-            return dates[dates.Count - 1];
-        }
+        //public int GetCurrentTickUpdateDate(String code)
+        //{
+        //    List<int> dates = tickDataReader.GetTickDates(code);
+        //    return dates[dates.Count - 1];
+        //}
     }
 }

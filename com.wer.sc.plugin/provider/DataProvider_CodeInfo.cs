@@ -27,7 +27,7 @@ namespace com.wer.sc.data.provider
             for (int i = 0; i < lines.Length; i++)
             {
                 String[] strs = lines[i].Split(',');
-                CodeInfo code = new CodeInfo(strs[0], strs[2], strs[1]);
+                CodeInfo code = new CodeInfo(strs[0], strs[1], strs[2]);
                 codes.Add(code);
                 dicCodes.Add(code.code, code);
             }

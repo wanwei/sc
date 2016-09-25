@@ -7,18 +7,34 @@ using System.Threading.Tasks;
 
 namespace com.wer.sc.data.impl
 {
-    public class KLineData_Sub : IKLineData
+    public class KLineData_Sub : KLineData_Abstract, IKLineData
     {
         private IKLineData klineData;
 
-        private int startIndex;
-        private int endIndex;
+        private int klineStartIndex;
+        private int klineEndIndex;
+
+        private IList<double> arr_time;
+        private IList<float> arr_start;
+        private IList<float> arr_high;
+        private IList<float> arr_low;
+        private IList<float> arr_end;
+        private IList<int> arr_mount;
+        private IList<float> arr_money;
+        private IList<int> arr_hold;
+        private IList<float> arr_height;
+        private IList<float> arr_heightPercent;
+        private IList<float> arr_blockHigh;
+        private IList<float> arr_BlockLow;
+        private IList<float> arr_blockHeight;
+        private IList<float> arr_blockHeightPercent;
+        private IList<float> arr_upPercent;
 
         public KLineData_Sub(IKLineData klineData, int startIndex, int endIndex)
         {
             this.klineData = klineData;
-            this.startIndex = startIndex;
-            this.endIndex = endIndex;
+            this.klineStartIndex = startIndex;
+            this.klineEndIndex = endIndex;
 
             this.arr_time = new ReadOnlyList_Sub<double>(klineData.Arr_Time, startIndex, endIndex);
             this.arr_start = new ReadOnlyList_Sub<float>(klineData.Arr_Start, startIndex, endIndex);
@@ -35,192 +51,18 @@ namespace com.wer.sc.data.impl
             this.arr_blockHeight = new ReadOnlyList_Sub<float>(klineData.Arr_BlockHeight, startIndex, endIndex);
             this.arr_blockHeightPercent = new ReadOnlyList_Sub<float>(klineData.Arr_BlockHeightPercent, startIndex, endIndex);
             this.arr_upPercent = new ReadOnlyList_Sub<float>(klineData.Arr_UpPercent, startIndex, endIndex);
-
-        }
-
-        public string Code
-        {
-            get
-            {
-                return klineData.Code;
-            }
-        }
-
-        public int BarPos
-        {
-            get
-            {
-                return klineData.BarPos - startIndex;
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public void SetBarPosByTime(double time)
-        {
-            throw new NotImplementedException();
-        }
-
-
-
-        public double FullTime
-        {
-            get
-            {
-                return Arr_Time[BarPos];
-            }
-        }
-
-        public int Date
-        {
-            get { return (int)Arr_Time[BarPos]; }
-        }
-
-        public double Time
-        {
-            get
-            {
-                return FullTime - Date;
-            }
-        }
-
-        public float Start
-        {
-            get
-            {
-                return Arr_Start[BarPos];
-            }
-        }
-
-        public float High
-        {
-            get
-            {
-                return Arr_High[BarPos];
-            }
-        }
-
-        public float Low
-        {
-            get
-            {
-                return Arr_Low[BarPos];
-            }
-        }
-
-        public float End
-        {
-            get
-            {
-                return Arr_End[BarPos];
-            }
-        }
-
-        public int Mount
-        {
-            get
-            {
-                return Arr_Mount[BarPos];
-            }
-        }
-
-        public float Money
-        {
-            get
-            {
-                return Arr_Money[BarPos];
-            }
-        }
-
-        public int Hold
-        {
-            get
-            {
-                return Arr_Hold[BarPos];
-            }
-        }
-
-        public IKLineChart GetCurrentChart()
-        {
-            return new KLineChart_KLineData(this, BarPos);
-        }
-
-        public int Length
-        {
-            get
-            {
-                return endIndex - startIndex + 1;
-            }
-        }
-
-        public KLinePeriod Period
-        {
-            get
-            {
-                return klineData.Period;
-            }
-        }
-
-        public IKLineData GetRange(int start, int end)
-        {
-            return new KLineData_Sub(this, start, end);
-        }
-
-        public IKLineChart GetAggrChart(int startIndex, int endIndex)
-        {
-            KLineChart chart = new KLineChart();
-            chart.SetTime(this.Arr_Time[startIndex]);
-            chart.SetStart(this.Arr_Start[startIndex]);
-            chart.SetEnd(this.Arr_End[endIndex]);
-            chart.SetHold(this.Arr_Hold[endIndex]);
-
-            float high = float.MinValue;
-            float low = float.MaxValue;
-            int mount = 0;
-            float money = 0;
-            for (int i = startIndex; i <= endIndex; i++)
-            {
-                float chigh = this.Arr_High[i];
-                float clow = this.Arr_Low[i];
-                high = high < chigh ? chigh : high;
-                low = low > clow ? clow : low;
-                mount += this.Arr_Mount[i];
-                money += this.Arr_Money[i];
-            }
-            chart.SetHigh(high);
-            chart.SetLow(low);
-            chart.SetMount(mount);
-            chart.SetMoney(money);
-            return chart;
-        }
-
-        public int IndexOfTime(double time)
-        {
-            return klineData.IndexOfTime(time) - startIndex;
-        }
-
-        public string PrintAll()
-        {
-            throw new NotImplementedException();
         }
 
         #region 得到完整数据
 
-        private IList<double> arr_time;
-
-        public IList<double> Arr_Time
+        public override IList<double> Arr_Time
         {
             get
             {
                 return arr_time;
             }
         }
-
-        private IList<float> arr_start;
-
-        public IList<float> Arr_Start
+        public override IList<float> Arr_Start
         {
             get
             {
@@ -228,8 +70,7 @@ namespace com.wer.sc.data.impl
             }
         }
 
-        private IList<float> arr_high;
-        public IList<float> Arr_High
+        public override IList<float> Arr_High
         {
             get
             {
@@ -237,18 +78,17 @@ namespace com.wer.sc.data.impl
             }
         }
 
-        private IList<float> arr_low;
 
-        public IList<float> Arr_Low
+        public override IList<float> Arr_Low
         {
             get
             {
                 return arr_low;
             }
         }
-        private IList<float> arr_end;
 
-        public IList<float> Arr_End
+
+        public override IList<float> Arr_End
         {
             get
             {
@@ -256,80 +96,77 @@ namespace com.wer.sc.data.impl
             }
         }
 
-        private IList<int> arr_mount;
-
-        public IList<int> Arr_Mount
+        public override IList<int> Arr_Mount
         {
             get
             {
                 return arr_mount;
             }
         }
-        private IList<float> arr_money;
 
-        public IList<float> Arr_Money
+        public override IList<float> Arr_Money
         {
             get
             {
                 return arr_money;
             }
         }
-        private IList<int> arr_hold;
-        public IList<int> Arr_Hold
+
+        public override IList<int> Arr_Hold
         {
             get
             {
                 return arr_hold;
             }
         }
-        private IList<float> arr_height;
+
         /// <summary>
         /// 得到每个k线的振幅数组
         /// </summary>
-        public IList<float> Arr_Height
+        public override IList<float> Arr_Height
         {
             get
             {
                 return arr_height;
             }
         }
-        private IList<float> arr_heightPercent;
+
         /// <summary>
         /// 得到每个k线的振幅百分比数组
         /// </summary>
-        public IList<float> Arr_HeightPercent
+        public override IList<float> Arr_HeightPercent
         {
             get
             {
                 return arr_heightPercent;
             }
         }
-        private IList<float> arr_blockHigh;
-        public IList<float> Arr_BlockHigh
+
+        public override IList<float> Arr_BlockHigh
         {
             get
             {
                 return arr_blockHigh;
             }
         }
-        private IList<float> arr_BlockLow;
-        public IList<float> Arr_BlockLow
+
+        public override IList<float> Arr_BlockLow
         {
             get
             {
                 return arr_BlockLow;
             }
         }
-        private IList<float> arr_blockHeight;
-        public IList<float> Arr_BlockHeight
+
+        public override IList<float> Arr_BlockHeight
         {
             get
             {
                 return arr_blockHeight;
             }
         }
-        private IList<float> arr_blockHeightPercent;
-        public IList<float> Arr_BlockHeightPercent
+
+        public override IList<float> Arr_BlockHeightPercent
         {
             get
             {
@@ -337,9 +174,7 @@ namespace com.wer.sc.data.impl
             }
         }
 
-        private IList<float> arr_upPercent;
-
-        public IList<float> Arr_UpPercent
+        public override IList<float> Arr_UpPercent
         {
             get
             {

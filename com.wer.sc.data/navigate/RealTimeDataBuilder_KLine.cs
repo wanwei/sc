@@ -76,9 +76,9 @@ namespace com.wer.sc.data.navigate
                 startIndex = 0;
             else
                 startIndex = todayMinuteKLineData.IndexOfTime(t);
-            int endIndex = todayMinuteKLineData.IndexOfTime(currentMinuteChart.Time);
+            int endIndex = todayMinuteKLineData.IndexOfTime(currentMinuteChart.FullTime);
 
-            IKLineChart currentChart = todayMinuteKLineData.GetAggrChart(startIndex, endIndex - 1);
+            IKLineChart currentChart = todayMinuteKLineData.GetAggrKLineBar(startIndex, endIndex - 1);
             KLineChartMerge.Merge((KLineChart)currentChart, currentMinuteChart);
             this.currentChart = currentChart;
             this.currentTime = time;

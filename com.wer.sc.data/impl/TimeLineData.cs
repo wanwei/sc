@@ -92,7 +92,6 @@ namespace com.wer.sc.data
 
         public int Date
         {
-            //get { return date; }
             get { return (int)Arr_Time[Length - 1]; }
         }
 

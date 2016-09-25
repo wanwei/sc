@@ -9,17 +9,57 @@ namespace com.wer.sc.data.store.test
     public class TestKLineDataStore
     {
         [TestMethod]
-        public void TestAppend()
+        public void TestKLineDataFromBytes()
         {
-            String path = System.Environment.CurrentDirectory + "test.kline";
-            KLineData data = ResourceLoader.LoadKLineData();
+            IKLineData data = LoadKLineData();
+            byte[] bs = KLineDataStore.GetBytes(data);
+            KLineData data2 = KLineDataStore.FromBytes(bs, 0, bs.Length);
+            for (int i = 0; i < data.Length; i++)
+            {
+                data.BarPos = i;
+                data2.BarPos = i;
+                Assert.AreEqual(data.ToString(), data2.ToString());
+            }
+        }
+
+        [TestMethod]
+        public void TestKLineDataSaveLoad()
+        {
+            String path = ResourceLoader.GetTestOutputPath("m05_20000717_20131225.kline");
+
+            IKLineData data = LoadKLineData();
+            KLineDataStore store = new KLineDataStore(path);
+            store.Save(data);
+
+            KLineDataStore store2 = new KLineDataStore(path);
+            KLineData data2 = store.Load();
+            Assert.AreEqual(data.Length, data2.Length);
+            for (int i = 0; i < data.Length; i++)
+            {
+                data.BarPos = i;
+                data2.BarPos = i;
+                Assert.AreEqual(data.ToString(), data2.ToString());
+            }
+
+            Assert.AreEqual(20000717, store.GetFirstTime());
+            Assert.AreEqual(20131225, store.GetLastTime());
+            File.Delete(path);
+        }
+
+        [TestMethod]
+        public void TestKLineDataAppend()
+        {
+            String path = ResourceLoader.GetTestOutputPath("m05_20000717_20131225.kline");
+            IKLineData data = LoadKLineData();
 
             IKLineData d1 = data.GetRange(0, 100);
             IKLineData d2 = data.GetRange(101, data.Length - 1);
 
             KLineDataStore store = new KLineDataStore(path);
             store.Save(d1);
-            store.Append(d2);
+
+            KLineDataStore store2 = new KLineDataStore(path);
+            store2.Append(d2);
 
             KLineData data2 = store.Load();
             for (int i = 0; i < data.Length; i++)
@@ -29,79 +69,65 @@ namespace com.wer.sc.data.store.test
                 Assert.AreEqual(data.ToString(), data2.ToString());
             }
             File.Delete(path);
-        }        
+        }
 
         [TestMethod]
-        public void TestSaveLoad()
+        public void TestKLineDataLoadByIndex()
         {
-            String path = System.Environment.CurrentDirectory + "test.kline";
-            KLineData data = ResourceLoader.LoadKLineData();
+            String path = ResourceLoader.GetTestOutputPath("m05_20000717_20131225.kline");
+            IKLineData data = LoadKLineData();
+
             KLineDataStore store = new KLineDataStore(path);
             store.Save(data);
-            KLineData data2 = store.Load();
-            for (int i = 0; i < data.Length; i++)
+
+            KLineDataStore store2 = new KLineDataStore(path);
+            IKLineData data2 = store2.LoadByIndex(50, 100);
+
+            for (int i = 50; i <= 100; i++)
             {
                 data.BarPos = i;
-                data2.BarPos = i;
+                data2.BarPos = i - 50;
                 Assert.AreEqual(data.ToString(), data2.ToString());
             }
-
-            Assert.AreEqual(20000717, store.GetFirstTime());
-            Assert.AreEqual(20131225, store.GetLastTime());
 
             File.Delete(path);
         }
 
         [TestMethod]
-        public void TestLoadByDate()
+        public void TestKLineDataLoadByDate()
         {
-            String path = System.Environment.CurrentDirectory + "test.kline";
-            KLineData data = ResourceLoader.LoadKLineData();
+            String path = ResourceLoader.GetTestOutputPath("m05_20000717_20131225.kline");
+            IKLineData data = LoadKLineData();
+
             KLineDataStore store = new KLineDataStore(path);
             store.Save(data);
-            KLineData data2 = store.Load();
-            for (int i = 0; i < data.Length; i++)
+
+            KLineDataStore store2 = new KLineDataStore(path);
+            IKLineData data2 = store2.Load(20100101, 20120101);
+
+            for (int i = 2244; i <= 2722; i++)
+            {
+                data.BarPos = i;
+                data2.BarPos = i - 2244;
+                Assert.AreEqual(data.ToString(), data2.ToString());
+            }
+
+            data2 = store2.Load(-1, int.MaxValue);
+            Assert.AreEqual(data.Length, data2.Length);
+            for(int i = 0; i < data2.Length; i++)
             {
                 data.BarPos = i;
                 data2.BarPos = i;
                 Assert.AreEqual(data.ToString(), data2.ToString());
             }
-
-            Assert.AreEqual(20000717, store.GetFirstTime());
-            Assert.AreEqual(20131225, store.GetLastTime());
 
             File.Delete(path);
         }
 
-        [TestMethod]
-        public void TestFromBytes()
+        private IKLineData LoadKLineData()
         {
-            KLineData data = ResourceLoader.LoadKLineData();
-            KLineDataStore store = new KLineDataStore("");
-            byte[] bs = store.GetBytes(data);
-            KLineData data2 = store.FromBytes(bs, 0, bs.Length);
-            for (int i = 0; i < data.Length; i++)
-            {
-                data.BarPos = i;
-                data2.BarPos = i;
-                Assert.AreEqual(data.ToString(), data2.ToString());
-                //Console.WriteLine(data2);
-            }
-        }
-
-        [TestMethod]
-        public void TestLoadCsv()
-        {
-            KLineData data = ResourceLoader.LoadKLineData();
-            Assert.AreEqual("20000717,2160,2160,1996,1996,372,270,0", data.ToString());
-            data.BarPos = 1;
-            Assert.AreEqual("20000718,2013,2146,2013,2038,1084,692,0", data.ToString());
-            data.BarPos = 2;
-            Assert.AreEqual("20000719,2040,2040,2011,2012,136,742,0", data.ToString());
-            data.BarPos = 3;
-            Assert.AreEqual("20000720,2021,2026,2006,2016,60,742,0", data.ToString());
-            data.BarPos = 4;
-            Assert.AreEqual("20000721,1990,1998,1970,1970,204,754,0", data.ToString());
+            string[] lines = Resources.KLineData_M05_20000717_20131225.Split('\r');
+            return KLineDataStore_Csv.LoadKLineData(lines);
         }
     }
 }

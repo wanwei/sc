@@ -50,6 +50,9 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="impl\TestKLineData.cs" />
+    <Compile Include="impl\TestKLineData_RealTime.cs" />
+    <Compile Include="impl\TestTimeLineData.cs" />
     <Compile Include="navigate\TestDataNavigate.cs" />
     <Compile Include="navigate\TestDataNavigate_Night.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -58,23 +61,28 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="DataTestUtils.cs" />
+    <Compile Include="reader\TestOpenDateReader.cs" />
     <Compile Include="ResourceLoader.cs" />
     <Compile Include="store\TestCodeStore.cs" />
     <Compile Include="store\TestKLineDataIndex.cs" />
-    <Compile Include="TestKLineData.cs" />
+    <Compile Include="store\TestKLineDataStore_Csv.cs" />
+    <Compile Include="store\TestOpenDateStore.cs" />
+    <Compile Include="store\TestTickDataStore_Csv.cs" />
     <Compile Include="TestKLineDataReader.cs" />
-    <Compile Include="TestResourceLoader.cs" />
+    <Compile Include="update\MockDataProvider2.cs" />
+    <Compile Include="update\MockDataProvider_Abstract.cs" />
     <Compile Include="update\TestDataTransfer_KLine2KLine.cs" />
     <Compile Include="update\TestDataTransfer_Tick2KLineGenerator.cs" />
-    <Compile Include="update\TestTickUpdate.cs" />
+    <Compile Include="update\TestDataUpdate.cs" />
+    <Compile Include="update\TestDataUpdate_Tick.cs" />
     <Compile Include="update\MockDataProvider.cs" />
     <Compile Include="update\TestDataTransfer_Tick2KLine.cs" />
-    <Compile Include="update\TestCodeUpdate.cs" />
+    <Compile Include="update\TestDataUpdate_Code.cs" />
     <Compile Include="store\TestGetBytes.cs" />
     <Compile Include="store\TestKLineDataStore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="store\TestTickDataStore.cs" />
-    <Compile Include="update\TestKLineUpdater.cs" />
+    <Compile Include="update\TestDataUpdate_KLine.cs" />
     <Compile Include="utils\TestDaySplitter.cs" />
     <Compile Include="utils\TestTickDataIndeier.cs" />
   </ItemGroup>
@@ -86,7 +94,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AG05_20141230.csv" />
-    <None Include="Resources\DLm05.csv" />
     <None Include="Resources\m01_20131231.csv" />
     <None Include="Resources\m05_20040630.csv" />
     <None Include="Resources\M05_20141229.csv" />
@@ -180,6 +187,75 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Store_Catelog.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KLineData_M05_20000717_20131225.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MockData_OpenDate.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MockData_Code.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Store_OpenDate.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TickData_M01_20131231.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Store_KlineData.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Store_TickData.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MockData_Code2.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MockData_OpenDate2.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TickData_M01_20141223.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TickData_M05_20150121.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TickData_M09_20141223.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KLineData_M05_20141215_20150116_1Minute.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Kline2kline_M05_20131216_20131231_Day.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Kline2Kline_M05_20141215_20150116_Day.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KLineData_M05_20141215_20150116_Day.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KLineData_M05_20141215_20150116_15Minute.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KLineData_M05_20141215_20150127_1Minute.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KLineData_M05_20141215_20150127_15Minute.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KLineData_M05_20141215_20150127_Day.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KLineData_M09_20141215_20150127_1Minute.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DataUpdate_DataPrepare.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Resource_M01_1Minute.txt" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

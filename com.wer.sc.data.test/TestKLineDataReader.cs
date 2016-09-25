@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace com.wer.sc.data.test
 {
+    
     public class TestKLineDataReader
     {
     }

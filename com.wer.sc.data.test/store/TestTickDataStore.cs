@@ -15,36 +15,30 @@ namespace com.wer.sc.data.test
     public class TestTickDataStore
     {
         [TestMethod]
-        public void TestAppend()
+        public void TestFromBytes()
         {
-            String path = System.Environment.CurrentDirectory + "test.tick";
-            TickData data = ResourceLoader.LoadTickData_M01_20131231();
-
-            TickData d1 = data.SubData(0, 100);
-            TickData d2 = data.SubData(101, data.Length - 1);
-
-            TickDataStore store = new TickDataStore(path);
-            store.save(d1);
-            store.Append(d2);
-
-            TickData data2 = store.load();
+            TickData data = GetTickData();
+            byte[] bs = TickDataStore.GetBytes(data);
+            TickData data2 = TickDataStore.FromBytes(bs, 0, bs.Length);
             for (int i = 0; i < data.Length; i++)
             {
                 data.BarPos = i;
                 data2.BarPos = i;
                 Assert.AreEqual(data.ToString(), data2.ToString());
             }
-            File.Delete(path);
         }
 
         [TestMethod]
         public void TestSaveLoad()
         {
-            String path = System.Environment.CurrentDirectory + "test.tick";
-            TickData data = ResourceLoader.LoadTickData_M01_20131231();
+            TickData data = GetTickData();
+
+            String path = ResourceLoader.GetTestOutputPath("tickstoretest.tick");
             TickDataStore store = new TickDataStore(path);
-            store.save(data);
-            TickData data2 = store.load();
+            store.Save(data);
+
+            TickDataStore store2 = new TickDataStore(path);
+            TickData data2 = store2.Load();
             for (int i = 0; i < data.Length; i++)
             {
                 data.BarPos = i;
@@ -55,34 +49,36 @@ namespace com.wer.sc.data.test
         }
 
         [TestMethod]
-        public void TestFromBytes()
+        public void TestAppend()
         {
-            TickData data = ResourceLoader.LoadTickData_M01_20131231();
-            TickDataStore store = new TickDataStore("");
-            byte[] bs = store.GetBytes(data);
-            TickData data2 = store.FromBytes(bs, 0, bs.Length);
+            TickData data = GetTickData();
+
+            String path = ResourceLoader.GetTestOutputPath("tickstoretest.tick");
+            TickData d1 = data.SubData(0, 100);
+            TickData d2 = data.SubData(101, data.Length - 1);
+
+            TickDataStore store = new TickDataStore(path);
+            store.Save(d1);
+
+            TickDataStore store2 = new TickDataStore(path);
+            store2.Append(d2);
+
+            TickDataStore store3 = new TickDataStore(path);
+            TickData data2 = store3.Load();
+
             for (int i = 0; i < data.Length; i++)
             {
                 data.BarPos = i;
                 data2.BarPos = i;
                 Assert.AreEqual(data.ToString(), data2.ToString());
             }
+            File.Delete(path);
         }
 
-        [TestMethod]
-        public void TestLoadCsv()
+        private TickData GetTickData()
         {
-            TickData data = ResourceLoader.LoadTickData_M01_20131231();
-            Assert.AreEqual("20131231.0859,3711,192,192,28132,3711,8,3721,1,0", data.ToString());
-            data.BarPos = 1;
-            Assert.AreEqual("20131231.090006,3718,8,200,-8,3715,1,3718,6,1", data.ToString());
-            data.BarPos = 2;
-            Assert.AreEqual("20131231.090013,3718,18,218,-14,3718,2,3720,2,1", data.ToString());
-            //data.BarPos = 3;
-            //Assert.AreEqual("20000720,2021,2026,2006,2016,60,742,0", data.ToString());
-            //data.BarPos = 4;
-            //Assert.AreEqual("20000721,1990,1998,1970,1970,204,754,0", data.ToString());
+            string[] lines = Resources.Store_TickData.Split('\r');
+            return TickDataStore_Csv.Load(lines);
         }
-
     }
 }

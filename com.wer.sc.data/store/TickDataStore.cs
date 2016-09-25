@@ -16,7 +16,7 @@ namespace com.wer.sc.data.store
             this.path = path;
         }
 
-        public void save(TickData data)
+        public void Save(TickData data)
         {
             DirectoryInfo dir = Directory.GetParent(path);
             if (!dir.Exists)            
@@ -48,7 +48,7 @@ namespace com.wer.sc.data.store
             }
         }
 
-        public TickData load()
+        public TickData Load()
         {
             if (!File.Exists(path))
                 return null;
@@ -67,12 +67,12 @@ namespace com.wer.sc.data.store
             }
         }
 
-        public TickData FromBytes(byte[] bs)
+        public static TickData FromBytes(byte[] bs)
         {
             return FromBytes(bs, 0, bs.Length);
         }
 
-        public TickData FromBytes(byte[] bs, int start, int len)
+        public static TickData FromBytes(byte[] bs, int start, int len)
         {
             int size = 44;
             int dataLength = len / size;
@@ -114,7 +114,7 @@ namespace com.wer.sc.data.store
             return data;
         }
 
-        public byte[] GetBytes(TickData data)
+        public static byte[] GetBytes(TickData data)
         {
             int size = 44;
             byte[] bs = new byte[size * data.Length];

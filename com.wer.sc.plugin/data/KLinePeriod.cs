@@ -65,5 +65,30 @@ namespace com.wer.sc.data
         {
             return Period * 10 + PeriodType;
         }
+
+        private static KLinePeriod period_1minute = new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1);
+        private static KLinePeriod period_15minute = new KLinePeriod(KLinePeriod.TYPE_MINUTE, 15);
+        private static KLinePeriod period_Hour = new KLinePeriod(KLinePeriod.TYPE_HOUR, 1);
+        private static KLinePeriod period_Day = new KLinePeriod(KLinePeriod.TYPE_DAY, 1);
+
+        public static KLinePeriod KLinePeriod_1Minute
+        {
+            get { return period_1minute; }
+        }
+
+        public static KLinePeriod KLinePeriod_15Minute
+        {
+            get { return period_15minute; }
+        }
+
+        public static KLinePeriod KLinePeriod_1Hour
+        {
+            get { return period_Hour; }
+        }
+
+        public static KLinePeriod KLinePeriod_1Day
+        {
+            get { return period_Day; }
+        }
     }
 }

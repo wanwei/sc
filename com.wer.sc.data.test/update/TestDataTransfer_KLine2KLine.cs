@@ -44,42 +44,34 @@ namespace com.wer.sc.data.update
             IKLineData data_1min = DataTestUtils.GetKLineData("m05", 20131216, 20131231, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1), openTime);
 
             IKLineData data = DataTransfer_KLine2KLine.Transfer_Day(data_1min, new KLinePeriod(KLinePeriod.TYPE_DAY, 1));
-            for(int i=0;i< data_1min.Length;i++)
-            {
-                data_1min.BarPos = i;
-                Console.WriteLine(data_1min);
-            }
-            //Assert.AreEqual("20131216,3341,3364,3335,3348,938428,0,1659396", data.ToString());
-            //data.BarPos = 1;
-            //Assert.AreEqual("20131217,3365,3395,3362,3386,1231522,0,1625218", data.ToString());
-            //data.BarPos = 2;
-            //Assert.AreEqual("20131218,3400,3406,3383,3393,989908,0,1617380", data.ToString());
-            //data.BarPos = 3;
-            //Assert.AreEqual("20131219,3371,3383,3367,3381,765966,0,1616592", data.ToString());
-            //data.BarPos = 11;
-            //Assert.AreEqual("20131231,3352,3373,3350,3368,1049534,0,1556822", data.ToString());
+            DataTestUtils.AssertKLineDataResult(data, Resources.Kline2kline_M05_20131216_20131231_Day);
         }
 
-        public static IKLineData GetKLineData_1Minute()
+        [TestMethod]
+        public void TestTransferKLine_DayOverNight()
         {
-            MockDataProvider dataProvider = new MockDataProvider();
-            dataProvider.Append = true;
-            List<int> dates = dataProvider.GetOpenDates();
-            List<TickData> dataList = new List<TickData>();
-            for (int i = 0; i < dates.Count; i++)
-            {
-                int date = dates[i];
-                TickData tickData = dataProvider.GetTickData("m05", date);
-                if (tickData == null)
-                    continue;
-                dataList.Add(tickData);
-            }
+            IKLineData klineData = GetMaKLineData(20141215, 20150116);
+            IKLineData data = DataTransfer_KLine2KLine.Transfer_Day(klineData, new KLinePeriod(KLinePeriod.TYPE_DAY, 1));
+            AssertResult(data, Resources.Kline2Kline_M05_20141215_20150116_Day);
+            //for (int i = 0; i < data.Length; i++)
+            //{
+            //    data.BarPos = i;
+            //    Console.WriteLine(data);
+            //}
+        }
 
-            List<double[]> openTime = new List<double[]>();
-            openTime.Add(new double[] { .090000, .101500 });
-            openTime.Add(new double[] { .103000, .113000 });
-            openTime.Add(new double[] { .133000, .150000 });
-            return DataTransfer_Tick2KLine.Transfer(dataList, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1), openTime);
+        private static IKLineData GetMaKLineData(int startDate, int endDate)
+        {
+            List<IKLineData> klineDataList = new List<IKLineData>();
+            IList<int> openDates = ResourceLoader.GetDefaultDataReaderFactory().OpenDateReader.GetOpenDates(20141215, 20150116);
+            for (int i = 0; i < openDates.Count; i++)
+            {
+                int date = openDates[i];
+                List<double[]> openTime = MockDataProvider_Abstract.GetOpenTime_M(openDates[i]);
+                IKLineData data_1min = DataTestUtils.GetKLineData("m05", date, date, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1), openTime);
+                klineDataList.Add(data_1min);
+            }
+            return KLineData.Merge(klineDataList);
         }
 
         private void AssertResult(IKLineData klineData, String txt)

@@ -50,7 +50,15 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="TestTime.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="provider\TestProvider_CodeInfo.cs" />
+    <Compile Include="provider\TestProvider_OpenTime.cs" />
+    <Compile Include="ResourceLoader.cs" />
+    <Compile Include="data\TestTimeUtils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -58,6 +66,17 @@
       <Project>{b8955457-f108-4060-a35b-69b482a19ab6}</Project>
       <Name>com.wer.sc.plugin</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\opentime.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

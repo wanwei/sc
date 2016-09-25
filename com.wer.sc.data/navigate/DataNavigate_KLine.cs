@@ -5,7 +5,7 @@ namespace com.wer.sc.data.navigate
 {
     public class DataNavigate_KLine
     {
-        private IKLineData klineData;
+        private KLineData_RealTime klineData;
         private double currentTime;
 
         private RealTimeDataBuilder_KLine klineChartBuilder;
@@ -26,7 +26,8 @@ namespace com.wer.sc.data.navigate
 
         private void Init(DataReaderFactory factory, string code, KLinePeriod period, double time, int startDate, int endDate)
         {
-            this.klineData = factory.KLineDataReader.GetData(code, startDate, endDate, period);
+            KLineData data = (KLineData)factory.KLineDataReader.GetData(code, startDate, endDate, period);
+            this.klineData = new KLineData_RealTime(data);
             DataCacheFactory cacheFac = factory.CacheFactory;
             this.klineChartBuilder = new RealTimeDataBuilder_KLine(klineData, cacheFac.CreateCache_Code(code, startDate, endDate), time);
             this.CurrentTime = time;
@@ -62,7 +63,7 @@ namespace com.wer.sc.data.navigate
 
                 //设置为修改当前barpos
                 klineData.SetBarPosByTime(currentTime);
-                ((KLineData)klineData).ChangeChart(klineChart);
+                klineData.SetRealTimeData(klineChart);
                 //int currentKLineIndex = klineData.IndexOfTime(currentTime);
                 //((KLineData)klineData).ChangeChart(klineChart, currentKLineIndex);
             }

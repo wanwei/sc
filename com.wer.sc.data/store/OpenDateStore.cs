@@ -47,6 +47,11 @@ namespace com.wer.sc.data.store
             if (!File.Exists(path))
                 return new List<int>();
             String[] strs = File.ReadAllLines(path);
+            return LoadOpenDates(strs);
+        }
+
+        public static List<int> LoadOpenDates(string[] strs)
+        {
             List<int> openDates = new List<int>();
             for (int i = 0; i < strs.Length; i++)
             {
