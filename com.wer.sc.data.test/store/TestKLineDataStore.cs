@@ -9,7 +9,7 @@ namespace com.wer.sc.data.store.test
     public class TestKLineDataStore
     {
         [TestMethod]
-        public void TestKLineDataFromBytes()
+        public void TestKLineDataStore_GetBytes_FromBytes()
         {
             IKLineData data = LoadKLineData();
             byte[] bs = KLineDataStore.GetBytes(data);
@@ -23,7 +23,7 @@ namespace com.wer.sc.data.store.test
         }
 
         [TestMethod]
-        public void TestKLineDataSaveLoad()
+        public void TestKLineDataStore_SaveLoad()
         {
             String path = ResourceLoader.GetTestOutputPath("m05_20000717_20131225.kline");
 
@@ -32,7 +32,7 @@ namespace com.wer.sc.data.store.test
             store.Save(data);
 
             KLineDataStore store2 = new KLineDataStore(path);
-            KLineData data2 = store.Load();
+            KLineData data2 = store.LoadAll();
             Assert.AreEqual(data.Length, data2.Length);
             for (int i = 0; i < data.Length; i++)
             {
@@ -47,7 +47,7 @@ namespace com.wer.sc.data.store.test
         }
 
         [TestMethod]
-        public void TestKLineDataAppend()
+        public void TestKLineDataStore_Append()
         {
             String path = ResourceLoader.GetTestOutputPath("m05_20000717_20131225.kline");
             IKLineData data = LoadKLineData();
@@ -61,7 +61,7 @@ namespace com.wer.sc.data.store.test
             KLineDataStore store2 = new KLineDataStore(path);
             store2.Append(d2);
 
-            KLineData data2 = store.Load();
+            KLineData data2 = store.LoadAll();
             for (int i = 0; i < data.Length; i++)
             {
                 data.BarPos = i;
@@ -72,7 +72,7 @@ namespace com.wer.sc.data.store.test
         }
 
         [TestMethod]
-        public void TestKLineDataLoadByIndex()
+        public void TestKLineDataStore_LoadByIndex()
         {
             String path = ResourceLoader.GetTestOutputPath("m05_20000717_20131225.kline");
             IKLineData data = LoadKLineData();
@@ -94,7 +94,7 @@ namespace com.wer.sc.data.store.test
         }
 
         [TestMethod]
-        public void TestKLineDataLoadByDate()
+        public void TestKLineDataStore_LoadByDate()
         {
             String path = ResourceLoader.GetTestOutputPath("m05_20000717_20131225.kline");
             IKLineData data = LoadKLineData();

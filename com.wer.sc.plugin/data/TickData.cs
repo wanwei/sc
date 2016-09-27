@@ -42,8 +42,6 @@ namespace com.wer.sc.data
 
         private int barPos;
 
-
-
         public TickData(int length)
         {
             this.arr_time = new double[length];
@@ -72,7 +70,7 @@ namespace com.wer.sc.data
         }
 
         // 交易时间
-        public double FullTime
+        public double Time
         {
             get { return arr_time[BarPos]; }
         }
@@ -80,14 +78,6 @@ namespace com.wer.sc.data
         public int Date
         {
             get { return (int)arr_time[barPos]; }
-        }
-
-        public double Time
-        {
-            get
-            {
-                return FullTime - Date;
-            }
         }
 
         // 交易价格
@@ -269,7 +259,7 @@ namespace com.wer.sc.data
         public String ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append(FullTime).Append(",");
+            sb.Append(Time).Append(",");
             sb.Append(Price).Append(",");
             sb.Append(Mount).Append(",");
             sb.Append(TotalMount).Append(",");
@@ -281,30 +271,25 @@ namespace com.wer.sc.data
             sb.Append(IsBuy ? 1 : 0);
             return sb.ToString();
         }
-
-        public String PrintAll()
+        public String ToString(int i)
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("barpos:").Append(BarPos).Append("/r/n");
-            for (int i = 0; i < Length; i++)
-            {
-                sb.Append(Arr_Time[i]).Append(",");
-                sb.Append(Arr_Price[i]).Append(",");
-                sb.Append(Arr_Mount[i]).Append(",");
-                sb.Append(Arr_TotalMount[i]).Append(",");
-                sb.Append(Arr_Add[i]).Append(",");
-                sb.Append(Arr_BuyPrice[i]).Append(",");
-                sb.Append(Arr_BuyMount[i]).Append(",");
-                sb.Append(Arr_SellPrice[i]).Append(",");
-                sb.Append(Arr_SellMount[i]).Append(",");
-                sb.Append(Arr_IsBuy[i] ? 1 : 0).Append("/r/n");
-            }
+            sb.Append(Arr_Time[i]).Append(",");
+            sb.Append(Arr_Price[i]).Append(",");
+            sb.Append(Arr_Mount[i]).Append(",");
+            sb.Append(Arr_TotalMount[i]).Append(",");
+            sb.Append(Arr_Add[i]).Append(",");
+            sb.Append(Arr_BuyPrice[i]).Append(",");
+            sb.Append(Arr_BuyMount[i]).Append(",");
+            sb.Append(Arr_SellPrice[i]).Append(",");
+            sb.Append(Arr_SellMount[i]).Append(",");
+            sb.Append(Arr_IsBuy[i] ? 1 : 0);
             return sb.ToString();
         }
 
-        public ITickChart GetChart(int index)
+        public ITickBar GetChart(int index)
         {
-            return new TickChart_TickData(this, index);
+            return new TickBar_TickData(this, index);
         }
     }
 }

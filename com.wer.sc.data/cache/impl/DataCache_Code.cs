@@ -80,7 +80,7 @@ namespace com.wer.sc.data.cache.impl
         public int GetOpenDate(double time)
         {
             int date = (int)time;
-            if (!DaySpliter.IsNight(time))
+            if (!DaySplitter.IsNight(time))
                 return date;
 
             return openDateCache.GetNextOpenDate(date);

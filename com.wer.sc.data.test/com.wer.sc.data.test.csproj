@@ -51,6 +51,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="impl\TestKLineData.cs" />
+    <Compile Include="impl\TestKLineData_Dynamic.cs" />
     <Compile Include="impl\TestKLineData_RealTime.cs" />
     <Compile Include="impl\TestTimeLineData.cs" />
     <Compile Include="navigate\TestDataNavigate.cs" />
@@ -61,10 +62,11 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="DataTestUtils.cs" />
-    <Compile Include="reader\TestOpenDateReader.cs" />
+    <Compile Include="reader\TestKLineDataReader.cs" />
+    <Compile Include="reader\TestOpenDateCache.cs" />
     <Compile Include="ResourceLoader.cs" />
     <Compile Include="store\TestCodeStore.cs" />
-    <Compile Include="store\TestKLineDataIndex.cs" />
+    <Compile Include="store\TestKLineDataIndexer.cs" />
     <Compile Include="store\TestKLineDataStore_Csv.cs" />
     <Compile Include="store\TestOpenDateStore.cs" />
     <Compile Include="store\TestTickDataStore_Csv.cs" />
@@ -256,6 +258,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Resource_M01_1Minute.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Cache_OpenDate.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KLineData_M05_20130101_20151231_1Minute.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\M05_20130101_20151231_1Minute_index.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KLineData_M05_20130101_20151231_1Minute_Index.txt" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

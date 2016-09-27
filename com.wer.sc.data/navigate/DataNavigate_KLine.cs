@@ -59,7 +59,7 @@ namespace com.wer.sc.data.navigate
                     return;
                 currentTime = value;
                 this.klineChartBuilder.ChangeTime(value);
-                IKLineChart klineChart = this.klineChartBuilder.GetCurrentChart();
+                IKLineBar klineChart = this.klineChartBuilder.GetCurrentChart();
 
                 //设置为修改当前barpos
                 klineData.SetBarPosByTime(currentTime);

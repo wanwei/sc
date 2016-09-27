@@ -116,7 +116,7 @@ namespace com.wer.sc.data.navigate
             this.time = time;
             this.currentKLineIndex = klineData.IndexOfTime(time);
             this.chartBuilder.ChangeTime(time);
-            IKLineChart chart = this.chartBuilder.GetCurrentChart();
+            IKLineBar chart = this.chartBuilder.GetCurrentChart();
             klineData.SetRealTimeData(chart, currentKLineIndex);
         }
 

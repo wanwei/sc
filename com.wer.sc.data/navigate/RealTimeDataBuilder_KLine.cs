@@ -21,7 +21,7 @@ namespace com.wer.sc.data.navigate
             get { return klineChartBuilder_1Minute; }
         }
 
-        private IKLineChart currentChart;
+        private IKLineBar currentChart;
 
         private double currentTime;
 
@@ -55,7 +55,7 @@ namespace com.wer.sc.data.navigate
             //1分钟线可以正常显示
             //日线需要将            
 
-            int date = DaySpliter.GetTimeDate(time, dataCache_Code.GetOpenDateReader());
+            int date = DaySplitter.GetTimeDate(time, dataCache_Code.GetOpenDateReader());
             if (currentDate != date)
             {
                 //TODO 将以前生成的klineChartBuilder_1Minute cache下来
@@ -68,7 +68,7 @@ namespace com.wer.sc.data.navigate
             double t = klineData.Arr_Time[index];
 
             IKLineData todayMinuteKLineData = klineChartBuilder_1Minute.MinuteKlineData;
-            KLineChart currentMinuteChart = klineChartBuilder_1Minute.GetCurrentChart();
+            KLineBar currentMinuteChart = klineChartBuilder_1Minute.GetCurrentChart();
 
             //TODO 这里最多只支持到日线，两日线或以上不支持
             int startIndex;
@@ -78,13 +78,13 @@ namespace com.wer.sc.data.navigate
                 startIndex = todayMinuteKLineData.IndexOfTime(t);
             int endIndex = todayMinuteKLineData.IndexOfTime(currentMinuteChart.FullTime);
 
-            IKLineChart currentChart = todayMinuteKLineData.GetAggrKLineBar(startIndex, endIndex - 1);
-            KLineChartMerge.Merge((KLineChart)currentChart, currentMinuteChart);
+            IKLineBar currentChart = todayMinuteKLineData.GetAggrKLineBar(startIndex, endIndex - 1);
+            KLineChartMerge.Merge((KLineBar)currentChart, currentMinuteChart);
             this.currentChart = currentChart;
             this.currentTime = time;
         }
 
-        public IKLineChart GetCurrentChart()
+        public IKLineBar GetCurrentChart()
         {
             return currentChart;
         }

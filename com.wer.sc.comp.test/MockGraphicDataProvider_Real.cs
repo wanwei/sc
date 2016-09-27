@@ -48,9 +48,9 @@ namespace com.wer.sc.comp.test
             }
         }
 
-        public ITimeLineChart GetCurrentChart()
+        public ITimeLineBar GetCurrentChart()
         {
-            return data.GetCurrentChart();
+            return data.GetCurrentBar();
         }
 
         public ITimeLineData GetRealData()

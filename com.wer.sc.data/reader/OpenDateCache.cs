@@ -9,7 +9,6 @@ namespace com.wer.sc.data.reader
 {
     public class OpenDateCache : IOpenDateReader
     {
-
         private List<int> openDatesList;
 
         private Dictionary<int, int> dicOpenDateIndex;
@@ -41,7 +40,7 @@ namespace com.wer.sc.data.reader
         public IList<int> GetOpenDates(int start, int end)
         {
             if (end < start)
-                return null;
+                return ListUtils.EmptyIntList;
 
             int startIndex = GetOpenDateIndex(start, false);
             int endIndex = GetOpenDateIndex(end, true);
@@ -98,8 +97,10 @@ namespace com.wer.sc.data.reader
             int nextOpenDate = GetRecentOpenDate(date, length < 0);
             if (nextOpenDate < 0)
                 return -1;
-            int index = GetOpenDateIndex(date);
+            int index = GetOpenDateIndex(nextOpenDate);
             index += length;
+            if (nextOpenDate != date)
+                index += length < 0 ? 1 : -1;
             if (index < 0 || index >= openDatesList.Count)
                 return -1;
             return openDatesList[index];
@@ -117,14 +118,15 @@ namespace com.wer.sc.data.reader
             if (date > lastOpen)
                 return isFindPrev ? lastOpen : -1;
 
+            int addPeriod = isFindPrev ? -1 : 1;
             while (!IsOpen(date))
-                date = (int)TimeUtils.AddDays(date, 1);
+                date = (int)TimeUtils.AddDays(date, addPeriod);
             return date;
         }
 
         public int GetPrevOpenDate(int date)
         {
-            return GetPrevOpenDate(date, -1);
+            return GetPrevOpenDate(date, 1);
         }
 
         public int GetPrevOpenDate(int date, int length)

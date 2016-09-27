@@ -28,7 +28,7 @@ namespace com.wer.sc.comp.graphic.info
 
             //List<RealDataInfo> reals = currentInfo.GetReal();
             //List<ChartInfo> charts = currentInfo.GetChart(ChartPeriod.DAY, 1);
-            ITickChart tickChart = tick.GetChart(navigate.CurrentTickIndex);
+            ITickBar tickChart = tick.GetChart(navigate.CurrentTickIndex);
             chartinfo.currentPrice = Math.Round(tick.Price, 2);
             chartinfo.currentHand = tickChart.Mount;
             chartinfo.totalHand = tickChart.TotalMount;
@@ -43,7 +43,7 @@ namespace com.wer.sc.comp.graphic.info
             //ChartInfo chart = charts[0];
             ITimeLineData realData = navigate.CurrentRealData;
 
-            ITimeLineChart realChart = realData.GetCurrentChart();
+            ITimeLineBar realChart = realData.GetCurrentBar();
             chartinfo.upRange = Math.Round(realChart.UpRange, 2);
             chartinfo.upPercent = realChart.UpPercent;
             chartinfo.upSpeed = 0;

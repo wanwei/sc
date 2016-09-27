@@ -130,16 +130,16 @@ namespace com.wer.sc.comp.graphic
         public SelectedPointInfo GetBlockInfo(int index)
         {
             IKLineData data = dataProvider.GetKLineData();
-            KLineChart_KLineData chart = new KLineChart_KLineData(data, index);
-            KLineChart_KLineData lastChart;
+            KLineBar_KLineData chart = new KLineBar_KLineData(data, index);
+            KLineBar_KLineData lastChart;
             if (index == 0)
                 lastChart = null;
             else
-                lastChart = new KLineChart_KLineData(data, index - 1);
+                lastChart = new KLineBar_KLineData(data, index - 1);
             return GetBlockInfo(chart, lastChart);
         }
 
-        private SelectedPointInfo GetBlockInfo(KLineChart_KLineData chart, KLineChart_KLineData lastChart)
+        private SelectedPointInfo GetBlockInfo(KLineBar_KLineData chart, KLineBar_KLineData lastChart)
         {
             SelectedPointInfo b = new SelectedPointInfo();
             b.LineHeight = 20;

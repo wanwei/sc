@@ -280,4 +280,13 @@
   <data name="Resource_M01_1Minute" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Resource_M01_1Minute.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
   </data>
+  <data name="Cache_OpenDate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Cache_OpenDate.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
+  </data>
+  <data name="KLineData_M05_20130101_20151231_1Minute" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\KLineData_M05_20130101_20151231_1Minute.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
+  </data>
+  <data name="KLineData_M05_20130101_20151231_1Minute_Index" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\KLineData_M05_20130101_20151231_1Minute_Index.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
+  </data>
 </root>

@@ -244,7 +244,7 @@ namespace com.wer.sc.plugin
         /// 得到当前对应的Chart
         /// </summary>
         /// <returns></returns>
-        public IKLineChart Chart
+        public IKLineBar Chart
         {
             get
             {

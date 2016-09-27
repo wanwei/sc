@@ -50,24 +50,24 @@ namespace com.wer.sc.data.update
             this.yesterdayEndPrice = yesterdayEndPrice;
         }
 
-        public List<KLineChart> GetKLineCharts()
+        public List<KLineBar> GetKLineCharts()
         {
             return DataTransfer_Tick2KLineGenerator.GenerateCharts(ticks, openTime, targetPeriod, yesterdayEndPrice);
         }
 
         public KLineData GetKLineData()
         {
-            List<KLineChart> charts = DataTransfer_Tick2KLineGenerator.GenerateCharts(ticks, openTime, targetPeriod, yesterdayEndPrice);
+            List<KLineBar> charts = DataTransfer_Tick2KLineGenerator.GenerateCharts(ticks, openTime, targetPeriod, yesterdayEndPrice);
 
             return GetCharts(charts);
         }
 
-        public static KLineData GetCharts(List<KLineChart> charts)
+        public static KLineData GetCharts(List<KLineBar> charts)
         {
             KLineData data = new KLineData(charts.Count);
             for (int i = 0; i < charts.Count; i++)
             {
-                KLineChart chart = charts[i];
+                KLineBar chart = charts[i];
                 data.arr_time[i] = chart.FullTime;
                 data.arr_start[i] = chart.Start;
                 data.arr_high[i] = chart.High;

@@ -28,7 +28,7 @@ namespace com.wer.sc.data.cache.impl
         {
             KLineTimeGetter timeGetter = new KLineTimeGetter(klineData);
 
-            List<SplitterResult> splitResults = DaySpliter.Split(timeGetter, openDateReader);
+            List<SplitterResult> splitResults = DaySplitter.Split(timeGetter, openDateReader);
             for (int i = 0; i < splitResults.Count; i++)
             {
                 SplitterResult result = splitResults[i];

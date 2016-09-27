@@ -17,24 +17,24 @@ namespace com.wer.sc.data
         {
             String csv = Resources.m01_20131231;
             String[] lines = csv.Split("\r".ToCharArray());
-            return ReadLinesToTickData("m01", lines);
+            return ReadLinesToTickData_OrignalFormat("m01", lines);
         }
 
         public static TickData LoadTickData_AG05_20141230()
         {
             String csv = Resources.AG05_20141230;
             String[] lines = csv.Split("\r".ToCharArray());
-            return ReadLinesToTickData("ag05", lines);
+            return ReadLinesToTickData_OrignalFormat("ag05", lines);
         }
 
         public static TickData LoadTickData_M05_20150106()
         {
             String csv = Resources.M05_20150106;
             String[] lines = csv.Split("\r".ToCharArray());
-            return ReadLinesToTickData2(lines);
+            return ReadLinesToTickData(lines);
         }
 
-        private static TickData ReadLinesToTickData2(string[] lines)
+        private static TickData ReadLinesToTickData(string[] lines)
         {
             TickData data = new TickData(lines.Length - 1);
             for (int i = 0; i < lines.Length - 1; i++)
@@ -84,10 +84,10 @@ namespace com.wer.sc.data
             if (!File.Exists(path))
                 return null;
             String[] lines = File.ReadAllLines(path);
-            return ReadLinesToTickData(code, lines);
+            return ReadLinesToTickData_OrignalFormat(code, lines);
         }
 
-        public static TickData ReadLinesToTickData(string code, string[] lines)
+        private static TickData ReadLinesToTickData_OrignalFormat(string code, string[] lines)
         {
             int cnt = GetEmptyLines(lines);
             TickData data = new TickData(lines.Length - 1 - cnt);

@@ -33,7 +33,7 @@ namespace com.wer.sc.app.data
                 if (fileName.EndsWith("kline"))
                 {
                     KLineDataStore store = new KLineDataStore(fileName);
-                    KLineData data = store.Load();
+                    KLineData data = store.LoadAll();
                     int showLen = data.Length;
                     showLen = showLen > 5000 ? 5000 : showLen;
                     StringBuilder sb = new StringBuilder();

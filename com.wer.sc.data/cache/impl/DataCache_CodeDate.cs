@@ -74,7 +74,7 @@ namespace com.wer.sc.data.cache.impl
                 lock (lockObj_Real)
                 {
                     if (realData == null)
-                        realData = DataTransfer_KLine2TimeLine.ConvertTimeLineData(date, minuteKLineData, lastEndPrice);
+                        realData = DataTransfer_KLine2TimeLine.ConvertTimeLineData(minuteKLineData, lastEndPrice);
                 }
             }
             //TODO realdata是可以被修改的，所以此处线程不安全

@@ -1,11 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace com.wer.sc.data
 {
-    public interface ITimeLineData
+    public interface ITimeLineData : ITimeLineBar
     {
-        string Code { get; }
-
         float YesterdayEnd { get; }
 
         int Date { get; }
@@ -16,21 +15,9 @@ namespace com.wer.sc.data
 
         void SetBarPosByTime(double time);
 
-        double Time { get; }
+        ITimeLineBar GetCurrentBar();
 
-        int Hold { get; }
-
-        int Mount { get; }
-
-        float Price { get; }
-
-        float UpPercent { get; }
-
-        float UpRange { get; }
-
-        ITimeLineChart GetCurrentChart();
-
-        ITimeLineChart GetCurrentChart(int index);
+        ITimeLineBar GetBar(int index);
 
         #region 完整数据信息
 
@@ -46,10 +33,10 @@ namespace com.wer.sc.data
 
         IList<float> Arr_UpPercent { get; }
 
-        IList<float> Arr_UpRange { get; }        
+        IList<float> Arr_UpRange { get; }
 
-        #endregion
+        #endregion        
 
-        string PrintAll();
+        String ToString(int index);
     }
 }

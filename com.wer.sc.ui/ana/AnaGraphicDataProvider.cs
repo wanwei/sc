@@ -100,9 +100,9 @@ namespace com.wer.sc.ui.ana
 
         public event DataChangeHandler DataChange;
 
-        public IKLineChart GetCurrentChart()
+        public IKLineBar GetCurrentChart()
         {
-            return new KLineChart_KLineData(klineDataWrap.KlineData, endIndex);
+            return new KLineBar_KLineData(klineDataWrap.KlineData, endIndex);
         }
 
         public IKLineData GetKLineData()

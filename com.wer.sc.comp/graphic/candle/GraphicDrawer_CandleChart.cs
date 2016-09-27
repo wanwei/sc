@@ -127,12 +127,12 @@ namespace com.wer.sc.comp.graphic
             int endIndex = DataProvider.EndIndex;
             for (int i = startIndex; i < endIndex; i++)
             {
-                DrawCandle(g, new KLineChart_KLineData(data, i), i);
+                DrawCandle(g, new KLineBar_KLineData(data, i), i);
             }
             DrawCandle(g, DataProvider.GetCurrentChart(), endIndex);
         }
 
-        private void DrawCandle(Graphics g, IKLineChart chart, int index)
+        private void DrawCandle(Graphics g, IKLineBar chart, int index)
         {
             bool isRed = chart.End > chart.Start;
             Brush b = isRed ? this.ColorConfig.Brush_CandleBlockUp : this.ColorConfig.Brush_CandleBlockDown;

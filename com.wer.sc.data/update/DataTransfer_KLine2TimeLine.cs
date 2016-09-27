@@ -13,17 +13,17 @@ namespace com.wer.sc.data.update
     /// </summary>
     public class DataTransfer_KLine2TimeLine
     {
-        public static ITimeLineData ConvertTimeLineData(int date, IKLineData data, float lastEndPrice)
+        public static ITimeLineData ConvertTimeLineData(IKLineData data, float lastEndPrice)
         {
-            TimeLineData r = new TimeLineData(date, lastEndPrice, data.Length);
-            r.code = data.Code;
+            TimeLineData r = new TimeLineData(lastEndPrice, data.Length);
+            r.Code = data.Code;
             Convert2RealData(data, 0, data.Length - 1, r);
             return r;
         }
 
         public static List<ITimeLineData> ConvertRealDataList(IKLineData data, float lastEndPrice, IOpenDateReader openDateReader)
         {
-            List<SplitterResult> splitResult = DaySpliter.Split(new KLineDataTimeGetter(data), openDateReader);
+            List<SplitterResult> splitResult = DaySplitter.Split(data, openDateReader);
 
             List<ITimeLineData> realdataList = new List<ITimeLineData>(splitResult.Count);
             for (int i = 0; i < splitResult.Count; i++)
@@ -37,8 +37,8 @@ namespace com.wer.sc.data.update
                 else
                     todayEndIndex = splitResult[i + 1].Index;
                 int len = todayEndIndex - todayStartIndex + 1;
-                TimeLineData r = new TimeLineData(date, lastEndPrice, len);
-                r.code = data.Code;
+                TimeLineData r = new TimeLineData( lastEndPrice, len);
+                r.Code = data.Code;
                 Convert2RealData(data, todayStartIndex, todayEndIndex, r);
                 realdataList.Add(r);
             }

@@ -40,7 +40,7 @@ namespace com.wer.sc.data.check
                 if (fileName.EndsWith("kline"))
                 {
                     KLineDataStore store = new KLineDataStore(fileName);
-                    klineData = store.Load();
+                    klineData = store.LoadAll();
                     int showLen = klineData.Length;
                     showLen = showLen > 5000 ? 5000 : showLen;
                     StringBuilder sb = new StringBuilder();

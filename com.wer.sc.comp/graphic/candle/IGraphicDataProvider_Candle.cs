@@ -32,7 +32,7 @@ namespace com.wer.sc.comp.graphic
         /// 得到当前的Charts
         /// </summary>
         /// <returns></returns>
-        IKLineChart GetCurrentChart();
+        IKLineBar GetCurrentChart();
 
         int StartIndex { get; }
 

@@ -48,9 +48,9 @@ namespace com.wer.sc.comp.graphic
         {
             return data;
         }
-        public IKLineChart GetCurrentChart()
+        public IKLineBar GetCurrentChart()
         {
-            return new KLineChart_KLineData(data, endIndex);
+            return new KLineBar_KLineData(data, endIndex);
         }
 
         private void InitIndex()

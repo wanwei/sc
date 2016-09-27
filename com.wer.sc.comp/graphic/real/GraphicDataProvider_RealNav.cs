@@ -43,9 +43,9 @@ namespace com.wer.sc.comp.graphic.real
             }
         }
 
-        public ITimeLineChart GetCurrentChart()
+        public ITimeLineBar GetCurrentChart()
         {
-            return new TimeLineChart_RealData(GetRealData(), CurrentIndex);
+            return new TimeLineBar_RealData(GetRealData(), CurrentIndex);
         }
 
         public ITimeLineData GetRealData()

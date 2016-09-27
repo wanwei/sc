@@ -21,7 +21,7 @@ namespace com.wer.sc.data.navigate
 
         private TickDataIndeier tickDataIndeier;
 
-        private KLineChart currentChart = new KLineChart();
+        private KLineBar currentChart = new KLineBar();
 
         public RealTimeDataBuilder_DayData(IDataCache_CodeDate cache_CodeDate, double currentTime)
         {
@@ -61,12 +61,12 @@ namespace com.wer.sc.data.navigate
             }
         }
 
-        public KLineChart GetCurrentChart()
+        public KLineBar GetCurrentChart()
         {
             return currentChart;
         }
 
-        private void ModifyChart(KLineChart chart, int tickStart, int tickEnd)
+        private void ModifyChart(KLineBar chart, int tickStart, int tickEnd)
         {
             float high = 0;
             float low = float.MaxValue;

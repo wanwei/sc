@@ -21,7 +21,7 @@ namespace com.wer.sc.comp.graphic.real
         /// 得到当前的Charts
         /// </summary>
         /// <returns></returns>
-        ITimeLineChart GetCurrentChart();
+        ITimeLineBar GetCurrentChart();
 
         /// <summary>
         /// 得到或设置当前的index

@@ -107,9 +107,9 @@ namespace com.wer.sc.comp.graphic
             return dataNavigate.CurrentKLineData;
         }
 
-        public IKLineChart GetCurrentChart()
+        public IKLineBar GetCurrentChart()
         {
-            return new KLineChart_KLineData(GetKLineData(), dataNavigate.CurrentKLineIndex);
+            return new KLineBar_KLineData(GetKLineData(), dataNavigate.CurrentKLineIndex);
         }
 
         public int StartIndex

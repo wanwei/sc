@@ -7,10 +7,9 @@ using System.Threading.Tasks;
 
 namespace com.wer.sc.data.impl
 {
-    public class TimeLineData_RealTime : ITimeLineData
+    public class TimeLineData_RealTime : TimeLineData_Abstract
     {
-        private ITimeLineData timeLineData;
-        private int barPos;
+        private ITimeLineData timeLineData;        
 
         private ReadOnlyList_TmpValue<double> list_time;
         private ReadOnlyList_TmpValue<float> list_price;
@@ -30,8 +29,9 @@ namespace com.wer.sc.data.impl
             this.list_upRange = new ReadOnlyList_TmpValue<float>(timeLineData.Arr_UpRange);
         }
 
-        public void ChangeChart(ITimeLineChart chart, int index)
+        public void SetRealTimeData(ITimeLineBar chart, int barPos)
         {
+            this.BarPos = barPos;
             ReadOnlyList_TmpValue<double> timelist = (ReadOnlyList_TmpValue<double>)Arr_Time;
             ReadOnlyList_TmpValue<float> pricelist = (ReadOnlyList_TmpValue<float>)Arr_Price;
             ReadOnlyList_TmpValue<int> mountlist = (ReadOnlyList_TmpValue<int>)Arr_Mount;
@@ -50,12 +50,12 @@ namespace com.wer.sc.data.impl
             }
             else
             {
-                timelist.SetTmpValue(index, chart.Time);
-                pricelist.SetTmpValue(index, chart.Price);
-                mountlist.SetTmpValue(index, chart.Mount);
-                holdlist.SetTmpValue(index, chart.Hold);
-                upPercentlist.SetTmpValue(index, chart.UpPercent);
-                upRangelist.SetTmpValue(index, chart.UpRange);
+                timelist.SetTmpValue(barPos, chart.Time);
+                pricelist.SetTmpValue(barPos, chart.Price);
+                mountlist.SetTmpValue(barPos, chart.Mount);
+                holdlist.SetTmpValue(barPos, chart.Hold);
+                upPercentlist.SetTmpValue(barPos, chart.UpPercent);
+                upRangelist.SetTmpValue(barPos, chart.UpRange);
             }
         }
 
@@ -63,120 +63,15 @@ namespace com.wer.sc.data.impl
         /// 修改当前chart，
         /// </summary>
         /// <param name="chart"></param>
-        public void ChangeChart(ITimeLineChart chart)
+        public void SetRealTimeData(ITimeLineBar chart)
         {
-            ChangeChart(chart, BarPos);
+            SetRealTimeData(chart, BarPos);
         }
 
-        public string Code
-        {
-            get
-            {
-                return timeLineData.Code;
-            }
-        }
-
-        public float YesterdayEnd
-        {
-            get
-            {
-                return timeLineData.YesterdayEnd;
-            }
-        }
-
-        public int Date
-        {
-            get
-            {
-                return timeLineData.Date;
-            }
-        }
-
-        public int BarPos
-        {
-            get { return barPos; }
-            set { this.barPos = value; }
-        }
-
-        public int IndexOfTime(double time)
-        {
-            return timeLineData.IndexOfTime(time);
-        }
-
-        public void SetBarPosByTime(double time)
-        {
-            this.barPos = IndexOfTime(time);
-        }
-
-        public double Time
-        {
-            get
-            {
-                return Arr_Time[barPos];
-            }
-        }
-
-        public int Hold
-        {
-            get
-            {
-                return Arr_Hold[barPos];
-            }
-        }
-
-        public int Mount
-        {
-            get
-            {
-                return Arr_Mount[barPos];
-            }
-        }
-
-        public float Price
-        {
-            get
-            {
-                return Arr_Price[barPos];
-            }
-        }
-
-        public float UpPercent
-        {
-            get
-            {
-                return Arr_UpPercent[barPos];
-            }
-        }
-
-        public float UpRange
-        {
-            get
-            {
-                return Arr_UpRange[barPos];
-            }
-        }
-
-        public ITimeLineChart GetCurrentChart()
-        {
-            return null;
-        }
-
-        public ITimeLineChart GetCurrentChart(int index)
-        {
-            return null;
-        }
 
         #region 完整数据信息
 
-        public int Length
-        {
-            get
-            {
-                return timeLineData.Length;
-            }
-        }
-
-        public IList<double> Arr_Time
+        public override IList<double> Arr_Time
         {
             get
             {
@@ -184,7 +79,7 @@ namespace com.wer.sc.data.impl
             }
         }
 
-        public IList<float> Arr_Price
+        public override IList<float> Arr_Price
         {
             get
             {
@@ -192,7 +87,7 @@ namespace com.wer.sc.data.impl
             }
         }
 
-        public IList<int> Arr_Mount
+        public override IList<int> Arr_Mount
         {
             get
             {
@@ -200,7 +95,7 @@ namespace com.wer.sc.data.impl
             }
         }
 
-        public IList<int> Arr_Hold
+        public override IList<int> Arr_Hold
         {
             get
             {
@@ -208,7 +103,7 @@ namespace com.wer.sc.data.impl
             }
         }
 
-        public IList<float> Arr_UpPercent
+        public override IList<float> Arr_UpPercent
         {
             get
             {
@@ -216,7 +111,7 @@ namespace com.wer.sc.data.impl
             }
         }
 
-        public IList<float> Arr_UpRange
+        public override IList<float> Arr_UpRange
         {
             get
             {
@@ -225,10 +120,5 @@ namespace com.wer.sc.data.impl
         }
 
         #endregion
-
-        public string PrintAll()
-        {
-            return null;
-        }
     }
 }

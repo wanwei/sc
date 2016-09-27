@@ -55,7 +55,7 @@ namespace com.wer.sc.data.check
             //TickData tickData = fac.TickDataReader.GetTickData(code, date);
 
             RealTimeDataBuilder_DayData builder = new RealTimeDataBuilder_DayData(cache.GetCache_CodeDate(date), currentTime);
-            KLineChart chart = builder.GetCurrentChart();
+            KLineBar chart = builder.GetCurrentChart();
 
             tbData.Clear();
             tbData.Text = chart.ToString();
@@ -116,7 +116,7 @@ namespace com.wer.sc.data.check
             //TickData tickData = fac.TickDataReader.GetTickData(code, date);
 
             RealTimeDataBuilder_KLine builder = new RealTimeDataBuilder_KLine(klineData, cacheFactory.CreateCache_Code(code, start, end), time);
-            IKLineChart chart = builder.GetCurrentChart();
+            IKLineBar chart = builder.GetCurrentChart();
 
             tbData.Clear();
             tbData.AppendText(chart.ToString());

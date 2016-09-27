@@ -8,7 +8,7 @@ namespace com.wer.sc.data.utils
 {
     public class KLineChartMerge
     {
-        public static void Merge(KLineChart chart, IKLineChart chart2)
+        public static void Merge(KLineBar chart, IKLineBar chart2)
         {
             if (chart.High < chart2.High)
                 chart.High = chart2.High;

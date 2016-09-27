@@ -15,21 +15,21 @@ namespace com.wer.sc.data.utils
         [TestMethod]
         public void TestSplit_Normal()
         {
-            List<SplitterResult> results = DaySpliter.Split(new MockTimeGetter("m05", 20131201, 20131231, DataTestUtils.GetOpenTimeNormal()));
+            List<SplitterResult> results = DaySplitter.Split(new MockTimeGetter("m05", 20131201, 20131231, DataTestUtils.GetOpenTimeNormal()));
             AssertResult(results, Resources.DaySplit_M05_20131201_20131231);
         }
 
         [TestMethod]
         public void TestSplit_Night()
         {
-            List<SplitterResult> results = DaySpliter.Split(new MockTimeGetter("m05", 20150625, 20150715, DataTestUtils.GetOpenTimeNight()));
+            List<SplitterResult> results = DaySplitter.Split(new MockTimeGetter("m05", 20150625, 20150715, DataTestUtils.GetOpenTimeNight()));
             AssertResult(results, Resources.DaySplit_M05_20150625_20150715);
         }
 
         [TestMethod]
         public void TestSplit_OverNightWeekend()
         {
-            List<SplitterResult> results = DaySpliter.Split(new MockTimeGetter("m05", 20141229, 20150115, DataTestUtils.GetOpenTimeOverNight()));
+            List<SplitterResult> results = DaySplitter.Split(new MockTimeGetter("m05", 20141229, 20150115, DataTestUtils.GetOpenTimeOverNight()));
             for (int i = 0; i < results.Count; i++)
                 Console.WriteLine(results[i]);
         }
@@ -39,7 +39,7 @@ namespace com.wer.sc.data.utils
         {
             IKLineData klineData = ResourceLoader.GetDefaultDataReaderFactory().KLineDataReader.GetData("m05", 20150105, 20150106, KLinePeriod.KLinePeriod_1Minute);
             IKLineData subData = klineData.Sub(0, 570);
-            List<SplitterResult> results = DaySpliter.Split(new MockTimeGetter(subData));
+            List<SplitterResult> results = DaySplitter.Split(new MockTimeGetter(subData));
             //for (int i = 0; i < results.Count; i++)
             //    Console.WriteLine(results[i]);
             Assert.AreEqual("20150105,0", results[0].ToString());

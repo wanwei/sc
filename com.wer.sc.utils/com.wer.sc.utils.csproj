@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="ByteUtils.cs" />
     <Compile Include="ColorUtils.cs" />
+    <Compile Include="ListUtils.cs" />
     <Compile Include="LogHelper.cs" />
     <Compile Include="NumberUtils.cs" />
     <Compile Include="ObjectUtils.cs" />

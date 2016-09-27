@@ -42,7 +42,7 @@ namespace com.wer.sc.data.utils
         private void DoIndex()
         {
             KLineTimeGetter timeGetter = new KLineTimeGetter(this.klineData);
-            List<SplitterResult> splitResults = DaySpliter.Split(timeGetter, openDateReader);
+            List<SplitterResult> splitResults = DaySplitter.Split(timeGetter, openDateReader);
             for (int i = 0; i < splitResults.Count; i++)
             {
                 SplitterResult result = splitResults[i];
@@ -54,7 +54,7 @@ namespace com.wer.sc.data.utils
 
         public int GetTimeDate(double time)
         {
-            return DaySpliter.GetTimeDate(time, openDateCache);
+            return DaySplitter.GetTimeDate(time, openDateCache);
         }
 
         public int GetTimeDateIndex(double time)
@@ -70,7 +70,7 @@ namespace com.wer.sc.data.utils
                 //TODO 现在只支持1日线，2日及以上不支持
                 int timeDate = (int)time;
                 int index = GetTimeIndex(timeDate, 0);
-                return DaySpliter.IsNight(time) ? index + 1 : index;
+                return DaySplitter.IsNight(time) ? index + 1 : index;
             }
 
             int date = GetTimeDate(time);
