@@ -29,7 +29,7 @@ namespace com.wer.sc.data.provider
                 String[] strs = lines[i].Split(',');
                 CodeInfo code = new CodeInfo(strs[0], strs[1], strs[2]);
                 codes.Add(code);
-                dicCodes.Add(code.code, code);
+                dicCodes.Add(code.Code, code);
             }
         }
 
@@ -56,12 +56,12 @@ namespace com.wer.sc.data.provider
 
         public String GetBelongMarket(String code)
         {
-            return dicCatelogs[dicCodes[code.ToUpper()].catelog];
+            return dicCatelogs[dicCodes[code.ToUpper()].Catelog];
         }
 
         public String GetVariety(String code)
         {
-            return dicCodes[code.ToUpper()].catelog;
+            return dicCodes[code.ToUpper()].Catelog;
         }
 
         public List<CodeInfo> GetCodes(String variety)
@@ -70,7 +70,7 @@ namespace com.wer.sc.data.provider
             for (int i = 0; i < codes.Count; i++)
             {
                 CodeInfo c = codes[i];
-                if (c.catelog.Equals(variety))
+                if (c.Catelog.Equals(variety))
                     vcodes.Add(c);
             }
             return vcodes;

@@ -1,5 +1,6 @@
 ﻿using com.wer.sc.data.store;
 using com.wer.sc.data.test.Properties;
+using com.wer.sc.data.utils;
 using com.wer.sc.plugin;
 using System;
 using System.Collections.Generic;
@@ -45,8 +46,8 @@ namespace com.wer.sc.data.update
 
         override
         public List<CodeInfo> GetCodes()
-        {
-            return CodeStore.GetCodes(GetCodeResource().Split('\r'));
+        {            
+            return CsvUtils_Code.LoadByLines(GetCodeResource().Split('\r')); 
         }
 
         override

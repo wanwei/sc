@@ -31,6 +31,8 @@ namespace com.wer.sc.data.navigate
 
         private RealTimeDataBuilder_KLine chartBuilder;
 
+        private KLineDataIndeier klineDataIndeier;
+
         public event DataChangeEventHandler OnDataChangeHandler;
 
         public DataNavigate(DataReaderFactory dataReaderFac)
@@ -103,6 +105,8 @@ namespace com.wer.sc.data.navigate
             Change(code, time, period);
         }
 
+        //private KLineDataIndeier klineDataIndeier;
+
         public void ChangeTime(double time)
         {
             if (this.time == time)
@@ -114,7 +118,9 @@ namespace com.wer.sc.data.navigate
             }
             RefreshChartBuilder(time);
             this.time = time;
-            this.currentKLineIndex = klineData.IndexOfTime(time);
+            if (klineDataIndeier == null || klineDataIndeier.KLineData != klineData)
+                klineDataIndeier = new KLineDataIndeier(klineData);
+            this.currentKLineIndex = klineDataIndeier.GetTimeDateIndex(time);
             this.chartBuilder.ChangeTime(time);
             IKLineBar chart = this.chartBuilder.GetCurrentChart();
             klineData.SetRealTimeData(chart, currentKLineIndex);

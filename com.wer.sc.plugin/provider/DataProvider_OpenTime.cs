@@ -21,10 +21,10 @@ namespace com.wer.sc.data.provider
         }
 
         public DataProvider_OpenTime(String configPath, DataProvider_CodeInfo provider_CodeInfo)
-        {
-            this.provider_CodeInfo = provider_CodeInfo;
+        {            
             XmlDocument doc = new XmlDocument();
             doc.Load(configPath + "opentime.config");
+            this.provider_CodeInfo = provider_CodeInfo;
             Load(doc);
         }
 

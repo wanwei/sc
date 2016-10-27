@@ -54,6 +54,5 @@ namespace com.wer.sc.data.test.update
             //update_OpenDate.Update();
             //UpdateInfo generates = DataPrepare();
         }
-
     }
 }

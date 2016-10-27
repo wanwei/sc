@@ -1,6 +1,7 @@
 ﻿using com.wer.sc.ana;
 using com.wer.sc.comp.graphic;
 using com.wer.sc.data;
+using com.wer.sc.data.utils;
 using com.wer.sc.utils;
 using System;
 using System.Collections.Generic;

@@ -59,5 +59,137 @@ namespace com.wer.sc.data.cnfutures.generator.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   查找类似 A,豆一,DL
+        ///B,豆二,DL
+        ///BB,胶合板,DL
+        ///C,玉米,DL
+        ///CS,淀粉,DL
+        ///FB,纤维板,DL
+        ///I,铁矿石,DL
+        ///J,焦炭,DL
+        ///JD,鸡蛋,DL
+        ///JM,焦煤,DL
+        ///L,塑料,DL
+        ///M,豆粕,DL
+        ///P,棕榈,DL
+        ///PP,聚丙烯,DL
+        ///V,聚氯乙烯,DL
+        ///Y,豆油,DL
+        ///AU,黄金,SQ
+        ///BU,沥青,SQ
+        ///FU,燃油,SQ
+        ///HC,轧卷板,SQ
+        ///RB,螺纹钢,SQ
+        ///RU,橡胶,SQ
+        ///WR,线材,SQ
+        ///AG,白银,SQ
+        ///AL,沪铝,SQ
+        ///CU,沪铜,SQ
+        ///PB,沪铅,SQ
+        ///ZN,沪锌,SQ
+        ///NI,沪镍,SQ
+        ///SN,沪锡,SQ
+        ///CF,棉花,ZZ
+        ///ER,籼稻,ZZ
+        ///FG,玻璃,ZZ
+        ///JR,粳稻,ZZ
+        ///LR,晚籼稻,ZZ
+        ///MA,甲醇,ZZ
+        ///ME,甲醇,ZZ
+        ///OI,新菜油,ZZ
+        ///PM,普麦,ZZ
+        ///RI,新籼稻,ZZ
+        ///RM,菜粕,ZZ
+        ///RO,(旧)菜油,ZZ
+        ///RS,菜籽,ZZ
+        ///SF,硅铁,ZZ
+        ///SM,锰硅,ZZ
+        ///SR,白糖,ZZ
+        ///TA,PTA,ZZ
+        ///TC,动力煤,ZZ
+        ///WH,新强麦,ZZ
+        ///WS,强麦,ZZ
+        ///WT,硬麦 [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        /// </summary>
+        internal static string catelogs {
+            get {
+                return ResourceManager.GetString("catelogs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 AMI,豆一连续,A
+        ///AX01,豆一01,A
+        ///AX03,豆一03,A
+        ///AX05,豆一05,A
+        ///AX07,豆一07,A
+        ///AX09,豆一09,A
+        ///AX11,豆一11,A
+        ///AX13,豆一指数,A
+        ///AY01,豆一01,A
+        ///AY03,豆一03,A
+        ///AY05,豆一05,A
+        ///AY07,豆一07,A
+        ///AY09,豆一09,A
+        ///AY11,豆一11,A
+        ///BMI,豆二连续,B
+        ///B01,豆二01,B
+        ///B03,豆二03,B
+        ///B05,豆二05,B
+        ///B07,豆二07,B
+        ///B09,豆二09,B
+        ///B11,豆二11,B
+        ///B13,豆二指数,B
+        ///BBMI,胶合板连续,BB
+        ///BB01,胶合板01,BB
+        ///BB02,胶合板02,BB
+        ///BB03,胶合板03,BB
+        ///BB04,胶合板04,BB
+        ///BB05,胶合板05,BB
+        ///BB06,胶合板06,BB
+        ///BB07,胶合板07,BB
+        ///BB08,胶合板08,BB
+        ///BB09,胶合板09,BB
+        ///BB10,胶合板10,BB
+        ///BB11,胶合板11,BB
+        ///BB12,胶合板12,BB
+        ///BB13,胶合板指数,BB
+        ///CMI,玉米连续,C
+        ///C01,玉米01,C
+        ///C [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        /// </summary>
+        internal static string codes {
+            get {
+                return ResourceManager.GetString("codes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 &lt;CONFIG&gt;
+        ///  &lt;OPENTIMES DEFAULT=&quot;NORMAL&quot;&gt;
+        ///    &lt;!--一般日盘时间 
+        ///    大商所 M豆粕 Y豆油 A豆一 B豆二 P棕榈 J焦炭 JM焦煤 I铁矿
+        ///    郑商所 SR白糖 CF棉花 PTA甲酸 ME甲醇 RM菜粕
+        ///    --&gt;
+        ///    &lt;OPENTIME ID=&quot;NORMAL&quot;&gt;
+        ///      &lt;PERIOD START=&quot;0.09&quot; END=&quot;0.1015&quot; /&gt;
+        ///      &lt;PERIOD START=&quot;0.103&quot; END=&quot;0.113&quot; /&gt;
+        ///      &lt;PERIOD START=&quot;0.133&quot; END=&quot;0.15&quot; /&gt;
+        ///    &lt;/OPENTIME&gt;
+        ///    &lt;!--2004年11月30日前郑州开盘时间--&gt;
+        ///    &lt;OPENTIME ID=&quot;ZZ_EARLY&quot;&gt;
+        ///      &lt;PERIOD START=&quot;0.09&quot; END=&quot;0.113&quot; /&gt;
+        ///      &lt;PERIOD START=&quot;0.133&quot; END=&quot;0.15&quot; /&gt;
+        ///    &lt;/OPENTIME&gt;
+        ///    &lt;!--2010年中前上期开盘时间--&gt;
+        ///  [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        /// </summary>
+        internal static string opentime {
+            get {
+                return ResourceManager.GetString("opentime", resourceCulture);
+            }
+        }
     }
 }

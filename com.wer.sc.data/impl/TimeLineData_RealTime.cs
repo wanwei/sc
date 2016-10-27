@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace com.wer.sc.data.impl
+namespace com.wer.sc.data
 {
     public class TimeLineData_RealTime : TimeLineData_Abstract
     {

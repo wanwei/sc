@@ -22,12 +22,12 @@ namespace com.wer.sc.data.utils
 
         private IKLineData klineData;
 
-        private IOpenDateReader openDateReader;
+        //private IOpenDateReader openDateReader;
 
-        public KLineDataIndeier(IKLineData data, IOpenDateReader openDateReader)
+        public KLineDataIndeier(IKLineData data)
         {
             this.klineData = data;
-            this.openDateReader = openDateReader;
+            //this.openDateReader = openDateReader;
             this.DoIndex();
         }
 
@@ -40,9 +40,9 @@ namespace com.wer.sc.data.utils
         }
 
         private void DoIndex()
-        {
+        {            
             KLineTimeGetter timeGetter = new KLineTimeGetter(this.klineData);
-            List<SplitterResult> splitResults = DaySplitter.Split(timeGetter, openDateReader);
+            List<SplitterResult> splitResults = DaySplitter.Split(timeGetter, null);
             for (int i = 0; i < splitResults.Count; i++)
             {
                 SplitterResult result = splitResults[i];

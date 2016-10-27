@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace com.wer.sc.data
 {
+    /// <summary>
+    /// ITickBar接口的实现类
+    /// 该类是只读的，用来从TickData里获取数据
+    /// </summary>
     public class TickBar_TickData : ITickBar
     {
         private ITickData data;

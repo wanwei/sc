@@ -61,7 +61,7 @@ namespace com.wer.sc.data.update
         private static KLineBar GetChart_Day(IKLineData data, int startIndex, int endIndex)
         {
             KLineBar chart = GetChart(data, startIndex, endIndex);
-            chart.FullTime = (int)data.Arr_Time[endIndex];
+            chart.Time = (int)data.Arr_Time[endIndex];
             return chart;
         }
 
@@ -114,7 +114,7 @@ namespace com.wer.sc.data.update
         {
             //KLineChart chart = new KLineChart();
             KLineBar chart = new KLineBar();
-            chart.FullTime = data.Arr_Time[startIndex];
+            chart.Time = data.Arr_Time[startIndex];
             chart.Start = data.Arr_Start[startIndex];
             chart.End = data.Arr_End[endIndex];
             chart.Hold = data.Arr_Hold[endIndex];
@@ -145,7 +145,7 @@ namespace com.wer.sc.data.update
             for (int i = 0; i < charts.Count; i++)
             {
                 KLineBar chart = charts[i];
-                data.arr_time[i] = chart.FullTime;
+                data.arr_time[i] = chart.Time;
                 data.arr_start[i] = chart.Start;
                 data.arr_high[i] = chart.High;
                 data.arr_low[i] = chart.Low;

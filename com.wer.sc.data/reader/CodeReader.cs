@@ -33,11 +33,11 @@ namespace com.wer.sc.data.reader
             {
                 CodeInfo codeInfo = codeInfos[i];
                 codes.Add(codeInfo);
-                dicCodes.Add(codeInfo.code, codeInfo);
-                String catelog = codeInfo.catelog;
+                dicCodes.Add(codeInfo.Code, codeInfo);
+                String catelog = codeInfo.Catelog;
                 if (!catelogs.Contains(catelog))
                     catelogs.Add(catelog);
-                String code = codeInfo.code;
+                String code = codeInfo.Code;
                 AddDicCodeCatelog(code, catelog);
             }
         }

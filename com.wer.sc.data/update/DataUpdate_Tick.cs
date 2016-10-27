@@ -25,7 +25,7 @@ namespace com.wer.sc.data.update
             List<CodeInfo> codes = tmpFac.CodeReader.GetAllCodes();
             for (int i = 0; i < codes.Count; i++)
             {
-                String code = codes[i].code;
+                String code = codes[i].Code;
                 DoUpdate(code, tmpFac);
             }
         }

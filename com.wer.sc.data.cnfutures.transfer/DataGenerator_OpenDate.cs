@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace com.wer.sc.data.cnfutures.transfer
+namespace com.wer.sc.data.cnfutures.generator
 {
     public class DataGenerator_OpenDate
     {

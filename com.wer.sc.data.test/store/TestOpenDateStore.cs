@@ -1,5 +1,6 @@
 ﻿using com.wer.sc.data.store;
 using com.wer.sc.data.test.Properties;
+using com.wer.sc.data.utils;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,7 @@ namespace com.wer.sc.data.test.store
         {
             String path = ResourceLoader.GetTestOutputPath("opendate");
             string[] lines = Resources.Store_OpenDate.Split('\r');
-            List<int> openDates = OpenDateStore.LoadOpenDates(lines);
+            List<int> openDates = CsvUtils_OpenDate.LoadByLines(lines);
 
             Assert.AreEqual(lines.Length, openDates.Count);
             for (int i = 0; i < openDates.Count; i++)

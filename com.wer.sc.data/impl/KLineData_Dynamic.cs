@@ -1,10 +1,11 @@
-﻿using System;
+﻿using com.wer.sc.data.utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace com.wer.sc.data.impl
+namespace com.wer.sc.data
 {
     /// <summary>
     /// 动态K线数据
@@ -14,9 +15,9 @@ namespace com.wer.sc.data.impl
     {
         private List<double[]> openTime;
 
-        private KLinePeriod period;        
+        private KLinePeriod period;
 
-        public List<double> list_time;        
+        public List<double> list_time;
 
         public List<float> list_start;
 
@@ -32,8 +33,8 @@ namespace com.wer.sc.data.impl
 
         public List<int> list_hold;
 
-        public KLineData_Dynamic(List<double[]> openTime, KLinePeriod period)
-        {
+        public KLineData_Dynamic(List<double[]> openTime, KLinePeriod period) 
+        {            
             this.list_time = TimeUtils.GetKLineTimes(openTime, period);
         }
 

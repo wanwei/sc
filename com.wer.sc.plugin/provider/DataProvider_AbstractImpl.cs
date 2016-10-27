@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace com.wer.sc.data.provider
 {
-    public abstract class DataProvider_AbstractImpl : Plugin_DataProvider
+    public abstract class Plugin_HistoryData_Abstract : Plugin_DataProvider
     {
         private DataProviderConfig providerConfig;
 
@@ -19,7 +19,7 @@ namespace com.wer.sc.data.provider
 
         private DataProvider_TickData provider_TickData;
 
-        public DataProvider_AbstractImpl(PluginHelper helper) : base(helper)
+        public Plugin_HistoryData_Abstract(PluginHelper helper) : base(helper)
         {
             this.providerConfig = new DataProviderConfig(helper);
             this.provider_CodeInfo = new DataProvider_CodeInfo(providerConfig.ConfigPath);

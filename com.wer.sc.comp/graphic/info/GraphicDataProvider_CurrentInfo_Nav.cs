@@ -28,7 +28,7 @@ namespace com.wer.sc.comp.graphic.info
 
             //List<RealDataInfo> reals = currentInfo.GetReal();
             //List<ChartInfo> charts = currentInfo.GetChart(ChartPeriod.DAY, 1);
-            ITickBar tickChart = tick.GetChart(navigate.CurrentTickIndex);
+            ITickBar tickChart = tick.GetBar(navigate.CurrentTickIndex);
             chartinfo.currentPrice = Math.Round(tick.Price, 2);
             chartinfo.currentHand = tickChart.Mount;
             chartinfo.totalHand = tickChart.TotalMount;

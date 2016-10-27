@@ -65,7 +65,7 @@ namespace com.wer.sc.data.update
             for (int i = 0; i < codes.Count; i++)
             {
                 CodeInfo c = codes[i];
-                if (!codeReader.Contain(c.code))
+                if (!codeReader.Contain(c.Code))
                     updateCodes.Add(c);
             }
             return updateCodes;

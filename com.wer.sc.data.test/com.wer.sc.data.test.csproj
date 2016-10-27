@@ -71,9 +71,12 @@
     <Compile Include="store\TestOpenDateStore.cs" />
     <Compile Include="store\TestTickDataStore_Csv.cs" />
     <Compile Include="TestKLineDataReader.cs" />
+    <Compile Include="update\DataProvider_MockCnFuturesM.cs" />
     <Compile Include="update\MockDataProvider2.cs" />
     <Compile Include="update\MockDataProvider_Abstract.cs" />
     <Compile Include="update\TestDataTransfer_KLine2KLine.cs" />
+    <Compile Include="update\TestDataTransfer_KLine2TimeLine.cs" />
+    <Compile Include="update\TestDataTransfer_Tick2KLine2.cs" />
     <Compile Include="update\TestDataTransfer_Tick2KLineGenerator.cs" />
     <Compile Include="update\TestDataUpdate.cs" />
     <Compile Include="update\TestDataUpdate_Tick.cs" />
@@ -86,6 +89,7 @@
     <Compile Include="store\TestTickDataStore.cs" />
     <Compile Include="update\TestDataUpdate_KLine.cs" />
     <Compile Include="utils\TestDaySplitter.cs" />
+    <Compile Include="utils\TestOpenTimeUtils.cs" />
     <Compile Include="utils\TestTickDataIndeier.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -270,6 +274,33 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\KLineData_M05_20130101_20151231_1Minute_Index.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KLineData_M05_20141229_20141229_1Minute.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KLineOpenTime_Normal.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KLineOpenTime_Night_Normal.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KLineOpenTime_OverNight.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KLineOpenTime_OverNight_WeekStart.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KLineOpenTime_NightNormal_WeekStart.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KLineData_M01_20040101_20040130.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Tick2KLine_M01_20131202.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Tick2KLine_M05_20040129.txt" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

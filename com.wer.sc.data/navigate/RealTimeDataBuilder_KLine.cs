@@ -63,7 +63,7 @@ namespace com.wer.sc.data.navigate
                 this.klineChartBuilder_1Minute = new RealTimeDataBuilder_DayData(currentDataCache_CodeDate, time);
                 this.currentDate = date;
             }
-
+            
             int index = klineData.IndexOfTime(time);
             double t = klineData.Arr_Time[index];
 
@@ -76,7 +76,7 @@ namespace com.wer.sc.data.navigate
                 startIndex = 0;
             else
                 startIndex = todayMinuteKLineData.IndexOfTime(t);
-            int endIndex = todayMinuteKLineData.IndexOfTime(currentMinuteChart.FullTime);
+            int endIndex = todayMinuteKLineData.IndexOfTime(currentMinuteChart.Time);
 
             IKLineBar currentChart = todayMinuteKLineData.GetAggrKLineBar(startIndex, endIndex - 1);
             KLineChartMerge.Merge((KLineBar)currentChart, currentMinuteChart);

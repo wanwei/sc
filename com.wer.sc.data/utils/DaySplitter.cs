@@ -132,7 +132,6 @@ namespace com.wer.sc.data.utils
         }
     }
 
-
     public struct SplitterResult
     {
         private int date;

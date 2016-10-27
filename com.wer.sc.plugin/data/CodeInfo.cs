@@ -6,30 +6,73 @@ using System.Threading.Tasks;
 
 namespace com.wer.sc.data
 {
-    public class CodeInfo
+    /// <summary>
+    /// 股票或期货信息的实现类
+    /// </summary>
+    public class CodeInfo : ICodeInfo
     {
-        public string code;
+        private string code;
 
-        public string catelog;
+        private String name;
 
-        public String name;
+        private string catelog;
+
+        public string Code
+        {
+            get
+            {
+                return code;
+            }
+
+            set
+            {
+                code = value;
+            }
+        }
+
+
+        public string Name
+        {
+            get
+            {
+                return name;
+            }
+
+            set
+            {
+                name = value;
+            }
+        }
+
+        public string Catelog
+        {
+            get
+            {
+                return catelog;
+            }
+
+            set
+            {
+                catelog = value;
+            }
+        }
 
         public CodeInfo()
         {
 
         }
 
-        public CodeInfo(String code, String name, String variety)
+        public CodeInfo(String code, String name, String catelog)
         {
-            this.code = code;
-            this.catelog = variety;
-            this.name = name;
+            this.Code = code;
+            this.Catelog = catelog;
+            this.Name = name;
         }
 
         override
         public String ToString()
         {
-            return code + "," + name + "," + catelog;
+            return Code + "," + Name + "," + Catelog;
         }
 
         public override bool Equals(object obj)
@@ -39,7 +82,7 @@ namespace com.wer.sc.data
 
         public override int GetHashCode()
         {
-            return code.GetHashCode();
+            return Code.GetHashCode();
         }
     }
 }

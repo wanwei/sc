@@ -23,6 +23,21 @@ namespace com.wer.sc.data.update
             AssertResult(klinedata, Resources.AG05_20141230_Result);
         }
 
+        [TestMethod]
+        public void TestTransferNight2()
+        {
+            List<double[]> openTime = new List<double[]>();
+            openTime.Add(new double[] { .210000, .023000 });
+            openTime.Add(new double[] { .090000, .101500 });
+            openTime.Add(new double[] { .103000, .113000 });
+            openTime.Add(new double[] { .133000, .150000 });
+            TickData data = ResourceLoader.LoadTickData_AG05_20141230();
+            List<TickData> dataList = new List<TickData>();
+            dataList.Add(data);
+            IKLineData klinedata = DataTransfer_Tick2KLine.Transfer(dataList, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1), openTime);
+            AssertResult(klinedata, Resources.AG05_20141230_Result);
+        }
+
         private void AssertResult(IKLineData klineData, String txt)
         {
             string[] periodArr = txt.Split('\r');
@@ -34,20 +49,20 @@ namespace com.wer.sc.data.update
             }            
         }        
 
-        [TestMethod]
-        public void TestTransferNight2()
-        {
-            List<double[]> openTime = new List<double[]>();
-            openTime.Add(new double[] { .210000, .023300 });
-            openTime.Add(new double[] { .090000, .101500 });
-            openTime.Add(new double[] { .103000, .113000 });
-            openTime.Add(new double[] { .133000, .150000 });
-            TickData data = ResourceLoader.LoadTickData_M05_20150106();
-            List<TickData> dataList = new List<TickData>();
-            dataList.Add(data);
-            IKLineData klinedata = DataTransfer_Tick2KLine.Transfer(dataList, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1), openTime);
-            AssertResult(klinedata, Resources.M05_20150106_Result);
-        }
+        //[TestMethod]
+        //public void TestTransferNight2()
+        //{
+        //    List<double[]> openTime = new List<double[]>();
+        //    openTime.Add(new double[] { .210000, .023300 });
+        //    openTime.Add(new double[] { .090000, .101500 });
+        //    openTime.Add(new double[] { .103000, .113000 });
+        //    openTime.Add(new double[] { .133000, .150000 });
+        //    TickData data = ResourceLoader.LoadTickData_M05_20150106();
+        //    List<TickData> dataList = new List<TickData>();
+        //    dataList.Add(data);
+        //    IKLineData klinedata = DataTransfer_Tick2KLine.Transfer(dataList, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1), openTime);
+        //    AssertResult(klinedata, Resources.M05_20150106_Result);
+        //}
 
         [TestMethod]
         public void TestTransfer_M01_20131202_20131213()

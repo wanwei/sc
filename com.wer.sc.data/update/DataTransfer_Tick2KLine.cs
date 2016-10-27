@@ -1,4 +1,5 @@
-﻿using System;
+﻿using com.wer.sc.data.utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,43 @@ namespace com.wer.sc.data.update
 {
     public class DataTransfer_Tick2KLine
     {
+        public static IKLineData Transfer(int date, TickData data, OpenDateReader openDateReader, List<double[]> opentime, KLinePeriod targetPeriod, KLineData lastKLineData)
+        {
+            List<double> klineTimePeriods = OpenTimeUtils.GetKLineTimeList(date, openDateReader, opentime, targetPeriod);
+            KLineData klineData = new KLineData(klineTimePeriods.Count);
+            for (int i = 0; i < klineTimePeriods.Count; i++)
+            {
+                klineData.arr_time[i] = klineTimePeriods[i];
+            }
+
+            int currentTickindex = 0;
+            for (int i = 0; i < klineData.Length; i++)
+            {
+
+            }
+
+            return klineData;
+        }
+
+        private static int NextTickIndex()
+        {
+            return -1;
+        }
+
+        private static void GetEmptyChart(KLineData klineData, int currentIndex, double time, IKLineData lastKLineData)
+        {
+            klineData.arr_time[currentIndex] = time;
+            float lastPrice = currentIndex == 0 ? lastKLineData.Arr_End[lastKLineData.Length - 1] : klineData.Arr_End[currentIndex - 1];
+            int lastHold = currentIndex == 0 ? lastKLineData.Arr_Hold[lastKLineData.Length - 1] : klineData.Arr_Hold[currentIndex - 1];
+            klineData.arr_start[currentIndex] = lastPrice;
+            klineData.arr_high[currentIndex] = lastPrice;
+            klineData.arr_low[currentIndex] = lastPrice;
+            klineData.arr_end[currentIndex] = lastPrice;
+            klineData.arr_mount[currentIndex] = 0;
+            klineData.arr_money[currentIndex] = 0;
+            klineData.arr_hold[currentIndex] = lastHold;
+        }
+
         public static IKLineData Transfer(List<TickData> data, KLinePeriod targetPeriod, List<double[]> opentime)
         {
             List<IKLineData> klineDataList = new List<IKLineData>();
@@ -58,7 +96,6 @@ namespace com.wer.sc.data.update
         public KLineData GetKLineData()
         {
             List<KLineBar> charts = DataTransfer_Tick2KLineGenerator.GenerateCharts(ticks, openTime, targetPeriod, yesterdayEndPrice);
-
             return GetCharts(charts);
         }
 
@@ -68,7 +105,7 @@ namespace com.wer.sc.data.update
             for (int i = 0; i < charts.Count; i++)
             {
                 KLineBar chart = charts[i];
-                data.arr_time[i] = chart.FullTime;
+                data.arr_time[i] = chart.Time;
                 data.arr_start[i] = chart.Start;
                 data.arr_high[i] = chart.High;
                 data.arr_low[i] = chart.Low;

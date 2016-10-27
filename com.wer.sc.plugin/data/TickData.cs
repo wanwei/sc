@@ -6,10 +6,13 @@ using System.Threading.Tasks;
 
 namespace com.wer.sc.data
 {
-    public class TickData : ITickData
+    /// <summary>
+    /// Tick数据实现类，表示一天的Tick数据
+    /// 
+    /// 当Tick数据从数据中心获取后，会初始化成该类
+    /// </summary>
+    public class TickData : TickData_Abstract
     {
-        private String code;
-
         // 交易时间
         public double[] arr_time;
 
@@ -40,8 +43,8 @@ namespace com.wer.sc.data
         // 买OR卖
         public Boolean[] arr_isBuy;
 
-        private int barPos;
-
+        private int[] arr_hold;
+        
         public TickData(int length)
         {
             this.arr_time = new double[length];
@@ -54,94 +57,6 @@ namespace com.wer.sc.data
             this.arr_sellPrice = new float[length];
             this.arr_sellMount = new int[length];
             this.arr_isBuy = new bool[length];
-        }
-
-        public int BarPos
-        {
-            get
-            {
-                return barPos;
-            }
-
-            set
-            {
-                barPos = value;
-            }
-        }
-
-        // 交易时间
-        public double Time
-        {
-            get { return arr_time[BarPos]; }
-        }
-
-        public int Date
-        {
-            get { return (int)arr_time[barPos]; }
-        }
-
-        // 交易价格
-        public float Price
-        {
-            get { return arr_price[BarPos]; }
-        }
-
-        // 交易量
-        public int Mount
-        {
-            get { return arr_mount[BarPos]; }
-        }
-
-        // 到现在为止总成交量
-        public int TotalMount
-        {
-            get { return arr_totalMount[BarPos]; }
-        }
-
-        // 持仓增减
-        public int Add
-        {
-            get { return arr_add[BarPos]; }
-        }
-
-        public int Hold
-        {
-            get { return Arr_Hold[BarPos]; }
-        }
-
-        // 买价
-        public float BuyPrice
-        {
-            get { return arr_buyPrice[BarPos]; }
-        }
-
-        // 买量
-        public int BuyMount
-        {
-            get { return arr_buyMount[BarPos]; }
-        }
-
-        // 卖价
-        public float SellPrice
-        {
-            get { return arr_sellPrice[BarPos]; }
-        }
-
-        // 卖量
-        public int SellMount
-        {
-            get { return arr_sellMount[BarPos]; }
-        }
-
-        // 买OR卖
-        public Boolean IsBuy
-        {
-            get { return arr_isBuy[BarPos]; }
-        }
-
-        public int Length
-        {
-            get { return arr_time.Length; }
         }
 
         public TickData SubData(int start, int end)
@@ -164,59 +79,27 @@ namespace com.wer.sc.data
             return d1;
         }
 
-        public IList<double> Arr_Time { get { return arr_time; } }
+        #region 完整数据
 
-        // 交易价格
-        public IList<float> Arr_Price { get { return arr_price; } }
+        public override IList<double> Arr_Time { get { return arr_time; } }
 
-        // 交易量
-        public IList<int> Arr_Mount { get { return arr_mount; } }
+        public override IList<float> Arr_Price { get { return arr_price; } }
 
-        // 到现在为止总成交量
-        public IList<int> Arr_TotalMount { get { return arr_totalMount; } }
+        public override IList<int> Arr_Mount { get { return arr_mount; } }
 
-        // 持仓增减
-        public IList<int> Arr_Add { get { return arr_add; } }
+        public override IList<int> Arr_TotalMount { get { return arr_totalMount; } }
 
-        // 买价
-        public IList<float> Arr_BuyPrice
-        {
-            get
-            {
-                return arr_buyPrice;
-            }
-        }
+        public override IList<int> Arr_Add { get { return arr_add; } }
 
-        // 买量
-        public IList<int> Arr_BuyMount
-        {
-            get
-            {
-                return arr_buyMount;
-            }
-        }
+        public override IList<float> Arr_BuyPrice { get { return arr_buyPrice; } }
 
-        // 卖价
-        public IList<float> Arr_SellPrice
-        {
-            get
-            {
-                return arr_sellPrice;
-            }
-        }
+        public override IList<int> Arr_BuyMount { get { return arr_buyMount; } }
 
-        // 卖量
-        public IList<int> Arr_SellMount
-        {
-            get
-            {
-                return arr_sellMount;
-            }
-        }
+        public override IList<float> Arr_SellPrice { get { return arr_sellPrice; } }
 
-        private int[] arr_hold;
+        public override IList<int> Arr_SellMount { get { return arr_sellMount; } }
 
-        public IList<int> Arr_Hold
+        public override IList<int> Arr_Hold
         {
             get
             {
@@ -233,63 +116,8 @@ namespace com.wer.sc.data
             }
         }
 
-        // 买OR卖
-        public IList<Boolean> Arr_IsBuy
-        {
-            get
-            {
-                return arr_isBuy;
-            }
-        }
+        public override IList<Boolean> Arr_IsBuy { get { return arr_isBuy; } }
 
-        public string Code
-        {
-            get
-            {
-                return code;
-            }
-
-            set
-            {
-                code = value;
-            }
-        }
-
-        override
-        public String ToString()
-        {
-            StringBuilder sb = new StringBuilder();
-            sb.Append(Time).Append(",");
-            sb.Append(Price).Append(",");
-            sb.Append(Mount).Append(",");
-            sb.Append(TotalMount).Append(",");
-            sb.Append(Add).Append(",");
-            sb.Append(BuyPrice).Append(",");
-            sb.Append(BuyMount).Append(",");
-            sb.Append(SellPrice).Append(",");
-            sb.Append(SellMount).Append(",");
-            sb.Append(IsBuy ? 1 : 0);
-            return sb.ToString();
-        }
-        public String ToString(int i)
-        {
-            StringBuilder sb = new StringBuilder();
-            sb.Append(Arr_Time[i]).Append(",");
-            sb.Append(Arr_Price[i]).Append(",");
-            sb.Append(Arr_Mount[i]).Append(",");
-            sb.Append(Arr_TotalMount[i]).Append(",");
-            sb.Append(Arr_Add[i]).Append(",");
-            sb.Append(Arr_BuyPrice[i]).Append(",");
-            sb.Append(Arr_BuyMount[i]).Append(",");
-            sb.Append(Arr_SellPrice[i]).Append(",");
-            sb.Append(Arr_SellMount[i]).Append(",");
-            sb.Append(Arr_IsBuy[i] ? 1 : 0);
-            return sb.ToString();
-        }
-
-        public ITickBar GetChart(int index)
-        {
-            return new TickBar_TickData(this, index);
-        }
+        #endregion
     }
 }

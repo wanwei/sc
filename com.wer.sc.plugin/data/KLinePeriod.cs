@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace com.wer.sc.data
 {
+    /// <summary>
+    /// K线周期类
+    /// 如1分钟、5分钟、日线都用该类表示
+    /// </summary>
     public class KLinePeriod
     {
         public const int TYPE_SECOND = 0;
@@ -31,6 +35,24 @@ namespace com.wer.sc.data
         {
             this.PeriodType = periodType;
             this.Period = period;
+        }
+
+        public String ToEngString()
+        {
+            switch (PeriodType)
+            {
+                case TYPE_SECOND:
+                    return Period + "second";
+                case TYPE_MINUTE:
+                    return Period + "minute";
+                case TYPE_HOUR:
+                    return Period + "hour";
+                case TYPE_DAY:
+                    return Period + "day";
+                case TYPE_WEEK:
+                    return Period + "week";
+            }
+            return "";
         }
 
         public override String ToString()
@@ -66,10 +88,16 @@ namespace com.wer.sc.data
             return Period * 10 + PeriodType;
         }
 
+        private static KLinePeriod period_5second = new KLinePeriod(KLinePeriod.TYPE_SECOND, 5);
         private static KLinePeriod period_1minute = new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1);
         private static KLinePeriod period_15minute = new KLinePeriod(KLinePeriod.TYPE_MINUTE, 15);
         private static KLinePeriod period_Hour = new KLinePeriod(KLinePeriod.TYPE_HOUR, 1);
         private static KLinePeriod period_Day = new KLinePeriod(KLinePeriod.TYPE_DAY, 1);
+
+        public static KLinePeriod KLinePeriod_5Second
+        {
+            get { return period_5second; }
+        }
 
         public static KLinePeriod KLinePeriod_1Minute
         {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using com.wer.sc.data.utils;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -17,48 +18,12 @@ namespace com.wer.sc.data.store
 
         public void Save(List<int> openDates)
         {
-            String[] openDateArr = new string[openDates.Count];
-            for (int i = 0; i < openDates.Count; i++)
-            {
-                int arr = openDates[i];
-                openDateArr[i] = arr.ToString();
-            }
-
-            DirectoryInfo dir = Directory.GetParent(path);
-            if (!dir.Exists)
-                dir.Create();
-
-            StreamWriter writer = File.CreateText(path);
-            try
-            {
-                for (int i = 0; i < openDates.Count; i++)
-                {
-                    writer.WriteLine(openDateArr[i]);
-                }
-            }
-            finally
-            {
-                writer.Close();
-            }
+            CsvUtils_OpenDate.Save(path, openDates);
         }
 
         public List<int> Load()
         {
-            if (!File.Exists(path))
-                return new List<int>();
-            String[] strs = File.ReadAllLines(path);
-            return LoadOpenDates(strs);
-        }
-
-        public static List<int> LoadOpenDates(string[] strs)
-        {
-            List<int> openDates = new List<int>();
-            for (int i = 0; i < strs.Length; i++)
-            {
-                String line = strs[i];
-                openDates.Add(int.Parse(line));
-            }
-            return openDates;
+            return CsvUtils_OpenDate.Load(path);
         }
     }
 }

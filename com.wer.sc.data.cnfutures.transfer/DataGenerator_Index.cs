@@ -1,4 +1,5 @@
 ﻿using com.wer.sc.data.provider;
+using com.wer.sc.data.utils;
 using com.wer.sc.utils;
 using System;
 using System.Collections.Generic;
@@ -39,14 +40,14 @@ namespace com.wer.sc.data.cnfutures
             for (int i = 0; i < codes.Count; i++)
             {
                 CodeInfo code = codes[i];
-                String upperCode = code.code.ToUpper();
+                String upperCode = code.Code.ToUpper();
                 if (upperCode.EndsWith("MI") || upperCode.EndsWith("13"))
                     continue;
-                TickData data = provider_TickData.GetTickData(code.code, date);
+                TickData data = provider_TickData.GetTickData(code.Code, date);
                 tickData.Add(data);
             }
 
-            List<double[]> openTime = this.provider_OpenTime.GetOpenTime(codes[0].code, date);
+            List<double[]> openTime = this.provider_OpenTime.GetOpenTime(codes[0].Code, date);
             return Generate(tickData, openTime);
         }
 

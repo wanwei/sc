@@ -52,10 +52,8 @@
     <Compile Include="cache\IDataCache_Code.cs" />
     <Compile Include="ICodeReader.cs" />
     <Compile Include="IKLineDataReader.cs" />
-    <Compile Include="impl\KLineData_Abstract.cs" />
     <Compile Include="impl\KLineData_Dynamic.cs" />
     <Compile Include="impl\KLineData_RealTime.cs" />
-    <Compile Include="impl\TimeLineData_Abstract.cs" />
     <Compile Include="impl\TimeLineData_RealTime.cs" />
     <Compile Include="ITimeLineDataReader.cs" />
     <Compile Include="ITickDataReader.cs" />
@@ -72,32 +70,26 @@
     <Compile Include="IDataNavigate.cs" />
     <Compile Include="navigate\DataNavigate2.cs" />
     <Compile Include="DataNavigateMgr.cs" />
-    <Compile Include="impl\KLineBar.cs" />
-    <Compile Include="impl\KLineBar_Abstract.cs" />
-    <Compile Include="impl\KLineBar_KLineData.cs" />
-    <Compile Include="impl\KLineData.cs" />
     <Compile Include="cache\impl\DataCache_Date.cs" />
-    <Compile Include="impl\KLineData_Sub.cs" />
     <Compile Include="navigate\RealTimeDataBuilder_KLine.cs" />
     <Compile Include="navigate\DataNavigateCache.cs" />
     <Compile Include="navigate\DataNavigateKey.cs" />
     <Compile Include="navigate\RealTimeDataBuilder_DayData.cs" />
-    <Compile Include="impl\TimeLineBar.cs" />
-    <Compile Include="impl\TimeLineBar_Abstract.cs" />
-    <Compile Include="impl\TimeLineBar_RealData.cs" />
     <Compile Include="IOpenDateReader.cs" />
+    <Compile Include="store\DayStartTimeStore.cs" />
     <Compile Include="store\KLineDataIndexer.cs" />
     <Compile Include="store\KLineDataStore_Csv.cs" />
     <Compile Include="store\TickDataStore_Csv.cs" />
     <Compile Include="store\TimeLineDataStore_Csv.cs" />
+    <Compile Include="update\DataTransfer_Tick2KLine2.cs" />
     <Compile Include="update\DataTransfer_Tick2KLineGenerator.cs" />
+    <Compile Include="update\KLineDataGetter_FromTick.cs" />
     <Compile Include="utils\KLineDataTimeGetter.cs" />
     <Compile Include="utils\DataCache.cs" />
     <Compile Include="utils\DayDataCache.cs" />
     <Compile Include="utils\KLineChartMerge.cs" />
     <Compile Include="utils\KLineDataDaySplitter.cs" />
     <Compile Include="utils\KLineDataIndeier.cs" />
-    <Compile Include="impl\TimeLineData.cs" />
     <Compile Include="KLineDataWrap.cs" />
     <Compile Include="reader\OpenDateReader.cs" />
     <Compile Include="reader\TimeLineDataReader.cs" />
@@ -122,6 +114,7 @@
     <Compile Include="store\TickDataStore.cs" />
     <Compile Include="reader\TickDataReader.cs" />
     <Compile Include="update\DataProviderWrap.cs" />
+    <Compile Include="utils\OpenTimeUtils.cs" />
     <Compile Include="utils\TickDataIndeier.cs" />
   </ItemGroup>
   <ItemGroup />

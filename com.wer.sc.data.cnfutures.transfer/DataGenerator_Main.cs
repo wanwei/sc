@@ -33,7 +33,7 @@ namespace com.wer.sc.data.cnfutures
             for (int i = 0; i < codes.Count; i++)
             {
                 CodeInfo c = codes[i];
-                String code = c.code.ToUpper();
+                String code = c.Code.ToUpper();
                 if (code.EndsWith("MI") || code.EndsWith("13"))
                     continue;
                 anaCodes.Add(c);
@@ -95,7 +95,7 @@ namespace com.wer.sc.data.cnfutures
             String mainCode = null;
             for (int i = 0; i < codes.Count; i++)
             {
-                String code = codes[i].code;
+                String code = codes[i].Code;
                 if (code.Contains("MI") || code.Contains("13"))
                     continue;
                 String p = GetPath(path, code, date);

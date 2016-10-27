@@ -1,5 +1,4 @@
-﻿using com.wer.sc.data.impl;
-using com.wer.sc.data.utils;
+﻿using com.wer.sc.data.utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;

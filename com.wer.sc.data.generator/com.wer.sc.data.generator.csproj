@@ -35,6 +35,9 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="com.wer.sc.utils.ui">
+      <HintPath>..\com.wer.sc.utils.ui\obj\Debug\com.wer.sc.utils.ui.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -55,6 +58,12 @@
     <Compile Include="FormChoosePlugin.Designer.cs">
       <DependentUpon>FormChoosePlugin.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormDataUpdate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormDataUpdate.Designer.cs">
+      <DependentUpon>FormDataUpdate.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormGenerator.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -63,8 +72,15 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StepPreparer.cs" />
+    <Compile Include="Step_CodeInfo.cs" />
+    <Compile Include="Step_DayStartTime.cs" />
+    <Compile Include="Step_OpenDate.cs" />
     <EmbeddedResource Include="FormChoosePlugin.resx">
       <DependentUpon>FormChoosePlugin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormDataUpdate.resx">
+      <DependentUpon>FormDataUpdate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormGenerator.resx">
       <DependentUpon>FormGenerator.cs</DependentUpon>

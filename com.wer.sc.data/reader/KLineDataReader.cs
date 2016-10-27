@@ -22,7 +22,9 @@ namespace com.wer.sc.data.reader
 
         public IKLineData GetAllData(string code, KLinePeriod period)
         {
-            return GetData(code, -1, int.MaxValue, period);
+            String path = utils.GetKLineDataPath(code, period);
+            KLineDataStore store = new KLineDataStore(path);
+            return store.LoadAll();
         }
 
         public IKLineData GetData(String code, int startDate, int endDate, KLinePeriod period)

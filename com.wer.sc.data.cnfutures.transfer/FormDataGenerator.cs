@@ -9,7 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace com.wer.sc.data.cnfutures.transfer
+namespace com.wer.sc.data.cnfutures.generator
 {
     public partial class FormDataGenerator : Form
     {

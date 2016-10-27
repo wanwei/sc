@@ -207,7 +207,7 @@ namespace com.wer.sc.data.update
             UpdateInfo generateInfo = new UpdateInfo();
             for (int i = 0; i < codes.Count; i++)
             {
-                generateInfo.generates.Add(GetUpdateInfo_Code(codes[i].code));
+                generateInfo.generates.Add(GetUpdateInfo_Code(codes[i].Code));
             }
             return generateInfo;
         }

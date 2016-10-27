@@ -1,4 +1,4 @@
-﻿namespace com.wer.sc.data.cnfutures.transfer
+﻿namespace com.wer.sc.data.cnfutures.generator
 {
     partial class FormDataGenerator
     {

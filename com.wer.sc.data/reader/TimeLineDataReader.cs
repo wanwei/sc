@@ -51,7 +51,7 @@ namespace com.wer.sc.data.reader
             IKLineData lastEndData = store.LoadByIndex(lastEndIndex, lastEndIndex);
             ((KLineData)data).Code = code;
             float lastEndPrice = lastEndData.Arr_End[0];
-            return DataTransfer_KLine2TimeLine.ConvertRealDataList(data, lastEndPrice, dataReaderFactory.OpenDateReader);
+            return DataTransfer_KLine2TimeLine.ConvertTimeLineDataList(data, lastEndPrice, dataReaderFactory.OpenDateReader);
         }
     }
 

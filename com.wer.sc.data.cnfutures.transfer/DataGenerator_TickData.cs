@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace com.wer.sc.data.cnfutures.transfer
+namespace com.wer.sc.data.cnfutures.generator
 {
     /// <summary>
     /// 数据生成
@@ -16,6 +16,7 @@ namespace com.wer.sc.data.cnfutures.transfer
     {
         public const int PROGRESS_PERIOD = 10;
         private bool isCancel = false;
+
         public bool IsCancel
         {
             get
@@ -53,7 +54,7 @@ namespace com.wer.sc.data.cnfutures.transfer
         private DataGenerator_Main generator_Main;
 
         public DataGenerator_TickData(String srcPath, String targetPath, String[] varieties)
-        {
+        {            
             String configPath = Environment.CurrentDirectory + "\\com.wer.sc.data.cnfutures\\";
             //生成开盘日数据
             DataGenerator_OpenDate generator_OpenDate = new DataGenerator_OpenDate(configPath, srcPath);
@@ -182,10 +183,10 @@ namespace com.wer.sc.data.cnfutures.transfer
             for (int i = 0; i < codes.Count; i++)
             {
                 CodeInfo code = codes[i];
-                String upperCode = code.code.ToUpper();
+                String upperCode = code.Code.ToUpper();
                 if (upperCode.EndsWith("MI") || upperCode.EndsWith("13"))
                     continue;
-                GenerateNormal(code.code, date);
+                GenerateNormal(code.Code, date);
             }
             GenerateMain(variety, date);
             GenerateIndex(variety, date);
@@ -241,6 +242,7 @@ namespace com.wer.sc.data.cnfutures.transfer
     public delegate void AfterPreparedHandler(GenerateInfo generateInfo);
     public delegate void AfterGeneratedPeriodHandler(GeneratedPeriodArgs args);
     public delegate void AfterGeneratedHandler(GeneratedArgs args);
+
 
     public class GeneratedArgs
     {

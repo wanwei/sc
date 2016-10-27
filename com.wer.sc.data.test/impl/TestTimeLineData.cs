@@ -11,7 +11,7 @@ namespace com.wer.sc.data.test.impl
     public class TestTimeLineData
     {
         [TestMethod]
-        public void Test()
+        public void TestTimeLineData_ToString()
         {
             //TimeLineData
         }

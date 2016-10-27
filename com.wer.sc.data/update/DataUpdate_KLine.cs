@@ -1,4 +1,5 @@
 ﻿using com.wer.sc.data.store;
+using com.wer.sc.data.utils;
 using com.wer.sc.plugin;
 using System;
 using System.Collections.Generic;
@@ -27,7 +28,7 @@ namespace com.wer.sc.data.update
             for (int i = 0; i < codes.Count; i++)
             {
                 CodeInfo code = codes[i];
-                UpdateCode(code.code, tmpFac);
+                UpdateCode(code.Code, tmpFac);
             }
         }
 
@@ -111,25 +112,59 @@ namespace com.wer.sc.data.update
             String path = utils.GetKLineDataPath(code, period);
             KLineDataStore store = new KLineDataStore(path);
 
+            IKLineData data = GetKLineDataByTick(code, dataReaderFactory, period, dates);
+            store.Append(data);
+            return data;
+        }
+
+        public IKLineData GetKLineDataByTick(string code, DataReaderFactory dataReaderFactory, KLinePeriod period, IList<int> dates)
+        {
+            IKLineData lastKLineData = null;
             float lastPrice = -1;
             List<IKLineData> klineDataList = new List<IKLineData>();
             for (int i = 0; i < dates.Count; i++)
             {
                 int openDate = dates[i];
                 TickData tickdata = dataReaderFactory.TickDataReader.GetTickData(code, openDate);
+                List<double[]> openTimes = dataProvider.GetOpenTime(code, openDate);
+                KLineData klineData;
                 if (tickdata != null)
                 {
-                    List<double[]> openTimes = dataProvider.GetOpenTime(code, openDate);
-                    KLineData klineData = DataTransfer_Tick2KLine.Transfer(tickdata, period, openTimes, lastPrice);
+                    klineData = DataTransfer_Tick2KLine.Transfer(tickdata, period, openTimes, lastPrice);
                     klineDataList.Add(klineData);
                     lastPrice = klineData.arr_end[klineData.Length - 1];
                 }
+                else
+                {
+                    klineData = GetEmptyDayKLineData(code, openDate, openTimes, dataReaderFactory.OpenDateReader, lastKLineData);
+                    klineDataList.Add(klineData);
+                }
+                lastKLineData = klineData;
             }
             if (klineDataList.Count == 0)
                 return null;
             IKLineData data = KLineData.Merge(klineDataList);
-            store.Append(data);
             return data;
+        }
+
+        private KLineData GetEmptyDayKLineData(string code, int date, List<double[]> openTimes, IOpenDateReader openDateReader, IKLineData lastKLineData)
+        {
+            float lastPrice = lastKLineData.Arr_End[lastKLineData.Length - 1];
+            int lastHold = lastKLineData.Arr_Hold[lastKLineData.Length - 1];
+            List<double> openTimeList = OpenTimeUtils.GetKLineTimeList(date, openDateReader, openTimes, KLinePeriod.KLinePeriod_1Minute);
+            KLineData klineData = new KLineData(openTimeList.Count);
+            for (int i = 0; i < klineData.Length; i++)
+            {
+                klineData.arr_time[i] = openTimeList[i];
+                klineData.arr_start[i] = lastPrice;
+                klineData.arr_high[i] = lastPrice;
+                klineData.arr_low[i] = lastPrice;
+                klineData.arr_end[i] = lastPrice;
+                klineData.arr_mount[i] = 0;
+                klineData.arr_money[i] = 0;
+                klineData.arr_hold[i] = lastHold;
+            }
+            return klineData;
         }
 
         public IKLineData UpdateByKLine(String code, DataReaderFactory dataReaderFactory, KLinePeriod period, IKLineData originalData)

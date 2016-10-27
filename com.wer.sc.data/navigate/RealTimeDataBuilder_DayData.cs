@@ -41,7 +41,7 @@ namespace com.wer.sc.data.navigate
             int currentTickIndex = tickDataIndeier.GetTickIndex(currentTime);
             tickData.BarPos = currentTickIndex;
 
-            currentChart.FullTime = splitTime;
+            currentChart.Time = splitTime;
             ModifyChart(currentChart, splitIndex, currentTickIndex);
         }
 

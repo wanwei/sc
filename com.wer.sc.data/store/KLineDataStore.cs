@@ -150,7 +150,7 @@ namespace com.wer.sc.data.store
             for (int i = 0; i < data.Length; i++)
             {
                 data.BarPos = i;
-                byte[] tmpBs = BitConverter.GetBytes(data.FullTime);
+                byte[] tmpBs = BitConverter.GetBytes(data.Time);
                 Array.Copy(tmpBs, 0, bs, offset, 8);
                 offset += 8;
 

@@ -289,4 +289,31 @@
   <data name="KLineData_M05_20130101_20151231_1Minute_Index" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\KLineData_M05_20130101_20151231_1Minute_Index.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
   </data>
+  <data name="KLineData_M05_20141229_20141229_1Minute" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\KLineData_M05_20141229_20141229_1Minute.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
+  </data>
+  <data name="KLineOpenTime_NightNormal_WeekStart" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\KLineOpenTime_NightNormal_WeekStart.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
+  </data>
+  <data name="KLineOpenTime_Night_Normal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\KLineOpenTime_Night_Normal.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
+  </data>
+  <data name="KLineOpenTime_Normal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\KLineOpenTime_Normal.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
+  </data>
+  <data name="KLineOpenTime_OverNight" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\KLineOpenTime_OverNight.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
+  </data>
+  <data name="KLineOpenTime_OverNight_WeekStart" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\KLineOpenTime_OverNight_WeekStart.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
+  </data>
+  <data name="KLineData_M01_20040101_20040130" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\KLineData_M01_20040101_20040130.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
+  </data>
+  <data name="Tick2KLine_M01_20131202" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Tick2KLine_M01_20131202.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
+  </data>
+  <data name="Tick2KLine_M05_20040129" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Tick2KLine_M05_20040129.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
+  </data>
 </root>

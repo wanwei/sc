@@ -77,7 +77,7 @@ namespace com.wer.sc.app.data
         private void LoadCodeUpdateInfo(CodeInfo code)
         {
             DataReaderFactory fac = GetCurrentDataProvider().GetFactory();
-            List<int> tickDates = GetCurrentDataUpdate().Update_Tick.GetUpdatedDates(code.code, fac);
+            List<int> tickDates = GetCurrentDataUpdate().Update_Tick.GetUpdatedDates(code.Code, fac);
             if (tickDates.Count == 0)
             {
                 lbTickStart.Text = "--------";
@@ -90,17 +90,17 @@ namespace com.wer.sc.app.data
             }
 
             DataUpdate_KLine update_KLine = GetCurrentDataUpdate().Update_KLine;
-            ShowDate(lbMinuteStart, update_KLine.GetUpdateFirstTime(code.code, fac, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1)));
-            ShowDate(lbMinuteEnd, update_KLine.GetUpdateLastDate(code.code, fac, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1)));
+            ShowDate(lbMinuteStart, update_KLine.GetUpdateFirstTime(code.Code, fac, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1)));
+            ShowDate(lbMinuteEnd, update_KLine.GetUpdateLastDate(code.Code, fac, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1)));
 
-            ShowDate(lb15MinuteStart, update_KLine.GetUpdateFirstTime(code.code, fac, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 15)));
-            ShowDate(lb15MinuteEnd, update_KLine.GetUpdateLastDate(code.code, fac, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 15)));
+            ShowDate(lb15MinuteStart, update_KLine.GetUpdateFirstTime(code.Code, fac, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 15)));
+            ShowDate(lb15MinuteEnd, update_KLine.GetUpdateLastDate(code.Code, fac, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 15)));
 
-            ShowDate(lbHourStart, update_KLine.GetUpdateFirstTime(code.code, fac, new KLinePeriod(KLinePeriod.TYPE_HOUR, 1)));
-            ShowDate(lbHourEnd, update_KLine.GetUpdateLastDate(code.code, fac, new KLinePeriod(KLinePeriod.TYPE_HOUR, 1)));
+            ShowDate(lbHourStart, update_KLine.GetUpdateFirstTime(code.Code, fac, new KLinePeriod(KLinePeriod.TYPE_HOUR, 1)));
+            ShowDate(lbHourEnd, update_KLine.GetUpdateLastDate(code.Code, fac, new KLinePeriod(KLinePeriod.TYPE_HOUR, 1)));
 
-            ShowDate(lbDayStart, update_KLine.GetUpdateFirstTime(code.code, fac, new KLinePeriod(KLinePeriod.TYPE_DAY, 1)));
-            ShowDate(lbDayEnd, update_KLine.GetUpdateLastDate(code.code, fac, new KLinePeriod(KLinePeriod.TYPE_DAY, 1)));
+            ShowDate(lbDayStart, update_KLine.GetUpdateFirstTime(code.Code, fac, new KLinePeriod(KLinePeriod.TYPE_DAY, 1)));
+            ShowDate(lbDayEnd, update_KLine.GetUpdateLastDate(code.Code, fac, new KLinePeriod(KLinePeriod.TYPE_DAY, 1)));
         }
 
         private void ShowDate(Label lb, int date)
@@ -135,8 +135,8 @@ namespace com.wer.sc.app.data
             {
                 CodeInfo code = (CodeInfo)objs[i];
                 DataUpdate_Old dataUpdater = GetCurrentDataUpdate();
-                dataUpdater.UpdateTick(code.code);
-                dataUpdater.UpdateKLine(code.code);
+                dataUpdater.UpdateTick(code.Code);
+                dataUpdater.UpdateKLine(code.Code);
             }
         }
 
