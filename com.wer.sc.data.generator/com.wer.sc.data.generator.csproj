@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="UpdateDataInfoGetter.cs" />
     <Compile Include="DataGenerator.cs" />
     <Compile Include="FormChoosePlugin.cs">
       <SubType>Form</SubType>
@@ -75,7 +76,10 @@
     <Compile Include="StepPreparer.cs" />
     <Compile Include="Step_CodeInfo.cs" />
     <Compile Include="Step_DayStartTime.cs" />
+    <Compile Include="Step_KLine.cs" />
     <Compile Include="Step_OpenDate.cs" />
+    <Compile Include="Step_TickData.cs" />
+    <Compile Include="Step_TickData_OneDay.cs" />
     <EmbeddedResource Include="FormChoosePlugin.resx">
       <DependentUpon>FormChoosePlugin.cs</DependentUpon>
     </EmbeddedResource>

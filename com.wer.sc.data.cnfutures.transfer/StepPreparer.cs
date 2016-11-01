@@ -112,15 +112,6 @@ namespace com.wer.sc.data.cnfutures.generator
             List<int> openDates = updateDataInfo.dates;
             string code = updateDataInfo.code;
 
-            //int lastDate = -1;
-            //if (updateDataInfo.dates.Count > 0)
-            //{
-            //    int firstDate = updateDataInfo.dates[0];
-            //    lastDate = dataLoader.DataLoader_OpenDate.GetOpenDateReader().GetPrevOpenDate(firstDate);
-            //}
-            //IKLineData lastKlineData = lastDate < 0 ? null : dataLoader.Plugin_HistoryData.GetKLineData(code, lastDate, KLinePeriod.KLinePeriod_1Minute);
-            //float lastEndPrice = lastKlineData != null ? lastKlineData.Arr_End[lastKlineData.Length - 1] : -1;
-            //int lastEndHold = lastKlineData != null ? lastKlineData.Arr_Hold[lastKlineData.Length - 1] : -1;
             for (int i = 0; i < stepCount; i++)
             {
                 Step_KLineData step;

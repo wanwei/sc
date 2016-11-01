@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace com.wer.sc.data.store
 {
+    /// <summary>
+    /// 日开盘时间保存，现在保存成CSV格式
+    /// </summary>
     public class DayStartTimeStore
     {
         private String path;

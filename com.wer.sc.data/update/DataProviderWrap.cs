@@ -21,7 +21,7 @@ namespace com.wer.sc.data.update
 
         public DataProviderWrap(Plugin_DataProvider provider)
         {
-            factory = new DataReaderFactory(provider.GetDataPath());
+            this.factory = new DataReaderFactory(provider.GetDataPath());
             this.provider = provider;
             this.codeReader = factory.CodeReader;
             this.klineDataReader = factory.KLineDataReader;

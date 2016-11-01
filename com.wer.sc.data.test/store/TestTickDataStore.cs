@@ -1,6 +1,7 @@
 ﻿using com.wer.sc.data.store;
 using com.wer.sc.data.test.Properties;
 using com.wer.sc.data.update;
+using com.wer.sc.data.utils;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
@@ -78,7 +79,7 @@ namespace com.wer.sc.data.test
         private TickData GetTickData()
         {
             string[] lines = Resources.Store_TickData.Split('\r');
-            return TickDataStore_Csv.Load(lines);
+            return (TickData)CsvUtils_TickData.LoadByLines(lines);
         }
     }
 }

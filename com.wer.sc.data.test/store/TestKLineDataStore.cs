@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using com.wer.sc.data.test.Properties;
 using System.IO;
+using com.wer.sc.data.utils;
 
 namespace com.wer.sc.data.store.test
 {
@@ -127,7 +128,7 @@ namespace com.wer.sc.data.store.test
         private IKLineData LoadKLineData()
         {
             string[] lines = Resources.KLineData_M05_20000717_20131225.Split('\r');
-            return KLineDataStore_Csv.LoadKLineData(lines);
+            return CsvUtils_KLineData.LoadByLines(lines);
         }
     }
 }

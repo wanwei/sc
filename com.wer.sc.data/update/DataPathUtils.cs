@@ -7,9 +7,27 @@ using System.Threading.Tasks;
 
 namespace com.wer.sc.data
 {
+    /// <summary>
+    /// 用户需要将数据保存成以下方式：
+    /// 数据目录：
+    ///     --opendate
+    ///     --codes
+    ///     --m01
+    ///         --tick
+    ///             --M01_20040102.tick
+    ///             --M01_20040105.tick
+    ///             --......
+    ///         --M01_1minute.kline
+    ///         --M01_1hour.kline
+    ///         --......
+    ///         --M01_daystarttime
+    ///     --m03
+    ///     --......
+    /// </summary>
     public class DataPathUtils
     {
         private String dataPath;
+
         public DataPathUtils(String dataPath)
         {
             this.dataPath = RealPath(dataPath);
@@ -17,28 +35,34 @@ namespace com.wer.sc.data
 
         public String GetCodePath()
         {
-            return dataPath + "codes";
+            return dataPath + "\\codes";
         }
 
         public String GetOpenDatePath()
         {
-            return dataPath + "opendate";
+            return dataPath + "\\opendate";
         }
 
         public string GetTickPath(string code)
         {
-            return dataPath + code + "\\tick\\";
+            return dataPath + "\\" + code + "\\tick\\";
+        }
+
+        public string GetDayStartTime(string code)
+        {
+            String realPath = dataPath + "\\" + code + "\\" + code + "_daystarttime";
+            return realPath;
         }
 
         public string GetTickPath(string code, int date)
         {
-            String realPath = dataPath + code + "\\tick\\" + code + "_" + date + ".tick";
+            String realPath = GetTickPath(code) + code + "_" + date + ".tick";
             return realPath;
         }
 
         public String GetKLineDataPath(String code, KLinePeriod period)
         {
-            String realPath = dataPath + code + "\\" + code + "_" + period.Period + GetPeriodTypeName(period.PeriodType) + ".kline";
+            String realPath = dataPath + "\\" + code + "\\" + code + "_" + period.Period + GetPeriodTypeName(period.PeriodType) + ".kline";
             return realPath;
         }
 

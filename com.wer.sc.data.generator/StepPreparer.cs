@@ -1,5 +1,6 @@
 ﻿using com.wer.sc.data.historydata;
 using com.wer.sc.data.provider;
+using com.wer.sc.plugin;
 using com.wer.sc.utils.ui.proceed;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace com.wer.sc.data.cnfutures.generator
+namespace com.wer.sc.data.generator
 {
     /// <summary>
     /// 更新国内期货市场历史数据的准备步骤
@@ -19,38 +20,92 @@ namespace com.wer.sc.data.cnfutures.generator
 
         private const int DAYS_EVERYKLINESTEP = 50;
 
-        private string srcDataPath;
+        private List<CodeInfo> codes;
 
-        private string pluginSrcDataPath;
+        private List<int> openDates;
 
-        private HistoryData_PrepareForUpdate preparer;
+        private IPlugin_HistoryData historyData;
 
-        //private DataLoader dataLoader;
+        private DataPathUtils dataPathUtils;
 
-        //private bool updateFillUp;
+        public StepPreparer(IPlugin_HistoryData plugin_HistoryData)
+        {
+            this.historyData = plugin_HistoryData;
+            this.dataPathUtils = new DataPathUtils(plugin_HistoryData.GetDataPath());
+        }
 
-        //public StepPreparer(string srcDataPath, string pluginSrcDataPath, bool updateFillUp)
+        public List<IStep> GetAllSteps()
+        {
+            List<IStep> steps = new List<IStep>();
+            steps.Add(new Step_OpenDate(historyData, dataPathUtils));
+            steps.Add(new Step_CodeInfo(historyData, dataPathUtils));
+
+            this.codes = historyData.GetCodes();
+            this.openDates = historyData.GetOpenDates();
+
+            GetDayStartTime(steps);
+            GetTickSteps(steps);
+            GetKLineDataSteps(steps);
+            return steps;
+        }
+
+        private void GetDayStartTime(List<IStep> steps)
+        {
+            for (int i = 0; i < codes.Count; i++)
+            {
+                Step_DayStartTime step = new Step_DayStartTime(codes[i].Code, historyData, dataPathUtils);
+                steps.Add(step);
+            }
+        }
+
+        private void GetTickSteps(List<IStep> steps)
+        {
+            for (int i = 0; i < codes.Count; i++)
+            {
+                GetTickSteps(steps, codes[i].Code);
+            }
+        }
+
+        private void GetTickSteps(List<IStep> steps, string code)
+        {
+
+        }
+
+        //private void GetTickSteps(List<IStep> steps, UpdateDataInfo updateDataInfo)
         //{
-        //    this.srcDataPath = srcDataPath;
-        //    this.pluginSrcDataPath = pluginSrcDataPath;
-        //    this.dataLoader = new DataLoader(srcDataPath, pluginSrcDataPath);
-        //    this.updateFillUp = updateFillUp;
+        //    int stepCount = updateDataInfo.dates.Count / DAYS_EVERYTICKSTEP;
+        //    int lastStepUpdateCount = updateDataInfo.dates.Count % DAYS_EVERYTICKSTEP;
+        //    if (lastStepUpdateCount != 0)
+        //        stepCount++;
+        //    else
+        //        lastStepUpdateCount = DAYS_EVERYTICKSTEP;
+        //    List<int> openDates = updateDataInfo.dates;
+        //    for (int i = 0; i < stepCount; i++)
+        //    {
+        //        IStep step;
+        //        if (i != stepCount - 1)
+        //            step = new Step_TickData(updateDataInfo.code, openDates.GetRange(i * DAYS_EVERYTICKSTEP, DAYS_EVERYTICKSTEP), dataLoader);
+        //        else
+        //            step = new Step_TickData(updateDataInfo.code, openDates.GetRange(i * DAYS_EVERYTICKSTEP, lastStepUpdateCount), dataLoader);
+        //        steps.Add(step);
+        //    }
         //}
 
-        //public List<IStep> GetAllSteps()
-        //{
-        //    DataLoader dataLoader = new DataLoader(srcDataPath, pluginSrcDataPath);
 
-        //    List<IStep> steps = new List<IStep>();
-        //    steps.Add(new Step_OpenDate(dataLoader));
-        //    steps.Add(new Step_CodeInfo(pluginSrcDataPath));
-        //    steps.Add(new Step_OpenTime(pluginSrcDataPath));
-        //    this.preparer = new HistoryData_PrepareForUpdate(pluginSrcDataPath, dataLoader.DataLoader_CodeInfo.GetAllCodes(), dataLoader.DataLoader_OpenDate.GetOpenDates());
+        private void GetKLineDataSteps(List<IStep> steps)
+        {
 
-        //    GetDayStartTime(steps);
-        //    GetTickSteps(steps);
-        //    GetKLineDataSteps(steps);
-        //    return steps;
-        //}        
+        }
+    }
+
+    /// <summary>
+    /// 得到
+    /// </summary>
+    public class UpdateInfoGetter
+    {
+        public void GetUpdateInfo()
+        {
+
+        }
     }
 }

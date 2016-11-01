@@ -24,7 +24,8 @@ namespace com.wer.sc.data.historydata
         {
             this.codes = codes;
             this.openDates = openDates;
-            this.loader = new UpdateDataInfoLoader(srcDataPath, openDates);
+            //this.historyDataInfoLoader = new HistoryDataInfoLoader(srcDataPath);
+            //this.loader = new UpdateDataInfoLoader(srcDataPath, openDates);
         }
 
         /// <summary>
@@ -78,13 +79,14 @@ namespace com.wer.sc.data.historydata
     /// </summary>
     public class UpdateDataInfoLoader
     {
-        private HistoryDataInfoLoader historyDataInfoLoader;
+        private IHistoryDataOpenDateLoader historyDataInfoLoader;
 
         private List<int> openDates;
 
-        public UpdateDataInfoLoader(string srcDataPath, List<int> openDates)
+        public UpdateDataInfoLoader(IHistoryDataOpenDateLoader historyDataInfoLoader, List<int> openDates)
         {
-            this.historyDataInfoLoader = new HistoryDataInfoLoader(srcDataPath);
+            //this.historyDataInfoLoader = new HistoryDataInfoLoader(srcDataPath);
+            this.historyDataInfoLoader = historyDataInfoLoader;
             this.openDates = openDates;
         }
 
@@ -148,102 +150,6 @@ namespace com.wer.sc.data.historydata
                 }
             }
             return waitForUpdateOpenDates;
-        }
-    }
-
-    /// <summary>
-    /// 更新数据信息类
-    /// 该类可以表示已经更新的数据，也可以表示未更新的数据
-    /// </summary>
-    public class UpdateDataInfo
-    {
-        public String code;
-
-        public List<int> dates;
-    }
-
-    /// <summary>
-    /// 历史数据信息装载
-    /// 该类用来得到当前历史数据更新状况
-    /// </summary>
-    public class HistoryDataInfoLoader
-    {
-        private String srcDataPath;
-
-        public HistoryDataInfoLoader(String srcDataPath)
-        {
-            this.srcDataPath = srcDataPath;
-        }
-
-        public List<int> GetOpenDates_TickData(string code)
-        {
-            return GetOpenDates(GetTickDataPath(code));
-        }
-
-        public int GetLastOpenDate_TickData(string code)
-        {
-            return GetLastOpenDate(GetTickDataPath(code));
-        }
-
-        private string GetTickDataPath(string code)
-        {
-            return srcDataPath + "\\" + code + "\\tick\\";
-        }
-
-        public List<int> GetOpenDates_KLineData(string code, KLinePeriod period)
-        {
-            return GetOpenDates(GetKLineDataPath(code, period));
-        }
-
-        public int GetLastOpenDate_KLineData(string code, KLinePeriod period)
-        {
-            return GetLastOpenDate(GetKLineDataPath(code, period));
-        }
-
-        private string GetKLineDataPath(string code, KLinePeriod period)
-        {
-            return srcDataPath + "\\" + code + "\\kline\\" + period.ToEngString() + "\\";
-        }
-
-        private static int GetLastOpenDate(string path)
-        {
-            if (!Directory.Exists(path))
-                return -1;
-            String[] files = Directory.GetFiles(path);
-            int lastOpenDate = -1;
-            foreach (String file in files)
-            {
-                int openDate;
-                int index = file.LastIndexOf('_');
-                bool isInt = int.TryParse(file.Substring(index + 1, 8), out openDate);
-                if (isInt && openDate > lastOpenDate)
-                {
-                    lastOpenDate = openDate;
-                }
-            }
-            return lastOpenDate;
-        }
-
-        /// <summary>
-        /// 得到该目录下数据的
-        /// </summary>
-        /// <param name="path"></param>
-        /// <returns></returns>
-        private static List<int> GetOpenDates(string path)
-        {
-            if (!Directory.Exists(path))
-                return new List<int>();
-            String[] files = Directory.GetFiles(path);
-            List<int> openDates = new List<int>();
-            foreach (String file in files)
-            {
-                int openDate;
-                int index = file.LastIndexOf('_');
-                bool isInt = int.TryParse(file.Substring(index + 1, 8), out openDate);
-                if (isInt)
-                    openDates.Add(openDate);
-            }
-            return openDates;
         }
     }
 }

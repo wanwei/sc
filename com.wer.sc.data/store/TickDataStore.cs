@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace com.wer.sc.data.store
 {
+    /// <summary>
+    /// Tick数据存储，存储成
+    /// </summary>
     public class TickDataStore
     {
         private String path;

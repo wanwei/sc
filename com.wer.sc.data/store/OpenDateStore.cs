@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace com.wer.sc.data.store
 {
+    /// <summary>
+    /// 开盘日数据存储，存储成CSV格式
+    /// </summary>
     public class OpenDateStore
     {
         private String path;

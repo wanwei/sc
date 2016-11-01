@@ -9,7 +9,8 @@ using System.Threading.Tasks;
 namespace com.wer.sc.data.store
 {
     /// <summary>
-    /// K线数据索引器
+    /// K线数据索引器，用作索引KLineDataStore保存的数据
+    /// 该索引器会记录每天开盘那个K线index，所以装载数据时能快速获取以日为单位的数据。
     /// </summary>
     public class KLineDataIndexer
     {

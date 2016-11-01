@@ -78,9 +78,6 @@
     <Compile Include="IOpenDateReader.cs" />
     <Compile Include="store\DayStartTimeStore.cs" />
     <Compile Include="store\KLineDataIndexer.cs" />
-    <Compile Include="store\KLineDataStore_Csv.cs" />
-    <Compile Include="store\TickDataStore_Csv.cs" />
-    <Compile Include="store\TimeLineDataStore_Csv.cs" />
     <Compile Include="update\DataTransfer_Tick2KLine2.cs" />
     <Compile Include="update\DataTransfer_Tick2KLineGenerator.cs" />
     <Compile Include="update\KLineDataGetter_FromTick.cs" />

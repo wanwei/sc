@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace com.wer.sc.data.cnfutures.generator
+namespace com.wer.sc.data.generator
 {
     /// <summary>
     /// 数据更新，更新开盘日期

@@ -7,9 +7,7 @@ using System.Linq;
 namespace com.wer.sc.data.store
 {
     /// <summary>
-    /// k线数据存储
-    /// 存储格式：
-    /// 从第一个字节开始直接存储数据
+    /// k线数据存储，存储成二进制格式
     /// </summary>
     public class KLineDataStore
     {

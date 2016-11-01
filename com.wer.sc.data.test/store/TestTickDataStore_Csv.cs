@@ -1,5 +1,6 @@
 ﻿using com.wer.sc.data.store;
 using com.wer.sc.data.test.Properties;
+using com.wer.sc.data.utils;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,7 @@ namespace com.wer.sc.data.test.store
         public void TestLoadTick()
         {
             string[] lines = Resources.Store_TickData.Split('\r');
-            TickData tickData = TickDataStore_Csv.Load(lines);
+            ITickData tickData = CsvUtils_TickData.LoadByLines(lines);
             Assert.AreEqual(lines.Length, tickData.Length);
             for (int i = 0; i < tickData.Length; i++)
             {
@@ -29,13 +30,11 @@ namespace com.wer.sc.data.test.store
         public void TestLoadSaveTick()
         {
             string[] lines = Resources.Store_TickData.Split('\r');
-            TickData tickData = TickDataStore_Csv.Load(lines);
+            ITickData tickData = CsvUtils_TickData.LoadByLines(lines);
 
-            TickDataStore_Csv store = new TickDataStore_Csv(ResourceLoader.GetTestOutputPath("m01_20131231.csv"));
-            store.Save(tickData);
-
-            TickDataStore_Csv newstore = new TickDataStore_Csv(ResourceLoader.GetTestOutputPath("m01_20131231.csv"));
-            TickData newtickData = newstore.Load();
+            string path = ResourceLoader.GetTestOutputPath("m01_20131231.csv");
+            CsvUtils_TickData.Save(path, tickData);            
+            ITickData newtickData = CsvUtils_TickData.Load(path);
             Assert.AreEqual(tickData.Length, newtickData.Length);
             for (int i = 0; i < tickData.Length; i++)
             {

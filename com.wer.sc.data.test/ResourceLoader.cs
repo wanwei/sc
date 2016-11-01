@@ -1,6 +1,7 @@
 ﻿using com.wer.sc.data.store;
 using com.wer.sc.data.test.Properties;
 using com.wer.sc.data.update;
+using com.wer.sc.data.utils;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -141,7 +142,7 @@ namespace com.wer.sc.data
         public static KLineData GetKLineData(String resource)
         {
             string[] lines = resource.Split('\r');
-            return (KLineData)KLineDataStore_Csv.LoadKLineData(lines);
+            return (KLineData)CsvUtils_KLineData.LoadByLines(lines);
         }
 
         public static DataReaderFactory GetDefaultDataReaderFactory()
