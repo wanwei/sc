@@ -8,6 +8,8 @@ namespace com.wer.sc.utils.ui.proceed
 {
     /// <summary>
     /// 数据进程接口
+    /// 该接口用于实现数据更新
+    /// 用户只需要实现该接口的Prepare方法，将所有步骤准备好，就可以交给系统执行了
     /// </summary>
     public interface IDataProceed
     {
@@ -19,6 +21,7 @@ namespace com.wer.sc.utils.ui.proceed
 
         /// <summary>
         /// 设置或获取取消该进程
+        /// TODO 这个不应该在这里，应该在DataProceedExecutor里面
         /// </summary>
         bool IsCancel { get; set; }
     }

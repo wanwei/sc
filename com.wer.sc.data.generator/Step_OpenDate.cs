@@ -21,8 +21,16 @@ namespace com.wer.sc.data.generator
 
         public Step_OpenDate(IPlugin_HistoryData historyData, DataPathUtils utils)
         {                        
-            OpenDateStore openDateStore = new OpenDateStore(utils.GetOpenDatePath());
+            openDateStore = new OpenDateStore(utils.GetOpenDatePath());
             this.openDates = historyData.GetOpenDates();
+        }
+
+        public List<int> OpenDates
+        {
+            get
+            {
+                return openDates;
+            }
         }
 
         public int ProgressStep

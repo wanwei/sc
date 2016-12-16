@@ -7,9 +7,12 @@ using System.Threading.Tasks;
 namespace com.wer.sc.plugin
 {
     /// <summary>
-    /// 所有模型的基类，主要用作反射找到所有模型
+    /// 模型接口
     /// </summary>
     public interface IPlugin_Model
     {
+        void ModelStart();
+
+        void ModelEnd();
     }
 }

@@ -221,6 +221,14 @@ namespace com.wer.sc.data.store
             }
         }
 
+        public List<int> GetAllOpenDate()
+        {
+            if (!File.Exists(path))
+                return null;
+            KLineDataIndexResult result = LoadIndex();
+            return result.DateList;
+        }
+
         public IKLineData Load(int startDate, int endDate)
         {
             if (!File.Exists(path))

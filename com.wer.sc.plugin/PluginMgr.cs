@@ -6,54 +6,100 @@ using System.Threading.Tasks;
 
 namespace com.wer.sc.plugin
 {
-    public class PluginMgr
+    /// <summary>
+    /// 插件管理器
+    /// </summary>
+    public class PluginMgr : IPluginMgr
     {
-        private static PluginMgr pluginMgr = new PluginMgr();
+        private Dictionary<string, object> dic = new Dictionary<string, object>();
 
-        public static PluginMgr Instance
+        private List<PluginAssembly> pluginAssemblies = new List<PluginAssembly>();
+
+        private List<PluginInfo> pluginInfos = new List<PluginInfo>();
+
+        private Dictionary<string, List<PluginInfo>> dicPlugins = new Dictionary<string, List<PluginInfo>>();
+
+        private string path;
+
+        public List<PluginAssembly> PluginAssemblys
         {
             get
             {
-                return pluginMgr;
+                return pluginAssemblies;
             }
         }
 
-        private bool loadOK = false;
-        private List<PluginInfo> plugins = new List<PluginInfo>();
-        public bool LoadOK
+        internal PluginMgr(string path)
         {
-            get
+            this.path = path;
+        }
+
+        public List<PluginInfo> GetAllPlugins()
+        {
+            return this.pluginInfos;
+        }
+
+        public List<PluginInfo> GetPlugins(Type type)
+        {
+            List<PluginInfo> plugins;
+            dicPlugins.TryGetValue(type.Name, out plugins);
+            return plugins;
+        }
+
+        public T CreatePluginObject<T>(PluginInfo pluginInfo)
+        {
+            return (T)Activator.CreateInstance(pluginInfo.PluginClassType);
+        }
+
+        public T GetPluginObject<T>(PluginInfo pluginInfo)
+        {
+            if (dic.ContainsKey(pluginInfo.PluginName))
             {
-                return loadOK;
+                return (T)dic[pluginInfo.PluginName];
+            }
+            T t = CreatePluginObject<T>(pluginInfo);
+            dic.Add(pluginInfo.PluginName, t);
+            return t;
+        }
+
+        public void Load()
+        {
+            PluginAssemblyScan scan = new PluginAssemblyScan();
+            this.pluginAssemblies = scan.Scan(this.path);
+            if (pluginAssemblies == null)
+                return;
+            for (int i = 0; i < pluginAssemblies.Count; i++)
+            {
+                AddPluginAssembly(pluginAssemblies[i]);
             }
         }
 
-        public List<PluginInfo> Plugins
+        private void AddPluginAssembly(PluginAssembly assembly)
         {
-            get
+            List<PluginInfo> plugins = assembly.Plugins;
+            if (plugins == null)
+                return;
+            this.pluginInfos.AddRange(plugins);
+            for (int i = 0; i < plugins.Count; i++)
             {
-                return plugins;
+                PluginInfo plugin = plugins[i];
+                AddPlugin2Dic(plugin);
             }
         }
 
-        PluginMgr()
+        private void AddPlugin2Dic(PluginInfo pluginInfo)
         {
-        }
-
-        public List<PluginInfo> Load()
-        {
-            if (loadOK)
-                return plugins;
-            lock (this)
+            Type type = pluginInfo.PluginType;
+            string typeName = type.Name;
+            if (this.dicPlugins.ContainsKey(typeName))
             {
-                if (loadOK)
-                    return plugins;
-                PluginScan scan = new PluginScan();
-                String path = System.Environment.CurrentDirectory;
-                Plugins.AddRange(scan.Scan(path + "\\dataprovider\\"));
-                Plugins.AddRange(scan.Scan(path + "\\model\\"));
-                loadOK = true;
-                return plugins;
+                this.dicPlugins[typeName].Add(pluginInfo);
+            }
+            else
+            {
+                List<PluginInfo> plugins = new List<PluginInfo>();
+                plugins.Add(pluginInfo);
+                this.dicPlugins.Add(typeName, plugins);
             }
         }
     }

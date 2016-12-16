@@ -18,7 +18,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\bin\Debug\dataprovider\</OutputPath>
+    <OutputPath>..\bin\Debug\cnfutures\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -51,17 +51,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataGeneratorProceed.cs" />
+    <Compile Include="DataProceed_CnFuturesData.cs" />
     <Compile Include="kline\Step_KLineData_OneDay.cs" />
     <Compile Include="MainFuturesScan.cs" />
     <Compile Include="Step_DayStartTime.cs" />
     <Compile Include="Step_TickData.cs" />
     <Compile Include="tick\generator\DataGenerator_TickData_Index.cs" />
     <Compile Include="tick\Step_TickDataBuilder.cs" />
-    <Compile Include="DataGenerator_Main.cs" />
-    <Compile Include="DataGenerator_Index.cs" />
-    <Compile Include="DataGenerator_TickData.cs" />
-    <Compile Include="DataGenerator_OpenDate.cs" />
+    <Compile Include="bak\DataGenerator_Main.cs" />
+    <Compile Include="bak\DataGenerator_Index.cs" />
+    <Compile Include="bak\DataGenerator_TickData.cs" />
+    <Compile Include="bak\DataGenerator_OpenDate.cs" />
     <Compile Include="DataLoader_CodeInfo.cs" />
     <Compile Include="DataLoader_OpenDate.cs" />
     <Compile Include="DataLoader_OpenTime.cs" />
@@ -91,7 +91,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="DataGenerator_Normal.cs" />
+    <Compile Include="bak\DataGenerator_Normal.cs" />
     <Compile Include="tick\Step_TickData_Abstract.cs" />
     <Compile Include="tick\Step_TickData_Index.cs" />
     <Compile Include="tick\scan\TickDataError_Repeat.cs" />

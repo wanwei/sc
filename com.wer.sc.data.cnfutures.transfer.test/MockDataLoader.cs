@@ -8,9 +8,9 @@ namespace com.wer.sc.data.cnfutures.generator
 {
     public class MockDataLoader
     {
-        public static string originalDataPath = @"F:\FUTURES\CSV\TICK\";
+        public static string originalDataPath = @"E:\FUTURES\CSV\TICK\";
 
-        public static string pluginDataPath = @"F:\FUTURES\CSV\TICKADJUSTED";
+        public static string pluginDataPath = @"E:\FUTURES\CSV\TICKADJUSTED";
 
         private static DataLoader dataLoader = new DataLoader(originalDataPath, pluginDataPath);
 

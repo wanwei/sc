@@ -19,7 +19,7 @@ namespace com.wer.sc.data
         private TickDataReader tickDataReader;
         private KLineDataReader klineDataReader;
         private TimeLineDataReader realDataReader;
-        private DataNavigate dataNavigate;
+        private DataNavigate3 dataNavigate;
         private DataCacheFactory cacheFactory;
         private DataNavigateMgr dataNavigateMgr;
 
@@ -32,7 +32,7 @@ namespace com.wer.sc.data
             this.tickDataReader = new TickDataReader(dataPath);
             this.klineDataReader = new KLineDataReader(dataPath);
             this.realDataReader = new TimeLineDataReader(this);
-            this.dataNavigate = new DataNavigate(this);
+            this.dataNavigate = new DataNavigate3(this);
             this.cacheFactory = new DataCacheFactory(this);
             this.dataNavigateMgr = new DataNavigateMgr(this);
         }
@@ -62,7 +62,7 @@ namespace com.wer.sc.data
             get { return tickDataReader; }
         }
 
-        public DataNavigate DataNavigate
+        public DataNavigate3 DataNavigate
         {
             get { return dataNavigate; }
         }

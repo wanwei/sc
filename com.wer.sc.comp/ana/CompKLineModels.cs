@@ -18,7 +18,7 @@ namespace com.wer.sc.comp.ana
 
         public CompKLineModels()
         {
-            List<PluginInfo> plugins = PluginMgr.Instance.Load();
+            List<PluginInfo2> plugins = PluginMgr2.Instance.Load();
 
             for (int i = 0; i < plugins.Count; i++)
             {

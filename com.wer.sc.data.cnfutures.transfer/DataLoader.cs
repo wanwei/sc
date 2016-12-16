@@ -47,7 +47,7 @@ namespace com.wer.sc.data.cnfutures.generator
             this.dataLoader_CodeInfo = new DataLoader_CodeInfo();
             this.dataLoader_OpenTime = new DataLoader_OpenTime(this.dataLoader_CodeInfo);
             this.dataLoader_TickData = new DataLoader_TickData(srcDataPath, dataLoader_CodeInfo);
-            this.historyData = new Plugin_HistoryData_CnFutures(pluginSrcDataPath);
+            this.historyData = new Plugin_HistoryData_CnFutures();
         }
 
         public string SrcDataPath

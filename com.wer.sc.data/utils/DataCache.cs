@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 
 namespace com.wer.sc.data.utils
 {
+    /// <summary>
+    /// 数据缓存
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class DataCache<T>
     {
         private List<int> keies = new List<int>();
@@ -17,13 +21,26 @@ namespace com.wer.sc.data.utils
 
         private Object lockCache = new object();
 
+        public int MaxCacheDateCount
+        {
+            get
+            {
+                return maxCacheDateCount;
+            }
+
+            set
+            {
+                maxCacheDateCount = value;
+            }
+        }
+
         public void AddCache(int key, T t)
         {
             lock (lockCache)
             {                
                 if (dicCache.ContainsKey(key))
                     return;
-                if (keies.Count > maxCacheDateCount)
+                if (keies.Count > MaxCacheDateCount)
                 {
                     //先进先出策略
                     int removeDate = keies[0];

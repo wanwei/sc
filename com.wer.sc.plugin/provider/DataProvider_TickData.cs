@@ -53,7 +53,7 @@ namespace com.wer.sc.data.provider
 
         private String GetCodePath(String code, int date)
         {
-            return dataPath + "\\" + code + "\\" + code + "_" + date + ".csv";
+            return dataPath + "\\" + code + "\\TICK\\" + code + "_" + date + ".csv";
         }
 
         public static TickData ReadLinesToTickData(string[] lines)

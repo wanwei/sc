@@ -5,7 +5,7 @@ namespace com.wer.sc.comp.graphic.info
 {
     public class GraphicDataProvider_CurrentInfo_Nav : IGraphicDataProvider_CurrentInfo
     {
-        private IDataNavigate navigate;
+        private IDataNavigate3 navigate;
 
         private IGraphicOperator_CurrentInfo graphicOperator;
 
@@ -15,7 +15,7 @@ namespace com.wer.sc.comp.graphic.info
             this.graphicOperator = new GraphicOperator_CurrentInfo_Nav(navigate);
         }
 
-        public GraphicDataProvider_CurrentInfo_Nav(IDataNavigate navigate)
+        public GraphicDataProvider_CurrentInfo_Nav(IDataNavigate3 navigate)
         {
             this.navigate = navigate;
             this.graphicOperator = new GraphicOperator_CurrentInfo_Nav(navigate);

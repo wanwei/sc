@@ -9,7 +9,7 @@ namespace com.wer.sc.comp.graphic.main
     public class GraphicDataProvider_Main : IGraphicDataProvider_Main
     {
         private DataReaderFactory dataReaderFac;
-        private IDataNavigate dataNavigate;
+        private IDataNavigate3 dataNavigate;
 
         private IGraphicDataProvider_Candle dataProvider_Candle;
         private IGraphicDataProvider_Real dataProvider_Real;
@@ -19,7 +19,7 @@ namespace com.wer.sc.comp.graphic.main
         public GraphicDataProvider_Main(DataReaderFactory dataReaderFac)
         {
             this.dataReaderFac = dataReaderFac;
-            this.dataNavigate = new DataNavigate(dataReaderFac);
+            this.dataNavigate = new DataNavigate3(dataReaderFac);
 
             this.dataProvider_Candle = new GraphicDataProvider_CandleNav(dataReaderFac, dataNavigate);
             this.dataProvider_Real = new GraphicDataProvider_RealNav(dataReaderFac, dataNavigate);
@@ -42,7 +42,7 @@ namespace com.wer.sc.comp.graphic.main
             get { return dataProvider_CurrentInfo; }
         }
 
-        public IDataNavigate DataNavigate
+        public IDataNavigate3 DataNavigate
         {
             get
             {

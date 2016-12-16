@@ -7,68 +7,41 @@ using System.Threading.Tasks;
 namespace com.wer.sc.data
 {
     /// <summary>
-    /// 数据导航
+    /// 数据导航接口
     /// </summary>
     public interface IDataNavigate
     {
-        String Code { get; }
+        /// <summary>
+        /// 导航到time位置
+        /// </summary>
+        /// <param name="time"></param>
+        void NavigateTo(double time);
 
         /// <summary>
-        /// 得到当前K线数据
+        /// 向前导航，前进一定的时间
+        /// 比如，前进1小时，前进15分钟....
         /// </summary>
-        IKLineData CurrentKLineData { get; }
-
-        int CurrentKLineIndex { get; }
+        /// <param name="period"></param>
+        /// <param name="len"></param>
+        void NavigateForward_Time(KLinePeriod period, int len);
 
         /// <summary>
-        /// 得到当前分时数据
+        /// 向前导航，前进到下一个周期截至
         /// </summary>
-        ITimeLineData CurrentRealData { get; }
-
-        int CurrentRealIndex { get; }
-
-        ITickData CurrentTickData { get; }
-
-        int CurrentTickIndex { get; }
-
-        double CurrentTime { get; }
-
-        void Change(IKLineData data, double time);
-
-        void Change(String code, double time, KLinePeriod period);
-
-        void ChangeCode(String code);
-
-        void ChangeTime(double time);
-
-        void ChangeIndex(int index);
-
-        void ChangePeriod(KLinePeriod period);
-
-        event DataChangeEventHandler OnDataChangeHandler;
-    }
-
-    public interface IDataNavigate2
-    {
-        /// <summary>
-        /// 设置或获取导航的开始日期
-        /// </summary>
-        int StartDate { get;  }
+        /// <param name="period"></param>
+        /// <param name="len"></param>
+        void NavigateForward_Period(KLinePeriod period, int len);
 
         /// <summary>
-        /// 设置或获取导航的结束时间
+        /// 向前导航，前进tick条数据
         /// </summary>
-        int EndDate { get; }
-
-        /// <summary>
-        /// 得到当前股票或期货代码
-        /// </summary>
-        String Code { get; }
+        /// <param name="len"></param>
+        void NavigateForward_Tick(int len);
 
         /// <summary>
         /// 得到当前时间
         /// </summary>
-        double CurrentTime { get; }
+        double Time { get; }
 
         /// <summary>
         /// 得到指定周期的K线
@@ -90,67 +63,32 @@ namespace com.wer.sc.data
         ITickData GetTickData();
 
         /// <summary>
-        /// 修改数据
+        /// 
         /// </summary>
-        /// <param name="code"></param>
-        /// <param name="time"></param>
-        void ChangeData(string code, double time);
-
-        /// <summary>
-        /// 修改当前时间
-        /// </summary>
-        /// <param name="time"></param>
-        void ChangeTime(double time);
-
-        /// <summary>
-        /// 前进，前进时会修改当前时间
-        /// </summary>
-        /// <param name="period"></param>
-        /// <param name="len"></param>
-        void Forward(KLinePeriod period, int len);
-
-        /// <summary>
-        /// 前进一个tick数据
-        /// </summary>
-        /// <param name="len"></param>
-        void ForwardTick(int len);
-
         event DataChangeEventHandler OnDataChangeHandler;
     }
 
-    public delegate void DataChangeEventHandler(Object source, DataChangeEventArgs e);
+    public delegate void DelegateOnNavigateTo(Object sender, DataNavigateEventArgs e);
 
-    public class DataChangeEventArgs : System.EventArgs
+    public class DataNavigateEventArgs : System.EventArgs
     {
-        internal string code;
+        public const int CHANGETYPE_TO = 0;
 
-        internal string prevCode;
+        public const int CHANGETYPE_FORWARDTIME = 1;
 
-        internal string time;
+        public const int CHANGETYPE_FORWARDPERIOD = 2;
 
-        internal string prevTime;
+        public const int CHANGETYPE_FORWARDTICK = 3;
 
-        internal bool isForwardChange;
+        private string time;
 
-        internal int forwardLength;
+        private string prevTime;
 
-        internal KLinePeriod forwardPeriod;
+        private int changeType;
 
-        public string Code
-        {
-            get
-            {
-                return code;
-            }
-        }
+        private int forwardLength;
 
-        public string PrevCode
-        {
-            get
-            {
-                return prevCode;
-            }
-        }
+        private KLinePeriod forwardPeriod;
 
         public string Time
         {
@@ -168,11 +106,11 @@ namespace com.wer.sc.data
             }
         }
 
-        public bool IsForwardChange
+        public int ChangeType
         {
             get
             {
-                return isForwardChange;
+                return changeType;
             }
         }
 
@@ -192,40 +130,39 @@ namespace com.wer.sc.data
             }
         }
 
-        public DataChangeEventArgs()
+        public DataNavigateEventArgs()
         {
 
         }
 
-
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            if (IsForwardChange)
+            switch (changeType)
             {
-                if (forwardLength >= 0)
-                    sb.Append("时间前进");
-                else
-                    sb.Append("时间后退");
-                sb.Append(forwardLength).Append(forwardPeriod);
+                case CHANGETYPE_TO:
+
+                    break;
+                case CHANGETYPE_FORWARDTIME:
+                    sb.Append("时间前进").Append(forwardLength).Append(forwardPeriod);
+                    break;
+                case CHANGETYPE_FORWARDPERIOD:
+                    break;
+                case CHANGETYPE_FORWARDTICK:
+                    break;
             }
-            else
-            {
-                if (code == prevCode)
-                {
-                    sb.Append("时间修改:").Append("从" + prevTime + "修改为" + time);
-                }
-                else if (prevTime == time)
-                {
-                    sb.Append("CODE修改:").Append("从" + prevCode + "修改为" + code);
-                }
-                else
-                {
-                    sb.Append("数据修改:");
-                    sb.Append("CODE从" + prevCode + "修改为" + code + ";");
-                    sb.Append("时间从" + prevTime + "修改为" + time);
-                }
-            }
+            //if (IsForwardChange)
+            //{
+            //    if (forwardLength >= 0)
+            //        sb.Append("时间前进");
+            //    else
+            //        sb.Append("时间后退");
+            //    sb.Append(forwardLength).Append(forwardPeriod);
+            //}
+            //else
+            //{
+
+            //}
             return sb.ToString();
         }
     }

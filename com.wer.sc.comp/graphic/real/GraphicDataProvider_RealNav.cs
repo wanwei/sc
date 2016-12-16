@@ -11,9 +11,9 @@ namespace com.wer.sc.comp.graphic.real
     {
         private DataReaderFactory dataReaderFac;
 
-        private IDataNavigate dataNavigate;
+        private IDataNavigate3 dataNavigate;
 
-        public GraphicDataProvider_RealNav(DataReaderFactory dataReaderFac, IDataNavigate dataNavigate)
+        public GraphicDataProvider_RealNav(DataReaderFactory dataReaderFac, IDataNavigate3 dataNavigate)
         {
             this.dataReaderFac = dataReaderFac;
             this.dataNavigate = dataNavigate;

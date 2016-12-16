@@ -136,7 +136,7 @@ namespace com.wer.sc.data.check
 
             DataProviderWrap dataProvider = providerDataMgr.GetProvider(cbProvider.SelectedItem.ToString());
             DataReaderFactory fac = dataProvider.GetFactory();
-            DataNavigate navigate = new DataNavigate(fac);
+            DataNavigate3 navigate = new DataNavigate3(fac);
 
 
 

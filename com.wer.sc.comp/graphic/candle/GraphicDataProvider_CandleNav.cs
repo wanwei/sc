@@ -36,15 +36,15 @@ namespace com.wer.sc.comp.graphic
 
         //private int endDate;
 
-        private IDataNavigate dataNavigate;
+        private IDataNavigate3 dataNavigate;
 
         public GraphicDataProvider_CandleNav(DataReaderFactory dataReaderFac)
         {
             this.dataReaderFac = dataReaderFac;
-            this.dataNavigate = new DataNavigate(dataReaderFac);
+            this.dataNavigate = new DataNavigate3(dataReaderFac);
         }
 
-        public GraphicDataProvider_CandleNav(DataReaderFactory dataReaderFac, IDataNavigate dataNavigate)
+        public GraphicDataProvider_CandleNav(DataReaderFactory dataReaderFac, IDataNavigate3 dataNavigate)
         {
             this.dataReaderFac = dataReaderFac;
             this.dataNavigate = dataNavigate;            

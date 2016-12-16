@@ -22,6 +22,7 @@ namespace com.wer.sc.data.test.reader
             {
                 klineData.BarPos = i;
                 Assert.AreEqual(lines[i].Trim(), klineData.ToString());
+                //Console.WriteLine(klineData);
             }
         }
 
@@ -31,8 +32,8 @@ namespace com.wer.sc.data.test.reader
             IKLineDataReader reader = GetKLineDataReader();
             IKLineData data_m01 = reader.GetAllData("m01", KLinePeriod.KLinePeriod_1Minute);
 
-            //IKLineData data_m03 = reader.GetAllData("m03", KLinePeriod.KLinePeriod_1Minute);
-            //AssertKLineTime(data_m01, data_m03);
+            IKLineData data_m03 = reader.GetAllData("m03", KLinePeriod.KLinePeriod_1Minute);
+            AssertKLineTime(data_m01, data_m03);
             IKLineData data_m05 = reader.GetAllData("m05", KLinePeriod.KLinePeriod_1Minute);
             AssertKLineTime(data_m01, data_m05);
             IKLineData data_m07 = reader.GetAllData("m07", KLinePeriod.KLinePeriod_1Minute);

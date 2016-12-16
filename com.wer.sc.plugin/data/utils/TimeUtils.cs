@@ -159,6 +159,19 @@ namespace com.wer.sc.data.utils
 
             return currentTime - endTime;
         }
+
+        public static int GetDate(DateTime dateTime)
+        {
+            int d = dateTime.Year * 10000 + dateTime.Month * 100 + dateTime.Day;
+            return d;
+        }
+
+        public static double GetTime(DateTime dateTime)
+        {
+            int date = GetDate(dateTime);
+            double second = dateTime.Hour * 10000 + dateTime.Minute * 100 + dateTime.Second;
+            return date + Math.Round(second / 1000000, 6);
+        }
     }
 
     public class DayOpenTime

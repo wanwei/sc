@@ -38,7 +38,7 @@ namespace com.wer.sc.data.generator
         {
             get
             {
-                return "更新" + openDates[0] + "-" + openDates[openDates.Count - 1] + "的Tick数据";
+                return "更新" + code + "的" + openDates[0] + "-" + openDates[openDates.Count - 1] + "的Tick数据";
             }
         }
 

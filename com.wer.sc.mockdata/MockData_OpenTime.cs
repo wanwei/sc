@@ -9,7 +9,7 @@ namespace com.wer.sc.mockdata
     public class MockData_OpenTime
     {
         public static List<double[]> GetOpenTime(String code, int date)
-        {
+        {            
             if (date <= 20141226)
                 return GetOpenTime_Normal();
             if (date == 20150105)

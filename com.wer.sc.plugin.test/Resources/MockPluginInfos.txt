@@ -1,0 +1,8 @@
+com.wer.sc.plugin.mockmarket,D:\SCWORK\DEV\SC\com.wer.sc.plugin.test\bin\Debug\plugin\com.wer.sc.plugin.mockmarket.dll
+0,历史数据,历史数据,
+1,交易,交易,
+1,模拟交易,模拟交易,
+com.wer.sc.plugin.mockmodel,D:\SCWORK\DEV\SC\com.wer.sc.plugin.test\bin\Debug\plugin\com.wer.sc.plugin.mockmodel.dll
+2,MA指标,MA指标,
+2,转折点查找,转折点查找,
+2,量能过滤,量能过滤,

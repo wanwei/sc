@@ -17,11 +17,12 @@ namespace com.wer.sc.data.generator
     public class Step_CodeInfo : IStep
     {
         private CodeStore codeStore;
+
         private List<CodeInfo> codes;
 
         public Step_CodeInfo(IPlugin_HistoryData historyData, DataPathUtils utils)
         {
-            List<CodeInfo> codes = historyData.GetCodes();
+            this.codes = historyData.GetCodes();
             this.codeStore = new CodeStore(utils.GetCodePath());
         }
 
@@ -39,6 +40,14 @@ namespace com.wer.sc.data.generator
             {
                 return "更新品种信息";
             }
+        }
+
+        public List<CodeInfo> Codes
+        {
+            get
+            {
+                return codes;
+            }            
         }
 
         public string Proceed()

@@ -1,5 +1,6 @@
-﻿using com.wer.sc.data.historydata;
-using com.wer.sc.data.provider;
+﻿using com.wer.sc.data.provider;
+using com.wer.sc.plugin.historydata;
+using com.wer.sc.plugin.historydata.csv;
 using com.wer.sc.utils.ui.proceed;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 namespace com.wer.sc.data.cnfutures.generator
 {
     /// <summary>
-    /// 更新国内期货市场历史数据的准备步骤
+    /// 国内期货市场历史数据的准备步骤
     /// </summary>
     public class StepPreparer
     {
@@ -23,7 +24,7 @@ namespace com.wer.sc.data.cnfutures.generator
 
         private string pluginSrcDataPath;
 
-        private HistoryData_PrepareForUpdate preparer;
+        private WaitForUpdateInfoGetter preparer;
 
         private DataLoader dataLoader;
 
@@ -45,7 +46,7 @@ namespace com.wer.sc.data.cnfutures.generator
             steps.Add(new Step_OpenDate(dataLoader));
             steps.Add(new Step_CodeInfo(pluginSrcDataPath));
             steps.Add(new Step_OpenTime(pluginSrcDataPath));
-            this.preparer = new HistoryData_PrepareForUpdate(pluginSrcDataPath, dataLoader.DataLoader_CodeInfo.GetAllCodes(), dataLoader.DataLoader_OpenDate.GetOpenDates());
+            this.preparer = new WaitForUpdateInfoGetter(pluginSrcDataPath, dataLoader.DataLoader_CodeInfo.GetAllCodes(), dataLoader.DataLoader_OpenDate.GetOpenDates(),new OpenDateReader_HistoryData_CsvData(pluginSrcDataPath));
 
             GetDayStartTime(steps);
             GetTickSteps(steps);
@@ -64,14 +65,14 @@ namespace com.wer.sc.data.cnfutures.generator
 
         private void GetTickSteps(List<IStep> steps)
         {
-            List<UpdateDataInfo> dataInfoList = preparer.GetTickNewData(updateFillUp);
+            List<WaitForUpdateInfo> dataInfoList = preparer.GetTickNewData(updateFillUp);
             for (int i = 0; i < dataInfoList.Count; i++)
             {
                 GetTickSteps(steps, dataInfoList[i]);
             }
         }
 
-        private void GetTickSteps(List<IStep> steps, UpdateDataInfo updateDataInfo)
+        private void GetTickSteps(List<IStep> steps, WaitForUpdateInfo updateDataInfo)
         {
             int stepCount = updateDataInfo.dates.Count / DAYS_EVERYTICKSTEP;
             int lastStepUpdateCount = updateDataInfo.dates.Count % DAYS_EVERYTICKSTEP;
@@ -93,14 +94,14 @@ namespace com.wer.sc.data.cnfutures.generator
 
         private void GetKLineDataSteps(List<IStep> steps)
         {
-            List<UpdateDataInfo> dataInfoList = preparer.GetKLineNewData(KLinePeriod.KLinePeriod_1Minute, updateFillUp);
+            List<WaitForUpdateInfo> dataInfoList = preparer.GetKLineNewData(KLinePeriod.KLinePeriod_1Minute, updateFillUp);
             for (int i = 0; i < dataInfoList.Count; i++)
             {
                 GetKLineDataSteps(steps, dataInfoList[i]);
             }
         }
 
-        private void GetKLineDataSteps(List<IStep> steps, UpdateDataInfo updateDataInfo)
+        private void GetKLineDataSteps(List<IStep> steps, WaitForUpdateInfo updateDataInfo)
         {
             int stepCount = updateDataInfo.dates.Count / DAYS_EVERYKLINESTEP;
             int lastStepUpdateCount = updateDataInfo.dates.Count % DAYS_EVERYKLINESTEP;

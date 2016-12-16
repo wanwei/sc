@@ -19,12 +19,13 @@ namespace com.wer.sc.data.generator
 
             FormChoosePlugin formChoosePlugin = new FormChoosePlugin();
             formChoosePlugin.ShowDialog();
-
+            
             if (formChoosePlugin.DialogResult == DialogResult.OK)
             {
-                FormGenerator generator = new FormGenerator();
-                generator.LoadDataCenter(formChoosePlugin.ProviderName, formChoosePlugin.ProviderDataMgr);
-                Application.Run(generator);
+                FormDataUpdate form = new FormDataUpdate(formChoosePlugin.ChoosedPlugin);
+                //FormGenerator generator = new FormGenerator();
+               // generator.LoadDataCenter(formChoosePlugin.ProviderName, formChoosePlugin.ProviderDataMgr);
+                Application.Run(form);
             }
         }
     }

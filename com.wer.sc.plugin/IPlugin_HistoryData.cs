@@ -19,6 +19,7 @@ namespace com.wer.sc.plugin
     /// </summary>
     public interface IPlugin_HistoryData
     {
+
         /// <summary>
         /// 得到插件的名称
         /// 对于历史数据插件，不同的插件名称不能相同

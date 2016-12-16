@@ -10,7 +10,7 @@ namespace com.wer.sc.data
     /// ITickBar接口的实现类
     /// 该类是只读的，用来从TickData里获取数据
     /// </summary>
-    public class TickBar_TickData : ITickBar
+    public class TickBar_TickData : TickBar_Abstract, ITickBar
     {
         private ITickData data;
 
@@ -22,97 +22,109 @@ namespace com.wer.sc.data
             this.index = index;
         }
 
-        public string Code
+        public override string Code
         {
             get { return data.Code; }
+            set { throw new NotImplementedException(); }
         }
 
-        public int Add
+        public override int Add
         {
             get
             {
                 return data.Arr_Add[index];
             }
+            set { throw new NotImplementedException(); }
         }
 
-        public int BuyMount
+        public override int BuyMount
         {
             get
             {
                 return data.Arr_BuyMount[index];
             }
+            set { throw new NotImplementedException(); }
         }
 
-        public float BuyPrice
+        public override float BuyPrice
         {
             get
             {
                 return data.Arr_BuyPrice[index];
             }
+            set { throw new NotImplementedException(); }
         }
 
-        public int Hold
+        public override int Hold
         {
             get
             {
                 return data.Arr_Hold[index];
             }
+            set { throw new NotImplementedException(); }
         }
 
-        public bool IsBuy
+        public override bool IsBuy
         {
             get
             {
                 return data.Arr_IsBuy[index];
             }
+            set { throw new NotImplementedException(); }
         }
 
-        public int Mount
+        public override int Mount
         {
             get
             {
                 return data.Arr_Mount[index];
             }
+            set { throw new NotImplementedException(); }
         }
 
-        public float Price
+        public override float Price
         {
             get
             {
                 return data.Arr_Price[index];
             }
+            set { throw new NotImplementedException(); }
         }
 
-        public int SellMount
+        public override int SellMount
         {
             get
             {
                 return data.Arr_SellMount[index];
             }
+            set { throw new NotImplementedException(); }
         }
 
-        public float SellPrice
+        public override float SellPrice
         {
             get
             {
                 return data.Arr_SellPrice[index];
             }
+            set { throw new NotImplementedException(); }
         }
 
-        public double Time
+        public override double Time
         {
             get
             {
                 return data.Arr_Time[index];
             }
+            set { throw new NotImplementedException(); }
         }
 
-        public int TotalMount
+        public override int TotalMount
         {
             get
             {
                 return data.Arr_TotalMount[index];
             }
+            set { throw new NotImplementedException(); }
         }
     }
 }

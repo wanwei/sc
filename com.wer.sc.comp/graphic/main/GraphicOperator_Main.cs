@@ -20,11 +20,11 @@ namespace com.wer.sc.comp.graphic.main
 
         private GraphicDataProvider_Main dataProvider;
 
-        private IDataNavigate dataNavigate;
+        private IDataNavigate3 dataNavigate;
 
         private KLineModelRunner runner;
 
-        public GraphicOperator_Main(DataReaderFactory dataReaderFac, IDataNavigate navigate)
+        public GraphicOperator_Main(DataReaderFactory dataReaderFac, IDataNavigate3 navigate)
         {
             this.dataNavigate = navigate;
         }

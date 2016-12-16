@@ -13,8 +13,7 @@ namespace com.wer.sc.mockdata
     {
         public static List<CodeInfo> GetAllCodes()
         {
-            String[] lines = Resources.MockData_Code.Split(',');
-            return CsvUtils_Code.LoadByLines(lines);
+            return Plugin_HistoryData_CsvProvider_Mock.Plugin_History.GetCodes();
         }
     }
 }

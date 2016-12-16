@@ -1,6 +1,6 @@
-﻿using com.wer.sc.data.historydata;
-using com.wer.sc.data.opentime;
+﻿using com.wer.sc.data.opentime;
 using com.wer.sc.data.utils;
+using com.wer.sc.plugin.historydata.csv;
 using com.wer.sc.utils.ui.proceed;
 using System;
 using System.Collections.Generic;
@@ -45,7 +45,7 @@ namespace com.wer.sc.data.cnfutures.generator
             List<DayStartTime> result = GetAllDayStartTimes();
             if (result == null)
                 return code + "的开盘时间已经是最新的，不需要更新";
-            string path = HistoryDataPathUtils.GetDayStartTimePath(dataLoader.PluginSrcDataPath, code);
+            string path = CsvHistoryDataPathUtils.GetDayStartTimePath(dataLoader.PluginSrcDataPath, code);
             CsvUtils_DayStartTime.Save(path, result);
             return "更新完成" + code + "的开盘时间";
         }

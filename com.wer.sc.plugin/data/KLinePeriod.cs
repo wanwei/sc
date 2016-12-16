@@ -22,7 +22,20 @@ namespace com.wer.sc.data
 
         public const int TYPE_WEEK = 4;
 
-        public int PeriodType;
+        private int periodType;
+
+        public int PeriodType
+        {
+            get
+            {
+                return periodType;
+            }
+
+            set
+            {
+                periodType = value;
+            }
+        }
 
         public int Period;
 
@@ -118,5 +131,7 @@ namespace com.wer.sc.data
         {
             get { return period_Day; }
         }
+
+     
     }
 }

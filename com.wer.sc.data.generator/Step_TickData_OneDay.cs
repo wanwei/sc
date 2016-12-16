@@ -46,7 +46,8 @@ namespace com.wer.sc.data.generator
         public string Proceed()
         {
             TickData tickData = (TickData)historyData.GetTickData(code, date);
-            store.Save(tickData);
+            if (tickData != null)
+                store.Save(tickData);
             return StepDesc + "完成";
         }
     }

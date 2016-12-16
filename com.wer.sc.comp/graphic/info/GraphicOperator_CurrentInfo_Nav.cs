@@ -9,9 +9,9 @@ namespace com.wer.sc.comp.graphic.info
 {
     public class GraphicOperator_CurrentInfo_Nav : IGraphicOperator_CurrentInfo
     {
-        private IDataNavigate dataNavigate;
+        private IDataNavigate3 dataNavigate;
 
-        public GraphicOperator_CurrentInfo_Nav(IDataNavigate dataNavigate)
+        public GraphicOperator_CurrentInfo_Nav(IDataNavigate3 dataNavigate)
         {
             this.dataNavigate = dataNavigate;
         }

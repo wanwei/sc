@@ -61,6 +61,20 @@ namespace com.wer.sc.plugin.test.Properties {
         }
         
         /// <summary>
+        ///   查找类似 [
+        ///{&quot;Key&quot;:&quot;test&quot;,&quot;Value&quot;:12},
+        ///{&quot;Key&quot;:&quot;test1&quot;,&quot;Value&quot;:13},
+        ///{&quot;Key&quot;:&quot;test2&quot;,&quot;Value&quot;:14},
+        ///{&quot;Key&quot;:&quot;test3&quot;,&quot;Value&quot;:15}
+        ///] 的本地化字符串。
+        /// </summary>
+        internal static string ConnectionInfo {
+            get {
+                return ResourceManager.GetString("ConnectionInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 20000717,2160,2160,1996,1996,372,270,100
         ///20000718,2013,2146,2013,2038,1084,692,200
         ///20000719,2040,2040,2011,2012,136,742,0
@@ -170,6 +184,22 @@ namespace com.wer.sc.plugin.test.Properties {
         internal static string DaySplit_M05_20150625_20150715 {
             get {
                 return ResourceManager.GetString("DaySplit_M05_20150625_20150715", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 com.wer.sc.plugin.mockmarket,D:\SCWORK\DEV\SC\com.wer.sc.plugin.test\bin\Debug\plugin\com.wer.sc.plugin.mockmarket.dll
+        ///0,历史数据,历史数据,
+        ///1,交易,交易,
+        ///1,模拟交易,模拟交易,
+        ///com.wer.sc.plugin.mockmodel,D:\SCWORK\DEV\SC\com.wer.sc.plugin.test\bin\Debug\plugin\com.wer.sc.plugin.mockmodel.dll
+        ///2,MA指标,MA指标,
+        ///2,转折点查找,转折点查找,
+        ///2,量能过滤,量能过滤, 的本地化字符串。
+        /// </summary>
+        internal static string MockPluginInfos {
+            get {
+                return ResourceManager.GetString("MockPluginInfos", resourceCulture);
             }
         }
         

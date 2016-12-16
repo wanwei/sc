@@ -1,7 +1,7 @@
-﻿using com.wer.sc.data.historydata;
-using com.wer.sc.data.opentime;
+﻿using com.wer.sc.data.opentime;
 using com.wer.sc.data.transfer;
 using com.wer.sc.data.utils;
+using com.wer.sc.plugin.historydata.csv;
 using com.wer.sc.utils.ui.proceed;
 using System;
 using System.Collections.Generic;
@@ -76,7 +76,7 @@ namespace com.wer.sc.data.cnfutures.generator.kline
             IKLineTimeListGetter timeListGetter = new KLineTimeListGetter(openDateReader, openTimeReader);
             List<double> klineTimes = timeListGetter.GetKLineTimes(code, date, klinePeriod);
             this.klineData = DataTransfer_Tick2KLine.Transfer(tickData, klineTimes, lastEndPrice, lastEndHold);
-            string path = HistoryDataPathUtils.GetKLineDataPath(dataLoader.PluginSrcDataPath, code, date, klinePeriod);
+            string path = CsvHistoryDataPathUtils.GetKLineDataPath(dataLoader.PluginSrcDataPath, code, date, klinePeriod);
             CsvUtils_KLineData.Save(path, klineData);
             return "更新" + code + "-" + date + "的" + klinePeriod + "K线完成";
         }

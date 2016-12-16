@@ -18,8 +18,8 @@ namespace com.wer.sc.data.cnfutures.generator
         public FormDataGenerator()
         {
             InitializeComponent();
-            this.tbSrcPath.Text = @"F:\FUTURES\CSV\TICK";
-            this.tbAdjustedPath.Text = @"F:\FUTURES\CSV\TICKADJUSTED";
+            this.tbSrcPath.Text = @"E:\FUTURES\CSV\TICK";
+            this.tbAdjustedPath.Text = @"E:\FUTURES\CSV\TICKADJUSTED";
             this.tbVariety.Text = "M";
         }
 

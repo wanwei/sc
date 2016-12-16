@@ -17,7 +17,7 @@ namespace com.wer.sc.data.update
         public DataMgr()
         {
             List<Plugin_DataProvider> pluginproviders = new List<Plugin_DataProvider>();
-            List<PluginInfo> plugs = PluginMgr.Instance.Load();
+            List<PluginInfo2> plugs = PluginMgr2.Instance.Load();
             for (int i = 0; i < plugs.Count; i++)
             {
                 pluginproviders.AddRange(plugs[i].GetProviders());

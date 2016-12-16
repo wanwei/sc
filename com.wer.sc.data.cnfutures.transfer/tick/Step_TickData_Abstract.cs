@@ -1,5 +1,5 @@
-﻿using com.wer.sc.data.historydata;
-using com.wer.sc.data.utils;
+﻿using com.wer.sc.data.utils;
+using com.wer.sc.plugin.historydata.csv;
 using com.wer.sc.utils.ui.proceed;
 using System;
 using System.Collections.Generic;
@@ -53,7 +53,7 @@ namespace com.wer.sc.data.cnfutures.generator.tick
             TickData tickData = GetTickData(code, date);
             if (tickData == null)
                 return code + "-" + date + "没有数据";
-            string path = HistoryDataPathUtils.GetTickDataPath(pluginSrcDataPath, code, date);
+            string path = CsvHistoryDataPathUtils.GetTickDataPath(pluginSrcDataPath, code, date);
             CsvUtils_TickData.Save(path, tickData);
             return code + "-" + date + "的Tick数据更新完成";
         }

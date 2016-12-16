@@ -1,5 +1,4 @@
-﻿using com.wer.sc.data.historydata;
-using com.wer.sc.data.opentime;
+﻿using com.wer.sc.data.opentime;
 using com.wer.sc.data.store;
 using com.wer.sc.data.utils;
 using com.wer.sc.plugin;

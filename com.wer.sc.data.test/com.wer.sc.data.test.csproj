@@ -111,6 +111,10 @@
       <Project>{1ee9e83b-fd37-42fa-a263-eee93479ad45}</Project>
       <Name>com.wer.sc.data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\com.wer.sc.mockdata\com.wer.sc.mockdata.csproj">
+      <Project>{4645ed74-abf5-449e-8c75-16a2c8ce5612}</Project>
+      <Name>com.wer.sc.mockdata</Name>
+    </ProjectReference>
     <ProjectReference Include="..\com.wer.sc.plugin\com.wer.sc.plugin.csproj">
       <Project>{b8955457-f108-4060-a35b-69b482a19ab6}</Project>
       <Name>com.wer.sc.plugin</Name>

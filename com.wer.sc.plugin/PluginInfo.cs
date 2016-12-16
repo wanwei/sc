@@ -6,67 +6,82 @@ using System.Threading.Tasks;
 
 namespace com.wer.sc.plugin
 {
+    /// <summary>
+    /// 插件信息类，该类描述了一个插件信息
+    /// </summary>
     public class PluginInfo
     {
-        /// <summary>
-        /// 程序集的名称
-        /// </summary>
-        public String AssemblyName;
+        private PluginAssembly pluginAssembly;
 
-        /// <summary>
-        /// 程序集完整路径
-        /// </summary>
-        public String FullPath;
+        private Type pluginClassType;
 
-        /// <summary>
-        /// 得到插件里的数据提供者
-        /// </summary>
-        public List<Type> DataProviders = new List<Type>();
+        private Type pluginType;
 
-        public List<Type> KLineModels = new List<Type>();
+        private string pluginName;
 
-        public Plugin_DataProvider CreateDataProvider(Type type)
+        private string pluginDesc;
+
+        public PluginInfo(PluginAssembly pluginAssembly, Type pluginClassType, Type pluginType, string pluginName, string pluginDesc)
         {
-            PluginHelper helper = new PluginHelper();
-            helper.ConfigPath = FullPath.Substring(0, FullPath.Length - 4) + "\\";
-            Plugin_DataProvider dataProvider = (Plugin_DataProvider)Activator.CreateInstance(type, new Object[] { helper });
-            return dataProvider;
+            this.pluginAssembly = pluginAssembly;
+            this.pluginClassType = pluginClassType;
+            this.pluginType = pluginType;
+            this.pluginName = pluginName;
+            this.pluginDesc = pluginDesc;
         }
 
-        private List<Plugin_DataProvider> providers;
-
-        public List<Plugin_DataProvider> GetProviders()
+        /// <summary>
+        /// 得到插件所在的Assembly
+        /// </summary>
+        public PluginAssembly PluginAssembly
         {
-            if (providers != null)
-                return providers;
-            providers = new List<Plugin_DataProvider>();
-            for (int i = 0; i < DataProviders.Count; i++)
+            get
             {
-                providers.Add(CreateDataProvider(DataProviders[i]));
+                return pluginAssembly;
             }
-            return providers;
         }
 
-        override
-        public String ToString()
+       
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Type PluginClassType
+        {
+            get { return pluginClassType; }
+        }
+
+        public Type PluginType
+        {
+            get { return pluginType; }
+        }
+
+        /// <summary>
+        /// 插件名称
+        /// </summary>
+        public string PluginName
+        {
+            get
+            {
+                return pluginName;
+            }
+        }
+
+        public string PluginDesc
+        {
+            get
+            {
+                return pluginDesc;
+            }            
+        }
+
+        public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append(AssemblyName).Append(",");
-            sb.Append(FullPath).Append(",");
-            for (int i = 0; i < DataProviders.Count; i++)
-            {
-                sb.Append(DataProviders[i]);
-                if (i == DataProviders.Count - 1)
-                    sb.Append(",");
-                else
-                    sb.Append(";");
-            }
-            for (int i = 0; i < KLineModels.Count; i++)
-            {
-                sb.Append(KLineModels[i]);
-                if (i != KLineModels.Count - 1)
-                    sb.Append(";");
-            }
+            sb.Append(pluginType.FullName).Append(",");
+            sb.Append(pluginClassType.FullName).Append(",");
+            sb.Append(PluginName).Append(",");
+            sb.Append(PluginDesc);
             return sb.ToString();
         }
     }

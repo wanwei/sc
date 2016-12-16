@@ -40,7 +40,7 @@ namespace com.wer.sc.data.cnfutures.generator.tick.generator
 
         private TickData GetAdjustedTickData(string code, int date)
         {
-            Plugin_HistoryData_CnFutures historyData = new Plugin_HistoryData_CnFutures(pluginSrcDataPath);
+            Plugin_HistoryData_CnFutures historyData = new Plugin_HistoryData_CnFutures();
             return (TickData)historyData.GetTickData(code, date);
         }
 

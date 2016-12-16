@@ -17,8 +17,8 @@ namespace com.wer.sc.data.cnfutures.generator
         {
             InitializeComponent();
 
-            this.tbSrcPath.Text = @"F:\FUTURES\CSV\TICK";
-            this.tbAdjustedPath.Text = @"F:\FUTURES\CSV\TICKADJUSTED";
+            this.tbSrcPath.Text = @"E:\FUTURES\CSV\TICK";
+            this.tbAdjustedPath.Text = @"E:\FUTURES\CSV\TICKADJUSTED";
             this.tbVariety.Text = "M";
             this.rb_New.Checked = true;
             controlDataProceed1.BeforeProceedStart += ControlDataProceed1_BeforeProceedStart;
@@ -30,7 +30,7 @@ namespace com.wer.sc.data.cnfutures.generator
             string pluginSrcDataPath = tbAdjustedPath.Text;
             //StepPreparer preparer = new StepPreparer(srcDataPath, pluginSrcDataPath);
             //List<IStep> steps = preparer.GetAllSteps();
-            DataGeneratorProceed proceed = new DataGeneratorProceed(srcDataPath, pluginSrcDataPath, !this.rb_New.Checked);
+            DataProceed_CnFuturesData proceed = new DataProceed_CnFuturesData(srcDataPath, pluginSrcDataPath, !this.rb_New.Checked);
             controlDataProceed1.DataProceed = proceed;
         }
     }  
