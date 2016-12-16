@@ -54,11 +54,11 @@ namespace com.wer.sc.data.opentime
              * 分钟K线用小时做索引
              * 小时及以上K线用日线做索引
              */
-            if (klinePeriod.PeriodType == KLinePeriod.TYPE_SECOND)
+            if (klinePeriod.PeriodType == KLineTimeType.SECOND)
             {
                 return Math.Round(time, 4);
             }
-            else if (klinePeriod.PeriodType == KLinePeriod.TYPE_MINUTE)
+            else if (klinePeriod.PeriodType == KLineTimeType.MINUTE)
             {
                 return Math.Round(time, 2);
             }

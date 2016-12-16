@@ -24,7 +24,7 @@ namespace com.wer.sc.data.test.update
             openTime.Add(new double[] { .103000, .113000 });
             openTime.Add(new double[] { .133000, .150000 });
 
-            List<KLineBar> charts = DataTransfer_Tick2KLineGenerator.GenerateCharts(tickData, openTime, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1), -1);
+            List<KLineBar> charts = DataTransfer_Tick2KLineGenerator.GenerateCharts(tickData, openTime, new KLinePeriod(KLineTimeType.MINUTE, 1), -1);
             AssertTick2Charts(charts, Resources.Tick2Charts_M01_20131202);
         }
 
@@ -40,7 +40,7 @@ namespace com.wer.sc.data.test.update
             openTime.Add(new double[] { .103000, .113000 });
             openTime.Add(new double[] { .133000, .150000 });
 
-            List<KLineBar> charts = DataTransfer_Tick2KLineGenerator.GenerateCharts(tickData, openTime, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1), -1);
+            List<KLineBar> charts = DataTransfer_Tick2KLineGenerator.GenerateCharts(tickData, openTime, new KLinePeriod(KLineTimeType.MINUTE, 1), -1);
             AssertTick2Charts(charts, Resources.Tick2Charts_M05_20141230);
         }
 
@@ -57,7 +57,7 @@ namespace com.wer.sc.data.test.update
             openTime.Add(new double[] { .103000, .113000 });
             openTime.Add(new double[] { .133000, .150000 });
 
-            List<KLineBar> charts = DataTransfer_Tick2KLineGenerator.GenerateCharts(tickData, openTime, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1), -1);
+            List<KLineBar> charts = DataTransfer_Tick2KLineGenerator.GenerateCharts(tickData, openTime, new KLinePeriod(KLineTimeType.MINUTE, 1), -1);
             AssertTick2Charts(charts, Resources.Tick2Charts_M05_20150624);
         }
 
@@ -73,7 +73,7 @@ namespace com.wer.sc.data.test.update
             openTime.Add(new double[] { .103000, .113000 });
             openTime.Add(new double[] { .133000, .150000 });
 
-            List<KLineBar> charts = DataTransfer_Tick2KLineGenerator.GenerateCharts(tickData, openTime, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1), -1);
+            List<KLineBar> charts = DataTransfer_Tick2KLineGenerator.GenerateCharts(tickData, openTime, new KLinePeriod(KLineTimeType.MINUTE, 1), -1);
             //for (int i = 0; i < charts.Count; i++)
             //    Console.WriteLine(charts[i]);
             AssertTick2Charts(charts, Resources.Tick2Charts_M05_20141229);
@@ -94,7 +94,7 @@ namespace com.wer.sc.data.test.update
             openTime.Add(new double[] { .103000, .113000 });
             openTime.Add(new double[] { .133000, .150000 });
 
-            List<KLineBar> charts = DataTransfer_Tick2KLineGenerator.GenerateCharts(tickData, openTime, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1), -1);
+            List<KLineBar> charts = DataTransfer_Tick2KLineGenerator.GenerateCharts(tickData, openTime, new KLinePeriod(KLineTimeType.MINUTE, 1), -1);
             //for (int i = 0; i < charts.Count; i++)
             //    Console.WriteLine(charts[i]);
             AssertTick2Charts(charts, Resources.Tick2Charts_M05_20150504);
@@ -112,7 +112,7 @@ namespace com.wer.sc.data.test.update
             openTime.Add(new double[] { .103000, .113000 });
             openTime.Add(new double[] { .133000, .150000 });
 
-            List<KLineBar> charts = DataTransfer_Tick2KLineGenerator.GenerateCharts(tickData, openTime, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1), -1);
+            List<KLineBar> charts = DataTransfer_Tick2KLineGenerator.GenerateCharts(tickData, openTime, new KLinePeriod(KLineTimeType.MINUTE, 1), -1);
             //for (int i = 0; i < charts.Count; i++)
             //    Console.WriteLine(charts[i]);
             AssertTick2Charts(charts, Resources.Tick2Charts_M05_20150506);
@@ -128,9 +128,9 @@ namespace com.wer.sc.data.test.update
             openTime.Add(new double[] { .090000, .101500 });
             openTime.Add(new double[] { .103000, .113000 });
             openTime.Add(new double[] { .133000, .150000 });
-            List<double> timePeriods = TimeUtils.GetKLineTimes(openTime, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1));
+            List<double> timePeriods = TimeUtils.GetKLineTimes(openTime, new KLinePeriod(KLineTimeType.MINUTE, 1));
 
-            List<KLineBar> charts = DataTransfer_Tick2KLineGenerator.GenerateCharts(tickData, openTime, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1), 2262);
+            List<KLineBar> charts = DataTransfer_Tick2KLineGenerator.GenerateCharts(tickData, openTime, new KLinePeriod(KLineTimeType.MINUTE, 1), 2262);
             AssertTick2Charts(charts, Resources.Tick2Charts_M05_20040630);
         }
 

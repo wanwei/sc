@@ -19,7 +19,7 @@ namespace com.wer.sc.data.update
             TickData data = ResourceLoader.LoadTickData_AG05_20141230();
             List<TickData> dataList = new List<TickData>();
             dataList.Add(data);
-            IKLineData klinedata = DataTransfer_Tick2KLine.Transfer(dataList, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1), openTime);
+            IKLineData klinedata = DataTransfer_Tick2KLine.Transfer(dataList, new KLinePeriod(KLineTimeType.MINUTE, 1), openTime);
             AssertResult(klinedata, Resources.AG05_20141230_Result);
         }
 
@@ -34,7 +34,7 @@ namespace com.wer.sc.data.update
             TickData data = ResourceLoader.LoadTickData_AG05_20141230();
             List<TickData> dataList = new List<TickData>();
             dataList.Add(data);
-            IKLineData klinedata = DataTransfer_Tick2KLine.Transfer(dataList, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1), openTime);
+            IKLineData klinedata = DataTransfer_Tick2KLine.Transfer(dataList, new KLinePeriod(KLineTimeType.MINUTE, 1), openTime);
             AssertResult(klinedata, Resources.AG05_20141230_Result);
         }
 
@@ -60,7 +60,7 @@ namespace com.wer.sc.data.update
         //    TickData data = ResourceLoader.LoadTickData_M05_20150106();
         //    List<TickData> dataList = new List<TickData>();
         //    dataList.Add(data);
-        //    IKLineData klinedata = DataTransfer_Tick2KLine.Transfer(dataList, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1), openTime);
+        //    IKLineData klinedata = DataTransfer_Tick2KLine.Transfer(dataList, new KLinePeriod(KLineTimeType.MINUTE, 1), openTime);
         //    AssertResult(klinedata, Resources.M05_20150106_Result);
         //}
 
@@ -84,7 +84,7 @@ namespace com.wer.sc.data.update
             openTime.Add(new double[] { .090000, .101500 });
             openTime.Add(new double[] { .103000, .113000 });
             openTime.Add(new double[] { .133000, .150000 });
-            IKLineData data = DataTransfer_Tick2KLine.Transfer(dataList, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1), openTime);
+            IKLineData data = DataTransfer_Tick2KLine.Transfer(dataList, new KLinePeriod(KLineTimeType.MINUTE, 1), openTime);
             AssertResult(data, Resources.Tick2Kline_M01_20131202_20131213);
         }
 
@@ -108,7 +108,7 @@ namespace com.wer.sc.data.update
             openTime.Add(new double[] { .090000, .101500 });
             openTime.Add(new double[] { .103000, .113000 });
             openTime.Add(new double[] { .133000, .150000 });
-            IKLineData data = DataTransfer_Tick2KLine.Transfer(dataList, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1), openTime);
+            IKLineData data = DataTransfer_Tick2KLine.Transfer(dataList, new KLinePeriod(KLineTimeType.MINUTE, 1), openTime);
             AssertResult(data, Resources.Tick2Kline_M05_20131202_20131231);
         }
 
@@ -132,7 +132,7 @@ namespace com.wer.sc.data.update
             openTime.Add(new double[] { .090000, .101500 });
             openTime.Add(new double[] { .103000, .113000 });
             openTime.Add(new double[] { .133000, .150000 });
-            IKLineData data = DataTransfer_Tick2KLine.Transfer(dataList, new KLinePeriod(KLinePeriod.TYPE_SECOND, 15), openTime);
+            IKLineData data = DataTransfer_Tick2KLine.Transfer(dataList, new KLinePeriod(KLineTimeType.SECOND, 15), openTime);
             AssertResult(data, Resources.Tick2Kline_M01_20131202_20131213_15Second);
             //String[] dataResults = ResourceLoader.GetKLineData_15Second_Result();
             ////Assert.AreEqual(data.Length, dataResults.Length);

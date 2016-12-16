@@ -90,17 +90,17 @@ namespace com.wer.sc.app.data
             }
 
             DataUpdate_KLine update_KLine = GetCurrentDataUpdate().Update_KLine;
-            ShowDate(lbMinuteStart, update_KLine.GetUpdateFirstTime(code.Code, fac, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1)));
-            ShowDate(lbMinuteEnd, update_KLine.GetUpdateLastDate(code.Code, fac, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1)));
+            ShowDate(lbMinuteStart, update_KLine.GetUpdateFirstTime(code.Code, fac, new KLinePeriod(KLineTimeType.MINUTE, 1)));
+            ShowDate(lbMinuteEnd, update_KLine.GetUpdateLastDate(code.Code, fac, new KLinePeriod(KLineTimeType.MINUTE, 1)));
 
-            ShowDate(lb15MinuteStart, update_KLine.GetUpdateFirstTime(code.Code, fac, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 15)));
-            ShowDate(lb15MinuteEnd, update_KLine.GetUpdateLastDate(code.Code, fac, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 15)));
+            ShowDate(lb15MinuteStart, update_KLine.GetUpdateFirstTime(code.Code, fac, new KLinePeriod(KLineTimeType.MINUTE, 15)));
+            ShowDate(lb15MinuteEnd, update_KLine.GetUpdateLastDate(code.Code, fac, new KLinePeriod(KLineTimeType.MINUTE, 15)));
 
-            ShowDate(lbHourStart, update_KLine.GetUpdateFirstTime(code.Code, fac, new KLinePeriod(KLinePeriod.TYPE_HOUR, 1)));
-            ShowDate(lbHourEnd, update_KLine.GetUpdateLastDate(code.Code, fac, new KLinePeriod(KLinePeriod.TYPE_HOUR, 1)));
+            ShowDate(lbHourStart, update_KLine.GetUpdateFirstTime(code.Code, fac, new KLinePeriod(KLineTimeType.HOUR, 1)));
+            ShowDate(lbHourEnd, update_KLine.GetUpdateLastDate(code.Code, fac, new KLinePeriod(KLineTimeType.HOUR, 1)));
 
-            ShowDate(lbDayStart, update_KLine.GetUpdateFirstTime(code.Code, fac, new KLinePeriod(KLinePeriod.TYPE_DAY, 1)));
-            ShowDate(lbDayEnd, update_KLine.GetUpdateLastDate(code.Code, fac, new KLinePeriod(KLinePeriod.TYPE_DAY, 1)));
+            ShowDate(lbDayStart, update_KLine.GetUpdateFirstTime(code.Code, fac, new KLinePeriod(KLineTimeType.DAY, 1)));
+            ShowDate(lbDayEnd, update_KLine.GetUpdateLastDate(code.Code, fac, new KLinePeriod(KLineTimeType.DAY, 1)));
         }
 
         private void ShowDate(Label lb, int date)

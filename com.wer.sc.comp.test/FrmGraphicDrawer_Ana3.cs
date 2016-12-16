@@ -19,7 +19,7 @@ namespace com.wer.sc.comp.test
             InitializeComponent();
 
             anaComponent1.DataPath = @"D:\SCDATA\CNFUTURES";
-            anaComponent1.Drawer.Show("m13", 20100101, 20150101, new KLinePeriod(KLinePeriod.TYPE_DAY, 1));
+            anaComponent1.Drawer.Show("m13", 20100101, 20150101, new KLinePeriod(KLineTimeType.DAY, 1));
 
             cbPeriod.Items.Add(new CbItem(0, "秒"));
             cbPeriod.Items.Add(new CbItem(1, "分钟"));
@@ -47,7 +47,7 @@ namespace com.wer.sc.comp.test
             String code = tbCode.Text;
             int startDate = int.Parse(tbStart.Text);
             int endDate = int.Parse(tbEnd.Text);
-            KLinePeriod period = new KLinePeriod(cbPeriod.SelectedIndex, int.Parse(tbPeriod.Text));
+            KLinePeriod period = new KLinePeriod((KLineTimeType)Enum.ToObject(typeof(KLineTimeType), cbPeriod.SelectedIndex), int.Parse(tbPeriod.Text));
             if (this.model == null) { 
                 this.anaComponent1.Drawer.Show(code, startDate, endDate, period);                
             }

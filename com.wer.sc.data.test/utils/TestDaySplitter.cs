@@ -71,7 +71,7 @@ namespace com.wer.sc.data.utils
         private IKLineData klineData;
         public MockTimeGetter(string code, int start, int end, List<double[]> openTime)
         {
-            this.klineData = DataTestUtils.GetKLineData(code, start, end, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1), openTime);
+            this.klineData = DataTestUtils.GetKLineData(code, start, end, new KLinePeriod(KLineTimeType.MINUTE, 1), openTime);
         }
 
         public MockTimeGetter(IKLineData klineData)

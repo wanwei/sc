@@ -30,7 +30,7 @@ namespace com.wer.sc.comp.test
 
             MockGraphicDataProvider dataProvider = new MockGraphicDataProvider();
             dataProvider.Code = "m05";
-            dataProvider.Period = new KLinePeriod(KLinePeriod.TYPE_DAY, 1);
+            dataProvider.Period = new KLinePeriod(KLineTimeType.DAY, 1);
             dataProvider.EndIndex = 210;
 
             drawer.DataProvider = dataProvider;

@@ -49,16 +49,16 @@ namespace com.wer.sc.data.update
                 dataProvider2.DataPathDir = "klineupdate\\";
                 DoKLineUpdate(dataProvider2);
 
-                data = klineReader.GetAllData("m05", new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1));                
+                data = klineReader.GetAllData("m05", new KLinePeriod(KLineTimeType.MINUTE, 1));                
                 DataTestUtils.AssertKLineDataResult(data, Resources.KLineData_M05_20141215_20150127_1Minute);
 
-                data = klineReader.GetAllData("m05", new KLinePeriod(KLinePeriod.TYPE_MINUTE, 15));
+                data = klineReader.GetAllData("m05", new KLinePeriod(KLineTimeType.MINUTE, 15));
                 DataTestUtils.AssertKLineDataResult(data, Resources.KLineData_M05_20141215_20150127_15Minute);
 
-                data = klineReader.GetAllData("m05", new KLinePeriod(KLinePeriod.TYPE_DAY, 1));
+                data = klineReader.GetAllData("m05", new KLinePeriod(KLineTimeType.DAY, 1));
                 DataTestUtils.AssertKLineDataResult(data, Resources.KLineData_M05_20141215_20150127_Day);
 
-                data = klineReader.GetAllData("m09", new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1));
+                data = klineReader.GetAllData("m09", new KLinePeriod(KLineTimeType.MINUTE, 1));
                 DataTestUtils.AssertKLineDataResult(data, Resources.KLineData_M09_20141215_20150127_1Minute);            
             }
             finally

@@ -55,7 +55,7 @@ namespace com.wer.sc.data.check
             List<int> dates = allDates.GetRange(startIndex, endIndex - startIndex + 1);
 
             String code = tbCode.Text;
-            KLinePeriod period = new KLinePeriod(cbPeriod.SelectedIndex, int.Parse(tbPeriod.Text));
+            KLinePeriod period = new KLinePeriod((KLineTimeType)Enum.ToObject(typeof(KLineTimeType), cbPeriod.SelectedIndex), int.Parse(tbPeriod.Text));
             List<IKLineData> klineDataList = new List<IKLineData>();
             float lastPrice = -1;
 

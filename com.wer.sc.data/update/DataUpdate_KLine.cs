@@ -62,14 +62,14 @@ namespace com.wer.sc.data.update
         public void UpdateCode(String code, DataReaderFactory dataReaderFactory)
         {
             //更新1分钟、15分钟、日线
-            IKLineData data = Update(code, dataReaderFactory, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1));
+            IKLineData data = Update(code, dataReaderFactory, new KLinePeriod(KLineTimeType.MINUTE, 1));
             if (data != null)
                 UpdateOther(code, dataReaderFactory, data);
         }
 
         public IKLineData Update(String code, DataReaderFactory dataReaderFactory, KLinePeriod period)
         {
-            if (period.PeriodType == KLinePeriod.TYPE_MINUTE && period.Period == 1)
+            if (period.PeriodType == KLineTimeType.MINUTE && period.Period == 1)
                 return UpdateByTick(code, dataReaderFactory, period);
             return null;
         }
@@ -188,9 +188,9 @@ namespace com.wer.sc.data.update
 
         private void UpdateOther(String code, DataReaderFactory tmpFac, IKLineData data)
         {
-            DoUpdate(code, tmpFac, data, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 15));
-            DoUpdate(code, tmpFac, data, new KLinePeriod(KLinePeriod.TYPE_HOUR, 1));
-            DoUpdate(code, tmpFac, data, new KLinePeriod(KLinePeriod.TYPE_DAY, 1));
+            DoUpdate(code, tmpFac, data, new KLinePeriod(KLineTimeType.MINUTE, 15));
+            DoUpdate(code, tmpFac, data, new KLinePeriod(KLineTimeType.HOUR, 1));
+            DoUpdate(code, tmpFac, data, new KLinePeriod(KLineTimeType.DAY, 1));
         }
 
         private void DoUpdate(String code, DataReaderFactory tmpFac, IKLineData data, KLinePeriod period)

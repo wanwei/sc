@@ -95,8 +95,8 @@ namespace com.wer.sc.comp.test
         }
 
         private KLinePeriod GetPeriods()
-        {
-            return new KLinePeriod(cbPeriod.SelectedIndex, int.Parse(tbPeriod.Text));
+        {            
+            return new KLinePeriod((KLineTimeType)Enum.ToObject(typeof(KLineTimeType), cbPeriod.SelectedIndex), int.Parse(tbPeriod.Text));
         }
 
         private int GetLength()

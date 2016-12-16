@@ -20,16 +20,16 @@ namespace com.wer.sc.data.update
         /// <returns></returns>
         public static IKLineData Transfer(IKLineData data, KLinePeriod targetPeriod)
         {
-            if (targetPeriod.PeriodType == KLinePeriod.TYPE_DAY)
+            if (targetPeriod.PeriodType == KLineTimeType.DAY)
                 return Transfer_Day(data, targetPeriod);
             KLinePeriod sourcePeriod = data.Period;
-            if (sourcePeriod.PeriodType == KLinePeriod.TYPE_MINUTE)
+            if (sourcePeriod.PeriodType == KLineTimeType.MINUTE)
             {
-                if (targetPeriod.PeriodType == KLinePeriod.TYPE_HOUR)
+                if (targetPeriod.PeriodType == KLineTimeType.HOUR)
                     targetPeriod = new KLinePeriod(sourcePeriod.PeriodType, targetPeriod.Period * 60);
                 return Transfer_SrcIs1Minute(data, targetPeriod);
             }
-            if (sourcePeriod.PeriodType == KLinePeriod.TYPE_HOUR)
+            if (sourcePeriod.PeriodType == KLineTimeType.HOUR)
             {
                 return Transfer_SrcIs1Minute(data, targetPeriod);
             }
@@ -160,7 +160,7 @@ namespace com.wer.sc.data.update
         private static IKLineData Transfer_DifferentPeriod(IKLineData data, KLinePeriod targetPeriod)
         {
             KLinePeriod srcPeriod = data.Period;
-            if (targetPeriod.PeriodType == KLinePeriod.TYPE_HOUR && srcPeriod.PeriodType == KLinePeriod.TYPE_MINUTE)
+            if (targetPeriod.PeriodType == KLineTimeType.HOUR && srcPeriod.PeriodType == KLineTimeType.MINUTE)
             {
                 KLinePeriod p = new KLinePeriod(srcPeriod.PeriodType, targetPeriod.Period * 60);
                 return Transfer(data, p);

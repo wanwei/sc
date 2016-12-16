@@ -55,17 +55,17 @@ namespace com.wer.sc.data.utils
             return ConvertToDoubleTime(ConvertToDateTime(time).AddDays(value));
         }
 
-        public static double AddTime(double time, int value, int timeType)
+        public static double AddTime(double time, int value, KLineTimeType timeType)
         {
             switch (timeType)
             {
-                case KLinePeriod.TYPE_SECOND:
+                case KLineTimeType.SECOND:
                     return AddSeconds(time, value);
-                case KLinePeriod.TYPE_MINUTE:
+                case KLineTimeType.MINUTE:
                     return AddMinutes(time, value);
-                case KLinePeriod.TYPE_HOUR:
+                case KLineTimeType.HOUR:
                     return AddHours(time, value);
-                case KLinePeriod.TYPE_DAY:
+                case KLineTimeType.DAY:
                     return AddDays(time, value);
             }
             return time;

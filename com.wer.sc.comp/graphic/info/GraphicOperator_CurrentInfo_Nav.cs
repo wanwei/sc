@@ -18,7 +18,7 @@ namespace com.wer.sc.comp.graphic.info
 
         public void Change(string code, double time)
         {
-            this.dataNavigate.Change(code, time, new KLinePeriod(KLinePeriod.TYPE_DAY, 1));
+            this.dataNavigate.Change(code, time, new KLinePeriod(KLineTimeType.DAY, 1));
         }
     }
 }

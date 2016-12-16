@@ -43,7 +43,6 @@
   <ItemGroup>
     <Compile Include="ana\KLineHoldInfo.cs" />
     <Compile Include="ana\KLineModelImport.cs" />
-    <Compile Include="ana\KLineTimeType.cs" />
     <Compile Include="ana\KLineTrade.cs" />
     <Compile Include="ana\KLineTradeDetailInfo.cs" />
     <Compile Include="ana\KLineTradeFee.cs" />
@@ -58,6 +57,7 @@
     <Compile Include="data\CodeInfo.cs" />
     <Compile Include="data\ICodeInfo.cs" />
     <Compile Include="data\IKLineData.cs" />
+    <Compile Include="data\KLineTimeType.cs" />
     <Compile Include="data\opentime\IDayStartTimeReader.cs" />
     <Compile Include="data\opentime\IOpenDateReader.cs" />
     <Compile Include="data\opentime\IOpenTimeReader.cs" />

@@ -38,7 +38,7 @@ namespace com.wer.sc.data.generator
         {
             get
             {
-                if (period.PeriodType == KLinePeriod.TYPE_DAY)
+                if (period.PeriodType == KLineTimeType.DAY)
                     return 3;
 
                 return 3 * TimeUtils.Substract(endDate, startDate).Days;

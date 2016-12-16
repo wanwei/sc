@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using com.wer.sc.ana;
 using com.wer.sc.ana.test.model;
+using com.wer.sc.data;
 
 namespace com.wer.sc.ana.test
 {
@@ -15,7 +16,7 @@ namespace com.wer.sc.ana.test
             runner.Code = "m05";
             runner.StartDate = 20100725;
             runner.EndDate = 20111125;
-            runner.Period = new data.KLinePeriod(KLineTimeType.TYPE_DAY, 1);
+            runner.Period = new data.KLinePeriod(KLineTimeType.DAY, 1);
 
             KLineModel_Simple model = new KLineModel_Simple();
             model.HLLen = 5;
@@ -42,7 +43,7 @@ namespace com.wer.sc.ana.test
             runner.Code = "m05";
             runner.StartDate = 20100725;
             runner.EndDate = 20111125;
-            runner.Period = new data.KLinePeriod(KLineTimeType.TYPE_DAY, 1);
+            runner.Period = new data.KLinePeriod(KLineTimeType.DAY, 1);
             KLineModel_Compound model = new KLineModel_Compound();
             runner.Model = model;
             runner.run();
@@ -57,7 +58,7 @@ namespace com.wer.sc.ana.test
             runner.Code = "m05";
             runner.StartDate = 20100725;
             runner.EndDate = 20111125;
-            runner.Period = new data.KLinePeriod(KLineTimeType.TYPE_MINUTE, 1);
+            runner.Period = new data.KLinePeriod(KLineTimeType.MINUTE, 1);
             KLineModel_ImportPeriod model = new KLineModel_ImportPeriod();
             runner.Model = model;
             runner.run();

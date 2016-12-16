@@ -1,4 +1,5 @@
-﻿using com.wer.sc.plugin;
+﻿using com.wer.sc.data;
+using com.wer.sc.plugin;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -26,8 +27,8 @@ namespace com.wer.sc.ana.test.model
         public override List<KLineModelImport> GetModelImports()
         {
             List<KLineModelImport> models = new List<KLineModelImport>();
-            models.Add(new KLineModelImport(model_15Minute, new data.KLinePeriod(KLineTimeType.TYPE_MINUTE, 15)));
-            models.Add(new KLineModelImport(model_Day, new data.KLinePeriod(KLineTimeType.TYPE_DAY, 1)));
+            models.Add(new KLineModelImport(model_15Minute, new data.KLinePeriod(KLineTimeType.MINUTE, 15)));
+            models.Add(new KLineModelImport(model_Day, new data.KLinePeriod(KLineTimeType.DAY, 1)));
             return models;
         }
 

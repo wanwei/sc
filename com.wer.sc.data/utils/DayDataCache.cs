@@ -26,7 +26,7 @@ namespace com.wer.sc.data.utils
 
         public IKLineData GetKLineData(String code, int date)
         {
-            return dataReaderFac.KLineDataReader.GetData(code, date, date, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1));
+            return dataReaderFac.KLineDataReader.GetData(code, date, date, new KLinePeriod(KLineTimeType.MINUTE, 1));
         }
 
         public ITimeLineData GetRealData(string code, int date)

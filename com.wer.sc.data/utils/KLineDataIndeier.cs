@@ -65,7 +65,7 @@ namespace com.wer.sc.data.utils
 
         public int GetTimeIndex(double time)
         {
-            if (klineData.Period.PeriodType == KLinePeriod.TYPE_DAY)
+            if (klineData.Period.PeriodType == KLineTimeType.DAY)
             {
                 //TODO 现在只支持1日线，2日及以上不支持
                 int timeDate = (int)time;

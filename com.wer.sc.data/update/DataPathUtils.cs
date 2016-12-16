@@ -66,19 +66,19 @@ namespace com.wer.sc.data
             return realPath;
         }
 
-        private String GetPeriodTypeName(int type)
+        private String GetPeriodTypeName(KLineTimeType type)
         {
             switch (type)
             {
-                case KLinePeriod.TYPE_SECOND:
+                case KLineTimeType.SECOND:
                     return "second";
-                case KLinePeriod.TYPE_MINUTE:
+                case KLineTimeType.MINUTE:
                     return "minute";
-                case KLinePeriod.TYPE_HOUR:
+                case KLineTimeType.HOUR:
                     return "hour";
-                case KLinePeriod.TYPE_DAY:
+                case KLineTimeType.DAY:
                     return "day";
-                case KLinePeriod.TYPE_WEEK:
+                case KLineTimeType.WEEK:
                     return "week";
             }
             return "";

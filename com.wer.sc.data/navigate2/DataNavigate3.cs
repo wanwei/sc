@@ -64,17 +64,17 @@ namespace com.wer.sc.data.navigate
 
             int extendBefore = 30;
             int extendAfter = 30;
-            if (period.PeriodType == KLinePeriod.TYPE_MINUTE)
+            if (period.PeriodType == KLineTimeType.MINUTE)
             {
                 extendBefore = 30;
                 extendAfter = 30;
             }
-            else if (period.PeriodType == KLinePeriod.TYPE_HOUR)
+            else if (period.PeriodType == KLineTimeType.HOUR)
             {
                 extendBefore = 100;
                 extendAfter = 100;
             }
-            else if (period.PeriodType == KLinePeriod.TYPE_DAY)
+            else if (period.PeriodType == KLineTimeType.DAY)
             {
                 extendBefore = 2000;
                 extendAfter = 2000;

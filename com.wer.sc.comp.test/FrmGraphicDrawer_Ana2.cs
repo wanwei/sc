@@ -25,16 +25,16 @@ namespace com.wer.sc.comp.test
             GraphicDataProvider_CandleDefault dataProvider = new GraphicDataProvider_CandleDefault(fac);
             AnaDrawer_KLine drawer = new AnaDrawer_KLine(fac, dataProvider);
             drawer.Bind(this);
-            drawer.Show("m13", 20100101, 20150101, new KLinePeriod(KLinePeriod.TYPE_DAY, 1));
+            drawer.Show("m13", 20100101, 20150101, new KLinePeriod(KLineTimeType.DAY, 1));
 
             KLineModel_Simple2 model = new KLineModel_Simple2();
             drawer.Run(model);
-            //drawer.Run("m13", 20100101, 20150101, new KLinePeriod(KLinePeriod.TYPE_DAY, 1), model);            
+            //drawer.Run("m13", 20100101, 20150101, new KLinePeriod(KLineTimeType.DAY, 1), model);            
 
             //Thread.Sleep(100000);
             KLineModel_Simple model2 = new KLineModel_Simple();
             drawer.Run(model2);
-            //drawer.Run("m13", 20100101, 20150101, new KLinePeriod(KLinePeriod.TYPE_DAY, 1), model2);
+            //drawer.Run("m13", 20100101, 20150101, new KLinePeriod(KLineTimeType.DAY, 1), model2);
         }
     }
 }

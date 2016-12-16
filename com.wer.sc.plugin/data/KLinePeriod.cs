@@ -22,9 +22,9 @@ namespace com.wer.sc.data
 
         public const int TYPE_WEEK = 4;
 
-        private int periodType;
+        private KLineTimeType periodType;
 
-        public int PeriodType
+        public KLineTimeType PeriodType
         {
             get
             {
@@ -44,7 +44,7 @@ namespace com.wer.sc.data
 
         }
 
-        public KLinePeriod(int periodType, int period)
+        public KLinePeriod(KLineTimeType periodType, int period)
         {
             this.PeriodType = periodType;
             this.Period = period;
@@ -52,36 +52,28 @@ namespace com.wer.sc.data
 
         public String ToEngString()
         {
-            switch (PeriodType)
-            {
-                case TYPE_SECOND:
-                    return Period + "second";
-                case TYPE_MINUTE:
-                    return Period + "minute";
-                case TYPE_HOUR:
-                    return Period + "hour";
-                case TYPE_DAY:
-                    return Period + "day";
-                case TYPE_WEEK:
-                    return Period + "week";
-            }
-            return "";
+            return Period.ToString() + PeriodType;
         }
 
         public override String ToString()
         {
-            switch (PeriodType)
+            return Period + TimeTypeToString(periodType);
+        }
+
+        public static string TimeTypeToString(KLineTimeType timeType)
+        {
+            switch (timeType)
             {
-                case TYPE_SECOND:
-                    return Period + "秒钟";
-                case TYPE_MINUTE:
-                    return Period + "分钟";
-                case TYPE_HOUR:
-                    return Period + "小时";
-                case TYPE_DAY:
-                    return Period + "天";
-                case TYPE_WEEK:
-                    return Period + "周";
+                case KLineTimeType.SECOND:
+                    return "秒钟";
+                case KLineTimeType.MINUTE:
+                    return "分钟";
+                case KLineTimeType.HOUR:
+                    return "小时";
+                case KLineTimeType.DAY:
+                    return "天";
+                case KLineTimeType.WEEK:
+                    return "周";
             }
             return "";
         }
@@ -98,14 +90,14 @@ namespace com.wer.sc.data
 
         public override int GetHashCode()
         {
-            return Period * 10 + PeriodType;
+            return Period * 10 + (int)PeriodType;
         }
 
-        private static KLinePeriod period_5second = new KLinePeriod(KLinePeriod.TYPE_SECOND, 5);
-        private static KLinePeriod period_1minute = new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1);
-        private static KLinePeriod period_15minute = new KLinePeriod(KLinePeriod.TYPE_MINUTE, 15);
-        private static KLinePeriod period_Hour = new KLinePeriod(KLinePeriod.TYPE_HOUR, 1);
-        private static KLinePeriod period_Day = new KLinePeriod(KLinePeriod.TYPE_DAY, 1);
+        private static KLinePeriod period_5second = new KLinePeriod(KLineTimeType.SECOND, 5);
+        private static KLinePeriod period_1minute = new KLinePeriod(KLineTimeType.MINUTE, 1);
+        private static KLinePeriod period_15minute = new KLinePeriod(KLineTimeType.MINUTE, 15);
+        private static KLinePeriod period_Hour = new KLinePeriod(KLineTimeType.HOUR, 1);
+        private static KLinePeriod period_Day = new KLinePeriod(KLineTimeType.DAY, 1);
 
         public static KLinePeriod KLinePeriod_5Second
         {
@@ -132,6 +124,6 @@ namespace com.wer.sc.data
             get { return period_Day; }
         }
 
-     
+
     }
 }

@@ -51,7 +51,7 @@ namespace com.wer.sc.data.check
             DataCacheFactory cacheFactory = new DataCacheFactory(fac);
             IDataCache_Code cache = cacheFactory.CreateCache_Code(code);
 
-            //IKLineData minuteKLineData = fac.KLineDataReader.GetData(code, date, date, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1));
+            //IKLineData minuteKLineData = fac.KLineDataReader.GetData(code, date, date, new KLinePeriod(KLineTimeType.MINUTE, 1));
             //TickData tickData = fac.TickDataReader.GetTickData(code, date);
 
             RealTimeDataBuilder_DayData builder = new RealTimeDataBuilder_DayData(cache.GetCache_CodeDate(date), currentTime);
@@ -72,7 +72,7 @@ namespace com.wer.sc.data.check
             DataReaderFactory fac = dataProvider.GetFactory();
 
             String code = tbCode.Text;
-            IKLineData minuteKLineData = fac.KLineDataReader.GetData(code, date, date, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1));
+            IKLineData minuteKLineData = fac.KLineDataReader.GetData(code, date, date, new KLinePeriod(KLineTimeType.MINUTE, 1));
             TickData tickData = fac.TickDataReader.GetTickData(code, date);
 
             TickDataIndeier indeier = new TickDataIndeier(tickData, minuteKLineData);
@@ -101,7 +101,7 @@ namespace com.wer.sc.data.check
             String code = tbCode.Text;
             int start = int.Parse(tbStart.Text);
             int end = int.Parse(tbEnd.Text);
-            KLinePeriod period = new KLinePeriod(cbPeriod.SelectedIndex, int.Parse(tbPeriod.Text));
+            KLinePeriod period = new KLinePeriod((KLineTimeType)Enum.ToObject(typeof(KLineTimeType), cbPeriod.SelectedIndex), int.Parse(tbPeriod.Text));
 
             double time = double.Parse(tbTime.Text);
             int date = (int)time;
@@ -112,7 +112,7 @@ namespace com.wer.sc.data.check
             DataReaderFactory fac = dataProvider.GetFactory();
             DataCacheFactory cacheFactory = new DataCacheFactory(fac);
             IKLineData klineData = fac.KLineDataReader.GetData(code, start, end, period);
-            //IKLineData minuteKLineData = fac.KLineDataReader.GetData(code, date, date, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1));
+            //IKLineData minuteKLineData = fac.KLineDataReader.GetData(code, date, date, new KLinePeriod(KLineTimeType.MINUTE, 1));
             //TickData tickData = fac.TickDataReader.GetTickData(code, date);
 
             RealTimeDataBuilder_KLine builder = new RealTimeDataBuilder_KLine(klineData, cacheFactory.CreateCache_Code(code, start, end), time);
@@ -127,7 +127,7 @@ namespace com.wer.sc.data.check
             String code = tbCode.Text;
             int start = int.Parse(tbStart.Text);
             int end = int.Parse(tbEnd.Text);
-            KLinePeriod period = new KLinePeriod(cbPeriod.SelectedIndex, int.Parse(tbPeriod.Text));
+            KLinePeriod period = new KLinePeriod((KLineTimeType)Enum.ToObject(typeof(KLineTimeType), cbPeriod.SelectedIndex), int.Parse(tbPeriod.Text));
 
             double time = double.Parse(tbTime.Text);
             int date = (int)time;
@@ -141,7 +141,7 @@ namespace com.wer.sc.data.check
 
 
             //IKLineData klineData = fac.KLineDataReader.GetData(code, start, end, period);
-            //IKLineData minuteKLineData = fac.KLineDataReader.GetData(code, date, date, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1));
+            //IKLineData minuteKLineData = fac.KLineDataReader.GetData(code, date, date, new KLinePeriod(KLineTimeType.MINUTE, 1));
             //TickData tickData = fac.TickDataReader.GetTickData(code, date);
 
             //CurrentKLineChartBuilder builder = new CurrentKLineChartBuilder(klineData, minuteKLineData, tickData, time);

@@ -19,18 +19,18 @@ namespace com.wer.sc.data.update
             openTime.Add(new double[] { .090000, .101500 });
             openTime.Add(new double[] { .103000, .113000 });
             openTime.Add(new double[] { .133000, .150000 });
-            IKLineData data_1min = DataTestUtils.GetKLineData("m05", 20131216, 20131231, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1), openTime);
+            IKLineData data_1min = DataTestUtils.GetKLineData("m05", 20131216, 20131231, new KLinePeriod(KLineTimeType.MINUTE, 1), openTime);
 
             //转换成5分钟线
-            IKLineData data = DataTransfer_KLine2KLine.Transfer(data_1min, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 5));
+            IKLineData data = DataTransfer_KLine2KLine.Transfer(data_1min, new KLinePeriod(KLineTimeType.MINUTE, 5));
             DataTestUtils.AssertKLineDataResult(data, Resources.Kline2Kline_M05_20131216_20131231_5Minute);
 
             //转换成15分钟
-            data = DataTransfer_KLine2KLine.Transfer(data_1min, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 15));
+            data = DataTransfer_KLine2KLine.Transfer(data_1min, new KLinePeriod(KLineTimeType.MINUTE, 15));
             DataTestUtils.AssertKLineDataResult(data, Resources.Kline2Kline_M05_20131216_20131231_15Minute);
 
             //转换成1小时
-            data = DataTransfer_KLine2KLine.Transfer(data_1min, new KLinePeriod(KLinePeriod.TYPE_HOUR, 1));
+            data = DataTransfer_KLine2KLine.Transfer(data_1min, new KLinePeriod(KLineTimeType.HOUR, 1));
             DataTestUtils.AssertKLineDataResult(data, Resources.Kline2Kline_M05_20131216_20131231_1Hour);
         }
 
@@ -41,9 +41,9 @@ namespace com.wer.sc.data.update
             openTime.Add(new double[] { .090000, .101500 });
             openTime.Add(new double[] { .103000, .113000 });
             openTime.Add(new double[] { .133000, .150000 });
-            IKLineData data_1min = DataTestUtils.GetKLineData("m05", 20131216, 20131231, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1), openTime);
+            IKLineData data_1min = DataTestUtils.GetKLineData("m05", 20131216, 20131231, new KLinePeriod(KLineTimeType.MINUTE, 1), openTime);
 
-            IKLineData data = DataTransfer_KLine2KLine.Transfer_Day(data_1min, new KLinePeriod(KLinePeriod.TYPE_DAY, 1));
+            IKLineData data = DataTransfer_KLine2KLine.Transfer_Day(data_1min, new KLinePeriod(KLineTimeType.DAY, 1));
             DataTestUtils.AssertKLineDataResult(data, Resources.Kline2kline_M05_20131216_20131231_Day);
         }
 
@@ -51,7 +51,7 @@ namespace com.wer.sc.data.update
         public void TestTransferKLine_DayOverNight()
         {
             IKLineData klineData = GetMaKLineData(20141215, 20150116);
-            IKLineData data = DataTransfer_KLine2KLine.Transfer_Day(klineData, new KLinePeriod(KLinePeriod.TYPE_DAY, 1));
+            IKLineData data = DataTransfer_KLine2KLine.Transfer_Day(klineData, new KLinePeriod(KLineTimeType.DAY, 1));
             AssertResult(data, Resources.Kline2Kline_M05_20141215_20150116_Day);
             //for (int i = 0; i < data.Length; i++)
             //{
@@ -68,7 +68,7 @@ namespace com.wer.sc.data.update
             {
                 int date = openDates[i];
                 List<double[]> openTime = MockDataProvider_Abstract.GetOpenTime_M(openDates[i]);
-                IKLineData data_1min = DataTestUtils.GetKLineData("m05", date, date, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1), openTime);
+                IKLineData data_1min = DataTestUtils.GetKLineData("m05", date, date, new KLinePeriod(KLineTimeType.MINUTE, 1), openTime);
                 klineDataList.Add(data_1min);
             }
             return KLineData.Merge(klineDataList);

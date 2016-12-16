@@ -24,7 +24,7 @@ namespace com.wer.sc.comp.test
             runner.Code = "m13";
             runner.StartDate = 20100725;
             runner.EndDate = 20111125;
-            runner.Period = new data.KLinePeriod(KLineTimeType.TYPE_DAY, 1);
+            runner.Period = new data.KLinePeriod(KLineTimeType.DAY, 1);
 
             KLineModel_Simple2 model = new KLineModel_Simple2();            
             runner.Model = model;

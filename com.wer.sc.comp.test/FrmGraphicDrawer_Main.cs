@@ -23,7 +23,7 @@ namespace com.wer.sc.comp.test
             GraphicDrawer_Main drawer = new GraphicDrawer_Main();
             DataReaderFactory fac = new DataReaderFactory(@"D:\SCDATA\CNFUTURES");
             GraphicDataProvider_Main dataProvider = new GraphicDataProvider_Main(fac);
-            dataProvider.GetOperator().ChangeData("m13", 20150106.094510, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1));
+            dataProvider.GetOperator().ChangeData("m13", 20150106.094510, new KLinePeriod(KLineTimeType.MINUTE, 1));
             drawer.DataProvider = dataProvider;
 
             drawer.BindControl(this);

@@ -33,7 +33,7 @@ namespace com.wer.sc.data.cache.impl
         internal DataCache_Code(DataReaderFactory dataReaderFactory, string code)
         {
             IKLineDataReader dataReader = dataReaderFactory.KLineDataReader;
-            KLinePeriod period = new KLinePeriod(KLinePeriod.TYPE_DAY, 1);
+            KLinePeriod period = new KLinePeriod(KLineTimeType.DAY, 1);
             int start = dataReader.GetFirstDate(code, period);
             int end = dataReader.GetLastDate(code, period);
             Init(dataReaderFactory, code, start, end);
@@ -51,10 +51,10 @@ namespace com.wer.sc.data.cache.impl
             this.endDate = endDate;
             this.dataReaderFactory = dataReaderFactory;
 
-            IKLineData minuteKLineData = dataReaderFactory.KLineDataReader.GetData(code, startDate, endDate, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1));
+            IKLineData minuteKLineData = dataReaderFactory.KLineDataReader.GetData(code, startDate, endDate, new KLinePeriod(KLineTimeType.MINUTE, 1));
             this.minuteDataGetter = new MinuteKLineData_DateGetter(minuteKLineData, dataReaderFactory.OpenDateReader);
             this.openDateCache = new OpenDateCache(this.minuteDataGetter.GetOpenDates());
-            this.dayKLineData = dataReaderFactory.KLineDataReader.GetData(code, startDate, endDate, new KLinePeriod(KLinePeriod.TYPE_DAY, 1));
+            this.dayKLineData = dataReaderFactory.KLineDataReader.GetData(code, startDate, endDate, new KLinePeriod(KLineTimeType.DAY, 1));
         }
 
         public string Code

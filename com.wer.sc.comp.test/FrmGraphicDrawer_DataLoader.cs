@@ -18,11 +18,11 @@ namespace com.wer.sc.comp.test
         {
             InitializeComponent();
 
-            cbPeriod.Items.Add(new CbItem(0, "秒"));
-            cbPeriod.Items.Add(new CbItem(1, "分钟"));
-            cbPeriod.Items.Add(new CbItem(2, "小时"));
-            cbPeriod.Items.Add(new CbItem(3, "天"));
-            cbPeriod.Items.Add(new CbItem(4, "周"));
+            cbPeriod.Items.Add(new CbItem((int)KLineTimeType.SECOND, "秒"));
+            cbPeriod.Items.Add(new CbItem((int)KLineTimeType.MINUTE, "分钟"));
+            cbPeriod.Items.Add(new CbItem((int)KLineTimeType.HOUR, "小时"));
+            cbPeriod.Items.Add(new CbItem((int)KLineTimeType.DAY, "天"));
+            cbPeriod.Items.Add(new CbItem((int)KLineTimeType.WEEK, "周"));
             cbPeriod.SelectedIndex = 3;
 
             anaComponent1.DataPath = @"D:\SCDATA\CNFUTURES";
@@ -40,7 +40,7 @@ namespace com.wer.sc.comp.test
             String code = tbCode.Text;
             int startDate = int.Parse(tbStart.Text);
             int endDate = int.Parse(tbEnd.Text);
-            KLinePeriod period = new KLinePeriod(cbPeriod.SelectedIndex, int.Parse(tbPeriod.Text));
+            KLinePeriod period = new KLinePeriod((KLineTimeType)Enum.ToObject(typeof(KLineTimeType), cbPeriod.SelectedIndex), int.Parse(tbPeriod.Text));
             this.anaComponent1.Drawer.Show(code, startDate, endDate, period);
             this.anaComponent1.Refresh();    
         }

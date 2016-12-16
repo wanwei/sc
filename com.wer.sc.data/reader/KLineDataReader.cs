@@ -29,25 +29,25 @@ namespace com.wer.sc.data.reader
 
         public IKLineData GetData(String code, int startDate, int endDate, KLinePeriod period)
         {
-            if (period.PeriodType == KLinePeriod.TYPE_MINUTE)
+            if (period.PeriodType == KLineTimeType.MINUTE)
             {
                 if (period.Period == 1 || period.Period == 15)
                     return LoadKLineData(code, startDate, endDate, period);
-                IKLineData data = LoadKLineData(code, startDate, endDate, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1));
+                IKLineData data = LoadKLineData(code, startDate, endDate, new KLinePeriod(KLineTimeType.MINUTE, 1));
                 return DataTransfer_KLine2KLine.Transfer(data, period);
             }
-            if (period.PeriodType == KLinePeriod.TYPE_HOUR)
+            if (period.PeriodType == KLineTimeType.HOUR)
             {
                 if (period.Period == 1)
                     return LoadKLineData(code, startDate, endDate, period);
-                IKLineData data = LoadKLineData(code, startDate, endDate, new KLinePeriod(KLinePeriod.TYPE_HOUR, 1));
+                IKLineData data = LoadKLineData(code, startDate, endDate, new KLinePeriod(KLineTimeType.HOUR, 1));
                 return DataTransfer_KLine2KLine.Transfer(data, period);
             }
-            if (period.PeriodType == KLinePeriod.TYPE_DAY)
+            if (period.PeriodType == KLineTimeType.DAY)
             {
                 if (period.Period == 1)
                     return LoadKLineData(code, startDate, endDate, period);
-                IKLineData data = LoadKLineData(code, startDate, endDate, new KLinePeriod(KLinePeriod.TYPE_DAY, 1));
+                IKLineData data = LoadKLineData(code, startDate, endDate, new KLinePeriod(KLineTimeType.DAY, 1));
                 return DataTransfer_KLine2KLine.Transfer(data, period);
             }
             //return LoadKLineData(code, startDate, endDate, period);

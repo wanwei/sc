@@ -195,22 +195,22 @@ namespace com.wer.sc.data
             if (span.Seconds != 0)
             {
                 period.Period = span.Seconds;
-                period.PeriodType = KLinePeriod.TYPE_SECOND;
+                period.PeriodType = KLineTimeType.SECOND;
             }
             else if (span.Minutes != 0)
             {
                 period.Period = span.Minutes;
-                period.PeriodType = KLinePeriod.TYPE_MINUTE;
+                period.PeriodType = KLineTimeType.MINUTE;
             }
             else if (span.Hours != 0)
             {
                 period.Period = span.Hours;
-                period.PeriodType = KLinePeriod.TYPE_HOUR;
+                period.PeriodType = KLineTimeType.HOUR;
             }
             else
             {
                 period.Period = span.Days;
-                period.PeriodType = KLinePeriod.TYPE_DAY;
+                period.PeriodType = KLineTimeType.DAY;
             }
             return period;
         }

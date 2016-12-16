@@ -28,7 +28,7 @@ namespace com.wer.sc.data.test.utils
 
         private List<int> GetDataIndeies(DataReaderFactory fac, string code, int date)
         {
-            IKLineData minuteKLineData = fac.KLineDataReader.GetData(code, date, date, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1));
+            IKLineData minuteKLineData = fac.KLineDataReader.GetData(code, date, date, new KLinePeriod(KLineTimeType.MINUTE, 1));
             TickData tickData = fac.TickDataReader.GetTickData(code, date);
             TickDataIndeier indeier = new TickDataIndeier(tickData, minuteKLineData);
             return indeier.GetAllTickSplitIndex();

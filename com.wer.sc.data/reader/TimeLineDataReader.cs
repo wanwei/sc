@@ -22,7 +22,7 @@ namespace com.wer.sc.data.reader
 
         public ITimeLineData GetData(String code, int date)
         {
-            String path = utils.GetKLineDataPath(code, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1));
+            String path = utils.GetKLineDataPath(code, new KLinePeriod(KLineTimeType.MINUTE, 1));
             KLineDataStore store = new KLineDataStore(path);
 
             KLineDataIndexResult result = store.LoadIndex();
@@ -36,7 +36,7 @@ namespace com.wer.sc.data.reader
 
         public List<ITimeLineData> GetData(String code, int startDate, int endDate)
         {
-            String path = utils.GetKLineDataPath(code, new KLinePeriod(KLinePeriod.TYPE_MINUTE, 1));
+            String path = utils.GetKLineDataPath(code, new KLinePeriod(KLineTimeType.MINUTE, 1));
             KLineDataStore store = new KLineDataStore(path);
             KLineDataIndexResult result = store.LoadIndex();
             return GetData(code, startDate, endDate, store, result);
