@@ -29,12 +29,16 @@ namespace com.wer.sc.data.navigate
         {
             this.fac = fac;
             this.code = code;
-            this.time = time;
+            this.NavigateTo(time);
         }
 
         public void NavigateTo(double time)
         {
             this.time = time;
+            /*
+             * 导航后
+             * 
+             */
         }
 
         public void NavigateForward_Period(KLinePeriod period, int len)
@@ -73,12 +77,7 @@ namespace com.wer.sc.data.navigate
         public ITickData GetTickData()
         {
             throw new NotImplementedException();
-        }
-
-        public List<ITickData> GetTickData(int len)
-        {
-            throw new NotImplementedException();
-        }
+        }        
 
         public event DataChangeEventHandler OnDataChangeHandler;
     }

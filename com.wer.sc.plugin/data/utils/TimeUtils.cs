@@ -90,7 +90,7 @@ namespace com.wer.sc.data.utils
         /// <returns></returns>
         public static List<double> GetKLineTimes(List<double[]> openTimeList, KLinePeriod period)
         {
-            DayOpenTime dayOpenTime = new DayOpenTime();
+            KLineOpenPeriods dayOpenTime = new KLineOpenPeriods();
             double offset = 0;
             for (int i = 0; i < openTimeList.Count; i++)
             {
@@ -105,9 +105,9 @@ namespace com.wer.sc.data.utils
             return dayOpenTime.KlineTimes;
         }
 
-        public static DayOpenTime GetKLineTimes_DayOpenTime(List<double[]> openTimeList, KLinePeriod period)
+        public static KLineOpenPeriods GetKLineTimes_DayOpenTime(List<double[]> openTimeList, KLinePeriod period)
         {
-            DayOpenTime dayOpenTime = new DayOpenTime();
+            KLineOpenPeriods dayOpenTime = new KLineOpenPeriods();
             double offset = 0;
             for (int i = 0; i < openTimeList.Count; i++)
             {
@@ -131,7 +131,7 @@ namespace com.wer.sc.data.utils
             return dayOpenTime;
         }
 
-        private static double GetTimeArr(DayOpenTime dayOpenTime, double[] openTime, KLinePeriod period, double offset)
+        private static double GetTimeArr(KLineOpenPeriods dayOpenTime, double[] openTime, KLinePeriod period, double offset)
         {
             List<double> times = dayOpenTime.KlineTimes;
             double currentTime = 20100101 + openTime[0] + offset;
@@ -174,7 +174,7 @@ namespace com.wer.sc.data.utils
         }
     }
 
-    public class DayOpenTime
+    public class KLineOpenPeriods
     {
         private List<int> splitIndeies = new List<int>();
         private List<double> klineTimes = new List<double>();

@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace com.wer.sc.data.reader
 {
-    public class TimeLineDataReader : ITimeLineDataReader
+    public class HistoryDataReader_TimeLine : IHistoryDataReader_TimeLine
     {
         private DataReaderFactory dataReaderFactory;
         private string dataPath;
         private DataPathUtils utils;
 
-        public TimeLineDataReader(DataReaderFactory dataReaderFactory)
+        public HistoryDataReader_TimeLine(DataReaderFactory dataReaderFactory)
         {
             this.dataReaderFactory = dataReaderFactory;
             this.utils = dataReaderFactory.PathUtils;
@@ -54,5 +54,4 @@ namespace com.wer.sc.data.reader
             return DataTransfer_KLine2TimeLine.ConvertTimeLineDataList(data, lastEndPrice, dataReaderFactory.OpenDateReader);
         }
     }
-
 }

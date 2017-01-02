@@ -62,7 +62,7 @@
     <Compile Include="data\opentime\IOpenDateReader.cs" />
     <Compile Include="data\opentime\IOpenTimeReader.cs" />
     <Compile Include="data\opentime\OpenDateCache.cs" />
-    <Compile Include="data\DayStartTime.cs" />
+    <Compile Include="data\DayOpenTime.cs" />
     <Compile Include="data\opentime\DayStartTimeCache.cs" />
     <Compile Include="data\opentime\DaySplitter.cs" />
     <Compile Include="data\ITimeLineBar.cs" />
@@ -89,7 +89,7 @@
     <Compile Include="data\transfer\IKLineTimeListGetter.cs" />
     <Compile Include="data\transfer\KLineTimeListGetter.cs" />
     <Compile Include="data\utils\CsvUtils_Code.cs" />
-    <Compile Include="data\utils\CsvUtils_DayStartTime.cs" />
+    <Compile Include="data\utils\CsvUtils_DayOpenTime.cs" />
     <Compile Include="data\utils\CsvUtils_KLineData.cs" />
     <Compile Include="data\utils\CsvUtils_OpenDate.cs" />
     <Compile Include="data\utils\CsvUtils_TickData.cs" />

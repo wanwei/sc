@@ -18,7 +18,7 @@
         /// <returns></returns>
         int GetOpenDate(double time);
         
-        IOpenDateReader GetOpenDateReader();
+        ICommonDataReader_OpenDate GetOpenDateReader();
 
         int MaxCacheDateCount { get; set; }
 

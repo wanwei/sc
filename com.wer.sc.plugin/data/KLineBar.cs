@@ -102,5 +102,19 @@ namespace com.wer.sc.data
             get { return this.hold; }
             set { this.hold = value; }
         }
+
+        public static KLineBar CopyFrom(IKLineBar otherKlineBar)
+        {
+            KLineBar klineBar = new KLineBar();
+            klineBar.code = otherKlineBar.Code;
+            klineBar.start = otherKlineBar.Start;
+            klineBar.high = otherKlineBar.High;
+            klineBar.low = otherKlineBar.Low;
+            klineBar.end = otherKlineBar.End;
+            klineBar.mount = otherKlineBar.Mount;
+            klineBar.money = otherKlineBar.Money;
+            klineBar.hold = otherKlineBar.Hold;
+            return klineBar;
+        }
     }
 }

@@ -10,21 +10,27 @@ namespace com.wer.sc.data
     /// 日开盘时间
     /// 该类记录了开盘日早上的开盘时间
     /// </summary>
-    public struct DayStartTime
+    public class DayOpenTime
     {
         public int Date;
 
         public double Start;
 
-        public DayStartTime(int date, double start)
+        public double End;
+        public DayOpenTime()
+        {
+
+        }
+        public DayOpenTime(int date, double start, double end)
         {
             this.Date = date;
             this.Start = start;
+            this.End = end;
         }
 
         public override string ToString()
         {
-            return Date + "," + Start;
+            return Date + "," + Start + "," + End;
         }
     }
 }

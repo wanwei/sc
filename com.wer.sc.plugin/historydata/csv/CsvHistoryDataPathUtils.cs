@@ -46,11 +46,10 @@ namespace com.wer.sc.plugin.historydata.csv
             return pluginSrcDataPath + "opendates.csv";
         }
 
-        public static String GetDayStartTimePath(String pluginSrcDataPath, String code)
+        public static String GetDayOpenTimePath(String pluginSrcDataPath, String code)
         {
-            return pluginSrcDataPath + "\\" + code + "\\" + code + "_daystarttime" + ".csv";
+            return pluginSrcDataPath + "\\" + code + "\\" + code + "_dayopentime" + ".csv";
         }
-
 
         public static String GetTickDataPath(String pluginSrcDataPath, String code, int date)
         {

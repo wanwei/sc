@@ -35,7 +35,7 @@ namespace com.wer.sc.data.cache.impl
             if (dicRealData.ContainsKey(key))
                 return dicRealData[key];
 
-            ITimeLineData realdata = dataReaderFac.RealDataReader.GetData(code, date);
+            ITimeLineData realdata = dataReaderFac.TimeLineDataReader.GetData(code, date);
             if (keies.Count > 10)
             {
                 DayDataKey firstKey = keies[0];

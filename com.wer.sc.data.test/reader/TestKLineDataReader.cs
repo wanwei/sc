@@ -14,7 +14,7 @@ namespace com.wer.sc.data.test.reader
         [TestMethod]
         public void TestKLineDataReader_GetData_20130101_20160101()
         {
-            IKLineDataReader klineDataReader = GetKLineDataReader();
+            IHistoryDataReader_KLine klineDataReader = GetKLineDataReader();
             IKLineData klineData = klineDataReader.GetData("m05", 20130101, 20160101, KLinePeriod.KLinePeriod_1Minute);
             string[] lines = Resources.KLineData_M05_20130101_20151231_1Minute.Split('\r');
             Assert.AreEqual(lines.Length, klineData.Length);
@@ -29,7 +29,7 @@ namespace com.wer.sc.data.test.reader
         [TestMethod]
         public void TestKLineDataReaderGetAll()
         {
-            IKLineDataReader reader = GetKLineDataReader();
+            IHistoryDataReader_KLine reader = GetKLineDataReader();
             IKLineData data_m01 = reader.GetAllData("m01", KLinePeriod.KLinePeriod_1Minute);
 
             IKLineData data_m03 = reader.GetAllData("m03", KLinePeriod.KLinePeriod_1Minute);
@@ -93,7 +93,7 @@ namespace com.wer.sc.data.test.reader
 
         private void AssertGetData(string code, int start, int end, KLinePeriod period, string result)
         {
-            IKLineDataReader klineDataReader = GetKLineDataReader();
+            IHistoryDataReader_KLine klineDataReader = GetKLineDataReader();
             string[] lines = result.Split('\r');
             IKLineData klineData = klineDataReader.GetData(code, start, end, period);
             Assert.AreEqual(lines.Length, klineData.Length);
@@ -105,7 +105,7 @@ namespace com.wer.sc.data.test.reader
         }
 
 
-        private static IKLineDataReader GetKLineDataReader()
+        private static IHistoryDataReader_KLine GetKLineDataReader()
         {
             return ResourceLoader.GetDefaultDataReaderFactory().KLineDataReader;
         }

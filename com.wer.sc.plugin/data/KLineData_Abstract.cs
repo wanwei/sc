@@ -152,11 +152,11 @@ namespace com.wer.sc.data
 
         public IKLineBar GetAggrKLineBar(int startIndex, int endIndex)
         {
-            KLineBar chart = new KLineBar();
-            chart.Time = this.Arr_Time[startIndex];
-            chart.Start = this.Arr_Start[startIndex];
-            chart.End = this.Arr_End[endIndex];
-            chart.Hold = this.Arr_Hold[endIndex];
+            KLineBar bar = new KLineBar();
+            bar.Time = this.Arr_Time[startIndex];
+            bar.Start = this.Arr_Start[startIndex];
+            bar.End = this.Arr_End[endIndex];
+            bar.Hold = this.Arr_Hold[endIndex];
 
             float high = float.MinValue;
             float low = float.MaxValue;
@@ -171,11 +171,11 @@ namespace com.wer.sc.data
                 mount += this.Arr_Mount[i];
                 money += this.Arr_Money[i];
             }
-            chart.High = high;
-            chart.Low = low;
-            chart.Mount = mount;
-            chart.Money = money;
-            return chart;
+            bar.High = high;
+            bar.Low = low;
+            bar.Mount = mount;
+            bar.Money = money;
+            return bar;
         }
 
         public KLinePeriod Period

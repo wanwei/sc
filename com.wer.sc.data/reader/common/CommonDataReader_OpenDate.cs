@@ -6,13 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace com.wer.sc.data
+namespace com.wer.sc.data.reader
 {
-    public class OpenDateReader : IOpenDateReader
+    public class CommonDataReader_OpenDate : ICommonDataReader_OpenDate
     {
         private OpenDateCache cache;
 
-        public OpenDateReader(String path)
+        public CommonDataReader_OpenDate(String path)
         {
             OpenDateStore store = new OpenDateStore(path);
             List<int> openDates = store.Load();

@@ -68,7 +68,7 @@ namespace com.wer.sc.data.update
         public void TestTransfer_M01_20131202_20131213()
         {
             DataReaderFactory fac = ResourceLoader.GetDefaultDataReaderFactory();
-            ITickDataReader tickReader = fac.TickDataReader;
+            IHistoryDataReader_Tick tickReader = fac.TickDataReader;
             IList<int> openDates = fac.OpenDateReader.GetOpenDates(20131202, 20131213);
             List<TickData> dataList = new List<TickData>();
             for (int i = 0; i < openDates.Count; i++)
@@ -92,7 +92,7 @@ namespace com.wer.sc.data.update
         public void TestTransfer_M05_20131202_20131231()
         {
             DataReaderFactory fac = ResourceLoader.GetDefaultDataReaderFactory();
-            ITickDataReader tickReader = fac.TickDataReader;
+            IHistoryDataReader_Tick tickReader = fac.TickDataReader;
             IList<int> openDates = fac.OpenDateReader.GetOpenDates(20131202, 20131231);
             List<TickData> dataList = new List<TickData>();
             for (int i = 0; i < openDates.Count; i++)
@@ -116,7 +116,7 @@ namespace com.wer.sc.data.update
         public void TestTransfer_M01_20131202_20131213_15Second()
         {
             DataReaderFactory fac = ResourceLoader.GetDefaultDataReaderFactory();
-            ITickDataReader tickReader = fac.TickDataReader;
+            IHistoryDataReader_Tick tickReader = fac.TickDataReader;
             IList<int> openDates = fac.OpenDateReader.GetOpenDates(20131202, 20131213);
             List<TickData> dataList = new List<TickData>();
             for (int i = 0; i < openDates.Count; i++)

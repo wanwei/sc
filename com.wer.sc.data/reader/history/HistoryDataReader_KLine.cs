@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace com.wer.sc.data.reader
 {
-    public class KLineDataReader : IKLineDataReader
+    public class HistoryDataReader_KLine : IHistoryDataReader_KLine
     {
         private string dataPath;
         private DataPathUtils utils;
 
-        public KLineDataReader(string dataPath)
+        public HistoryDataReader_KLine(string dataPath)
         {
             this.dataPath = dataPath;
             this.utils = new DataPathUtils(this.dataPath);

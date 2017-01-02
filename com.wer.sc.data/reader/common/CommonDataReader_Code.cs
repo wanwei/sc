@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace com.wer.sc.data.reader
 {
-    public class CodeReader : ICodeReader
+    public class CommonDataReader_Code : ICommonDataReader_Code
     {
         private List<CodeInfo> codes = new List<CodeInfo>();
 
@@ -19,7 +19,7 @@ namespace com.wer.sc.data.reader
 
         private String path;
 
-        public CodeReader(String path)
+        public CommonDataReader_Code(String path)
         {
             this.path = path;
             init();

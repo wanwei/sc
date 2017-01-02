@@ -28,7 +28,7 @@ namespace com.wer.sc.data.update
                 DoKLineUpdate(dataProvider);
 
                 DataReaderFactory fac = new DataReaderFactory(dataProvider.GetDataPath());
-                IKLineDataReader klineReader = fac.KLineDataReader;
+                IHistoryDataReader_KLine klineReader = fac.KLineDataReader;
 
                 IKLineData data = klineReader.GetAllData("m05", period_Minute);
                 DataTestUtils.AssertKLineDataResult(data, Resources.KLineData_M05_20141215_20150116_1Minute);

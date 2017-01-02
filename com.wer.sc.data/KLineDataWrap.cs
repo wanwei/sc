@@ -19,9 +19,9 @@ namespace com.wer.sc.data
 
         private IKLineData klineData;
 
-        private IKLineDataReader dataReader;
+        private IHistoryDataReader_KLine dataReader;
 
-        public KLineDataWrap(IKLineDataReader dataReader)
+        public KLineDataWrap(IHistoryDataReader_KLine dataReader)
         {
             this.dataReader = dataReader;
         }

@@ -23,7 +23,7 @@ namespace com.wer.sc.data.navigate
         {
             DataCacheFactory cacheFactory = new DataCacheFactory(factory);
             IDataCache_Code cache = cacheFactory.CreateCache_Code(code);
-            IOpenDateReader openDateReader = cache.GetOpenDateReader();
+            ICommonDataReader_OpenDate openDateReader = cache.GetOpenDateReader();
             Init(factory, code, time, openDateReader.FirstOpenDate, openDateReader.LastOpenDate);
         }
 

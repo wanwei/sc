@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace com.wer.sc.data
 {
-    public interface IOpenDateReader
+    public interface ICommonDataReader_OpenDate
     {
         /// <summary>
         /// 得到该日是否开盘

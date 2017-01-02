@@ -11,19 +11,19 @@ using System.Threading.Tasks;
 
 namespace com.wer.sc.data.generator
 {
-    public class Step_DayStartTime : IStep
+    public class Step_DayOpenTime : IStep
     {
         private string code;
 
         private IPlugin_HistoryData historyData;
 
-        private DayStartTimeStore dayStartTimeStore;
+        private DayOpenTimeStore dayStartTimeStore;
 
-        public Step_DayStartTime(string code, IPlugin_HistoryData historyData, DataPathUtils utils)
+        public Step_DayOpenTime(string code, IPlugin_HistoryData historyData, DataPathUtils utils)
         {
             this.code = code;
             this.historyData = historyData;
-            this.dayStartTimeStore = new DayStartTimeStore(utils.GetDayStartTime(code));
+            this.dayStartTimeStore = new DayOpenTimeStore(utils.GetDayOpenTime(code));
         }
 
         public int ProgressStep
@@ -44,7 +44,7 @@ namespace com.wer.sc.data.generator
 
         public string Proceed()
         {
-            List<DayStartTime> dayStartTimes = historyData.GetDayStartTime(code);
+            List<DayOpenTime> dayStartTimes = historyData.GetDayOpenTime(code);
             dayStartTimeStore.Save(dayStartTimes);
             return "更新" + code + "的开盘时间完毕";
         }

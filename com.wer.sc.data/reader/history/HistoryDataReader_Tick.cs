@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace com.wer.sc.data.reader
 {
-    public class TickDataReader : ITickDataReader
+    public class HistoryDataReader_Tick : IHistoryDataReader_Tick
     {
         private String dataPath;
         private DataPathUtils utils;
-        public TickDataReader(String dataPath)
+        public HistoryDataReader_Tick(String dataPath)
         {
             this.dataPath = dataPath;
             this.utils = new DataPathUtils(dataPath);

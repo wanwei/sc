@@ -1,4 +1,4 @@
-﻿using com.wer.sc.data.utils;
+﻿using com.wer.sc.data.reader.realtime.utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,9 +14,9 @@ namespace com.wer.sc.data.cache.impl
         private List<int> openDates = new List<int>();
         private Dictionary<int, int[]> dicDateStartEnd = new Dictionary<int, int[]>();
 
-        private IOpenDateReader openDateReader;
+        private ICommonDataReader_OpenDate openDateReader;
 
-        public DayMinuteKLineDataGetter(IKLineData klineData, IOpenDateReader openDateReader)
+        public DayMinuteKLineDataGetter(IKLineData klineData, ICommonDataReader_OpenDate openDateReader)
         {
             this.klineData = klineData;
             this.openDateReader = openDateReader;
@@ -25,17 +25,17 @@ namespace com.wer.sc.data.cache.impl
 
         private void initIndex()
         {
-            KLineTimeGetter timeGetter = new KLineTimeGetter(klineData);
+            //KLineTimeGetter timeGetter = new KLineTimeGetter(klineData);
 
-            List<SplitterResult> splitResults = DaySplitter.Split(timeGetter, openDateReader);
-            for (int i = 0; i < splitResults.Count; i++)
-            {
-                SplitterResult result = splitResults[i];
-                openDates.Add(result.Date);
-                int start = result.Index;
-                int end = (i == splitResults.Count - 1) ? timeGetter.Count - 1 : splitResults[i + 1].Index;
-                dicDateStartEnd.Add(result.Date, new int[] { start, end });
-            }
+            //List<SplitterResult> splitResults = DaySplitter.Split(timeGetter, openDateReader);
+            //for (int i = 0; i < splitResults.Count; i++)
+            //{
+            //    SplitterResult result = splitResults[i];
+            //    openDates.Add(result.Date);
+            //    int start = result.Index;
+            //    int end = (i == splitResults.Count - 1) ? timeGetter.Count - 1 : splitResults[i + 1].Index;
+            //    dicDateStartEnd.Add(result.Date, new int[] { start, end });
+            //}
         }
 
         public IKLineData GetMinuteKLineData(int date)

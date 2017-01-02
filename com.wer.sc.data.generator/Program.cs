@@ -23,8 +23,6 @@ namespace com.wer.sc.data.generator
             if (formChoosePlugin.DialogResult == DialogResult.OK)
             {
                 FormDataUpdate form = new FormDataUpdate(formChoosePlugin.ChoosedPlugin);
-                //FormGenerator generator = new FormGenerator();
-               // generator.LoadDataCenter(formChoosePlugin.ProviderName, formChoosePlugin.ProviderDataMgr);
                 Application.Run(form);
             }
         }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace com.wer.sc.data.reader
 {
-    public class OpenDateCache : IOpenDateReader
+    public class OpenDateCache : ICommonDataReader_OpenDate
     {
         private List<int> openDatesList;
 

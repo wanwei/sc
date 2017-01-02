@@ -23,7 +23,7 @@ namespace com.wer.sc.data.utils
         /// <param name="openTimes"></param>
         /// <param name="targetPeriod"></param>
         /// <returns></returns>
-        public static List<double> GetKLineTimeList(int date, IOpenDateReader openDateReader, List<double[]> openTimes, KLinePeriod targetPeriod)
+        public static List<double> GetKLineTimeList(int date, ICommonDataReader_OpenDate openDateReader, List<double[]> openTimes, KLinePeriod targetPeriod)
         {
             if (!openDateReader.IsOpen(date))
                 throw new ArgumentException(date + "不开盘");
@@ -31,7 +31,7 @@ namespace com.wer.sc.data.utils
             bool overNight = IsOverNight(openTimes);
             bool isWeekStart = IsWeekStart(date, openDateReader);
 
-            DayOpenTime dayOpenTime = TimeUtils.GetKLineTimes_DayOpenTime(openTimes, targetPeriod);
+            KLineOpenPeriods dayOpenTime = TimeUtils.GetKLineTimes_DayOpenTime(openTimes, targetPeriod);
             List<double> klineFullTimes = new List<double>(dayOpenTime.KlineTimes.Count);
 
             List<double> klineTimes = dayOpenTime.KlineTimes;
@@ -75,7 +75,7 @@ namespace com.wer.sc.data.utils
             return openTime[0] < openTime[1];
         }
 
-        private static bool IsWeekStart(int date, IOpenDateReader openDateReader)
+        private static bool IsWeekStart(int date, ICommonDataReader_OpenDate openDateReader)
         {
             int index = openDateReader.GetOpenDateIndex(date);
             if (index < 0)
@@ -114,7 +114,7 @@ namespace com.wer.sc.data.utils
     public class OpenTimeUtilsArgs
     {
         public int date;
-        public IOpenDateReader openDateReader;
+        public ICommonDataReader_OpenDate openDateReader;
         public List<double[]> openTimes;
         public KLinePeriod targetPeriod;
 
@@ -122,7 +122,7 @@ namespace com.wer.sc.data.utils
         {
 
         }
-        public OpenTimeUtilsArgs(int date, IOpenDateReader openDateReader, List<double[]> openTimes, KLinePeriod period)
+        public OpenTimeUtilsArgs(int date, ICommonDataReader_OpenDate openDateReader, List<double[]> openTimes, KLinePeriod period)
         {
             this.date = date;
             this.openDateReader = openDateReader;

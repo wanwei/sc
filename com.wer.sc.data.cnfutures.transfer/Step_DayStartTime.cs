@@ -42,10 +42,10 @@ namespace com.wer.sc.data.cnfutures.generator
 
         public string Proceed()
         {
-            List<DayStartTime> result = GetAllDayStartTimes();
+            List<DayOpenTime> result = GetAllDayStartTimes();
             if (result == null)
                 return code + "的开盘时间已经是最新的，不需要更新";
-            string path = CsvHistoryDataPathUtils.GetDayStartTimePath(dataLoader.PluginSrcDataPath, code);
+            string path = CsvHistoryDataPathUtils.GetDayOpenTimePath(dataLoader.PluginSrcDataPath, code);
             CsvUtils_DayStartTime.Save(path, result);
             return "更新完成" + code + "的开盘时间";
         }
@@ -54,9 +54,9 @@ namespace com.wer.sc.data.cnfutures.generator
         /// 得到该合约的所有开盘时间，如果返回空，则表示现在数据已经是最新的
         /// </summary>
         /// <returns></returns>
-        public List<DayStartTime> GetAllDayStartTimes()
+        public List<DayOpenTime> GetAllDayStartTimes()
         {
-            List<DayStartTime> dayStartTimes = dataLoader.Plugin_HistoryData.GetDayStartTime(code);
+            List<DayOpenTime> dayStartTimes = dataLoader.Plugin_HistoryData.GetDayOpenTime(code);
             DataLoader_OpenDate dataLoader_OpenDate = dataLoader.DataLoader_OpenDate;
             IOpenDateReader openDateReader = dataLoader_OpenDate.GetOpenDateReader();
             int firstIndex = 0;
@@ -66,36 +66,37 @@ namespace com.wer.sc.data.cnfutures.generator
                 if (lastDate == openDateReader.LastOpenDate)
                     return null;
                 int lastIndex = openDateReader.GetOpenDateIndex(lastDate);
-                firstIndex = lastIndex + 1;                
+                firstIndex = lastIndex + 1;
             }
             List<int> openDates = openDateReader.GetAllOpenDates();
-            List<DayStartTime> updateStartTimes = CalcDayStartTime(openDates, firstIndex, openDates.Count - 1, dataLoader.DataLoader_OpenTime);
+            List<DayOpenTime> updateStartTimes = CalcDayOpenTime(openDates, firstIndex, openDates.Count - 1, dataLoader.DataLoader_OpenTime);
 
-            List<DayStartTime> result = new List<DayStartTime>();
+            List<DayOpenTime> result = new List<DayOpenTime>();
             if (dayStartTimes != null)
                 result.AddRange(dayStartTimes);
             result.AddRange(updateStartTimes);
             return result;
         }
 
-        private List<DayStartTime> CalcDayStartTime(List<int> openDates, int startIndex, int endIndex, DataLoader_OpenTime dataLoader_OpenTime)
+        private List<DayOpenTime> CalcDayOpenTime(List<int> openDates, int startIndex, int endIndex, DataLoader_OpenTime dataLoader_OpenTime)
         {
-            List<DayStartTime> dayStartTimes = new List<DayStartTime>();
+            List<DayOpenTime> dayStartTimes = new List<DayOpenTime>();
             for (int i = startIndex; i <= endIndex; i++)
             {
                 int date = openDates[i];
 
                 List<double[]> openTime = dataLoader_OpenTime.GetOpenTime(code, date);
                 double startTime = openTime[0][0];
+                double endTime = openTime[openTime.Count - 1][1];
                 if (startTime > 0.18)
                 {
                     if (i == 0)
                         throw new ArgumentException("传入的" + date + "有夜盘，必须传入其之前的日期");
-                    dayStartTimes.Add(new DayStartTime(date, openDates[i - 1] + startTime));
+                    dayStartTimes.Add(new DayOpenTime(date, openDates[i - 1] + startTime, openDates[i] + endTime));
                 }
                 else
                 {
-                    dayStartTimes.Add(new DayStartTime(date, date + startTime));
+                    dayStartTimes.Add(new DayOpenTime(date, date + startTime, date + endTime));
                 }
             }
             return dayStartTimes;

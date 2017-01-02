@@ -8,7 +8,7 @@ namespace com.wer.sc.data.utils
 {
     public class DaySplitter
     {
-        public static List<SplitterResult> Split(TimeGetter timeGetter, IOpenDateReader openDateReader)
+        public static List<SplitterResult> Split(TimeGetter timeGetter, ICommonDataReader_OpenDate openDateReader)
         {
             return Split(timeGetter);
         }
@@ -87,7 +87,7 @@ namespace com.wer.sc.data.utils
             return indeies;
         }
 
-        public static List<SplitterResult> Split(IKLineData klineData, IOpenDateReader openDateReader)
+        public static List<SplitterResult> Split(IKLineData klineData, ICommonDataReader_OpenDate openDateReader)
         {
             return Split(klineData);
         }
@@ -122,7 +122,7 @@ namespace com.wer.sc.data.utils
             return false;
         }
 
-        public static int GetTimeDate(double time, IOpenDateReader openDateReader)
+        public static int GetTimeDate(double time, ICommonDataReader_OpenDate openDateReader)
         {
             int date = (int)time;
             double t = time - date;

@@ -21,7 +21,7 @@ namespace com.wer.sc.comp.test
         public MockGraphicDataProvider_Real()
         {
             fac = new DataReaderFactory(@"D:\SCDATA\CNFUTURES");
-            data = fac.RealDataReader.GetData(code, date);
+            data = fac.TimeLineDataReader.GetData(code, date);
         }
 
         public string Code

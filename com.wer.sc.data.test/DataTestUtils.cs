@@ -10,7 +10,7 @@ namespace com.wer.sc.data.test
         public static IKLineData GetKLineData(string code, int start, int end, KLinePeriod period, List<double[]> openTime)
         {
             DataReaderFactory fac = ResourceLoader.GetDefaultDataReaderFactory();
-            ITickDataReader tickReader = fac.TickDataReader;
+            IHistoryDataReader_Tick tickReader = fac.TickDataReader;
             IList<int> dates = fac.OpenDateReader.GetOpenDates(start, end);
             List<TickData> dataList = new List<TickData>();
             for (int i = 0; i < dates.Count; i++)

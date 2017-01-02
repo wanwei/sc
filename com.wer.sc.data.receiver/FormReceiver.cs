@@ -16,6 +16,8 @@ namespace com.wer.sc.data.receiver
     {
         private const string PATH = @"\RECEIVER\";
 
+        private System.Timers.Timer timer;
+
         private LogUtils logUtils = new LogUtils();
 
         private TickBarWriter tickBarWriter;// = new TickBarWriter();
@@ -39,6 +41,78 @@ namespace com.wer.sc.data.receiver
             //this.tickBarWriter = new TickBarWriter(Environment.CurrentDirectory + PATH, 20161213);
             this.mgr = PluginMgrFactory.DefaultPluginMgr;
             InitMenu();
+            InitTimer();
+        }
+
+        //每天早上8点半或者晚上8点半重连
+        private void InitTimer()
+        {
+            DateTime nextConnectTime = GetNextConnectTime();
+
+            timer = new System.Timers.Timer();
+            TimeSpan ts = nextConnectTime - DateTime.Now;
+            timer.Interval = ts.TotalMilliseconds;
+            timer.Enabled = true;
+            timer.Elapsed += Timer_Elapsed;
+            timer.Start();
+        }
+
+        private bool timerAdjusted = false;
+
+        private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            if (!timerAdjusted)
+            {
+                timer.Interval = 12 * 3600 * 1000;
+                timerAdjusted = true;
+                ReConnect();
+            }
+            else
+            {
+                ReConnect();
+            }
+        }
+
+        private void ReConnect()
+        {
+            if (currentMarket != null)
+            {
+                currentMarket.MarketData.DisConnect();
+                currentMarket.MarketTrader.DisConnect();
+                currentMarket.MarketData.Connect(currentConnection);
+                currentMarket.MarketTrader.Connect(currentConnection);
+            }
+        }
+
+        const string NIGHTCONNECT = "20:30:00";
+        const string MORNINGCONNECT = "08:30:00";
+
+        private static DateTime GetNextConnectTime()
+        {
+            DateTime nextConnectTime;
+            DateTime dtNow = DateTime.Now;
+            string today = dtNow.ToString("yyyy-MM-dd");
+
+            DateTime nightConnect = DateTime.Parse(today + " " + NIGHTCONNECT);
+            //开启时间晚于晚上8点半，第二天重连
+            if (dtNow.CompareTo(nightConnect) > 0)
+            {
+                string nextDay = dtNow.AddDays(1).ToString("yyyy-MM-dd");
+                nextConnectTime = DateTime.Parse(nextDay + " " + MORNINGCONNECT);
+            }
+            else
+            {
+                DateTime morningConnect = DateTime.Parse(today + " " + MORNINGCONNECT);
+                if (dtNow.CompareTo(morningConnect) > 0)
+                {
+                    nextConnectTime = nightConnect;
+                }
+                else
+                {
+                    nextConnectTime = morningConnect;
+                }
+            }
+            return nextConnectTime;
         }
 
         private void InitMenu()
@@ -97,8 +171,13 @@ namespace com.wer.sc.data.receiver
 
                 Type type = currentMarket.GetType();
                 string[] nameDescArr = PluginAssembly.GetPluginNameDesc(type);
-                if (this.tickBarWriter == null)
+                //如果交易日期改了，需要重新创建一个tickbarwriter，否则程序隔夜跑的时候
+                int date = marketDataLoginInfo.TradingDay;
+                if (this.tickBarWriter == null || this.tickBarWriter.Date != date)
+                {
+                    //TODO tickbarwriter需要flush一下
                     this.tickBarWriter = new TickBarWriter(Environment.CurrentDirectory + PATH + nameDescArr[0] + "\\", marketDataLoginInfo.TradingDay);
+                }
             }
         }
 
@@ -163,8 +242,16 @@ namespace com.wer.sc.data.receiver
             ToolStripItem marketItem = connectionItem.OwnerItem;
             currentMarket = (IPlugin_Market)marketItem.Tag;
             currentConnection = (ConnectionInfo)connectionItem.Tag;
-            currentMarket.MarketData.Connect(currentConnection);
-            currentMarket.MarketTrader.Connect(currentConnection);
+            Connect();
+        }
+
+        private void Connect()
+        {
+            if (currentMarket != null)
+            {
+                currentMarket.MarketData.Connect(currentConnection);
+                currentMarket.MarketTrader.Connect(currentConnection);
+            }
         }
 
         private void FormReceiver_FormClosing(object sender, FormClosingEventArgs e)

@@ -153,7 +153,7 @@ namespace com.wer.sc.data.update
             return transfer.CalcKLineData();
         }
 
-        public static KLineData Transfer(int date, TickData data, IOpenDateReader openDateReader, List<double[]> opentime, KLinePeriod targetPeriod, KLineData lastKLineData)
+        public static KLineData Transfer(int date, TickData data, ICommonDataReader_OpenDate openDateReader, List<double[]> opentime, KLinePeriod targetPeriod, KLineData lastKLineData)
         {
             DataTransfer_Tick2KLine2 transfer = new DataTransfer_Tick2KLine2(data, lastKLineData, new OpenTimeUtilsArgs(date, openDateReader, opentime, targetPeriod));
             return transfer.CalcKLineData();

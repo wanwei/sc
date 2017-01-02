@@ -14,7 +14,7 @@ namespace com.wer.sc.data.opentime
         [TestMethod]
         public void TestGetOpenDateByTime()
         {
-            List<DayStartTime> dayStartTimes = MockData_DayStartTime.GetDayStartTime("m05");
+            List<DayOpenTime> dayStartTimes = MockData_DayStartTime.GetDayStartTime("m05");
             DayStartTimeCache cache = new DayStartTimeCache(dayStartTimes);
 
             int date = cache.GetOpenDate(20140106.10);

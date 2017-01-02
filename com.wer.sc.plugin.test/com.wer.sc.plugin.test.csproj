@@ -58,6 +58,7 @@
     <Compile Include="data\opentime\TestOpenDateCache.cs" />
     <Compile Include="data\opentime\TestOpenTimePeriodUtils.cs" />
     <Compile Include="data\TestKLineData.cs" />
+    <Compile Include="data\TestKLinePeriod.cs" />
     <Compile Include="data\transfer\TestDataTransfer_Tick2KLine.cs" />
     <Compile Include="data\utils\TestCsvUtils_KLineData.cs" />
     <Compile Include="data\utils\TestCsvUtils_TickData.cs" />

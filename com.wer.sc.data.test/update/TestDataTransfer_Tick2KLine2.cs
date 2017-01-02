@@ -21,10 +21,10 @@ namespace com.wer.sc.data.test.update
         public void TestTransfer_M01_20131202()
         {
             DataReaderFactory fac = ResourceLoader.GetDefaultDataReaderFactory();
-            ITickDataReader tickReader = fac.TickDataReader;
+            IHistoryDataReader_Tick tickReader = fac.TickDataReader;
             int date = 20131202;
             TickData tickData = tickReader.GetTickData("m01", date);
-            IOpenDateReader openDateReader = fac.OpenDateReader;
+            ICommonDataReader_OpenDate openDateReader = fac.OpenDateReader;
 
             List<double[]> openTime = new List<double[]>();
             openTime.Add(new double[] { .090000, .101500 });
@@ -38,10 +38,10 @@ namespace com.wer.sc.data.test.update
         public void TestTransfer_M05_20040129()
         {
             DataReaderFactory fac = ResourceLoader.GetDefaultDataReaderFactory();
-            ITickDataReader tickReader = fac.TickDataReader;
+            IHistoryDataReader_Tick tickReader = fac.TickDataReader;
             int date = 20040129;
             TickData tickData = tickReader.GetTickData("m05", date);
-            IOpenDateReader openDateReader = fac.OpenDateReader;
+            ICommonDataReader_OpenDate openDateReader = fac.OpenDateReader;
 
             List<double[]> openTime = new List<double[]>();
             openTime.Add(new double[] { .090000, .101500 });

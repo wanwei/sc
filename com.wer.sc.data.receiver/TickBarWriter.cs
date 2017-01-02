@@ -37,6 +37,14 @@ namespace com.wer.sc.data.receiver
 
         private System.Timers.Timer writeTimer;
 
+        public int Date
+        {
+            get
+            {
+                return date;
+            }
+        }
+
         public TickBarWriter(string path, int date)
         {
             this.path = path;

@@ -1,4 +1,5 @@
-﻿using com.wer.sc.data.utils;
+﻿using com.wer.sc.data.reader.realtime.utils;
+using com.wer.sc.data.utils;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
@@ -22,17 +23,17 @@ namespace com.wer.sc.data.test.utils
             DataReaderFactory fac = ResourceLoader.GetDefaultDataReaderFactory();
             string code = "m05";
             //Print(GetDataIndeies(fac, code, 20141229));
-            Print(GetDataIndeies(fac, code, 20141229));
+            //Print(GetDataIndeies(fac, code, 20141229));
             //Print(GetDataIndeies(fac, code, 20140506));
         }
 
-        private List<int> GetDataIndeies(DataReaderFactory fac, string code, int date)
-        {
-            IKLineData minuteKLineData = fac.KLineDataReader.GetData(code, date, date, new KLinePeriod(KLineTimeType.MINUTE, 1));
-            TickData tickData = fac.TickDataReader.GetTickData(code, date);
-            TickDataIndeier indeier = new TickDataIndeier(tickData, minuteKLineData);
-            return indeier.GetAllTickSplitIndex();
-        }
+        //private List<int> GetDataIndeies(DataReaderFactory fac, string code, int date)
+        //{
+        //    IKLineData minuteKLineData = fac.KLineDataReader.GetData(code, date, date, new KLinePeriod(KLineTimeType.MINUTE, 1));
+        //    TickData tickData = fac.TickDataReader.GetTickData(code, date);
+        //    TickDataIndeier indeier = new TickDataIndeier(tickData);
+        //    return indeier.GetAllTickSplitIndex();
+        //}
 
         private void Print(List<int> list)
         {

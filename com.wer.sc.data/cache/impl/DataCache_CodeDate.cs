@@ -44,6 +44,15 @@ namespace com.wer.sc.data.cache.impl
                 return date;
             }
         }
+
+        public DataReaderFactory DataReaderFactory
+        {
+            get
+            {
+                return dataReaderFactory;
+            }
+        }
+
         public IKLineData GetMinuteKLineData()
         {
             return minuteKLineData;

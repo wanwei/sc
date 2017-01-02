@@ -32,7 +32,7 @@ namespace com.wer.sc.data.cache.impl
 
         internal DataCache_Code(DataReaderFactory dataReaderFactory, string code)
         {
-            IKLineDataReader dataReader = dataReaderFactory.KLineDataReader;
+            IHistoryDataReader_KLine dataReader = dataReaderFactory.KLineDataReader;
             KLinePeriod period = new KLinePeriod(KLineTimeType.DAY, 1);
             int start = dataReader.GetFirstDate(code, period);
             int end = dataReader.GetLastDate(code, period);
@@ -72,7 +72,7 @@ namespace com.wer.sc.data.cache.impl
             get { return endDate; }
         }
 
-        public IOpenDateReader GetOpenDateReader()
+        public ICommonDataReader_OpenDate GetOpenDateReader()
         {
             return openDateCache;
         }
@@ -142,7 +142,7 @@ namespace com.wer.sc.data.cache.impl
 
         private Dictionary<int, IKLineData> dicDateKLineData = new Dictionary<int, IKLineData>();
 
-        public MinuteKLineData_DateGetter(IKLineData klineData, IOpenDateReader openDateReader)
+        public MinuteKLineData_DateGetter(IKLineData klineData, ICommonDataReader_OpenDate openDateReader)
         {
             dataGetter = new DayMinuteKLineDataGetter(klineData, openDateReader);
         }

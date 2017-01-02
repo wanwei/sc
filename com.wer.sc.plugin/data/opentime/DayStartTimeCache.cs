@@ -13,7 +13,7 @@ namespace com.wer.sc.data.opentime
     {
         private IOpenDateReader openDateCache;
 
-        private List<DayStartTime> dayStartTimes;
+        private List<DayOpenTime> dayStartTimes;
 
         private List<int> openDates;
 
@@ -23,7 +23,7 @@ namespace com.wer.sc.data.opentime
 
         private Dictionary<double, int> dicOpenDates;
 
-        public DayStartTimeCache(List<DayStartTime> dayStartTimes)
+        public DayStartTimeCache(List<DayOpenTime> dayStartTimes)
         {
             this.dayStartTimes = dayStartTimes;
             this.openDates = new List<int>(dayStartTimes.Count);
@@ -32,7 +32,7 @@ namespace com.wer.sc.data.opentime
             this.dicOpenDates = new Dictionary<double, int>(dayStartTimes.Count);
             for (int i = 0; i < dayStartTimes.Count; i++)
             {
-                DayStartTime startTime = dayStartTimes[i];
+                DayOpenTime startTime = dayStartTimes[i];
                 this.openDates.Add(startTime.Date);
                 this.startTimes.Add(startTime.Start);
                 this.dicStartTimes.Add(startTime.Date, startTime.Start);

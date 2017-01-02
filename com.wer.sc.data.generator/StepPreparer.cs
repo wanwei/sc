@@ -63,7 +63,7 @@ namespace com.wer.sc.data.generator
         {
             for (int i = 0; i < codes.Count; i++)
             {
-                Step_DayStartTime step = new Step_DayStartTime(codes[i].Code, historyData, dataPathUtils);
+                Step_DayOpenTime step = new Step_DayOpenTime(codes[i].Code, historyData, dataPathUtils);
                 steps.Add(step);
             }
         }

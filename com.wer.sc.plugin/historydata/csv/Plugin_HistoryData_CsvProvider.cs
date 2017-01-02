@@ -72,9 +72,9 @@ namespace com.wer.sc.plugin.historydata.csv
         /// </summary>
         /// <param name="code"></param>
         /// <returns></returns>
-        public virtual List<DayStartTime> GetDayStartTime(String code)
+        public virtual List<DayOpenTime> GetDayOpenTime(String code)
         {
-            return CsvUtils_DayStartTime.Load(CsvHistoryDataPathUtils.GetDayStartTimePath(GetPluginSrcDataPath(), code));
+            return CsvUtils_DayStartTime.Load(CsvHistoryDataPathUtils.GetDayOpenTimePath(GetPluginSrcDataPath(), code));
         }
 
         /// <summary>
@@ -107,7 +107,7 @@ namespace com.wer.sc.plugin.historydata.csv
                 return GetKLineData(code, klinePeriod, resultOpenDates);
 
             IKLineData oneMinuteKLine = GetKLineData(code, KLinePeriod.KLinePeriod_1Minute, resultOpenDates);
-            return DataTransfer_KLine2KLine.Transfer(oneMinuteKLine, klinePeriod, new DayStartTimeCache(GetDayStartTime(code)));
+            return DataTransfer_KLine2KLine.Transfer(oneMinuteKLine, klinePeriod, new DayStartTimeCache(GetDayOpenTime(code)));
         }
 
         private IKLineData GetKLineData(string code, KLinePeriod klinePeriod, IList<int> resultOpenDates)

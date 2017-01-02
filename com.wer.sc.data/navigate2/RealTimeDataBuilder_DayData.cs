@@ -1,4 +1,5 @@
 ﻿using com.wer.sc.data.cache;
+using com.wer.sc.data.reader.realtime.utils;
 using com.wer.sc.data.utils;
 using System;
 using System.Collections.Generic;
@@ -19,15 +20,12 @@ namespace com.wer.sc.data.navigate
 
         private double currentTime;
 
-        private TickDataIndeier tickDataIndeier;
-
         private KLineBar currentChart = new KLineBar();
 
         public RealTimeDataBuilder_DayData(IDataCache_CodeDate cache_CodeDate, double currentTime)
         {
             this.minuteKlineData = cache_CodeDate.GetMinuteKLineData();
             this.tickData = cache_CodeDate.GetTickData();
-            this.tickDataIndeier = new TickDataIndeier(tickData, minuteKlineData);
             this.ChangeTime(currentTime);
         }
 
@@ -37,8 +35,8 @@ namespace com.wer.sc.data.navigate
                 return;
             this.currentTime = time;
             double splitTime = Math.Round(currentTime, 4);
-            int splitIndex = tickDataIndeier.GetTickIndex(splitTime);
-            int currentTickIndex = tickDataIndeier.GetTickIndex(currentTime);
+            int splitIndex = TimeIndeierUtils.IndexOfTime_Tick(tickData, splitTime);
+            int currentTickIndex = TimeIndeierUtils.IndexOfTime_Tick(tickData, currentTime);
             tickData.BarPos = currentTickIndex;
 
             currentChart.Time = splitTime;

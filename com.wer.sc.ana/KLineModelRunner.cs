@@ -19,7 +19,7 @@ namespace com.wer.sc.ana
     /// </summary>
     public class KLineModelRunner
     {
-        private IKLineDataReader reader;
+        private IHistoryDataReader_KLine reader;
 
         //code
         private String code;
@@ -173,7 +173,7 @@ namespace com.wer.sc.ana
 
         public KLineModelRunner(String datapath)
         {
-            this.reader = new KLineDataReader(datapath);
+            this.reader = new HistoryDataReader_KLine(datapath);
         }
 
         public KLineModelRunner(DataReaderFactory fac)

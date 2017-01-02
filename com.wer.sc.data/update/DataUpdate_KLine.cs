@@ -147,7 +147,7 @@ namespace com.wer.sc.data.update
             return data;
         }
 
-        private KLineData GetEmptyDayKLineData(string code, int date, List<double[]> openTimes, IOpenDateReader openDateReader, IKLineData lastKLineData)
+        private KLineData GetEmptyDayKLineData(string code, int date, List<double[]> openTimes, ICommonDataReader_OpenDate openDateReader, IKLineData lastKLineData)
         {
             float lastPrice = lastKLineData.Arr_End[lastKLineData.Length - 1];
             int lastHold = lastKLineData.Arr_Hold[lastKLineData.Length - 1];

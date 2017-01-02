@@ -48,14 +48,6 @@ namespace com.wer.sc.data
             }
         }
 
-        public double FullTime
-        {
-            get
-            {
-                return Arr_Time[BarPos];
-            }
-        }
-
         public int Date
         {
             get { return (int)Arr_Time[Length - 1]; }
@@ -65,7 +57,7 @@ namespace com.wer.sc.data
         {
             get
             {
-                return FullTime - Date;
+                return Arr_Time[BarPos];
             }
         }
 
@@ -142,10 +134,11 @@ namespace com.wer.sc.data
         public abstract IList<float> Arr_UpRange { get; }
 
         #endregion
+
         public override String ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append(FullTime).Append(",");
+            sb.Append(Time).Append(",");
             sb.Append(Price).Append(",");
             sb.Append(UpRange).Append(",");
             sb.Append(UpPercent).Append(",");

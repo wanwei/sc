@@ -10,7 +10,7 @@ namespace com.wer.sc.data
     /// K线周期类
     /// 如1分钟、5分钟、日线都用该类表示
     /// </summary>
-    public class KLinePeriod
+    public class KLinePeriod : IComparable<KLinePeriod>
     {
         public const int TYPE_SECOND = 0;
 
@@ -78,6 +78,8 @@ namespace com.wer.sc.data
             return "";
         }
 
+
+
         public override bool Equals(object obj)
         {
             if (!(obj is KLinePeriod))
@@ -93,8 +95,17 @@ namespace com.wer.sc.data
             return Period * 10 + (int)PeriodType;
         }
 
+        public int CompareTo(KLinePeriod other)
+        {
+            if (this.periodType == other.periodType)
+                return this.Period.CompareTo(other.Period);
+            else
+                return this.periodType.CompareTo(other.periodType);
+        }
+
         private static KLinePeriod period_5second = new KLinePeriod(KLineTimeType.SECOND, 5);
         private static KLinePeriod period_1minute = new KLinePeriod(KLineTimeType.MINUTE, 1);
+        private static KLinePeriod period_5minute = new KLinePeriod(KLineTimeType.MINUTE, 5);
         private static KLinePeriod period_15minute = new KLinePeriod(KLineTimeType.MINUTE, 15);
         private static KLinePeriod period_Hour = new KLinePeriod(KLineTimeType.HOUR, 1);
         private static KLinePeriod period_Day = new KLinePeriod(KLineTimeType.DAY, 1);
@@ -107,6 +118,11 @@ namespace com.wer.sc.data
         public static KLinePeriod KLinePeriod_1Minute
         {
             get { return period_1minute; }
+        }
+
+        public static KLinePeriod KLinePeriod_5Minute
+        {
+            get { return period_5minute; }
         }
 
         public static KLinePeriod KLinePeriod_15Minute

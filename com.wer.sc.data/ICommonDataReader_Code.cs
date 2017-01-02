@@ -2,8 +2,16 @@
 
 namespace com.wer.sc.data
 {
-    public interface ICodeReader
+    /// <summary>
+    /// 股票信息读取器
+    /// </summary>
+    public interface ICommonDataReader_Code
     {
+        /// <summary>
+        /// 是否包含code
+        /// </summary>
+        /// <param name="code"></param>
+        /// <returns></returns>
         bool Contain(string code);
 
         List<string> GetAllCatelogs();

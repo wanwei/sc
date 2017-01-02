@@ -70,7 +70,7 @@ namespace com.wer.sc.data.utils
             openTime.Add(new double[] { .133000, .150000 });
 
             KLinePeriod period = new KLinePeriod(KLineTimeType.MINUTE, 1);
-            DayOpenTime dayOpenTime = TimeUtils.GetKLineTimes_DayOpenTime(openTime, period);
+            KLineOpenPeriods dayOpenTime = TimeUtils.GetKLineTimes_DayOpenTime(openTime, period);
             Assert.AreEqual(0, dayOpenTime.SplitIndeies[0]);
             Assert.AreEqual(75, dayOpenTime.SplitIndeies[1]);
             Assert.AreEqual(135, dayOpenTime.SplitIndeies[2]);
@@ -88,7 +88,7 @@ namespace com.wer.sc.data.utils
             openTime.Add(new double[] { .133000, .150000 });
 
             KLinePeriod period = new KLinePeriod(KLineTimeType.MINUTE, 1);
-            DayOpenTime dayOpenTime = TimeUtils.GetKLineTimes_DayOpenTime(openTime, period);
+            KLineOpenPeriods dayOpenTime = TimeUtils.GetKLineTimes_DayOpenTime(openTime, period);
 
             //AssertOpenTime(dayOpenTime.KlineTimes, Resources.OpenTime_OverNight_1Minute);
             Assert.AreEqual(150, dayOpenTime.OverNightIndex);
@@ -109,7 +109,7 @@ namespace com.wer.sc.data.utils
             openTime.Add(new double[] { .133000, .150000 });
 
             KLinePeriod period = new KLinePeriod(KLineTimeType.MINUTE, 1);
-            DayOpenTime dayOpenTime = TimeUtils.GetKLineTimes_DayOpenTime(openTime, period);
+            KLineOpenPeriods dayOpenTime = TimeUtils.GetKLineTimes_DayOpenTime(openTime, period);
 
             AssertOpenTime(dayOpenTime.KlineTimes, Resources.OpenTime_OverNight_1Minute);
             Assert.AreEqual(180, dayOpenTime.OverNightIndex);

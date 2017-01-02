@@ -63,7 +63,7 @@ namespace com.wer.sc.plugin
         /// </summary>
         /// <param name="code"></param>
         /// <returns></returns>
-        List<DayStartTime> GetDayStartTime(String code);
+        List<DayOpenTime> GetDayOpenTime(String code);
 
         /// <summary>
         /// 得到股票或期货的Tick数据

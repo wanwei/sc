@@ -116,6 +116,7 @@ namespace com.wer.sc.data
                 return list_Time;
             }
         }
+
         public override IList<float> Arr_Start
         {
             get
@@ -228,7 +229,6 @@ namespace com.wer.sc.data
                 return list_BlockHeightPercent;
             }
         }
-
 
         public override IList<float> Arr_UpPercent
         {

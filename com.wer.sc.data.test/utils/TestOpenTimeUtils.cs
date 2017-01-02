@@ -147,7 +147,7 @@ namespace com.wer.sc.data.test.utils
             }
         }
 
-        private IOpenDateReader OpenDateReader
+        private ICommonDataReader_OpenDate OpenDateReader
         {
             get
             {

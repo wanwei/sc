@@ -15,8 +15,8 @@ namespace com.wer.sc.mockdata.test
         [TestMethod]
         public void TestMock_DayStartTime()
         {
-            List<DayStartTime> dayStartTime = MockData_DayStartTime.GetDayStartTime("m05");
-            AssertUtils.AssertList<DayStartTime>(dayStartTime, Resources.MockData_DayStartTime);
+            List<DayOpenTime> dayStartTime = MockData_DayStartTime.GetDayStartTime("m05");
+            AssertUtils.AssertList<DayOpenTime>(dayStartTime, Resources.MockData_DayStartTime);
         }
     }
 }

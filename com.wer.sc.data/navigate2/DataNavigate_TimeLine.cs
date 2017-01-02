@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace com.wer.sc.data.navigate
+namespace com.wer.sc.data.navigate2
 {
     /// <summary>
     /// 分时线数据导航

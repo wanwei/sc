@@ -41,7 +41,7 @@ namespace com.wer.sc.data.check
             DataProviderWrap provider = this.providerDataMgr.GetProviders()[cbProvider.SelectedIndex];
             DataReaderFactory fac = new DataReaderFactory(provider.GetDataPath());
 
-            this.realdataList = fac.RealDataReader.GetData(code, startDate, endDate);
+            this.realdataList = fac.TimeLineDataReader.GetData(code, startDate, endDate);
             for (int i = 0; i < realdataList.Count; i++)
             {
                 ITimeLineData r = this.realdataList[i];

@@ -9,50 +9,51 @@ namespace com.wer.sc.plugin.historymarket
 {
     public class Plugin_MarketTrader_History : IPlugin_MarketTrader
     {
+        private DelegateOnConnectionStatus onConnectionStatus;
+
         public DelegateOnConnectionStatus OnConnectionStatus
         {
             get
             {
-                throw new NotImplementedException();
+                return onConnectionStatus;
             }
 
             set
             {
-                throw new NotImplementedException();
+                onConnectionStatus = value;
             }
         }
+
+        private DelegateOnReturnInstrument onReturnInstruments;
 
         public DelegateOnReturnInstrument OnReturnInstruments
         {
             get
             {
-                throw new NotImplementedException();
+                return onReturnInstruments;
             }
 
             set
             {
-                throw new NotImplementedException();
+                onReturnInstruments = value;
             }
         }
 
         public void Connect(ConnectionInfo connectionInfo)
         {
-            throw new NotImplementedException();
         }
 
         public void DisConnect()
         {
-            throw new NotImplementedException();
         }
 
         public List<ConnectionInfo> GetAllConnections()
         {
-            throw new NotImplementedException();
+            return null;
         }
 
         public void QueryInstruments(string[] instruments = null)
         {
-            throw new NotImplementedException();
         }
     }
 }

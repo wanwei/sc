@@ -24,7 +24,7 @@ namespace com.wer.sc.data.update
 
         public IKLineData GetKLineData(string code, int startDate, int endDate, KLinePeriod period)
         {
-            IOpenDateReader openDateReader = dataReaderFactory.OpenDateReader;
+            ICommonDataReader_OpenDate openDateReader = dataReaderFactory.OpenDateReader;
 
             IList<int> openDates = openDateReader.GetOpenDates(startDate, endDate);
             int prevOpenDate = openDateReader.GetPrevOpenDate(startDate);

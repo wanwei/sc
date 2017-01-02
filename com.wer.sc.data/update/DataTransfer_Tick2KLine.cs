@@ -1,4 +1,5 @@
-﻿using com.wer.sc.data.utils;
+﻿using com.wer.sc.data.reader;
+using com.wer.sc.data.utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace com.wer.sc.data.update
 {
     public class DataTransfer_Tick2KLine
     {
-        public static IKLineData Transfer(int date, TickData data, OpenDateReader openDateReader, List<double[]> opentime, KLinePeriod targetPeriod, KLineData lastKLineData)
+        public static IKLineData Transfer(int date, TickData data, CommonDataReader_OpenDate openDateReader, List<double[]> opentime, KLinePeriod targetPeriod, KLineData lastKLineData)
         {
             List<double> klineTimePeriods = OpenTimeUtils.GetKLineTimeList(date, openDateReader, opentime, targetPeriod);
             KLineData klineData = new KLineData(klineTimePeriods.Count);

@@ -33,7 +33,7 @@ namespace com.wer.sc.data.opentime
             bool overNight = IsOverNight(openTimes);
             bool isWeekStart = IsWeekStart(date, openDateReader);
 
-            DayOpenTime dayOpenTime = TimeUtils.GetKLineTimes_DayOpenTime(openTimes, targetPeriod);
+            KLineOpenPeriods dayOpenTime = TimeUtils.GetKLineTimes_DayOpenTime(openTimes, targetPeriod);
             List<double> klineFullTimes = new List<double>(dayOpenTime.KlineTimes.Count);
 
             List<double> klineTimes = dayOpenTime.KlineTimes;

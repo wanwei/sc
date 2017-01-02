@@ -20,9 +20,10 @@ namespace com.wer.sc.data.receiver
 
         public void WriteLog(object content)
         {
-            LogList.Add(content.ToString());
+            string log = DateTime.Now.ToString() + ": " + content.ToString();
+            LogList.Add(log);
             if (onWriteLog != null)
-                onWriteLog(this, content);
+                onWriteLog(this, log);
         }
 
         public DelegateOnWriteLog OnWriteLog

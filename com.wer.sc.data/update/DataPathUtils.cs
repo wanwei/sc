@@ -20,7 +20,7 @@ namespace com.wer.sc.data
     ///         --M01_1minute.kline
     ///         --M01_1hour.kline
     ///         --......
-    ///         --M01_daystarttime
+    ///         --M01_dayopentime
     ///     --m03
     ///     --......
     /// </summary>
@@ -48,9 +48,9 @@ namespace com.wer.sc.data
             return dataPath + "\\" + code + "\\tick\\";
         }
 
-        public string GetDayStartTime(string code)
+        public string GetDayOpenTime(string code)
         {
-            String realPath = dataPath + "\\" + code + "\\" + code + "_daystarttime";
+            String realPath = dataPath + "\\" + code + "\\" + code + "_dayopentime";
             return realPath;
         }
 

@@ -75,7 +75,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StepPreparer.cs" />
     <Compile Include="Step_CodeInfo.cs" />
-    <Compile Include="Step_DayStartTime.cs" />
+    <Compile Include="Step_DayOpenTime.cs" />
     <Compile Include="Step_KLineData.cs" />
     <Compile Include="Step_OpenDate.cs" />
     <Compile Include="Step_TickData.cs" />

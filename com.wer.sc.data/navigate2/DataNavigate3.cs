@@ -1,5 +1,6 @@
 ﻿using com.wer.sc.data.cache;
 using com.wer.sc.data.navigate;
+using com.wer.sc.data.reader.realtime.utils;
 using com.wer.sc.data.utils;
 using com.wer.sc.utils;
 using System;
@@ -30,8 +31,6 @@ namespace com.wer.sc.data.navigate
         private int currentKLineIndex;
 
         private RealTimeDataBuilder_KLine chartBuilder;
-
-        private KLineDataIndeier klineDataIndeier;
 
         public event DataChangeEventHandler OnDataChangeHandler;
 
@@ -118,9 +117,8 @@ namespace com.wer.sc.data.navigate
             }
             RefreshChartBuilder(time);
             this.time = time;
-            if (klineDataIndeier == null || klineDataIndeier.KLineData != klineData)
-                klineDataIndeier = new KLineDataIndeier(klineData);
-            this.currentKLineIndex = klineDataIndeier.GetTimeDateIndex(time);
+
+            this.currentKLineIndex = TimeIndeierUtils.IndexOfTime_KLine(klineData, time);
             this.chartBuilder.ChangeTime(time);
             IKLineBar chart = this.chartBuilder.GetCurrentChart();
             klineData.SetRealTimeData(chart, currentKLineIndex);
@@ -144,8 +142,8 @@ namespace com.wer.sc.data.navigate
             //    date += 1;
             //    date = (int)(this.klineData.IndexOfTime(date));
             //}
-            if (this.chartBuilder == null || this.chartBuilder.Code != this.code)            
-                this.chartBuilder = new RealTimeDataBuilder_KLine(klineData, dataCache_Code, time);            
+            if (this.chartBuilder == null || this.chartBuilder.Code != this.code)
+                this.chartBuilder = new RealTimeDataBuilder_KLine(klineData, dataCache_Code, time);
 
             //int date = DaySpliter.GetTimeDate(time, dataReaderFac.OpenDateReader);
             //if (this.chartBuilder == null || this.chartBuilder.Date != date || this.chartBuilder.Code != this.code)

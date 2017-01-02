@@ -10,9 +10,9 @@ namespace com.wer.sc.mockdata
 {
     public class MockData_DayStartTime
     {
-        public static List<DayStartTime> GetDayStartTime(string code)
+        public static List<DayOpenTime> GetDayStartTime(string code)
         {
-            return Plugin_HistoryData_CsvProvider_Mock.Plugin_History.GetDayStartTime(code);
+            return Plugin_HistoryData_CsvProvider_Mock.Plugin_History.GetDayOpenTime(code);
         }
     }
 }

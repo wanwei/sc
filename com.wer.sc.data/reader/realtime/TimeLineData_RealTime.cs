@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace com.wer.sc.data
 {
+    /// <summary>
+    /// 分时线实时数据
+    /// </summary>
     public class TimeLineData_RealTime : TimeLineData_Abstract
     {
         private ITimeLineData timeLineData;        

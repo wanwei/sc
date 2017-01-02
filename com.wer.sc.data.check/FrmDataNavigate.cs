@@ -1,5 +1,6 @@
 ﻿using com.wer.sc.data.cache;
 using com.wer.sc.data.navigate;
+using com.wer.sc.data.reader.realtime.utils;
 using com.wer.sc.data.update;
 using com.wer.sc.data.utils;
 using System;
@@ -75,8 +76,8 @@ namespace com.wer.sc.data.check
             IKLineData minuteKLineData = fac.KLineDataReader.GetData(code, date, date, new KLinePeriod(KLineTimeType.MINUTE, 1));
             TickData tickData = fac.TickDataReader.GetTickData(code, date);
 
-            TickDataIndeier indeier = new TickDataIndeier(tickData, minuteKLineData);
-            int index = indeier.GetTickIndex(time);
+            //TimeIndeier_Tick indeier = new TimeIndeier_Tick(tickData);
+            int index = TimeIndeierUtils.IndexOfTime_Tick(tickData, time);
 
             tbData.Clear();
             StringBuilder sb = new StringBuilder();
@@ -90,7 +91,7 @@ namespace com.wer.sc.data.check
             {
                 //sb.Append(splits[i]).Append("\r\n");
                 double t = minuteKLineData.Arr_Time[i];
-                sb.Append(i + ":" + t + "," + indeier.GetTickSplitIndex(i) + "," + indeier.GetTickSplitIndex(t)).Append("\r\n");
+                // sb.Append(i + ":" + t + "," + indeier.GetTickSplitIndex(i) + "," + indeier.GetTickSplitIndex(t)).Append("\r\n");
             }
             tbData.AppendText(sb.ToString());
             tbData.AppendText(index.ToString() + "\r\n");

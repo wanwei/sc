@@ -21,7 +21,7 @@ namespace com.wer.sc.data.update
             return r;
         }
 
-        public static List<ITimeLineData> ConvertTimeLineDataList(IKLineData data, float lastEndPrice, IOpenDateReader openDateReader)
+        public static List<ITimeLineData> ConvertTimeLineDataList(IKLineData data, float lastEndPrice, ICommonDataReader_OpenDate openDateReader)
         {
             List<SplitterResult> splitResult = DaySplitter.Split(data, openDateReader);
 

@@ -10,22 +10,17 @@ namespace com.wer.sc.data.store
     /// <summary>
     /// 日开盘时间保存，现在保存成CSV格式
     /// </summary>
-    public class DayStartTimeStore
+    public class DayOpenTimeStore
     {
         private String path;
-        public DayStartTimeStore(String path)
+        public DayOpenTimeStore(String path)
         {
             this.path = path;
         }
 
-        public void Save(List<DayStartTime> codes)
+        public void Save(List<DayOpenTime> codes)
         {
             CsvUtils_DayStartTime.Save(path, codes);
-        }
-
-        public List<CodeInfo> Load()
-        {
-            return CsvUtils_Code.Load(path);
         }
     }
 }

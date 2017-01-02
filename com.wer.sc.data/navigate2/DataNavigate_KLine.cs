@@ -1,4 +1,5 @@
 ﻿using com.wer.sc.data.cache;
+using com.wer.sc.data.reader.realtime.utils;
 using com.wer.sc.data.utils;
 using System;
 
@@ -7,8 +8,7 @@ namespace com.wer.sc.data.navigate
     public class DataNavigate_KLine
     {
         private KLineData_RealTime klineData;
-        private KLineDataIndeier klineDataIndeier;
-        private double currentTime;        
+        private double currentTime;
 
         private RealTimeDataBuilder_KLine klineChartBuilder;
 
@@ -16,7 +16,7 @@ namespace com.wer.sc.data.navigate
         {
             DataCacheFactory cacheFactory = new DataCacheFactory(factory);
             IDataCache_Code cache = cacheFactory.CreateCache_Code(code);
-            IOpenDateReader openDateReader = cache.GetOpenDateReader();
+            ICommonDataReader_OpenDate openDateReader = cache.GetOpenDateReader();
 
             Init(factory, code, period, time, openDateReader.FirstOpenDate, openDateReader.LastOpenDate);
         }
@@ -30,7 +30,6 @@ namespace com.wer.sc.data.navigate
         {
             KLineData data = (KLineData)factory.KLineDataReader.GetData(code, startDate, endDate, period);
             this.klineData = new KLineData_RealTime(data);
-            this.klineDataIndeier = new KLineDataIndeier(klineData);
             DataCacheFactory cacheFac = factory.CacheFactory;
             this.klineChartBuilder = new RealTimeDataBuilder_KLine(klineData, cacheFac.CreateCache_Code(code, startDate, endDate), time);
             this.CurrentTime = time;
@@ -65,7 +64,7 @@ namespace com.wer.sc.data.navigate
                 IKLineBar klineChart = this.klineChartBuilder.GetCurrentChart();
 
                 //设置为修改当前barpos
-                int index = klineDataIndeier.GetTimeDateIndex(currentTime);
+                int index = TimeIndeierUtils.IndexOfTime_KLine(klineData, currentTime);
                 klineData.BarPos = index;
                 klineData.SetRealTimeData(klineChart);
                 //int currentKLineIndex = klineData.IndexOfTime(currentTime);

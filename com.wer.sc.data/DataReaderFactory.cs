@@ -1,6 +1,7 @@
 ﻿using com.wer.sc.data.cache;
 using com.wer.sc.data.navigate;
 using com.wer.sc.data.reader;
+using com.wer.sc.data.reader.realtime;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,50 +15,62 @@ namespace com.wer.sc.data
         private String dataPath;
 
         private DataPathUtils pathUtils;
-        private CodeReader codeReader;
-        private OpenDateReader openDateReader;
-        private TickDataReader tickDataReader;
-        private KLineDataReader klineDataReader;
-        private TimeLineDataReader realDataReader;
+        private CommonDataReader_Code codeReader;
+        private CommonDataReader_OpenDate openDateReader;
+        private CommonDataReader_OpenTime openTimeReader;
+        private HistoryDataReader_Tick tickDataReader;
+        private HistoryDataReader_KLine klineDataReader;
+        private HistoryDataReader_TimeLine realDataReader;
         private DataNavigate3 dataNavigate;
         private DataCacheFactory cacheFactory;
         private DataNavigateMgr dataNavigateMgr;
-
+        private IRealTimeDataNavigaterFactory realTimeDataNavigaterFactory;
+        
         public DataReaderFactory(String dataPath)
         {
             this.dataPath = dataPath;
             this.pathUtils = new DataPathUtils(dataPath);
-            this.codeReader = new CodeReader(PathUtils.GetCodePath());
-            this.openDateReader = new OpenDateReader(PathUtils.GetOpenDatePath());
-            this.tickDataReader = new TickDataReader(dataPath);
-            this.klineDataReader = new KLineDataReader(dataPath);
-            this.realDataReader = new TimeLineDataReader(this);
+            this.codeReader = new CommonDataReader_Code(PathUtils.GetCodePath());
+            this.openDateReader = new CommonDataReader_OpenDate(PathUtils.GetOpenDatePath());
+            this.openTimeReader = new CommonDataReader_OpenTime(dataPath);
+            this.tickDataReader = new HistoryDataReader_Tick(dataPath);
+            this.klineDataReader = new HistoryDataReader_KLine(dataPath);
+            this.realDataReader = new HistoryDataReader_TimeLine(this);
             this.dataNavigate = new DataNavigate3(this);
             this.cacheFactory = new DataCacheFactory(this);
             this.dataNavigateMgr = new DataNavigateMgr(this);
+            this.realTimeDataNavigaterFactory = new RealTimeDataNavigateFactory(this);
         }
 
-        public ICodeReader CodeReader
+        public ICommonDataReader_Code CodeReader
         {
             get { return codeReader; }
         }
 
-        public IOpenDateReader OpenDateReader
+        public ICommonDataReader_OpenDate OpenDateReader
         {
             get { return openDateReader; }
         }
 
-        public IKLineDataReader KLineDataReader
+        public ICommonDataReader_OpenTime OpenTimeReader
+        {
+            get
+            {
+                return openTimeReader;
+            }
+        }
+
+        public IHistoryDataReader_KLine KLineDataReader
         {
             get { return klineDataReader; }
         }
 
-        public TimeLineDataReader RealDataReader
+        public HistoryDataReader_TimeLine TimeLineDataReader
         {
             get { return realDataReader; }
         }
 
-        public TickDataReader TickDataReader
+        public HistoryDataReader_Tick TickDataReader
         {
             get { return tickDataReader; }
         }
@@ -85,6 +98,14 @@ namespace com.wer.sc.data
             get
             {
                 return dataNavigateMgr;
+            }
+        }
+
+        public IRealTimeDataNavigaterFactory RealTimeDataNavigaterFactory
+        {
+            get
+            {
+                return realTimeDataNavigaterFactory;
             }
         }
     }
