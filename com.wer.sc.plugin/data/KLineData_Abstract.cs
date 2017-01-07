@@ -178,13 +178,17 @@ namespace com.wer.sc.data
             return bar;
         }
 
-        public KLinePeriod Period
+        public virtual KLinePeriod Period
         {
             get
             {
                 if (period == null)
                     period = GetPeriod(Arr_Time[0], Arr_Time[1]);
                 return period;
+            }
+            set
+            {
+                this.period = value;
             }
         }
 

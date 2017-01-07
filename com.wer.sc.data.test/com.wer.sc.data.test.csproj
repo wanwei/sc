@@ -66,8 +66,10 @@
     <Compile Include="DataTestUtils.cs" />
     <Compile Include="reader\common\TestCommonDataReader_OpenTime.cs" />
     <Compile Include="reader\realtime\TestRealDataNavigate.cs" />
+    <Compile Include="reader\realtime\TestRealDataNavigateUtils.cs" />
     <Compile Include="reader\realtime\TestRealDataReader.cs" />
     <Compile Include="reader\realtime\TestRealTimeDataNavigater_KLine.cs" />
+    <Compile Include="reader\realtime\TestRealTimeDataNavigater_Tick.cs" />
     <Compile Include="reader\realtime\TestTimeIndeier.cs" />
     <Compile Include="reader\TestKLineDataReader.cs" />
     <Compile Include="reader\TestOpenDateCache.cs" />

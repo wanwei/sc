@@ -24,7 +24,9 @@ namespace com.wer.sc.data.reader
         {
             String path = utils.GetKLineDataPath(code, period);
             KLineDataStore store = new KLineDataStore(path);
-            return store.LoadAll();
+            IKLineData klineData = store.LoadAll();
+            klineData.Period = period;
+            return klineData;
         }
 
         public IKLineData GetData(String code, int startDate, int endDate, KLinePeriod period)

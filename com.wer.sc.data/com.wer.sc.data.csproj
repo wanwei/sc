@@ -59,6 +59,7 @@
     <Compile Include="reader\realtime\KLineData_RealTime.cs" />
     <Compile Include="reader\realtime\RealTimeDataNavigateFactory.cs" />
     <Compile Include="reader\realtime\RealTimeDataNavigater_KLine.cs" />
+    <Compile Include="reader\realtime\RealTimeDataNavigater_Tick.cs" />
     <Compile Include="reader\realtime\RealTimeDataNavigateUtils.cs" />
     <Compile Include="reader\realtime\TimeLineData_RealTime.cs" />
     <Compile Include="ICommonDataReader_OpenTime.cs" />
@@ -89,7 +90,7 @@
     <Compile Include="ICommonDataReader_OpenDate.cs" />
     <Compile Include="reader\common\CommonDataReader_OpenTime.cs" />
     <Compile Include="reader\realtime\RealTimeDataReader.cs" />
-    <Compile Include="reader\realtime\RealTimeDataNavigate.cs" />
+    <Compile Include="reader\realtime\RealTimeDataNavigater.cs" />
     <Compile Include="reader\realtime\TickDataIndeier.cs" />
     <Compile Include="reader\realtime\utils\ITimeIndeier.cs" />
     <Compile Include="reader\realtime\utils\TimeIndeier.cs" />

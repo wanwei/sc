@@ -59,7 +59,7 @@ namespace com.wer.sc.data.reader.realtime
 
         public void NavigateForward_Time(KLinePeriod period, int len)
         {
-            
+
         }
 
         public void NavigateForward_Period(KLinePeriod period, int len)
@@ -71,8 +71,29 @@ namespace com.wer.sc.data.reader.realtime
         {
             if (this.tickData == null)
             {
-
+                this.tickData = realTimeDataReader.GetTickData();
             }
+
+            int lastIndex = this.tickData.BarPos;
+            int endIndex = lastIndex + len;
+            if (endIndex >= tickData.Length)
+            {
+                //说明本日结束了，切换到第二天一早
+            }
+            else
+            {
+
+                IKLineData[] klineDataArr = GetAllKLineData();
+                for (int i = 0; i < klineDataArr.Length; i++)
+                {
+                    //RealTimeDataNavigateUtils.ForwardKLineDataByForwardedTick(klineDataArr[i], tickData, lastIndex, endIndex);
+                }
+            }
+        }
+
+        private IKLineData[] GetAllKLineData()
+        {
+            return dicKLineData.Values.ToArray();
         }
 
         private ITimeLineData GetCurrentTimeLine()

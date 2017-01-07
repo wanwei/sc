@@ -33,7 +33,7 @@ namespace com.wer.sc.data
         /// <summary>
         /// 得到K线周期，1分钟、5分钟、日线.....
         /// </summary>
-        KLinePeriod Period { get; }
+        KLinePeriod Period { get; set; }
 
         /// <summary>
         /// 得到一段K线数据

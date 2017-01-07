@@ -12,7 +12,7 @@ namespace com.wer.sc.data.reader.realtime
     /// 基于K线的导航器
     /// 该导航器用途是遍历一段时间的K线数据
     /// 可以以一分钟向前进，5分钟前进等各种周期前进方式
-    /// 该类用于回测时不分析tick数据的状况。
+    /// 该类只用于K线数据回测，tick数据回测不能使用该类。
     /// </summary>
     public class RealTimeDataNavigater_KLine
     {
@@ -45,7 +45,7 @@ namespace com.wer.sc.data.reader.realtime
         /// <param name="code"></param>
         /// <param name="startDate"></param>
         /// <param name="endDate"></param>
-        /// <param name="defaultPeriod">缺省的</param>
+        /// <param name="defaultPeriod">默认要分析的周期，也就是向前</param>
         /// <param name="referPeriods"></param>
         public RealTimeDataNavigater_KLine(DataReaderFactory fac, string code, int startDate, int endDate, KLinePeriod defaultPeriod, List<KLinePeriod> referPeriods)
         {

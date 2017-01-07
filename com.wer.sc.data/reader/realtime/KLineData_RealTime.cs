@@ -105,7 +105,33 @@ namespace com.wer.sc.data
         public void SetRealTimeData(IKLineBar chart)
         {
             SetRealTimeData(chart, BarPos);
-        }   
+        }
+        
+        public override string Code
+        {
+            get
+            {
+                return klineData.Code;
+            }
+
+            set
+            {
+                
+            }
+        }
+
+        public override KLinePeriod Period
+        {
+            get
+            {
+                return klineData.Period;
+            }
+
+            set
+            {
+                
+            }
+        }
 
         #region 得到完整数据
 

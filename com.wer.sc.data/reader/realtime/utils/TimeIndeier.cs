@@ -16,11 +16,24 @@ namespace com.wer.sc.data.reader.realtime.utils
 
         }
 
+        /// <summary>
+        /// 得到timeGetter里time对应的索引号
+        /// </summary>
+        /// <param name="timeGetter"></param>
+        /// <param name="time"></param>
+        /// <returns></returns>
         public int IndexOf(TimeGetter timeGetter, double time)
         {
             return IndexOf(timeGetter, time, true);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="timeGetter"></param>
+        /// <param name="time"></param>
+        /// <param name="findBackward"></param>
+        /// <returns></returns>
         public int IndexOf(TimeGetter timeGetter, double time, bool findBackward)
         {
             int startIndex = 0;
@@ -28,10 +41,20 @@ namespace com.wer.sc.data.reader.realtime.utils
             double ctime = timeGetter.GetTime(startIndex);
             if (time < ctime)
                 return -1;
-            return IndexOf(timeGetter, time, 0, endIndex, findBackward);
+            return IndexOf(timeGetter, time, 0, endIndex, findBackward, 0);
         }
 
-        private int IndexOf(TimeGetter timeGetter, double time, int startIndex, int endIndex, bool findBackward)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="timeGetter"></param>
+        /// <param name="time"></param>
+        /// <param name="startIndex"></param>
+        /// <param name="endIndex"></param>
+        /// <param name="findBackward"></param>
+        /// <param name="indexIfRepeat"></param>
+        /// <returns></returns>
+        private int IndexOf(TimeGetter timeGetter, double time, int startIndex, int endIndex, bool findBackward, int indexIfRepeat)
         {
             if (endIndex - startIndex <= 1)
             {
@@ -55,11 +78,11 @@ namespace com.wer.sc.data.reader.realtime.utils
                 return currentIndex;
             if (currentTime > time)
             {
-                return IndexOf(timeGetter, time, startIndex, currentIndex, findBackward);
+                return IndexOf(timeGetter, time, startIndex, currentIndex, findBackward, indexIfRepeat);
             }
             else
             {
-                return IndexOf(timeGetter, time, currentIndex, endIndex, findBackward);
+                return IndexOf(timeGetter, time, currentIndex, endIndex, findBackward, indexIfRepeat);
             }
         }
     }

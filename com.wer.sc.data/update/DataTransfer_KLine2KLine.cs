@@ -55,7 +55,9 @@ namespace com.wer.sc.data.update
                 charts.Add(GetChart_Day(data, startIndex, endIndex));
             }         
 
-            return GetKLineData(charts);
+            KLineData klineData = GetKLineData(charts);
+            klineData.Period = targetPeriod;
+            return klineData;
         }
 
         private static KLineBar GetChart_Day(IKLineData data, int startIndex, int endIndex)
@@ -88,9 +90,10 @@ namespace com.wer.sc.data.update
                 endIndex = FindRealLastIndex_1Minute(data, startIndex, endIndex);
             }
 
-            return GetKLineData(charts);
+            KLineData klineData = GetKLineData(charts);
+            klineData.Period = targetPeriod;
+            return klineData;
         }
-
 
         private static int FindRealLastIndex_1Minute(IKLineData data, int startIndex, int endIndex)
         {
@@ -114,6 +117,7 @@ namespace com.wer.sc.data.update
         {
             //KLineChart chart = new KLineChart();
             KLineBar chart = new KLineBar();
+            chart.Code = data.Code;
             chart.Time = data.Arr_Time[startIndex];
             chart.Start = data.Arr_Start[startIndex];
             chart.End = data.Arr_End[endIndex];
@@ -142,6 +146,7 @@ namespace com.wer.sc.data.update
         private static KLineData GetKLineData(List<KLineBar> charts)
         {
             KLineData data = new KLineData(charts.Count);
+            data.Code = charts[0].Code;
             for (int i = 0; i < charts.Count; i++)
             {
                 KLineBar chart = charts[i];
