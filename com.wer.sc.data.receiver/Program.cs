@@ -16,7 +16,8 @@ namespace com.wer.sc.data.receiver
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormReceiver());
+            //Application.Run(new FormReceiver2());
+            Application.Run(new FormDataReceiver());
         }
     }
 }

@@ -48,10 +48,12 @@
   <ItemGroup>
     <Compile Include="ByteUtils.cs" />
     <Compile Include="ColorUtils.cs" />
+    <Compile Include="OpenTimeUtil.cs" />
     <Compile Include="FileUtils.cs" />
     <Compile Include="JSonUtils.cs" />
     <Compile Include="ListUtils.cs" />
     <Compile Include="LogHelper.cs" />
+    <Compile Include="LogUtils.cs" />
     <Compile Include="NumberUtils.cs" />
     <Compile Include="ObjectUtils.cs" />
     <Compile Include="PInvokeUtility.cs" />
@@ -66,6 +68,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="ReadOnlyList_Merge.cs" />
     <Compile Include="ReadOnlyList_Sub.cs" />
     <Compile Include="ReadOnlyList_TmpValue.cs" />
     <Compile Include="RectUtils.cs" />

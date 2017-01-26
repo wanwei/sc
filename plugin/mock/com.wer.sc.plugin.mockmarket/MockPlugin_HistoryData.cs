@@ -8,7 +8,7 @@ using com.wer.sc.plugin.historydata.csv;
 
 namespace com.wer.sc.plugin.mockmarket
 {
-    [Plugin("MockHistoryData", "历史数据", "历史数据")]
+    [Plugin("MOCKHISTORYDATA", "历史数据", "历史数据")]
     public class MockPlugin_HistoryData : Plugin_HistoryData_CsvProvider
     {
         public MockPlugin_HistoryData()

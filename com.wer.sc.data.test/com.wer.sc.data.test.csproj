@@ -21,7 +21,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -58,6 +58,11 @@
     <Compile Include="mock\TestDataNavigate.cs" />
     <Compile Include="navigate\TestDataNavigate.cs" />
     <Compile Include="navigate\TestDataNavigate_Night.cs" />
+    <Compile Include="present\data\TestKLineDataMerge.cs" />
+    <Compile Include="present\data\TestKLineData_Present.cs" />
+    <Compile Include="present\TestDataReceiver.cs" />
+    <Compile Include="present\TestKLineDataTimePresent.cs" />
+    <Compile Include="present\TestRecentKLineDataLoader.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -130,6 +135,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\opentime.config" />
     <None Include="Resources\TimePeriod_M01_20131202.txt" />
   </ItemGroup>
   <ItemGroup>

@@ -30,6 +30,13 @@ namespace com.wer.sc.plugin
         List<PluginInfo> GetPlugins(Type type);
 
         /// <summary>
+        /// 得到插件
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        PluginInfo GetPlugin(string id);
+
+        /// <summary>
         /// 创建一个插件对象
         /// </summary>
         /// <param name="pluginInfo"></param>

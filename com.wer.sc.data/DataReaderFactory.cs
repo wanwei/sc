@@ -17,6 +17,7 @@ namespace com.wer.sc.data
         private DataPathUtils pathUtils;
         private CommonDataReader_Code codeReader;
         private CommonDataReader_OpenDate openDateReader;
+        private CommonDataReaderMgr_OpenDate openDateReaderMgr;
         private CommonDataReader_OpenTime openTimeReader;
         private HistoryDataReader_Tick tickDataReader;
         private HistoryDataReader_KLine klineDataReader;
@@ -31,7 +32,7 @@ namespace com.wer.sc.data
             this.dataPath = dataPath;
             this.pathUtils = new DataPathUtils(dataPath);
             this.codeReader = new CommonDataReader_Code(PathUtils.GetCodePath());
-            this.openDateReader = new CommonDataReader_OpenDate(PathUtils.GetOpenDatePath());
+            this.openDateReader = new CommonDataReader_OpenDate(PathUtils.GetOpenDatePath());            
             this.openTimeReader = new CommonDataReader_OpenTime(dataPath);
             this.tickDataReader = new HistoryDataReader_Tick(dataPath);
             this.klineDataReader = new HistoryDataReader_KLine(dataPath);
@@ -40,6 +41,7 @@ namespace com.wer.sc.data
             this.cacheFactory = new DataCacheFactory(this);
             this.dataNavigateMgr = new DataNavigateMgr(this);
             this.realTimeDataNavigaterFactory = new RealTimeDataNavigateFactory(this);
+            this.openDateReaderMgr = new CommonDataReaderMgr_OpenDate(this);
         }
 
         public ICommonDataReader_Code CodeReader
@@ -50,6 +52,11 @@ namespace com.wer.sc.data
         public ICommonDataReader_OpenDate OpenDateReader
         {
             get { return openDateReader; }
+        }
+
+        public ICommonDataReader_OpenDate GetOpenDateReader(string code)
+        {
+            return openDateReaderMgr.GetOpenDateReader(code);
         }
 
         public ICommonDataReader_OpenTime OpenTimeReader

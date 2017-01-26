@@ -90,9 +90,10 @@ namespace com.wer.sc.plugin
                     if (pluginType == null)
                         continue;
                     string[] arr = GetPluginNameDesc(classType);
-                    string pluginName = arr == null ? "" : arr[0];
-                    string pluginDesc = arr == null ? "" : arr[1];
-                    PluginInfo pluginInfo = new PluginInfo(pluginAssembly, classType, pluginType, pluginName, pluginDesc);
+                    string pluginID = arr == null ? "" : arr[0];
+                    string pluginName = arr == null ? "" : arr[1];
+                    string pluginDesc = arr == null ? "" : arr[2];
+                    PluginInfo pluginInfo = new PluginInfo(pluginAssembly, classType, pluginType, pluginID, pluginName, pluginDesc);
                     pluginAssembly.plugins.Add(pluginInfo);
                 }
                 return pluginAssembly;
@@ -127,9 +128,10 @@ namespace com.wer.sc.plugin
             {
                 if (attribute.GetType() == type)
                 {
+                    string id = (String)attribute.GetType().GetProperty("ID").GetValue(attribute);
                     String name = (String)attribute.GetType().GetProperty("Name").GetValue(attribute);
                     string desc = (String)attribute.GetType().GetProperty("Desc").GetValue(attribute);
-                    return new string[] { name, desc };
+                    return new string[] { id, name, desc };
                 }
             }
             return null;
@@ -144,7 +146,7 @@ namespace com.wer.sc.plugin
             types[1] = typeof(IPlugin_Market);
             //types[1] = typeof(IPlugin_MarketData);
             //types[2] = typeof(IPlugin_MarketTrader);
-            types[2] = typeof(IPlugin_Model);
+            types[2] = typeof(IPlugin_Strategy);
             return types;
         }
 

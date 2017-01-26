@@ -76,6 +76,13 @@ namespace com.wer.sc.plugin.market
         public string Symbol;
 
         /// <summary>
+        /// 该品种在数据中心保存时的ID
+        /// 这个是为期货准备的，因为期货请求ID带年，如rb1705
+        /// 但是保存时是不带年的，如rb05
+        /// </summary>
+        public string SaveID;
+
+        /// <summary>
         /// 交易所ID
         /// </summary>
         public string ExchangeID;
@@ -288,5 +295,146 @@ namespace com.wer.sc.plugin.market
         public double Price;
         public int Size;
         public int Count;
+    }
+
+    /// <summary>
+    /// 账号信息
+    /// </summary>
+    public struct AccountInfo
+    {     
+        /// <summary>
+        /// 账户ID
+        /// </summary>
+        public string AccountID;          
+        /// <summary>
+        /// 上次结算准备金
+        /// </summary>
+        public double PreBalance;
+        /// <summary>
+        /// 当前保证金总额
+        /// </summary>
+        public double CurrMargin;
+        /// <summary>
+        /// 平仓盈亏
+        /// </summary>
+        public double CloseProfit;
+        /// <summary>
+        /// 持仓盈亏
+        /// </summary>
+        public double PositionProfit;
+        /// <summary>
+        /// 期货结算准备金
+        /// </summary>
+        public double Balance;
+        /// <summary>
+        /// 可用资金
+        /// </summary>
+        public double Available;
+        /// <summary>
+        /// 入金金额
+        /// </summary>
+        public double Deposit;
+        /// <summary>
+        /// 出金金额
+        /// </summary>
+        public double Withdraw;
+        /// <summary>
+        /// 可取资金
+        /// </summary>
+        public double WithdrawQuota;
+        /// <summary>
+        /// 冻结的过户费
+        /// </summary>
+        public double FrozenTransferFee;
+        /// <summary>
+        /// 冻结的印花税
+        /// </summary>
+        public double FrozenStampTax;
+        /// <summary>
+        /// 冻结的手续费
+        /// </summary>
+        public double FrozenCommission;
+        /// <summary>
+        /// 冻结的资金
+        /// </summary>
+        public double FrozenCash;
+        /// <summary>
+        /// 过户费
+        /// </summary>
+        public double TransferFee;
+        /// <summary>
+        /// 印花税
+        /// </summary>
+        public double StampTax;
+        /// <summary>
+        /// 手续费
+        /// </summary>
+        public double Commission;
+        /// <summary>
+        /// 资金差额
+        /// </summary>
+        public double CashIn;
+    }
+
+    /// <summary>
+    /// 持仓信息
+    /// </summary>
+    public struct PositionInfo
+    {
+        public string InstrumentName;
+
+        public string Symbol;
+
+        public string InstrumentID;
+
+        public string ExchangeID;
+
+        public string ClientID;
+
+        public string AccountID;
+
+        public PositionSide Side;
+        /// <summary>
+        /// 日期
+        /// </summary>
+        public int Date;
+        /// <summary>
+        /// 持仓成本
+        /// </summary>
+        public double PositionCost;
+
+        /// <summary>
+        /// 总持仓
+        /// </summary>
+        public double Position;
+        /// <summary>
+        /// 今日持仓
+        /// </summary>
+        public double TodayPosition;
+        /// <summary>
+        /// 历史持仓
+        /// </summary>
+        public double HistoryPosition;
+        /// <summary>
+        /// 历史冻结持仓
+        /// </summary>
+        public double HistoryFrozen;
+
+        /// <summary>
+        /// 今日买卖持仓
+        /// </summary>
+        public double TodayBSPosition;
+        /// <summary>
+        /// 今日买卖持仓冻结
+        /// </summary>
+        public double TodayBSFrozen;
+        /// <summary>
+        /// 今日申赎持仓
+        /// </summary>
+        public double TodayPRPosition;
+        /// <summary>
+        /// 今日申赎持仓冻结
+        /// </summary>
+        public double TodayPRFrozen;
     }
 }

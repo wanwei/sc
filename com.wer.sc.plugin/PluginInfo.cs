@@ -17,15 +17,18 @@ namespace com.wer.sc.plugin
 
         private Type pluginType;
 
+        private string pluginID;
+
         private string pluginName;
 
         private string pluginDesc;
 
-        public PluginInfo(PluginAssembly pluginAssembly, Type pluginClassType, Type pluginType, string pluginName, string pluginDesc)
+        public PluginInfo(PluginAssembly pluginAssembly, Type pluginClassType, Type pluginType, string pluginID, string pluginName, string pluginDesc)
         {
             this.pluginAssembly = pluginAssembly;
             this.pluginClassType = pluginClassType;
             this.pluginType = pluginType;
+            this.pluginID = pluginID;
             this.pluginName = pluginName;
             this.pluginDesc = pluginDesc;
         }
@@ -41,7 +44,7 @@ namespace com.wer.sc.plugin
             }
         }
 
-       
+
 
         /// <summary>
         /// 
@@ -54,6 +57,17 @@ namespace com.wer.sc.plugin
         public Type PluginType
         {
             get { return pluginType; }
+        }
+
+        /// <summary>
+        /// 插件ID
+        /// </summary>
+        public string PluginID
+        {
+            get
+            {
+                return pluginID;
+            }
         }
 
         /// <summary>
@@ -72,7 +86,7 @@ namespace com.wer.sc.plugin
             get
             {
                 return pluginDesc;
-            }            
+            }
         }
 
         public override string ToString()
@@ -80,6 +94,7 @@ namespace com.wer.sc.plugin
             StringBuilder sb = new StringBuilder();
             sb.Append(pluginType.FullName).Append(",");
             sb.Append(pluginClassType.FullName).Append(",");
+            sb.Append(PluginID).Append(",");
             sb.Append(PluginName).Append(",");
             sb.Append(PluginDesc);
             return sb.ToString();

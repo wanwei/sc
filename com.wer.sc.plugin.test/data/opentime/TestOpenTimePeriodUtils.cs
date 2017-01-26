@@ -29,6 +29,13 @@ namespace com.wer.sc.data.opentime
         }
 
         [TestMethod]
+        public void TestGetOpenTimePeriod_M01_20131202_1Minute_2()
+        {
+            List<double> klineTimes = OpenTimePeriodUtils.GetKLineTimeList(20131202, 20131129, OpenTime_Normal, KLinePeriod.KLinePeriod_1Minute);
+            AssertOpenTime(klineTimes, Resources.OpenTimePeriod_M01_20131202);
+        }
+
+        [TestMethod]
         public void TestGetOpenTimePeriod_M01_20141229_5Second()
         {
             List<double> klineTimes = OpenTimePeriodUtils.GetKLineTimeList(20141229, OpenDateReader, OpenTime_Night_OverNight, KLinePeriod.KLinePeriod_5Second);
@@ -99,6 +106,22 @@ namespace com.wer.sc.data.opentime
             List<double> klineTimes = OpenTimePeriodUtils.GetKLineTimeList(20150112, OpenDateReader, OpenTime_Night_OverNight, KLinePeriod.KLinePeriod_1Minute);
             AssertOpenTime(klineTimes, Resources.OpenTimePeriod_OverNight_WeekStart);
         }
+
+        [TestMethod]
+        public void TestGetOpenTimePeriods_NightOverNight_WeekStart_2()
+        {
+            List<double> klineTimes = OpenTimePeriodUtils.GetKLineTimeList(20150112, 20150109, OpenTime_Night_OverNight, KLinePeriod.KLinePeriod_1Minute);
+            AssertOpenTime(klineTimes, Resources.OpenTimePeriod_OverNight_WeekStart);
+        }
+
+        //[TestMethod]
+        //public void TestGetOpenTimePeriods_Future()
+        //{
+        //    List<double> klineTimes = OpenTimePeriodUtils.GetKLineTimeList(20280112, OpenDateReader, OpenTime_Night_OverNight, KLinePeriod.KLinePeriod_1Minute);
+        //    for (int i = 0; i < klineTimes.Count; i++)
+        //        Console.WriteLine(klineTimes[i]);
+        //    //AssertOpenTime(klineTimes, Resources.OpenTimePeriod_OverNight_WeekStart);
+        //}
 
         private void AssertOpenTime(List<double> klineTimes, String resource)
         {

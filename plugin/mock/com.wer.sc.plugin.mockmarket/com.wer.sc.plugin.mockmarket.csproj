@@ -41,8 +41,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MockPlugin_HistoryData.cs" />
-    <Compile Include="MockPlugin_SimuTrade.cs" />
-    <Compile Include="MockPlugin_Trade.cs" />
+    <Compile Include="MockPlugin_HistoryMarket.cs" />
+    <Compile Include="MockPlugin_MarketTrade.cs" />
+    <Compile Include="MockPlugin_MarketData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -24,6 +24,11 @@ namespace com.wer.sc.utils
             this.array = array;
         }
 
+        public T GetRealValue(int index)
+        {
+            return array[index];
+        }
+
         public T this[int index]
         {
             get

@@ -205,11 +205,23 @@ namespace com.wer.sc.plugin.market
         Replaced,
     };
 
+    /// <summary>
+    /// 委托方向
+    /// </summary>
     public enum OrderSide : byte
     {
         Buy,
         Sell,
         Unknown,
+    };
+
+    /// <summary>
+    /// 持仓方向
+    /// </summary>
+    public enum PositionSide : byte
+    {
+        Long,
+        Short,
     };
 
     public enum TimeInForce : byte

@@ -14,11 +14,6 @@ namespace com.wer.sc.plugin
         private String name;
 
         private string desc;
-        public PluginAttribute( String name, string desc)
-        {
-            this.name = name;
-            this.desc = desc;
-        }
 
         public PluginAttribute(string id, String name, string desc)
         {
@@ -27,7 +22,7 @@ namespace com.wer.sc.plugin
             this.desc = desc;
         }
 
-        public string Id
+        public string ID
         {
             get
             {

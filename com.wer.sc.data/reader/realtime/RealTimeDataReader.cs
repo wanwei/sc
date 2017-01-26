@@ -30,6 +30,10 @@ namespace com.wer.sc.data.reader.realtime
 
         private ITickData tickData;
 
+        private ITimeLineData timeLineData;
+
+        private Dictionary<KLinePeriod, KLineData_RealTime> dicKLineData = new Dictionary<KLinePeriod, KLineData_RealTime>();
+
         public double Time
         {
             get

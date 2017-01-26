@@ -15,26 +15,26 @@ namespace com.wer.sc.data.test.reader.realtime
         public void TestForwardTick()
         {
             string code = "m05";
-            int startDate = 20100101;
-            //int endDate = 20100530;
-            int endDate = 20100130;
+            int startDate = 20140101;
+            int endDate = 20160101;
+            //int endDate = 20100130;
             DataReaderFactory dataReaderFactory = ResourceLoader.GetDefaultDataReaderFactory();
             Dictionary<KLinePeriod, KLineData_RealTime> dicKLineData = new Dictionary<KLinePeriod, KLineData_RealTime>();
 
-            //dicKLineData.Add(KLinePeriod.KLinePeriod_1Minute, GetKLineData(dataReaderFactory, code, startDate, endDate, KLinePeriod.KLinePeriod_1Minute));
-            //dicKLineData.Add(KLinePeriod.KLinePeriod_5Minute, GetKLineData(dataReaderFactory, code, startDate, endDate, KLinePeriod.KLinePeriod_5Minute));
-            //dicKLineData.Add(KLinePeriod.KLinePeriod_15Minute, GetKLineData(dataReaderFactory, code, startDate, endDate, KLinePeriod.KLinePeriod_15Minute));
+            dicKLineData.Add(KLinePeriod.KLinePeriod_1Minute, GetKLineData(dataReaderFactory, code, startDate, endDate, KLinePeriod.KLinePeriod_1Minute));
+            dicKLineData.Add(KLinePeriod.KLinePeriod_5Minute, GetKLineData(dataReaderFactory, code, startDate, endDate, KLinePeriod.KLinePeriod_5Minute));
+            dicKLineData.Add(KLinePeriod.KLinePeriod_15Minute, GetKLineData(dataReaderFactory, code, startDate, endDate, KLinePeriod.KLinePeriod_15Minute));
             dicKLineData.Add(KLinePeriod.KLinePeriod_1Day, GetKLineData(dataReaderFactory, code, startDate, endDate, KLinePeriod.KLinePeriod_1Day));
-            RealTimeDataNavigater_Tick navigater = new RealTimeDataNavigater_Tick(dataReaderFactory, code, startDate, endDate, dicKLineData);
+            RealTimeDataNavigateForward_Tick navigater = new RealTimeDataNavigateForward_Tick(dataReaderFactory, code, startDate, endDate, dicKLineData);
 
             //Console.WriteLine(navigater.DicKLineData[KLinePeriod.KLinePeriod_1Minute]);
             //for (int i = 0; i < 50000; i++)
             //{
             int tickCount = 0;
-            while (navigater.NavigateForward(500))
+            while (navigater.NavigateForward(1))
             {
                 //Console.WriteLine(navigater.DicKLineData[KLinePeriod.KLinePeriod_1Minute]);
-                Console.WriteLine(navigater.DicKLineData[KLinePeriod.KLinePeriod_1Day]);
+                //Console.WriteLine(navigater.DicKLineData[KLinePeriod.KLinePeriod_1Day]);
                 tickCount++;
             }
             Console.WriteLine(tickCount);

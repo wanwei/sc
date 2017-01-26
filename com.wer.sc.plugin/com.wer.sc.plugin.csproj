@@ -53,10 +53,13 @@
     <Compile Include="backup\PluginHelper.cs" />
     <Compile Include="backup\PluginInfo2.cs" />
     <Compile Include="backup\PluginScan2.cs" />
-    <Compile Include="ConnectionInfo.cs" />
+    <Compile Include="market\account\Account.cs" />
+    <Compile Include="market\account\IAccount.cs" />
+    <Compile Include="market\ConnectionInfo.cs" />
     <Compile Include="data\CodeInfo.cs" />
     <Compile Include="data\ICodeInfo.cs" />
     <Compile Include="data\IKLineData.cs" />
+    <Compile Include="data\reader\IRealTimeDataReader.cs" />
     <Compile Include="data\KLineTimeType.cs" />
     <Compile Include="data\opentime\IDayStartTimeReader.cs" />
     <Compile Include="data\opentime\IOpenDateReader.cs" />
@@ -73,6 +76,7 @@
     <Compile Include="data\KLineBar_Abstract.cs" />
     <Compile Include="data\KLineBar_KLineData.cs" />
     <Compile Include="data\KLineData.cs" />
+    <Compile Include="data\reader\ReferedData.cs" />
     <Compile Include="data\TickBar.cs" />
     <Compile Include="data\TickBar_Abstract.cs" />
     <Compile Include="data\TickData_Abstract.cs" />
@@ -108,15 +112,16 @@
     <Compile Include="historydata\csv\Plugin_HistoryData_CsvProvider.cs" />
     <Compile Include="historydata\WaitForUpdateInfo.cs" />
     <Compile Include="IPlugin_Market.cs" />
-    <Compile Include="IPlugin_MarketData.cs" />
+    <Compile Include="market\IPlugin_MarketData.cs" />
     <Compile Include="IPluginMgr.cs" />
     <Compile Include="IPlugin_HistoryData.cs" />
-    <Compile Include="IPlugin_Model.cs" />
-    <Compile Include="IPlugin_MarketTrader.cs" />
-    <Compile Include="IModelData.cs" />
+    <Compile Include="market\IPlugin_MarketTrader.cs" />
+    <Compile Include="IPlugin_Strategy.cs" />
     <Compile Include="market\MarketDelegates.cs" />
     <Compile Include="market\MarketEnums.cs" />
     <Compile Include="market\MarketStructs.cs" />
+    <Compile Include="market\OrderInfo.cs" />
+    <Compile Include="market\TradeInfo.cs" />
     <Compile Include="PluginAssemblyScan.cs" />
     <Compile Include="PluginAssembly.cs" />
     <Compile Include="PluginAttribute.cs" />
@@ -144,7 +149,9 @@
     <Compile Include="provider\DataProvider_OpenTime.cs" />
     <Compile Include="provider\DataProvider_TickData.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="strategy\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\com.wer.sc.utils\com.wer.sc.utils.csproj">
       <Project>{6a9e6268-e856-4072-8b74-06f710d5ca33}</Project>

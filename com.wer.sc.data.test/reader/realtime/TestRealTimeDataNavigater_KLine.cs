@@ -20,7 +20,7 @@ namespace com.wer.sc.data.reader.realtime
             periods.Add(KLinePeriod.KLinePeriod_15Minute);
             periods.Add(KLinePeriod.KLinePeriod_1Hour);
             periods.Add(KLinePeriod.KLinePeriod_1Day);
-            RealTimeDataNavigater_KLine navigater = new RealTimeDataNavigater_KLine(fac, "m05", 20100101, 20100701, KLinePeriod.KLinePeriod_1Minute, periods);            
+            RealTimeDataNavigateForward_KLine navigater = new RealTimeDataNavigateForward_KLine(fac, "m05", 20100101, 20100701, KLinePeriod.KLinePeriod_1Minute, periods);            
 
             IKLineData klineData_1Minute = navigater.GetKLineData(KLinePeriod.KLinePeriod_1Minute);
             Console.WriteLine(klineData_1Minute);
@@ -47,9 +47,9 @@ namespace com.wer.sc.data.reader.realtime
             periods.Add(KLinePeriod.KLinePeriod_15Minute);
             periods.Add(KLinePeriod.KLinePeriod_1Hour);
             periods.Add(KLinePeriod.KLinePeriod_1Day);
-            RealTimeDataNavigater_KLine navigater = new RealTimeDataNavigater_KLine(fac, "m05", 20100101, 20100701, KLinePeriod.KLinePeriod_1Minute, periods);
+            RealTimeDataNavigateForward_KLine navigater = new RealTimeDataNavigateForward_KLine(fac, "m05", 20100101, 20100701, KLinePeriod.KLinePeriod_1Minute, periods);
 
-            navigater.NavigateForward(KLinePeriod.KLinePeriod_1Minute, 1);
+            navigater.NavigateForward(1);
 
             IKLineData klineData_1Minute = navigater.GetKLineData(KLinePeriod.KLinePeriod_1Minute);
             Console.WriteLine(klineData_1Minute);

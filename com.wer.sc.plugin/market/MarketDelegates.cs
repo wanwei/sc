@@ -30,4 +30,32 @@ namespace com.wer.sc.plugin.market
     /// <param name="sender"></param>
     /// <param name="instruments"></param>
     public delegate void DelegateOnReturnInstrument(object sender, ref List<InstrumentInfo> instruments);
+
+    /// <summary>
+    /// 返回下单委托
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="order"></param>
+    public delegate void DelegateOnReturnOrder(object sender, ref OrderInfo order);
+
+    /// <summary>
+    /// 返回成交
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="trade"></param>
+    public delegate void DelegateOnReturnTrade(object sender, ref TradeInfo trade);
+
+    /// <summary>
+    /// 返回投资者持仓
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="trade"></param>
+    public delegate void DelegateOnReturnInvestorPosition(object sender, ref PositionInfo trade);
+    
+    /// <summary>
+    /// 返回账号
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="trade"></param>
+    public delegate void DelegateOnReturnAccount(object sender, ref AccountInfo trade);
 }

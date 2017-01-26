@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,7 +19,10 @@ namespace com.wer.sc.plugin
 
         private static IPluginMgr CreateDefaultPluginMgr()
         {
-            string path = Environment.CurrentDirectory + "\\plugin\\";
+            string dllPath = Assembly.GetExecutingAssembly().Location;
+            FileInfo f = new FileInfo(dllPath);
+            string path = f.DirectoryName + "\\plugin\\";
+            //string path = Environment.CurrentDirectory + "\\plugin\\";
             return CreatePluginMgr(path);
         }
 
@@ -25,7 +30,8 @@ namespace com.wer.sc.plugin
 
         public static IPluginMgr DefaultPluginMgr
         {
-            get {
+            get
+            {
                 return pluginMgr;
             }
         }

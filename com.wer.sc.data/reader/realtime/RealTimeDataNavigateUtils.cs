@@ -21,28 +21,38 @@ namespace com.wer.sc.data.reader.realtime
         /// <param name="klineData"></param>
         /// <param name="dataReaderFactory"></param>
         /// <returns></returns>
-        public static bool ForwardKLineDataToNextDayOpenTime(KLineData_RealTime klineData, ITickData nextDayTick, DataReaderFactory dataReaderFactory, KLineBar tmpCurrentKLineBar)
+        public static bool ForwardKLineDataToNextDayOpenTime(KLineData_RealTime klineData, int nextOpenDate, ITickData nextDayTick, DataReaderFactory dataReaderFactory, KLineBar tmpCurrentKLineBar)
         {
+            klineData.SetRealTimeData(null);
             string code = klineData.Code;
             double currentTime = klineData.Time;
-            int openDate = dataReaderFactory.OpenTimeReader.GetRecentOpenDate(code, currentTime);
-            int nextOpenDate = dataReaderFactory.OpenDateReader.GetNextOpenDate(openDate);
-            if (nextOpenDate < 0)
-                return false;
-
+            //int openDate = dataReaderFactory.OpenTimeReader.GetRecentOpenDate(code, currentTime);
+            //int nextOpenDate = dataReaderFactory.OpenDateReader.GetNextOpenDate(openDate);
+            //if (nextOpenDate < 0)
+            //    return false;
+            
             int forwardedBarPos;
             if (klineData.Period.PeriodType == KLineTimeType.DAY)
             {
-                forwardedBarPos = klineData.BarPos + 1;
+                forwardedBarPos = klineData.BarPos;
+                while (currentTime < nextOpenDate)
+                {
+                    forwardedBarPos++;
+                    if (forwardedBarPos >= klineData.Length)
+                        break;         
+                    currentTime = klineData.Arr_Time[forwardedBarPos];                    
+                }
             }
             else
             {
                 double nextOpenTime = dataReaderFactory.OpenTimeReader.GetOpenTime(code, nextOpenDate).Start;
-                forwardedBarPos = klineData.BarPos + 1;             
+                forwardedBarPos = klineData.BarPos;
                 while (currentTime < nextOpenTime)
                 {
-                    currentTime = klineData.Arr_Time[forwardedBarPos];
                     forwardedBarPos++;
+                    if (forwardedBarPos >= klineData.Length)
+                        break;
+                    currentTime = klineData.Arr_Time[forwardedBarPos];               
                 }
             }
             nextDayTick.BarPos = 0;

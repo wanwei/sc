@@ -43,6 +43,8 @@
   <ItemGroup>
     <Compile Include="KLineModelRun.cs" />
     <Compile Include="KLineModelRunner.cs" />
+    <Compile Include="KLineStrategyRunner_History.cs" />
+    <Compile Include="KLineStrategyRunner_Present.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

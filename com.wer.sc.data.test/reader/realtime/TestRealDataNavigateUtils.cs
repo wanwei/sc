@@ -22,7 +22,7 @@ namespace com.wer.sc.data.reader.realtime
             KLineBar tmpCurrentKLineBar = new KLineBar();
             //Console.WriteLine(realtimeKLineData);
             Assert.AreEqual("20120104.09,2936,2938,2933,2935,2508,0,341690", realtimeKLineData.ToString());
-            RealTimeDataNavigateUtils.ForwardKLineDataToNextDayOpenTime(realtimeKLineData, nextDayTickData, dataReaderFactory, tmpCurrentKLineBar);
+            RealTimeDataNavigateUtils.ForwardKLineDataToNextDayOpenTime(realtimeKLineData, 20120105, nextDayTickData, dataReaderFactory, tmpCurrentKLineBar);
             //Console.WriteLine(realtimeKLineData);
             Assert.AreEqual("20120105.085901,2928,2928,2928,2928,6,17568,318690", realtimeKLineData.ToString());
         }
