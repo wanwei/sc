@@ -153,7 +153,7 @@
     <Folder Include="strategy\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\com.wer.sc.utils\com.wer.sc.utils.csproj">
+    <ProjectReference Include="..\common\com.wer.sc.utils\com.wer.sc.utils.csproj">
       <Project>{6a9e6268-e856-4072-8b74-06f710d5ca33}</Project>
       <Name>com.wer.sc.utils</Name>
     </ProjectReference>

@@ -14,6 +14,7 @@ namespace com.wer.sc.data.provider
         public List<OpenTimeMarket> Markets = new List<OpenTimeMarket>();
 
         public Dictionary<String, OpenTimePeriod> dicOpenPeriod = new Dictionary<string, OpenTimePeriod>();
+
         private DataProvider_CodeInfo provider_CodeInfo;   
 
         public DataProvider_OpenTime(String configPath) : this(configPath, new DataProvider_CodeInfo(configPath))

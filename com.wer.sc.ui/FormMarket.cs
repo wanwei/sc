@@ -35,6 +35,7 @@ namespace com.wer.sc.ui
         {
             InitializeComponent();
             this.pluginMgr = PluginMgrFactory.DefaultPluginMgr;
+            //MessageBox.Show(pluginMgr.GetAllPlugins().Count.ToString());
             this.plugins = pluginMgr.GetPlugins(typeof(IPlugin_Market));
             InitMarkets();
             InitSubscribeGrid();
@@ -44,7 +45,7 @@ namespace com.wer.sc.ui
         }
 
         private void InitMarkets()
-        {
+        {            
             for (int i = 0; i < plugins.Count; i++)
             {
                 PluginInfo plugin = plugins[i];

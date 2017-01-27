@@ -22,7 +22,33 @@ namespace com.wer.sc.plugin.mockmarket
             }
         }
 
+        public DelegateOnReturnAccount OnReturnAccount
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
         public DelegateOnReturnInstrument OnReturnInstruments
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public DelegateOnReturnInvestorPosition OnReturnInvestorPosition
         {
             get
             {
@@ -87,6 +113,11 @@ namespace com.wer.sc.plugin.mockmarket
         }
 
         public void QueryInstruments(string[] instruments)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void QueryPosition()
         {
             throw new NotImplementedException();
         }

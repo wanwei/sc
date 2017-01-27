@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1EE9E83B-FD37-42FA-A263-EEE93479AD45}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>com.wer.sc.data</RootNamespace>
+    <AssemblyName>com.wer.sc.data</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="cache\DataCacheFactory.cs" />
+    <Compile Include="cache\IDataCache_Date.cs" />
+    <Compile Include="cache\impl\DataCache_Code.cs" />
+    <Compile Include="cache\impl\DataCache_CodeDate.cs" />
+    <Compile Include="cache\impl\DayMinuteKLineDataGetter.cs" />
+    <Compile Include="cache\IDataCache_CodeDate.cs" />
+    <Compile Include="cache\IDataCache_Code.cs" />
+    <Compile Include="ICommonDataReader_Code.cs" />
+    <Compile Include="IDataNavigate.cs" />
+    <Compile Include="IHistoryDataReader_KLine.cs" />
+    <Compile Include="present\data\KLineData_Merge.cs" />
+    <Compile Include="present\RecentKLineDataLoader.cs" />
+    <Compile Include="present\JsonUtils_Instrument.cs" />
+    <Compile Include="present\RealTimeDataReceiver.cs" />
+    <Compile Include="present\store\PresentDataStore.cs" />
+    <Compile Include="present\RealTimeDataReceiver_Code.cs" />
+    <Compile Include="present\IDataReceiver.cs" />
+    <Compile Include="present\data\KLineData_Present.cs" />
+    <Compile Include="IRealTimeDataNavigater.cs" />
+    <Compile Include="IRealTimeDataNavigaterFactory.cs" />
+    <Compile Include="present\store\PresentKLineDataStore.cs" />
+    <Compile Include="present\store\PresentTickDataStore.cs" />
+    <Compile Include="reader\common\CommonDataReaderMgr_OpenDate.cs" />
+    <Compile Include="reader\realtime\data\KLineData_RealTime.cs" />
+    <Compile Include="reader\realtime\IRealTimeDataNavigateForward.cs" />
+    <Compile Include="reader\realtime\KLineForward.cs" />
+    <Compile Include="reader\realtime\RealTimeDataNavigateFactory.cs" />
+    <Compile Include="reader\realtime\RealTimeDataNavigateForward_KLine.cs" />
+    <Compile Include="reader\realtime\RealTimeDataNavigateForward_Tick.cs" />
+    <Compile Include="reader\realtime\RealTimeDataNavigateUtils.cs" />
+    <Compile Include="reader\realtime\data\TimeLineData_RealTime.cs" />
+    <Compile Include="ICommonDataReader_OpenTime.cs" />
+    <Compile Include="IHistoryDataReader_TimeLine.cs" />
+    <Compile Include="IHistoryDataReader_Tick.cs" />
+    <Compile Include="navigate2\DataForwardUtils.cs" />
+    <Compile Include="navigate\DataNavigate.cs" />
+    <Compile Include="navigate2\DataNavigate_Code.cs" />
+    <Compile Include="navigate2\DataNavigate_KLine.cs" />
+    <Compile Include="navigate2\DataNavigate_TimeLine.cs" />
+    <Compile Include="navigate2\DataNavigate_Tick.cs" />
+    <Compile Include="navigate2\RealTimeDataBuilder_DayDataCache.cs" />
+    <Compile Include="navigate\DataNavigate_TimeLine.cs" />
+    <Compile Include="navigate\DayNavigate.cs" />
+    <Compile Include="reader\common\OpenDateCache.cs" />
+    <Compile Include="reader\common\CommonDataReader_Code.cs" />
+    <Compile Include="navigate2\DataNavigate3.cs" />
+    <Compile Include="DataReaderFactory.cs" />
+    <Compile Include="IDataNavigate2.cs" />
+    <Compile Include="navigate2\DataNavigate2.cs" />
+    <Compile Include="DataNavigateMgr.cs" />
+    <Compile Include="cache\impl\DataCache_Date.cs" />
+    <Compile Include="navigate2\RealTimeDataBuilder_KLine.cs" />
+    <Compile Include="navigate2\DataNavigateCache.cs" />
+    <Compile Include="navigate2\DataNavigateKey.cs" />
+    <Compile Include="navigate2\RealTimeDataBuilder_DayData.cs" />
+    <Compile Include="ICommonDataReader_OpenDate.cs" />
+    <Compile Include="reader\common\CommonDataReader_OpenTime.cs" />
+    <Compile Include="reader\realtime\RealTimeDataReader.cs" />
+    <Compile Include="reader\realtime\RealTimeDataNavigater.cs" />
+    <Compile Include="reader\realtime\TickDataIndeier.cs" />
+    <Compile Include="reader\realtime\utils\ITimeIndeier.cs" />
+    <Compile Include="reader\realtime\utils\TimeIndeier.cs" />
+    <Compile Include="reader\realtime\utils\TimeIndeierUtils.cs" />
+    <Compile Include="present\DataReceiver.cs" />
+    <Compile Include="present\InstrumentWriter.cs" />
+    <Compile Include="present\DataReceiver_Tick.cs" />
+    <Compile Include="present\data\TickData_Present.cs" />
+    <Compile Include="present\data\TimeLineData_Present.cs" />
+    <Compile Include="store\DayOpenTimeStore.cs" />
+    <Compile Include="store\KLineDataIndexer.cs" />
+    <Compile Include="update\DataTransfer_Tick2KLine2.cs" />
+    <Compile Include="update\DataTransfer_Tick2KLineGenerator.cs" />
+    <Compile Include="update\KLineDataGetter_FromTick.cs" />
+    <Compile Include="utils\KLineDataTimeGetter.cs" />
+    <Compile Include="utils\DataCache.cs" />
+    <Compile Include="utils\DayDataCache.cs" />
+    <Compile Include="utils\KLineBarMerge.cs" />
+    <Compile Include="utils\KLineDataDaySplitter.cs" />
+    <Compile Include="KLineDataWrap.cs" />
+    <Compile Include="reader\common\CommonDataReader_OpenDate.cs" />
+    <Compile Include="reader\history\HistoryDataReader_TimeLine.cs" />
+    <Compile Include="store\CodeStore.cs" />
+    <Compile Include="utils\DaySplitter.cs" />
+    <Compile Include="store\OpenDateStore.cs" />
+    <Compile Include="update\DataMgr.cs" />
+    <Compile Include="update\DataTransfer_KLine2KLine.cs" />
+    <Compile Include="update\DataTransfer_KLine2TimeLine.cs" />
+    <Compile Include="update\DataUpdate.cs" />
+    <Compile Include="update\DataUpdate_OpenDate.cs" />
+    <Compile Include="update\DataTransfer_Tick2KLine.cs" />
+    <Compile Include="update\DataUpdateRunner.cs" />
+    <Compile Include="update\DataUpdate_Code.cs" />
+    <Compile Include="update\DataPathUtils.cs" />
+    <Compile Include="reader\history\HistoryDataReader_KLine.cs" />
+    <Compile Include="update\DataUpdate_Old.cs" />
+    <Compile Include="update\DataUpdate_KLine.cs" />
+    <Compile Include="update\DataUpdate_Tick.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="store\KLineDataStore.cs" />
+    <Compile Include="store\TickDataStore.cs" />
+    <Compile Include="reader\history\HistoryDataReader_Tick.cs" />
+    <Compile Include="update\DataProviderWrap.cs" />
+    <Compile Include="utils\OpenTimeUtils.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\com.wer.sc.plugin\com.wer.sc.plugin.csproj">
+      <Project>{b8955457-f108-4060-a35b-69b482a19ab6}</Project>
+      <Name>com.wer.sc.plugin</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\common\com.wer.sc.utils\com.wer.sc.utils.csproj">
+      <Project>{6a9e6268-e856-4072-8b74-06f710d5ca33}</Project>
+      <Name>com.wer.sc.utils</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

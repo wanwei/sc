@@ -25,7 +25,7 @@ namespace com.wer.sc.plugin
         void Connect(ConnectionInfo connectionInfo);
 
         /// <summary>
-        /// 
+        /// 设置或获取市场连接后的回调
         /// </summary>
         DelegateOnConnectionStatus OnConnectionStatus { get; set; }
 
@@ -59,14 +59,34 @@ namespace com.wer.sc.plugin
         /// <returns></returns>
         string CancelOrder(string orderid);
 
+        /// <summary>
+        /// 设置或获取交易委托回调
+        /// </summary>
         DelegateOnReturnOrder OnReturnOrder { get; set; }
 
+        /// <summary>
+        /// 设置或获取成交回调
+        /// </summary>
         DelegateOnReturnTrade OnReturnTrade { get; set; }
 
+        /// <summary>
+        /// 查询仓位信息
+        /// </summary>
+        void QueryPosition();
+
+        /// <summary>
+        /// 设置或获取持仓信息回调
+        /// </summary>
         DelegateOnReturnInvestorPosition OnReturnInvestorPosition { get; set; }
 
-        DelegateOnReturnAccount OnReturnAccount { get; set; }
-
+        /// <summary>
+        /// 查询账户信息
+        /// </summary>
         void QueryAccount();
+
+        /// <summary>
+        /// 设置或获取账号信息回调
+        /// </summary>
+        DelegateOnReturnAccount OnReturnAccount { get; set; }
     }
 }
