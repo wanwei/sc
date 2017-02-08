@@ -2,6 +2,7 @@
 using com.wer.sc.data.test.Properties;
 using com.wer.sc.data.update;
 using com.wer.sc.data.utils;
+using com.wer.sc.utils;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -62,12 +63,12 @@ namespace com.wer.sc.data
 
         public static String DataPath
         {
-            get { return System.Environment.CurrentDirectory + "\\data\\"; }
+            get { return ScConfig.Instance.ScPath + "\\data\\"; }
         }
 
         public static List<int> GetOpenDates()
         {
-            String path = System.Environment.CurrentDirectory + "\\data\\tick\\m01\\";
+            String path = ScConfig.Instance.ScPath + "\\data\\tick\\m01\\";
             String[] files = Directory.GetFiles(path);
             List<int> dates = new List<int>();
             for (int i = 0; i < files.Length; i++)

@@ -1,4 +1,5 @@
 ﻿using com.wer.sc.data.provider;
+using com.wer.sc.utils;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -55,7 +56,7 @@ namespace com.wer.sc.data.cnfutures.generator
 
         public DataGenerator_TickData(String srcPath, String targetPath, String[] varieties)
         {            
-            String configPath = Environment.CurrentDirectory + "\\com.wer.sc.data.cnfutures\\";
+            String configPath = ScConfig.Instance.ScPath + "\\com.wer.sc.data.cnfutures\\";
             //生成开盘日数据
             DataGenerator_OpenDate generator_OpenDate = new DataGenerator_OpenDate(configPath, srcPath);
             generator_OpenDate.Generate();

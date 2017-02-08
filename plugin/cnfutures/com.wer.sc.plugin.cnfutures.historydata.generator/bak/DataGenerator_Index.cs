@@ -78,7 +78,7 @@ namespace com.wer.sc.data.cnfutures
         //    for (int i = 0; i < holds.Length; i++)
         //    {
         //        int hold = holds[i];
-        //        holds[i] = hold + CalcCurrentHold(tickData[i], lastIndeies[i], currentIndeies[i]);
+        //        holds[i] = hold + CalcCurrentHold(tickGetValue(i], lastIndeies[i], currentIndeies[i]);
         //    }
         //}
 

@@ -64,10 +64,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\com.wer.sc.plugin\com.wer.sc.plugin.csproj">
-      <Project>{B8955457-F108-4060-A35B-69B482A19AB6}</Project>
-      <Name>com.wer.sc.plugin</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\common\com.wer.sc.utils.ui\com.wer.sc.utils.ui.csproj">
       <Project>{ffffc645-3a82-48f2-8705-d4ee4552f1b7}</Project>
       <Name>com.wer.sc.utils.ui</Name>
@@ -79,6 +75,10 @@
     <ProjectReference Include="..\..\..\data\com.wer.sc.mockdata\com.wer.sc.mockdata.csproj">
       <Project>{4645ed74-abf5-449e-8c75-16a2c8ce5612}</Project>
       <Name>com.wer.sc.mockdata</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\com.wer.sc.plugin\com.wer.sc.plugin.csproj">
+      <Project>{b8955457-f108-4060-a35b-69b482a19ab6}</Project>
+      <Name>com.wer.sc.plugin</Name>
     </ProjectReference>
     <ProjectReference Include="..\com.wer.sc.plugin.cnfutures.historydata.generator\com.wer.sc.plugin.cnfutures.historydata.generator.csproj">
       <Project>{B165E5A1-6ACA-4C8B-BD89-FE064209A893}</Project>

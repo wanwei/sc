@@ -55,10 +55,10 @@ namespace com.wer.sc.plugin.market.cnstock
         /// </summary>
         public void Connect(ConnectionInfo connectionInfo)
         {
-            api_Trade.Server.BrokerID = connectionInfo.Data["BrokerId"];
-            api_Trade.Server.Address = connectionInfo.Data["TradeServer"];
-            api_Trade.User.UserID = connectionInfo.Data["UserID"];
-            api_Trade.User.Password = connectionInfo.Data["Passwd"];
+            api_Trade.Server.BrokerID = connectionInfo.GetValue("BrokerId");
+            api_Trade.Server.Address = connectionInfo.GetValue("TradeServer");
+            api_Trade.User.UserID = connectionInfo.GetValue("UserID");
+            api_Trade.User.Password = connectionInfo.GetValue("Passwd");
 
             api_Trade.OnConnectionStatus = XApi_OnConnectionStatus;
             api_Trade.OnRspQryInstrument = XApi_OnRspQryInstrument;

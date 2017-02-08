@@ -1,5 +1,4 @@
-﻿using com.wer.sc.data.reader.realtime.utils;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

@@ -64,10 +64,10 @@ namespace com.wer.sc.plugin.market.cnstock
 
         public void Connect(ConnectionInfo connectionInfo)
         {
-            api_Quote.Server.BrokerID = connectionInfo.Data["BrokerId"];
-            api_Quote.Server.Address = connectionInfo.Data["DataServer"];
-            api_Quote.User.UserID = connectionInfo.Data["UserID"];
-            api_Quote.User.Password = connectionInfo.Data["Passwd"];
+            api_Quote.Server.BrokerID = connectionInfo.GetValue("BrokerId");
+            api_Quote.Server.Address = connectionInfo.GetValue("DataServer");
+            api_Quote.User.UserID = connectionInfo.GetValue("UserID");
+            api_Quote.User.Password = connectionInfo.GetValue("Passwd");
 
             api_Quote.OnConnectionStatus = XApi_OnConnectionStatus;
             api_Quote.OnRtnDepthMarketData = XApi_OnRtnDepthMarketData;

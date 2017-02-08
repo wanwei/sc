@@ -1,5 +1,6 @@
 ﻿using com.wer.sc.plugin;
 using com.wer.sc.plugin.market;
+using com.wer.sc.utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -38,7 +39,7 @@ namespace com.wer.sc.data.receiver
         public FormReceiver()
         {
             InitializeComponent();
-            //this.tickBarWriter = new TickBarWriter(Environment.CurrentDirectory + PATH, 20161213);
+            //this.tickBarWriter = new TickBarWriter(ScConfig.Instance.ScPath + PATH, 20161213);
             this.mgr = PluginMgrFactory.DefaultPluginMgr;
             InitMenu();
             InitTimer();
@@ -176,7 +177,7 @@ namespace com.wer.sc.data.receiver
                 if (this.tickBarWriter == null || this.tickBarWriter.Date != date)
                 {
                     //TODO tickbarwriter需要flush一下
-                    this.tickBarWriter = new TickBarWriter(Environment.CurrentDirectory + PATH + nameDescArr[0] + "\\", marketDataLoginInfo.TradingDay);
+                    this.tickBarWriter = new TickBarWriter(ScConfig.Instance.ScPath + PATH + nameDescArr[0] + "\\", marketDataLoginInfo.TradingDay);
                 }
             }
         }
@@ -217,7 +218,7 @@ namespace com.wer.sc.data.receiver
 
         private string GetPath()
         {
-            return Environment.CurrentDirectory + PATH;
+            return ScConfig.Instance.ScPath + PATH;
         }
 
         private void DoSubscribe(List<InstrumentInfo> instruments)

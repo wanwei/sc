@@ -27,14 +27,14 @@ namespace com.wer.sc.data.test.reader.realtime
             dicKLineData.Add(KLinePeriod.KLinePeriod_1Day, GetKLineData(dataReaderFactory, code, startDate, endDate, KLinePeriod.KLinePeriod_1Day));
             RealTimeDataNavigateForward_Tick navigater = new RealTimeDataNavigateForward_Tick(dataReaderFactory, code, startDate, endDate, dicKLineData);
 
-            //Console.WriteLine(navigater.DicKLineData[KLinePeriod.KLinePeriod_1Minute]);
+            //Console.WriteLine(navigater.DicKLineGetValue(KLinePeriod.KLinePeriod_1Minute]);
             //for (int i = 0; i < 50000; i++)
             //{
             int tickCount = 0;
             while (navigater.NavigateForward(1))
             {
-                //Console.WriteLine(navigater.DicKLineData[KLinePeriod.KLinePeriod_1Minute]);
-                //Console.WriteLine(navigater.DicKLineData[KLinePeriod.KLinePeriod_1Day]);
+                //Console.WriteLine(navigater.DicKLineGetValue(KLinePeriod.KLinePeriod_1Minute]);
+                //Console.WriteLine(navigater.DicKLineGetValue(KLinePeriod.KLinePeriod_1Day]);
                 tickCount++;
             }
             Console.WriteLine(tickCount);

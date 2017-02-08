@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace com.wer.sc.plugin.market.cnstock
 {
-    [Plugin("MARKET.CNSTOCK", "中国股票市场", "中国股票市场")]
+    [Plugin("MARKET.CNSTOCK", "中国股票市场", "中国股票市场", MarketType.CnStock)]
     public class Plugin_Market_CnStock : IPlugin_Market
     {
         private Plugin_MarketData_CnStock plugin_MarketData_XApi = new Plugin_MarketData_CnStock();

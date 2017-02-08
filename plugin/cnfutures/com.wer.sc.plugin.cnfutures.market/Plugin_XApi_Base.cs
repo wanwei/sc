@@ -1,4 +1,5 @@
-﻿using System;
+﻿using com.wer.sc.utils;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -14,7 +15,7 @@ namespace com.wer.sc.plugin.market.cnfutures
         public List<ConnectionInfo> GetAllConnections()
         {            
             //Application.StartupPath
-            string connFullPath = Environment.CurrentDirectory + connPath;
+            string connFullPath = ScConfig.Instance.ScPath + connPath;
             string[] connFiles = Directory.GetFiles(connFullPath, "*.CONN");
             List<ConnectionInfo> conns = new List<ConnectionInfo>();
             for (int i = 0; i < connFiles.Length; i++)

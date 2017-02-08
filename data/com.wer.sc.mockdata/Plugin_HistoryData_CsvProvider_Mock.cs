@@ -15,16 +15,6 @@ namespace com.wer.sc.mockdata
             throw new NotImplementedException();
         }
 
-        public override string GetDescription()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override string GetName()
-        {
-            throw new NotImplementedException();
-        }
-
         public override NeedsToUpdate GetNeedsToUpdate()
         {
             throw new NotImplementedException();
